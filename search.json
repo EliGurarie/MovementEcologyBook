@@ -4,7 +4,21 @@
     "href": "index.html",
     "title": "Techniques and Concepts in Movement Ecology",
     "section": "",
-    "text": "Introduction (for Book)\nCollecting movement data is one of the main tools of wildlife ecologists, whether via satellite, GPS, GSM, acoustic, terrestrial, marine, freshwater, avian. Technologies are constantly improving, datasets are increasing at dizzying rates [refs]. Following in the swirling wake (and occasionally flashing ahead) of this data tsunami is a colorful and confounding array of methodological tools. To some extent, this is to be expected, since every tool is designed to address a particular kind of ecological or behavioral question and, at least in development, most tools are also designed around particular systems and particularities of the data collected. An extensive and influential branch of movement analysis, for example, was built around analyzing movements of marine organisms (e.g. sea turtles) from extremely gappy and notoriously error-ridden (but remarkable for the time) ARGOS data (Jonsen, Myers, and Flemming 2003, Jonsen2005). But the questions marine researchers were asking (e.g. can we adequately infer where the animal is at all from gappy and error-ridden data?) are profoundly different from the questions asked in a terrestrial contexts, where the question tend to\nCertainly, two books are worth mentioning: Peter Turchin’s Quantitative Analysis of Movement (Turchin 1998) is a “seminal” text with much to offer, but not particularly useful in a modern context. Only fairly recently have there been a book-length synthesis of some of the statistical models for animal movement data by several outstanding statistical (movement) ecologists in Hooten, Johnson, McClintock and Morales’ Animal Movement: Statistical Models for Telemetry Data (Hooten et al. 2017). While this text is an absolutely essential compendium of the main developments in movement modeling in the past two decades, it is somewhat technically daunting for students or practitioners without strong statistical training. Also - in what is clearly the correct decision for a statistical, printed text that should stand the test of time, it provides only equations and figures, no R code.\nThe goals of this eventual book are to provide a rigorous, comprehensive, and somewhat less technical, but highly visual and example-driven guide through working with spatial and movement data, understanding some of the most important tools and techniques for interpreting and analyzing those data."
+    "text": "This is a living (and collaborative) document which primarily serves as course materials for EFB 796: Techniques and Concepts in Spatial and Movement Ecology - a graduate-level course I am currently (Spring 2023) teaching in the Dep’t of Environmental Biology at SUNY-ESF, together with some able assistance and collaboration. But it is also being developed - perhaps presumptuously - as the beginnings of a book. It is, of course, far more typical for people who embark on putting together a “book” to first teach a course for several years (or decades!) before making the leap into a text. But the smoothness of generating these materials in an organized way1 make the difference between course materials and a book somewhat hazy.1 Big shout out to the team behind Quarto, and - in particular - for the template laid out in Wickham & Grolemund’s R for Data Science (2e), for blurring these lines in the best possible way.\nLectures will gradually be modified into something resemble “chapters”, the structure might change, more materials might flow in or out, references will be added, some proof-reading might occur, and there may be some course specific materials popping up that are more temporary. It will (at least throughout the duration of the semester) be a chaotic and dynamic place. There will be incomplete sentences and incomplete thoughts and tremendous gaps. But the goal of this effort is, really, to put together the modern digital equivalent of a book that serves as a single, organized source for mathematical, statistical and computational techniques, complete with examples, for the modeling and analysis of movement (and some other kinds of spatial) data."
+  },
+  {
+    "objectID": "introductions.html",
+    "href": "introductions.html",
+    "title": "2  Introduction(s)",
+    "section": "",
+    "text": "3 Introduction (to the Course)\nMovement is a ubiquitous and fundamental property of all biological organisms. In this course/book, we will learn to model and analyze spatial patterns and animal movement data. Starting with a strong statistical foundation on time-series and spatial processes, we will cover topics such as point patterns, migration, dispersal, home-ranging, behavioral change point analysis, multi-state modeling, continuous-time movement models, and perhaps touch on cutting edge topics like cognitive movement ecology and collective movements. The overarching goal will be to match mathematical models, statistical techniques and computational tools to ecologically meaningful questions. Conceptual and theoretical lectures will be combined with practical work in R, including developing novel Bayesian MCMC tools in STAN. The course will culminate with student-led research projects involving some non-trivial analysis of spatial data.\nThe structure of the class will be somewhat improvised. But there will be a combination of lectures and labs, and perhaps some guest lecturers on special topics. There will be weekly homework assignments and a final project that involves a novel, non-trivial analysis to be worked on and presented at the end of the semester.\nAll materials will be on this course website and integrated into the document-style lecture materials.\nThus, for example, assignments will be posted at this link: Assignments.\nCollecting movement data is one of the main tools of wildlife ecologists, whether via satellite, GPS, GSM, acoustic, terrestrial, marine, freshwater, avian. Technologies are constantly improving, datasets are increasing at dizzying rates [refs]. Following in the swirling wake (and occasionally flashing ahead) of this data tsunami is a colorful and confounding array of methodological tools. To some extent, this is to be expected, since every tool is designed to address a particular kind of ecological or behavioral question and, at least in development, most tools are also designed around particular systems and particularities of the data collected. An extensive and influential branch of movement analysis, for example, was built around analyzing movements of marine organisms (e.g. sea turtles) from extremely gappy and notoriously error-ridden (but remarkable for the time) ARGOS data (Jonsen, Myers, and Flemming 2003, Jonsen2005). But the questions marine researchers were asking (e.g. can we adequately infer where the animal is at all from gappy and error-ridden data?) are profoundly different from the questions asked in a terrestrial contexts, where the question tend to\nCertainly, two books are worth mentioning: Peter Turchin’s Quantitative Analysis of Movement (Turchin 1998) is a “seminal” text with much to offer, but not particularly useful in a modern context. Only fairly recently have there been a book-length synthesis of some of the statistical models for animal movement data by several outstanding statistical (movement) ecologists in Hooten, Johnson, McClintock and Morales’ Animal Movement: Statistical Models for Telemetry Data (Hooten et al. 2017). While this text is an absolutely essential compendium of the main developments in movement modeling in the past two decades, it is somewhat technically daunting for students or practitioners without strong statistical training. Also - in what is clearly the correct decision for a statistical, printed text that should stand the test of time, it provides only equations and figures, no R code.\nThe goals of this eventual book are to provide a rigorous, comprehensive, and somewhat less technical, but highly visual and example-driven guide through working with spatial and movement data, understanding some of the most important tools and techniques for interpreting and analyzing those data."
+  },
+  {
+    "objectID": "introductions.html#references",
+    "href": "introductions.html#references",
+    "title": "2  Introduction(s)",
+    "section": "4.1 References",
+    "text": "4.1 References\n\n\n\n\nBacon, Bennett, Azadeh Khatiri, James Palmer, Tony Freeth, Paul Pettitt, and Robert Kentridge. 2023. “An Upper Palaeolithic Proto-writing System and Phenological Calendar.” Cambridge Archaeological Journal, January, 1–19. https://doi.org/10.1017/S0959774322000415.\n\n\nHooten, Mevin B., Devin S. Johnson, Brett T. McClintock, and Juan M. Morales. 2017. Animal Movement: Statistical Models for Telemetry Data. First. Boca Raton : CRC Press, 2017.: CRC Press. https://doi.org/10.1201/9781315117744.\n\n\nJonsen, I. D., R. A. Myers, and J. M. Flemming. 2003. “Meta-Analysis of Animal Movement Using State-Space Models.” Wildlife Research 21: 149–61.\n\n\nTurchin, P. 1998. Quantitative Analysis of Movement: Measuring and Modeling Population Redistribution in Animals and Plants. Sunderland, Mass.: Sinauer."
   },
   {
     "objectID": "whyspecialstats.html#spatial-data",
@@ -100,148 +114,99 @@
   {
     "objectID": "dependent_data.html",
     "href": "dependent_data.html",
-    "title": "\n7  Dependent Data\n",
+    "title": "\n9  Dependent Data\n",
     "section": "",
     "text": "time series, autocorrelated data\n\nNB talks about time warps\n\n\nspatial correlation\ngls - nlme"
   },
   {
     "objectID": "discrete_movement_models.html#simple-random-walk",
     "href": "discrete_movement_models.html#simple-random-walk",
-    "title": "\n8  Discrete time movement models\n",
-    "section": "\n8.1 Simple random walk",
-    "text": "8.1 Simple random walk"
+    "title": "\n10  Discrete time movement models\n",
+    "section": "\n10.1 Simple random walk",
+    "text": "10.1 Simple random walk"
   },
   {
     "objectID": "discrete_movement_models.html#correlated-random-walk",
     "href": "discrete_movement_models.html#correlated-random-walk",
-    "title": "\n8  Discrete time movement models\n",
-    "section": "\n8.2 Correlated random walk",
-    "text": "8.2 Correlated random walk\nStep-length distributions\nTurning angle distributions"
+    "title": "\n10  Discrete time movement models\n",
+    "section": "\n10.2 Correlated random walk",
+    "text": "10.2 Correlated random walk\nStep-length distributions\nTurning angle distributions"
   },
   {
     "objectID": "discrete_movement_models.html#biased-crw",
     "href": "discrete_movement_models.html#biased-crw",
-    "title": "\n8  Discrete time movement models\n",
-    "section": "\n8.3 Biased CRW",
-    "text": "8.3 Biased CRW"
+    "title": "\n10  Discrete time movement models\n",
+    "section": "\n10.3 Biased CRW",
+    "text": "10.3 Biased CRW"
   },
   {
     "objectID": "home_ranges.html#mcp",
     "href": "home_ranges.html#mcp",
-    "title": "\n10  Home ranges\n",
-    "section": "\n10.1 MCP",
-    "text": "10.1 MCP"
+    "title": "\n12  Home ranges\n",
+    "section": "\n12.1 MCP",
+    "text": "12.1 MCP"
   },
   {
     "objectID": "home_ranges.html#kernel",
     "href": "home_ranges.html#kernel",
-    "title": "\n10  Home ranges\n",
-    "section": "\n10.2 kernel",
-    "text": "10.2 kernel"
+    "title": "\n12  Home ranges\n",
+    "section": "\n12.2 kernel",
+    "text": "12.2 kernel"
   },
   {
     "objectID": "home_ranges.html#locoh",
     "href": "home_ranges.html#locoh",
-    "title": "\n10  Home ranges\n",
-    "section": "\n10.3 LoCoH",
-    "text": "10.3 LoCoH"
+    "title": "\n12  Home ranges\n",
+    "section": "\n12.3 LoCoH",
+    "text": "12.3 LoCoH"
   },
   {
     "objectID": "home_ranges.html#akde",
     "href": "home_ranges.html#akde",
-    "title": "\n10  Home ranges\n",
-    "section": "\n10.4 akde",
-    "text": "10.4 akde"
+    "title": "\n12  Home ranges\n",
+    "section": "\n12.4 akde",
+    "text": "12.4 akde"
   },
   {
     "objectID": "behavioral_changes.html#change-points",
     "href": "behavioral_changes.html#change-points",
-    "title": "\n11  Behavioral Changes\n",
-    "section": "\n11.1 Change points",
-    "text": "11.1 Change points"
+    "title": "\n13  Behavioral Changes\n",
+    "section": "\n13.1 Change points",
+    "text": "13.1 Change points"
   },
   {
     "objectID": "behavioral_changes.html#segmentation",
     "href": "behavioral_changes.html#segmentation",
-    "title": "\n11  Behavioral Changes\n",
-    "section": "\n11.2 Segmentation",
-    "text": "11.2 Segmentation"
+    "title": "\n13  Behavioral Changes\n",
+    "section": "\n13.2 Segmentation",
+    "text": "13.2 Segmentation"
   },
   {
     "objectID": "behavioral_changes.html#state-space-models",
     "href": "behavioral_changes.html#state-space-models",
-    "title": "\n11  Behavioral Changes\n",
-    "section": "\n11.3 State-space models",
-    "text": "11.3 State-space models"
+    "title": "\n13  Behavioral Changes\n",
+    "section": "\n13.3 State-space models",
+    "text": "13.3 State-space models"
   },
   {
     "objectID": "behavioral_changes.html#migration-dispersal",
     "href": "behavioral_changes.html#migration-dispersal",
-    "title": "\n11  Behavioral Changes\n",
-    "section": "\n11.4 Migration & dispersal",
-    "text": "11.4 Migration & dispersal"
+    "title": "\n13  Behavioral Changes\n",
+    "section": "\n13.4 Migration & dispersal",
+    "text": "13.4 Migration & dispersal"
   },
   {
     "objectID": "hmms.html#what-are-ssms-and-hmms",
     "href": "hmms.html#what-are-ssms-and-hmms",
-    "title": "\n12  Hidden Markov and State-Space Modeling\n",
-    "section": "\n12.1 What are SSM’s and HMM’s?",
-    "text": "12.1 What are SSM’s and HMM’s?"
+    "title": "\n14  Hidden Markov and State-Space Modeling\n",
+    "section": "\n14.1 What are SSM’s and HMM’s?",
+    "text": "14.1 What are SSM’s and HMM’s?"
   },
   {
     "objectID": "hmms.html#implementation-with-stan",
     "href": "hmms.html#implementation-with-stan",
-    "title": "\n12  Hidden Markov and State-Space Modeling\n",
-    "section": "\n12.2 Implementation with STAN",
-    "text": "12.2 Implementation with STAN"
-  },
-  {
-    "objectID": "index.html#preface-or-introduction",
-    "href": "index.html#preface-or-introduction",
-    "title": "Techniques and Concepts in Movement Ecology",
-    "section": "Preface (or Introduction)",
-    "text": "Preface (or Introduction)\nWhat is this website?\nThis is a living document which primarily serves as course materials for EFB 796: Techniques and Concepts in Spatial and Movement Ecology - a graduate-level course I am currently (Spring 2023) teaching in the Dep’t of Environmental Biology at SUNY-ESF, together with some able assistance and collaboration. But it is also being developed - prehaps presumptuously - as the beginnings of a book. It is, of course, far more typical for people who embark on putting together a “book” to first teach a course for several years (or decades!) before making the leap into a text. But the smoothness of generating these materials in an organized way1 make the difference between course materials and a book somewht hazy.1 shout out to the team behind Quarto, and - in particular - for the template laid out in Wickham & Grolemund’s R for Data Science (2e).\nLectures will gradually be modified into something resemble “chapters”, the structure might change, more materials might flow in or out, references will be added, some proof-reading might occur, and there may be some course specific materials popping up that are more temporary. It will (at least throughout the duration of the semester) be a chaotic and dynamic place. There will be incomplete sentences and incomplete thoughts and tremendous gaps. But the goal of this effort is, really, to put together the modern digital equivalent of a book that serves as a single, more or less organized source for mathematical, statistical and computational techniques for the modeling and analysis of movement (and some other kinds of spatial) data.\nWhy this book?\nCollecting movement data is one of the main tools of wildlife ecologists, whether via satellite, GPS, GSM, acoustic, terrestrial, marine, freshwater, avian. Technologies are constantly improving, datasets are increasing at dizzying rates [refs]. Following in the swirling wake (and occasionally flashing ahead) of this data tsunami is a colorful and confounding array of methodological tools. To some extent, this is to be expected, since every tool is designed to address a particular kind of ecological or behavioral question and, at least in development, most tools are also designed around particular systems and particularities of the data collected. An extensive and influential branch of movement analysis, for example, was built around analyzing movements of marine organisms (e.g. sea turtles) from extremely gappy and notoriously error-ridden (but remarkable for the time) ARGOS data (Jonsen et al.~2003,2005). But the questions marine researchers were asking (e.g. can we adequately infer where the animal is at all from gappy and error-ridden data?) are profoundly different from the questions asked in a terrestrial contexts, where the question tend to\nMovement ecology - at this point - is no longer such a “young” field. There is a dedicated journal, some but there are very few single “go-to” sources for students or practitioners to refer to in starting out in analysis. Certainly, two books are worth mentioning: Peter Turchin’s Quantitative Analysis of Movement (1998) is a “seminal” text with much to offer, but not particularly useful practically in the modern context, and the development of so many quantitative tools"
-  },
-  {
-    "objectID": "index.html#what-is-this-website",
-    "href": "index.html#what-is-this-website",
-    "title": "Techniques and Concepts in Movement Ecology",
-    "section": "\n0.1 What is this website?",
-    "text": "0.1 What is this website?\nThis is a living (and collaborative) document which primarily serves as course materials for EFB 796: Techniques and Concepts in Spatial and Movement Ecology - a graduate-level course I am currently (Spring 2023) teaching in the Dep’t of Environmental Biology at SUNY-ESF, together with some able assistance and collaboration. But it is also being developed - perhaps presumptuously - as the beginnings of a book. It is, of course, far more typical for people who embark on putting together a “book” to first teach a course for several years (or decades!) before making the leap into a text. But the smoothness of generating these materials in an organized way1 make the difference between course materials and a book somewhat hazy.1 Big shout out to the team behind Quarto, and - in particular - for the template laid out in Wickham & Grolemund’s R for Data Science (2e), for blurring these lines in the best possible way.\nLectures will gradually be modified into something resemble “chapters”, the structure might change, more materials might flow in or out, references will be added, some proof-reading might occur, and there may be some course specific materials popping up that are more temporary. It will (at least throughout the duration of the semester) be a chaotic and dynamic place. There will be incomplete sentences and incomplete thoughts and tremendous gaps. But the goal of this effort is, really, to put together the modern digital equivalent of a book that serves as a single, organized source for mathematical, statistical and computational techniques, complete with examples, for the modeling and analysis of movement (and some other kinds of spatial) data."
-  },
-  {
-    "objectID": "index.html#why-this-book",
-    "href": "index.html#why-this-book",
-    "title": "Techniques and Concepts in Movement Ecology",
-    "section": "\n1.2 Why this book?",
-    "text": "1.2 Why this book?\nCollecting movement data is one of the main tools of wildlife ecologists, whether via satellite, GPS, GSM, acoustic, terrestrial, marine, freshwater, avian. Technologies are constantly improving, datasets are increasing at dizzying rates [refs]. Following in the swirling wake (and occasionally flashing ahead) of this data tsunami is a colorful and confounding array of methodological tools. To some extent, this is to be expected, since every tool is designed to address a particular kind of ecological or behavioral question and, at least in development, most tools are also designed around particular systems and particularities of the data collected. An extensive and influential branch of movement analysis, for example, was built around analyzing movements of marine organisms (e.g. sea turtles) from extremely gappy and notoriously error-ridden (but remarkable for the time) ARGOS data (Jonsen, Myers, and Flemming 2003, Jonsen2005). But the questions marine researchers were asking (e.g. can we adequately infer where the animal is at all from gappy and error-ridden data?) are profoundly different from the questions asked in a terrestrial contexts, where the question tend to\nMovement ecology - at this point - is no longer such a young field2. There is a dedicated journal, thousands of papers reporting on some (non-trivial) animal movement data, hundred(s) just introducing and developing methodological tools, dozen(s) of R packages with which to implement those tools, and so on. But - remarkably - there are very few single “go-to” sources for students or practitioners to refer to in starting out in analysis. Certainly, two books are worth mentioning: Peter Turchin’s Quantitative Analysis of Movement (Turchin 1998) is a “seminal” text with much to offer, but not particularly useful in a modern context. Only fairly recently have there been a book-length synthesis of some of the statistical models for animal movement data (Hooten et al. 2017)2 Set aside the fact that Aristotle discussed the migration of birds in his Historia Animalium (4th century BCE), much less the recent analysis that the quantitative observation of animal migrations possibly predates written language(Bacon2023?).\n\n\n\n[height=“200px”] [height=“200px”]\n\n\nNearly the only existing academic texts on analysis of animal movement data."
-  },
-  {
-    "objectID": "index.html#efb-796-course",
-    "href": "index.html#efb-796-course",
-    "title": "Techniques and Concepts in Movement Ecology",
-    "section": "\n1.3 EFB 796 Course",
-    "text": "1.3 EFB 796 Course\nMovement is a ubiquitous and fundamental property of all biological organisms. In this course/book, we will learn to model and analyze spatial patterns and animal movement data. Starting with a strong statistical foundation on time-series and spatial processes, we will cover topics such as point patterns, migration, dispersal, home-ranging, behavioral change point analysis, multi-state modeling, continuous-time movement models, and perhaps touch on cutting edge topics like cognitive movement ecology and collective movements. The overarching goal will be to match mathematical models, statistical techniques and computational tools to ecologically meaningful questions. Conceptual and theoretical lectures will be combined with practical work in R, including developing novel Bayesian MCMC tools in STAN. The course will culminate with student-led research projects involving some non-trivial analysis of spatial data.\nThe structure of the class will be somewhat improvised. But there will be a combination of lectures and labs, and perhaps some guest lecturers on special topics. There will be weekly homework assignments and a final project that involves a novel, non-trivial analysis to be worked on and presented at the end of the semester.\nAll materials will be on this course website and integrated into the document-style lecture materials.\n\n\nEadweard Muybridge demonstrated that bison move"
-  },
-  {
-    "objectID": "index.html#references",
-    "href": "index.html#references",
-    "title": "Techniques and Concepts in Movement Ecology",
-    "section": "References",
-    "text": "References\n\n\n\n\nBacon, Bennett, Azadeh Khatiri, James Palmer, Tony Freeth, Paul Pettitt, and Robert Kentridge. 2023. “An Upper Palaeolithic Proto-writing System and Phenological Calendar.” Cambridge Archaeological Journal, January, 1–19. https://doi.org/10.1017/S0959774322000415.\n\n\nHooten, Mevin B., Devin S. Johnson, Brett T. McClintock, and Juan M. Morales. 2017. Animal Movement: Statistical Models for Telemetry Data. First. Boca Raton : CRC Press, 2017.: CRC Press. https://doi.org/10.1201/9781315117744.\n\n\nJonsen, I. D., R. A. Myers, and J. M. Flemming. 2003. “Meta-Analysis of Animal Movement Using State-Space Models.” Wildlife Research 21: 149–61.\n\n\nTurchin, P. 1998. Quantitative Analysis of Movement: Measuring and Modeling Population Redistribution in Animals and Plants. Sunderland, Mass.: Sinauer."
-  },
-  {
-    "objectID": "course_intro.html",
-    "href": "course_intro.html",
-    "title": "2  Introduction for the Course",
-    "section": "",
-    "text": "Movement is a ubiquitous and fundamental property of all biological organisms. In this course/book, we will learn to model and analyze spatial patterns and animal movement data. Starting with a strong statistical foundation on time-series and spatial processes, we will cover topics such as point patterns, migration, dispersal, home-ranging, behavioral change point analysis, multi-state modeling, continuous-time movement models, and perhaps touch on cutting edge topics like cognitive movement ecology and collective movements. The overarching goal will be to match mathematical models, statistical techniques and computational tools to ecologically meaningful questions. Conceptual and theoretical lectures will be combined with practical work in R, including developing novel Bayesian MCMC tools in STAN. The course will culminate with student-led research projects involving some non-trivial analysis of spatial data.\nThe structure of the class will be somewhat improvised. But there will be a combination of lectures and labs, and perhaps some guest lecturers on special topics. There will be weekly homework assignments and a final project that involves a novel, non-trivial analysis to be worked on and presented at the end of the semester.\nAll materials will be on this course website and integrated into the document-style lecture materials.\nThus, for example, assignments will be posted at this link: Assignments.\n\n\nEadweard Muybridge demonstrated that bison move"
-  },
-  {
-    "objectID": "index.html#what-is-this",
-    "href": "index.html#what-is-this",
-    "title": "Techniques and Concepts in Movement Ecology",
-    "section": "What is this?",
-    "text": "What is this?\nThis is a living (and collaborative) document which primarily serves as course materials for EFB 796: Techniques and Concepts in Spatial and Movement Ecology - a graduate-level course I am currently (Spring 2023) teaching in the Dep’t of Environmental Biology at SUNY-ESF, together with some able assistance and collaboration. But it is also being developed - perhaps presumptuously - as the beginnings of a book. It is, of course, far more typical for people who embark on putting together a “book” to first teach a course for several years (or decades!) before making the leap into a text. But the smoothness of generating these materials in an organized way1 make the difference between course materials and a book somewhat hazy.1 Big shout out to the team behind Quarto, and - in particular - for the template laid out in Wickham & Grolemund’s R for Data Science (2e), for blurring these lines in the best possible way.\nLectures will gradually be modified into something resemble “chapters”, the structure might change, more materials might flow in or out, references will be added, some proof-reading might occur, and there may be some course specific materials popping up that are more temporary. It will (at least throughout the duration of the semester) be a chaotic and dynamic place. There will be incomplete sentences and incomplete thoughts and tremendous gaps. But the goal of this effort is, really, to put together the modern digital equivalent of a book that serves as a single, organized source for mathematical, statistical and computational techniques, complete with examples, for the modeling and analysis of movement (and some other kinds of spatial) data."
+    "title": "\n14  Hidden Markov and State-Space Modeling\n",
+    "section": "\n14.2 Implementation with STAN",
+    "text": "14.2 Implementation with STAN"
   }
 ]
