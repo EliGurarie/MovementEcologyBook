@@ -1,1 +1,1 @@
-Sitemap: TBA/sitemap.xml
+Sitemap: https://eligurarie.github.io/MovementEcologyBook/sitemap.xml

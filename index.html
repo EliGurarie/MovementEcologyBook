@@ -18,6 +18,25 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -27,7 +46,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./questionsinmovementecology.html" rel="next">
+<link href="./course_intro.html" rel="next">
 <link href="./cover.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -57,7 +76,7 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 </head>
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
@@ -90,7 +109,12 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">Course description</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link active">What is this?</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./course_intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction for the Course</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -103,12 +127,12 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./questionsinmovementecology.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Kinds of movements, and kinds of questions</span></a>
+  <a href="./questionsinmovementecology.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Kinds of movements, and kinds of questions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./whyspecialstats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Why do we need special statistics?</span></a>
+  <a href="./whyspecialstats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Why do we need special statistics?</span></a>
   </div>
 </li>
       </ul>
@@ -123,17 +147,17 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./complex_numbers.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Complex Numbers are Simple</span></a>
+  <a href="./complex_numbers.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Complex Numbers are Simple</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./spatial_data_in_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Spatial data in R</span></a>
+  <a href="./spatial_data_in_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Spatial data in R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Visualization</span></a>
+  <a href="./visualization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Visualization</span></a>
   </div>
 </li>
       </ul>
@@ -148,12 +172,12 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./likelihoods.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Likelihood Theory</span></a>
+  <a href="./likelihoods.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Likelihood Theory</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dependent_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Dependent Data</span></a>
+  <a href="./dependent_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Dependent Data</span></a>
   </div>
 </li>
       </ul>
@@ -168,27 +192,27 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./discrete_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Discrete time movement models</span></a>
+  <a href="./discrete_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Discrete time movement models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./continuous_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Continuous time movement models</span></a>
+  <a href="./continuous_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Continuous time movement models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_ranges.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Home ranges</span></a>
+  <a href="./home_ranges.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Home ranges</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./behavioral_changes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Behavioral Changes</span></a>
+  <a href="./behavioral_changes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Behavioral Changes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./hmms.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Hidden Markov and State-Space Modeling</span></a>
+  <a href="./hmms.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Hidden Markov and State-Space Modeling</span></a>
   </div>
 </li>
       </ul>
@@ -203,12 +227,12 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./resource_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Resource Selection</span></a>
+  <a href="./resource_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Resource Selection</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./step_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Resource Selection</span></a>
+  <a href="./step_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Resource Selection</span></a>
   </div>
 </li>
       </ul>
@@ -219,12 +243,19 @@ ul.task-list li input[type="checkbox"] {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#course-description" id="toc-course-description" class="nav-link active" data-scroll-target="#course-description">Course description</a></li>
+<li><a href="#what-is-this" id="toc-what-is-this" class="nav-link active" data-scroll-target="#what-is-this">What is this?</a></li>
+  <li>
+<a href="#introduction-for-book" id="toc-introduction-for-book" class="nav-link" data-scroll-target="#introduction-for-book">Introduction (for Book)</a>
+  <ul class="collapse">
+<li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/edit/main/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title d-none d-lg-block">Techniques and Concepts in Movement Ecology</h1>
+<p class="subtitle lead">With applications in R</p>
 </div>
 
 
@@ -237,21 +268,60 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
-</header>
-<section id="course-description" class="level1 unnumbered"><h1 class="unnumbered">Course description</h1><p><img src="cover.png" title="Techniques and Concepts in Movement Ecology" class="quarto-cover-image img-fluid"></p>
+</header><p><img src="cover.png" title="Techniques and Concepts in Movement Ecology" class="quarto-cover-image img-fluid"></p>
 <div class="cell">
 
 </div>
-<p>Movement is a ubiquitous and fundamental property of all biological organisms. In this course, we will learn to model and analyze spatial patterns and animal movement data. Starting with a strong statistical foundation on time-series and spatial processes, we will cover topics such as point patterns, migration, dispersal, home-ranging, behavioral change point analysis, multi-state modeling, continuous-time movement models, and perhaps touch on cutting edge topics like cognitive movement ecology and collective movements. The overarching goal will be to match mathematical models, statistical techniques and computational tools to ecologically meaningful questions. Conceptual and theoretical lectures will be combined with practical work in R, including developing novel Bayesian MCMC tools in STAN. The course will culminate with student-led research projects involving some non-trivial analysis of spatial data.</p>
-<p>The structure of the class will be somewhat improvised. But there will be a combination of lectures and labs, and perhaps some guest lecturers on special topics. There will be weekly homework assignments and a final project that involves a novel, non-trivial analysis to be worked on and presented at the end of the semester.</p>
-<p>All materials will be on this course website and integrated into the document-style lecture materials.</p>
+<section id="what-is-this" class="level2 unnumbered page-columns page-full"><h2 class="unnumbered anchored" data-anchor-id="what-is-this">What is this?</h2>
+<div class="page-columns page-full"><p>This is a living (and collaborative) document which primarily serves as course materials for <strong>EFB 796: Techniques and Concepts in Spatial and Movement Ecology</strong> - a graduate-level course <a href="https://eligurarie.github.io">I</a> am currently (Spring 2023) teaching in the <a href="https://www.esf.edu/efb/">Dep’t of Environmental Biology</a> at <a href="https://www.esf.edu/">SUNY-ESF</a>, together with some able assistance and collaboration. But it is also being developed - perhaps presumptuously - as the beginnings of a <strong>book</strong>. It is, of course, far more typical for people who embark on putting together a “book” to first teach a course for several years (or decades!) before making the leap into a text. But the smoothness of generating these materials in an organized way<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> make the difference between course materials and a book somewhat hazy.</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Big shout out to the team behind <a href="https://quarto.org/docs/books/">Quarto</a>, and - in particular - for the template laid out in <a href="https://r4ds.hadley.nz/">Wickham &amp; Grolemund’s <em>R for Data Science (2e)</em></a>, for blurring these lines in the best possible way.</p></li></div></div>
+<p>Lectures will gradually be modified into something resemble “chapters”, the structure might change, more materials might flow in or out, references will be added, some proof-reading might occur, and there may be some course specific materials popping up that are more temporary. It will (at least throughout the duration of the semester) be a chaotic and dynamic place. There will be incomplete sentences and incomplete thoughts and tremendous gaps. But the goal of this effort is, really, to put together the modern digital equivalent of a book that serves as a single, organized source for mathematical, statistical and computational techniques, complete with examples, for the modeling and analysis of movement (and some other kinds of spatial) data.</p>
+</section><section id="introduction-for-book" class="level1 page-columns page-full"><h1>Introduction (for Book)</h1>
+<p>Collecting movement data is one of the main tools of wildlife ecologists, whether via satellite, GPS, GSM, acoustic, terrestrial, marine, freshwater, avian. Technologies are constantly improving, datasets are increasing at dizzying rates [<strong>refs</strong>]. Following in the swirling wake (and occasionally flashing ahead) of this data tsunami is a colorful and confounding array of methodological tools. To some extent, this is to be expected, since every tool is designed to address a particular kind of ecological or behavioral question and, at least in development, most tools are also designed around particular systems and particularities of the data collected. An extensive and influential branch of movement analysis, for example, was built around analyzing movements of marine organisms (e.g.&nbsp;sea turtles) from extremely gappy and notoriously error-ridden (but remarkable for the time) ARGOS data <span class="citation" data-cites="Jonsen2003">(<a href="#ref-Jonsen2003" role="doc-biblioref">Jonsen, Myers, and Flemming 2003, Jonsen2005</a>)</span>. But the questions marine researchers were asking (e.g.&nbsp;<em>can we adequately infer where the animal is at all from gappy and error-ridden data?</em>) are profoundly different from the questions asked in a terrestrial contexts, where the question tend to</p>
+<div class="page-columns page-full"><p>Movement ecology - at this point - is no longer <em>such</em> a young field<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. There is a dedicated <a href="https://movementecologyjournal.biomedcentral.com/">journal</a>, thousands of papers reporting on some (non-trivial) animal movement data, hundred(s) just introducing and developing methodological tools, dozen(s) of R packages with which to implement those tools, and so on. But - remarkably - there are very few single “go-to” sources for students or practitioners to refer to in starting out in analysis.</p><div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;Set aside the fact that Aristotle discussed the migration of birds in his <a href="https://archive.org/details/historiaanimaliu00aris_0/page/n415/mode/2up?view=theater"><em>Historia Animalium</em></a> 2500 years ago, much less the recent analysis that the quantitative observation of animal migrations possibly <a href="https://doi.org/10.1017/S0959774322000415">predates written language</a><span class="citation" data-cites="Bacon2023">(<a href="#ref-Bacon2023" role="doc-biblioref">Bacon et al. 2023</a>)</span>.</p></li></div></div>
+<p>Certainly, two books are worth mentioning: Peter Turchin’s <a href="https://peterturchin.com/quantitative-analysis-of-movement/">Quantitative Analysis of Movement</a> <span class="citation" data-cites="Turchin1998">(<a href="#ref-Turchin1998" role="doc-biblioref">Turchin 1998</a>)</span> is a “seminal” text with much to offer, but not particularly useful in a modern context. Only fairly recently have there been a book-length synthesis of some of the statistical models for animal movement data by several outstanding statistical (movement) ecologists in Hooten, Johnson, McClintock and Morales’ <em>Animal Movement: Statistical Models for Telemetry Data</em> <span class="citation" data-cites="Hooten2017">(<a href="#ref-Hooten2017" role="doc-biblioref">Hooten et al. 2017</a>)</span>. While this text is an absolutely essential compendium of the main developments in movement modeling in the past two decades, it is somewhat technically daunting for students or practitioners without strong statistical training. Also - in what is clearly the correct decision for a statistical, printed text that should stand the test of time, it provides only equations and figures, no R code.</p>
+<div id="fig-books" class="quarto-layout-panel">
+<figure class="figure"><div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 52.6%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/intro/turchin.jpg" class="img-fluid figure-img" width="250"></p>
+<p></p><figcaption class="figure-caption">Turchin et al.&nbsp;1998</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 47.4%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/intro/hooten.jpeg" class="img-fluid figure-img" width="225"></p>
+<p></p><figcaption class="figure-caption">Hooten et al.&nbsp;2017</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1.1: Nearly the <em>only</em> existing full length academic texts on analysis of animal movement data.</figcaption><p></p>
+</figure>
+</div>
+<p>The goals of <em>this eventual</em> book are to provide a rigorous, comprehensive, and somewhat less technical, but highly visual and example-driven guide through working with spatial and movement data, understanding some of the most important tools and techniques for interpreting and analyzing those data.</p>
 <center>
 <p><img src="images/Muybridge_Buffalo_galloping.gif" class="img-fluid"></p>
 <p><a href="https://en.wikipedia.org/wiki/Eadweard_Muybridge"><em>Eadweard Muybridge</em></a> <em>demonstrated that bison move</em></p>
 </center>
+<section id="references" class="level2"><h2 class="anchored" data-anchor-id="references">References</h2>
 
 
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-Bacon2023" class="csl-entry" role="doc-biblioentry">
+Bacon, Bennett, Azadeh Khatiri, James Palmer, Tony Freeth, Paul Pettitt, and Robert Kentridge. 2023. <span>“An <span class="nocase">Upper Palaeolithic Proto-writing System</span> and <span>Phenological Calendar</span>.”</span> <em>Cambridge Archaeological Journal</em>, January, 1–19. <a href="https://doi.org/10.1017/S0959774322000415">https://doi.org/10.1017/S0959774322000415</a>.
+</div>
+<div id="ref-Hooten2017" class="csl-entry" role="doc-biblioentry">
+Hooten, Mevin B., Devin S. Johnson, Brett T. McClintock, and Juan M. Morales. 2017. <em>Animal <span>Movement</span>: <span>Statistical Models</span> for <span>Telemetry Data</span></em>. First. <span>Boca Raton : CRC Press, 2017.</span>: <span>CRC Press</span>. <a href="https://doi.org/10.1201/9781315117744">https://doi.org/10.1201/9781315117744</a>.
+</div>
+<div id="ref-Jonsen2003" class="csl-entry" role="doc-biblioentry">
+Jonsen, I. D., R. A. Myers, and J. M. Flemming. 2003. <span>“Meta-Analysis of <span>Animal Movement Using State-Space Models</span>.”</span> <em>Wildlife Research</em> 21: 149–61.
+</div>
+<div id="ref-Turchin1998" class="csl-entry" role="doc-biblioentry">
+Turchin, P. 1998. <em>Quantitative <span>Analysis</span> of <span>Movement</span>: <span>Measuring</span> and <span>Modeling Population Redistribution</span> in <span>Animals</span> and <span>Plants</span>.</em> <span>Sunderland, Mass.</span>: <span>Sinauer</span>.
+</div>
+</div>
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -386,14 +456,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./questionsinmovementecology.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Kinds of movements, and kinds of questions</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./course_intro.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction for the Course</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
-    <div class="nav-footer-left">Eliezer Gurarie, Nicole Barbour and others</div>   
+    <div class="nav-footer-left"><a href="https://eligurarie.github.io/">E. Gurarie</a>, N. Barbour, O. Couriot, M. Hebblewhite (?), others (?)</div>   
     <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a>.</div>
   </div>
 </footer>

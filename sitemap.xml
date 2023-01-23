@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>TBA/index.html</loc>
-    <lastmod>2023-01-20T21:55:21.474Z</lastmod>
+    <lastmod>2023-01-21T03:16:42.802Z</lastmod>
   </url>
   <url>
     <loc>TBA/questionsinmovementecology.html</loc>
@@ -59,5 +59,33 @@
   <url>
     <loc>TBA/step_selection.html</loc>
     <lastmod>2023-01-20T21:55:21.522Z</lastmod>
+  </url>
+  <url>
+    <loc>https://eligurarie.github.io/MovementEcologyBook/index.html</loc>
+    <lastmod>2023-01-23T04:14:05.685Z</lastmod>
+  </url>
+  <url>
+    <loc>https://eligurarie.github.io/MovementEcologyBook/questionsinmovementecology.html</loc>
+    <lastmod>2023-01-23T01:51:06.657Z</lastmod>
+  </url>
+  <url>
+    <loc>https://eligurarie.github.io/MovementEcologyBook/continuous_movement_models.html</loc>
+    <lastmod>2023-01-23T01:51:06.661Z</lastmod>
+  </url>
+  <url>
+    <loc>https://eligurarie.github.io/MovementEcologyBook/course_intro.html</loc>
+    <lastmod>2023-01-23T04:00:58.657Z</lastmod>
+  </url>
+  <url>
+    <loc>https://eligurarie.github.io/MovementEcologyBook/whyspecialstats.html</loc>
+    <lastmod>2023-01-23T03:45:54.748Z</lastmod>
+  </url>
+  <url>
+    <loc>https://eligurarie.github.io/MovementEcologyBook/complex_numbers.html</loc>
+    <lastmod>2023-01-23T03:45:54.752Z</lastmod>
+  </url>
+  <url>
+    <loc>https://eligurarie.github.io/MovementEcologyBook/likelihoods.html</loc>
+    <lastmod>2023-01-23T03:45:54.760Z</lastmod>
   </url>
 </urlset>
