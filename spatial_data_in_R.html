@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.2.269">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="author" content="Eliezer Gurarie, Nicole Barbour">
+<meta name="author" content="E Gurarie, N Barbour, O Couriot, M Hebblewhite">
 <title>Techniques and Concepts in Movement Ecology - 5&nbsp; Spatial data in R</title>
 <style>
 code{white-space: pre-wrap;}
@@ -27,7 +27,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./visualization.html" rel="next">
+<link href="./movement_data_in_R.html" rel="next">
 <link href="./complex_numbers.html" rel="prev">
 <link href="./cover.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -141,7 +141,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Visualization</span></a>
+  <a href="./movement_data_in_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Movement data in R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualization</span></a>
   </div>
 </li>
       </ul>
@@ -156,12 +161,12 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./likelihoods.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Likelihood Theory</span></a>
+  <a href="./likelihoods.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Likelihood Theory</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dependent_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Dependent Data</span></a>
+  <a href="./dependent_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Dependent Data</span></a>
   </div>
 </li>
       </ul>
@@ -176,27 +181,27 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./discrete_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Discrete time movement models</span></a>
+  <a href="./discrete_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Discrete time movement models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./continuous_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Continuous time movement models</span></a>
+  <a href="./continuous_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Continuous time movement models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_ranges.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Home ranges</span></a>
+  <a href="./home_ranges.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Home ranges</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./behavioral_changes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Behavioral Changes</span></a>
+  <a href="./behavioral_changes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Behavioral Changes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./hmms.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Hidden Markov and State-Space Modeling</span></a>
+  <a href="./hmms.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Hidden Markov and State-Space Modeling</span></a>
   </div>
 </li>
       </ul>
@@ -211,12 +216,12 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./resource_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Resource Selection</span></a>
+  <a href="./resource_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Resource Selection</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./step_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Step Selection Functions</span></a>
+  <a href="./step_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Step Selection Functions</span></a>
   </div>
 </li>
       </ul>
@@ -231,7 +236,7 @@ ul.task-list li input[type="checkbox"] {
 <h1 class="title d-none d-lg-block">
 <span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Spatial data in R</span>
 </h1>
-<p class="subtitle lead">Loading, visualizing, processing</p>
+<p class="subtitle lead">Data types, projections, tools</p>
 </div>
 
 
@@ -244,9 +249,12 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
-</header><div class="cell">
+</header><div class="cell" data-hash="spatial_data_in_R_cache/html/unnamed-chunk-1_c4f376fdf32e359058cd59af7f4230d4">
 
 </div>
+<blockquote class="blockquote">
+<p>In this chapter we cover spatial data in R - notably <code>sf</code>, <code>sp</code>, and <code>raster</code>, and some basic manipulations of spatial data objects. We may refer somewhat heavily to other resources on the web, for example: https://cengel.github.io/R-spatial/</p>
+</blockquote>
 
 
 
@@ -388,8 +396,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./visualization.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Visualization</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./movement_data_in_R.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Movement data in R</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

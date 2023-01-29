@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.2.269">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="author" content="Eliezer Gurarie, Nicole Barbour">
-<title>Techniques and Concepts in Movement Ecology - 7&nbsp; Likelihood Theory</title>
+<meta name="author" content="E Gurarie, N Barbour, O Couriot, M Hebblewhite">
+<title>Techniques and Concepts in Movement Ecology - 8&nbsp; Likelihood Theory</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -126,7 +126,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
       <h1 class="quarto-secondary-nav-title">
-<span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Likelihood Theory</span>
+<span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Likelihood Theory</span>
 </h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
@@ -204,7 +204,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Visualization</span></a>
+  <a href="./movement_data_in_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Movement data in R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualization</span></a>
   </div>
 </li>
       </ul>
@@ -219,12 +224,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./likelihoods.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Likelihood Theory</span></a>
+  <a href="./likelihoods.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Likelihood Theory</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dependent_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Dependent Data</span></a>
+  <a href="./dependent_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Dependent Data</span></a>
   </div>
 </li>
       </ul>
@@ -239,27 +244,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./discrete_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Discrete time movement models</span></a>
+  <a href="./discrete_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Discrete time movement models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./continuous_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Continuous time movement models</span></a>
+  <a href="./continuous_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Continuous time movement models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_ranges.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Home ranges</span></a>
+  <a href="./home_ranges.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Home ranges</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./behavioral_changes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Behavioral Changes</span></a>
+  <a href="./behavioral_changes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Behavioral Changes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./hmms.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Hidden Markov and State-Space Modeling</span></a>
+  <a href="./hmms.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Hidden Markov and State-Space Modeling</span></a>
   </div>
 </li>
       </ul>
@@ -274,12 +279,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./resource_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Resource Selection</span></a>
+  <a href="./resource_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Resource Selection</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./step_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Step Selection Functions</span></a>
+  <a href="./step_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Step Selection Functions</span></a>
   </div>
 </li>
       </ul>
@@ -291,45 +296,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    
   <ul>
 <li>
-<a href="#likelihoods-are" id="toc-likelihoods-are" class="nav-link active" data-scroll-target="#likelihoods-are"><span class="toc-section-number">7.1</span>  Likelihoods are:</a>
+<a href="#likelihoods-are" id="toc-likelihoods-are" class="nav-link active" data-scroll-target="#likelihoods-are"><span class="toc-section-number">8.1</span>  Likelihoods are:</a>
   <ul class="collapse">
-<li><a href="#probability-statements" id="toc-probability-statements" class="nav-link" data-scroll-target="#probability-statements"><span class="toc-section-number">7.1.1</span>  Probability statements</a></li>
-  <li><a href="#defining-a-likelihood" id="toc-defining-a-likelihood" class="nav-link" data-scroll-target="#defining-a-likelihood"><span class="toc-section-number">7.1.2</span>  Defining a Likelihood</a></li>
-  <li><a href="#joint-likelihoods" id="toc-joint-likelihoods" class="nav-link" data-scroll-target="#joint-likelihoods"><span class="toc-section-number">7.1.3</span>  Joint Likelihoods</a></li>
+<li><a href="#probability-statements" id="toc-probability-statements" class="nav-link" data-scroll-target="#probability-statements"><span class="toc-section-number">8.1.1</span>  Probability statements</a></li>
+  <li><a href="#defining-a-likelihood" id="toc-defining-a-likelihood" class="nav-link" data-scroll-target="#defining-a-likelihood"><span class="toc-section-number">8.1.2</span>  Defining a Likelihood</a></li>
+  <li><a href="#joint-likelihoods" id="toc-joint-likelihoods" class="nav-link" data-scroll-target="#joint-likelihoods"><span class="toc-section-number">8.1.3</span>  Joint Likelihoods</a></li>
   </ul>
 </li>
-  <li><a href="#the-maximum-likelihood-estimator" id="toc-the-maximum-likelihood-estimator" class="nav-link" data-scroll-target="#the-maximum-likelihood-estimator"><span class="toc-section-number">7.2</span>  The <strong>Maximum Likelihood Estimator</strong></a></li>
+  <li><a href="#the-maximum-likelihood-estimator" id="toc-the-maximum-likelihood-estimator" class="nav-link" data-scroll-target="#the-maximum-likelihood-estimator"><span class="toc-section-number">8.2</span>  The <strong>Maximum Likelihood Estimator</strong></a></li>
   <li>
-<a href="#the-likelihood-profile" id="toc-the-likelihood-profile" class="nav-link" data-scroll-target="#the-likelihood-profile"><span class="toc-section-number">7.3</span>  The Likelihood profile</a>
+<a href="#the-likelihood-profile" id="toc-the-likelihood-profile" class="nav-link" data-scroll-target="#the-likelihood-profile"><span class="toc-section-number">8.3</span>  The Likelihood profile</a>
   <ul class="collapse">
-<li><a href="#numerically-finding-the-mle" id="toc-numerically-finding-the-mle" class="nav-link" data-scroll-target="#numerically-finding-the-mle"><span class="toc-section-number">7.3.1</span>  Numerically finding the MLE</a></li>
-  <li><a href="#comparing-models-side-by-side" id="toc-comparing-models-side-by-side" class="nav-link" data-scroll-target="#comparing-models-side-by-side"><span class="toc-section-number">7.3.2</span>  Comparing models side by side</a></li>
-  <li><a href="#comparing-with-method-of-moment-estimators-mmes" id="toc-comparing-with-method-of-moment-estimators-mmes" class="nav-link" data-scroll-target="#comparing-with-method-of-moment-estimators-mmes"><span class="toc-section-number">7.3.3</span>  Comparing with Method of Moment Estimators (MME’s)</a></li>
-  <li><a href="#log-likelihoods" id="toc-log-likelihoods" class="nav-link" data-scroll-target="#log-likelihoods"><span class="toc-section-number">7.3.4</span>  Log-likelihoods</a></li>
-  <li><a href="#confidence-intervals-a-bit-of-theory" id="toc-confidence-intervals-a-bit-of-theory" class="nav-link" data-scroll-target="#confidence-intervals-a-bit-of-theory"><span class="toc-section-number">7.3.5</span>  Confidence Intervals: A bit of theory</a></li>
-  <li><a href="#confidence-intervals-application" id="toc-confidence-intervals-application" class="nav-link" data-scroll-target="#confidence-intervals-application"><span class="toc-section-number">7.3.6</span>  Confidence Intervals: Application</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#testing-hypotheses-and-model-selection-with-likelihoods" id="toc-testing-hypotheses-and-model-selection-with-likelihoods" class="nav-link" data-scroll-target="#testing-hypotheses-and-model-selection-with-likelihoods"><span class="toc-section-number">7.4</span>  Testing hypotheses and model selection with likelihoods</a>
-  <ul class="collapse">
-<li><a href="#likelihood-ratio-test" id="toc-likelihood-ratio-test" class="nav-link" data-scroll-target="#likelihood-ratio-test"><span class="toc-section-number">7.4.1</span>  Likelihood Ratio Test:</a></li>
-  <li><a href="#information-criteria" id="toc-information-criteria" class="nav-link" data-scroll-target="#information-criteria"><span class="toc-section-number">7.4.2</span>  Information Criteria</a></li>
-  <li><a href="#in-summary" id="toc-in-summary" class="nav-link" data-scroll-target="#in-summary"><span class="toc-section-number">7.4.3</span>  In summary</a></li>
-  </ul>
-</li>
-  <li><a href="#panda-pregnancy-test-example" id="toc-panda-pregnancy-test-example" class="nav-link" data-scroll-target="#panda-pregnancy-test-example"><span class="toc-section-number">7.5</span>  Panda pregnancy test example</a></li>
-  <li>
-<a href="#applying-likelihoods-to-movement-data" id="toc-applying-likelihoods-to-movement-data" class="nav-link" data-scroll-target="#applying-likelihoods-to-movement-data"><span class="toc-section-number">7.6</span>  Applying Likelihoods to movement data</a>
-  <ul class="collapse">
-<li><a href="#correlated-random-walk" id="toc-correlated-random-walk" class="nav-link" data-scroll-target="#correlated-random-walk"><span class="toc-section-number">7.6.1</span>  Correlated Random Walk</a></li>
-  <li><a href="#mle-of-weibull-parameters" id="toc-mle-of-weibull-parameters" class="nav-link" data-scroll-target="#mle-of-weibull-parameters"><span class="toc-section-number">7.6.2</span>  MLE of Weibull parameters</a></li>
+<li><a href="#numerically-finding-the-mle" id="toc-numerically-finding-the-mle" class="nav-link" data-scroll-target="#numerically-finding-the-mle"><span class="toc-section-number">8.3.1</span>  Numerically finding the MLE</a></li>
+  <li><a href="#comparing-models-side-by-side" id="toc-comparing-models-side-by-side" class="nav-link" data-scroll-target="#comparing-models-side-by-side"><span class="toc-section-number">8.3.2</span>  Comparing models side by side</a></li>
+  <li><a href="#comparing-with-method-of-moment-estimators-mmes" id="toc-comparing-with-method-of-moment-estimators-mmes" class="nav-link" data-scroll-target="#comparing-with-method-of-moment-estimators-mmes"><span class="toc-section-number">8.3.3</span>  Comparing with Method of Moment Estimators (MME’s)</a></li>
+  <li><a href="#log-likelihoods" id="toc-log-likelihoods" class="nav-link" data-scroll-target="#log-likelihoods"><span class="toc-section-number">8.3.4</span>  Log-likelihoods</a></li>
+  <li><a href="#confidence-intervals-a-bit-of-theory" id="toc-confidence-intervals-a-bit-of-theory" class="nav-link" data-scroll-target="#confidence-intervals-a-bit-of-theory"><span class="toc-section-number">8.3.5</span>  Confidence Intervals: A bit of theory</a></li>
+  <li><a href="#confidence-intervals-application" id="toc-confidence-intervals-application" class="nav-link" data-scroll-target="#confidence-intervals-application"><span class="toc-section-number">8.3.6</span>  Confidence Intervals: Application</a></li>
   </ul>
 </li>
   <li>
-<a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1"><span class="toc-section-number">7.7</span>  Exercise 1</a>
+<a href="#testing-hypotheses-and-model-selection-with-likelihoods" id="toc-testing-hypotheses-and-model-selection-with-likelihoods" class="nav-link" data-scroll-target="#testing-hypotheses-and-model-selection-with-likelihoods"><span class="toc-section-number">8.4</span>  Testing hypotheses and model selection with likelihoods</a>
   <ul class="collapse">
-<li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2"><span class="toc-section-number">7.7.1</span>  Exercise 2</a></li>
+<li><a href="#likelihood-ratio-test" id="toc-likelihood-ratio-test" class="nav-link" data-scroll-target="#likelihood-ratio-test"><span class="toc-section-number">8.4.1</span>  Likelihood Ratio Test:</a></li>
+  <li><a href="#information-criteria" id="toc-information-criteria" class="nav-link" data-scroll-target="#information-criteria"><span class="toc-section-number">8.4.2</span>  Information Criteria</a></li>
+  <li><a href="#in-summary" id="toc-in-summary" class="nav-link" data-scroll-target="#in-summary"><span class="toc-section-number">8.4.3</span>  In summary</a></li>
+  </ul>
+</li>
+  <li><a href="#panda-pregnancy-test-example" id="toc-panda-pregnancy-test-example" class="nav-link" data-scroll-target="#panda-pregnancy-test-example"><span class="toc-section-number">8.5</span>  Panda pregnancy test example</a></li>
+  <li>
+<a href="#applying-likelihoods-to-movement-data" id="toc-applying-likelihoods-to-movement-data" class="nav-link" data-scroll-target="#applying-likelihoods-to-movement-data"><span class="toc-section-number">8.6</span>  Applying Likelihoods to movement data</a>
+  <ul class="collapse">
+<li><a href="#correlated-random-walk" id="toc-correlated-random-walk" class="nav-link" data-scroll-target="#correlated-random-walk"><span class="toc-section-number">8.6.1</span>  Correlated Random Walk</a></li>
+  <li><a href="#mle-of-weibull-parameters" id="toc-mle-of-weibull-parameters" class="nav-link" data-scroll-target="#mle-of-weibull-parameters"><span class="toc-section-number">8.6.2</span>  MLE of Weibull parameters</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1"><span class="toc-section-number">8.7</span>  Exercise 1</a>
+  <ul class="collapse">
+<li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2"><span class="toc-section-number">8.7.1</span>  Exercise 2</a></li>
   </ul>
 </li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/edit/main/likelihoods.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -337,7 +342,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title d-none d-lg-block">
-<span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Likelihood Theory</span>
+<span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Likelihood Theory</span>
 </h1>
 <p class="subtitle lead">Implementation and Applications</p>
 </div>
@@ -355,8 +360,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header><div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-2_3f193003c880dfce8c7304eb7a5f6073">
 
 </div>
-<section id="likelihoods-are" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="likelihoods-are">
-<span class="header-section-number">7.1</span> Likelihoods are:</h2>
+<section id="likelihoods-are" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="likelihoods-are">
+<span class="header-section-number">8.1</span> Likelihoods are:</h2>
 <ul>
 <li><p>the link between: <strong>Data</strong> -&gt; <strong>Probability Models</strong> -&gt; <strong>Inference</strong></p></li>
 <li><p>the most important tool, in practice, for fitting models … i.e.&nbsp;when we estimate parameters we like to <strong>Maximize the Likelihood</strong>,</p></li>
@@ -374,8 +379,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In short:</p>
 <p><img src="./images/likelihoods/headstand.jpg" style="width: 200px;"></p>
 <p><strong>Likelihoods</strong> turn <strong>Probabilities</strong> on their heads!</p>
-<section id="probability-statements" class="level3" data-number="7.1.1"><h3 data-number="7.1.1" class="anchored" data-anchor-id="probability-statements">
-<span class="header-section-number">7.1.1</span> Probability statements</h3>
+<section id="probability-statements" class="level3" data-number="8.1.1"><h3 data-number="8.1.1" class="anchored" data-anchor-id="probability-statements">
+<span class="header-section-number">8.1.1</span> Probability statements</h3>
 <p>Let’s say the average height of a human male is <span class="math display">\[X \sim {\cal N}(\mu_0 = 6, \sigma_0 = 0.5)\]</span> This is a <em>probability model</em>, i.e.&nbsp;it tells us that: <span class="math display">\[P(x &lt; X &lt; x+dx) = f(x|\mu, \sigma)dx\]</span> where <span class="math inline">\(f(x|\mu, \sigma)\)</span>, is the <em>density function</em> of the normal distribution with <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>.</p>
 <p>This <strong>probability statement</strong> means: If you take (for example) a single 7 foot tall person, you can say with certainty that:</p>
 <ol type="1">
@@ -405,8 +410,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Just under 1% probability that a person is within one inch of 7 feet.</p>
-</section><section id="defining-a-likelihood" class="level3" data-number="7.1.2"><h3 data-number="7.1.2" class="anchored" data-anchor-id="defining-a-likelihood">
-<span class="header-section-number">7.1.2</span> Defining a Likelihood</h3>
+</section><section id="defining-a-likelihood" class="level3" data-number="8.1.2"><h3 data-number="8.1.2" class="anchored" data-anchor-id="defining-a-likelihood">
+<span class="header-section-number">8.1.2</span> Defining a Likelihood</h3>
 <p>Say, you don’t know what those parameters are, but you are curious! So you collect one data point: a single man, and he is 7 feet tall.</p>
 <p><span class="math display">\[ X_1 = \{7\}\]</span></p>
 <p>To “flip this on its head”“, we ask a new question: What is the <em>likelihood</em> that the mean and standard deviation of human heights are 6 and 0.5, GIVEN that we observed a man who is <span class="math inline">\(X_1 = 7\)</span> feet tall?</p>
@@ -431,8 +436,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>so we can say that model 2 is <strong>more than 3000x more</strong> <strong><em>likely</em></strong> than Model 1!<br>
 </li>
 <li>(Of course, the likelihood ratio test for these two likelihoods has zero power, because we only have one data point. But we can still quantify their relative likelihoods.)</li>
-</ul></section><section id="joint-likelihoods" class="level3" data-number="7.1.3"><h3 data-number="7.1.3" class="anchored" data-anchor-id="joint-likelihoods">
-<span class="header-section-number">7.1.3</span> Joint Likelihoods</h3>
+</ul></section><section id="joint-likelihoods" class="level3" data-number="8.1.3"><h3 data-number="8.1.3" class="anchored" data-anchor-id="joint-likelihoods">
+<span class="header-section-number">8.1.3</span> Joint Likelihoods</h3>
 <p><img src="./images/likelihoods/bballteam.jpg" style="width: 200px;"></p>
 <p>Let’s sample 5 individuals from a professional basketball arena, and record their heights: <strong>6.6, 6.8, 7.0, 7.2, 7.4</strong> feet.</p>
 <p>At this point, I might have reasonable suspicion that our null-model might not be appropriate for this subset of humans.</p>
@@ -475,16 +480,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>You see that the points away from 7 have extremely low probability, which brings the likelihood of this model way down.</p>
-</section></section><section id="the-maximum-likelihood-estimator" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="the-maximum-likelihood-estimator">
-<span class="header-section-number">7.2</span> The <strong>Maximum Likelihood Estimator</strong>
+</section></section><section id="the-maximum-likelihood-estimator" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="the-maximum-likelihood-estimator">
+<span class="header-section-number">8.2</span> The <strong>Maximum Likelihood Estimator</strong>
 </h2>
 <p>So - how do we find the parameters that maximize the likelihood?</p>
 <p>These parameters are called the <strong>Maximum Likelihood Estimators</strong> (MLE’s), and are the “best” parameters in that they are the most precise. Remember, <em>every estimate is a random variable</em> and therefore comes with some variance. It can be shown that MLE’s have the smallest of those possible variances:</p>
 <p><span class="math display">\[  \{ \widehat\theta_\mathrm{mle}\} \subseteq \{ \underset{\theta\in\Theta}{\operatorname{arg\,max}}\ {\cal L}(\theta\,|\,X_1,\ldots,X_n) \}\]</span></p>
 <p>Translating to English:</p>
 <p><font color="darkred"> <em>the MLE estimators of parameters</em> <span class="math inline">\(\theta\)</span> are those values of <span class="math inline">\(\theta\)</span> for which the likelihood function is maximized. </font></p>
-</section><section id="the-likelihood-profile" class="level2" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="the-likelihood-profile">
-<span class="header-section-number">7.3</span> The Likelihood profile</h2>
+</section><section id="the-likelihood-profile" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="the-likelihood-profile">
+<span class="header-section-number">8.3</span> The Likelihood profile</h2>
 <p>Let’s look at a range of possible values for <span class="math inline">\(\widehat{\mu}\)</span> and <span class="math inline">\(\widehat{\sigma}\)</span>. We can do this pretty efficiently in R:</p>
 <p>First, pick some values to explore:</p>
 <div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-11_741e911b2f41bec248bcf39f4d2ea113">
@@ -530,8 +535,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1] 0.4580006</code></pre>
 </div>
 </div>
-<section id="numerically-finding-the-mle" class="level3" data-number="7.3.1"><h3 data-number="7.3.1" class="anchored" data-anchor-id="numerically-finding-the-mle">
-<span class="header-section-number">7.3.1</span> Numerically finding the MLE</h3>
+<section id="numerically-finding-the-mle" class="level3" data-number="8.3.1"><h3 data-number="8.3.1" class="anchored" data-anchor-id="numerically-finding-the-mle">
+<span class="header-section-number">8.3.1</span> Numerically finding the MLE</h3>
 <p>We don’t need to do this search ourselves - that’s why we invented electronic computing devices. The powerhouse function for optimizing functions in R is <code><a href="https://rdrr.io/r/stats/optim.html">optim()</a></code>, but it takes some getting used to. The (minimal) syntax is:</p>
 <div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-17_91ad9da4d57dd88d17c7f16d7ec5c83f">
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/optim.html">optim</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">FUN</span>, <span class="va">...</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -569,8 +574,8 @@ NULL</code></pre>
 </div>
 <p>So - lots of output, but the key numbers we’re interested in are the top two, under <code>$par</code>. These are: <span class="math inline">\(\widehat{\mu} = 7.000\)</span> and <span class="math inline">\(\widehat{\sigma} = 0.2828\)</span>. <strong>Good! it is what we expected.</strong></p>
 <p>The <code>$value</code> is very close to the (negative of the) maximum likelihood that we “hand-calculated”.</p>
-</section><section id="comparing-models-side-by-side" class="level3" data-number="7.3.2"><h3 data-number="7.3.2" class="anchored" data-anchor-id="comparing-models-side-by-side">
-<span class="header-section-number">7.3.2</span> Comparing models side by side</h3>
+</section><section id="comparing-models-side-by-side" class="level3" data-number="8.3.2"><h3 data-number="8.3.2" class="anchored" data-anchor-id="comparing-models-side-by-side">
+<span class="header-section-number">8.3.2</span> Comparing models side by side</h3>
 <div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-19_0ee605b76deee86d792e5e35b6e40b83">
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">PlotLikelihood</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">mu</span>, <span class="va">sigma</span>, <span class="va">X</span>, <span class="va">...</span><span class="op">)</span></span>
 <span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">mu</span>, <span class="va">sigma</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
@@ -596,8 +601,8 @@ NULL</code></pre>
 </div>
 </div>
 <p>You can get a feel for the constraints on the MLE model: if <span class="math inline">\(\sigma\)</span> were smaller, the contribution of the outlying points would become much smaller and bring the likelihood down; if <span class="math inline">\(\sigma\)</span> were any larger, then the flattening would bring down too far the contribution of the central points.</p>
-</section><section id="comparing-with-method-of-moment-estimators-mmes" class="level3" data-number="7.3.3"><h3 data-number="7.3.3" class="anchored" data-anchor-id="comparing-with-method-of-moment-estimators-mmes">
-<span class="header-section-number">7.3.3</span> Comparing with Method of Moment Estimators (MME’s)</h3>
+</section><section id="comparing-with-method-of-moment-estimators-mmes" class="level3" data-number="8.3.3"><h3 data-number="8.3.3" class="anchored" data-anchor-id="comparing-with-method-of-moment-estimators-mmes">
+<span class="header-section-number">8.3.3</span> Comparing with Method of Moment Estimators (MME’s)</h3>
 <p>Now … you might think that’s a whole lot of crazy to estimate a simple <strong>MEAN</strong> and <strong>VARIANCE</strong>.</p>
 <p>You may have guessed that the best estimates are the sample mean:</p>
 <p><span class="math display">\[\widehat{\mu} = \overline{X}\]</span> and the sample standard deviation:</p>
@@ -614,8 +619,8 @@ NULL</code></pre>
 <blockquote class="blockquote">
 <p>Note: this is a special case where the MLE is actually computable by hand, but in general it is not - and best to obtain numerically, as the examples that follow show.</p>
 </blockquote>
-</section><section id="log-likelihoods" class="level3" data-number="7.3.4"><h3 data-number="7.3.4" class="anchored" data-anchor-id="log-likelihoods">
-<span class="header-section-number">7.3.4</span> Log-likelihoods</h3>
+</section><section id="log-likelihoods" class="level3" data-number="8.3.4"><h3 data-number="8.3.4" class="anchored" data-anchor-id="log-likelihoods">
+<span class="header-section-number">8.3.4</span> Log-likelihoods</h3>
 <p>For a combination of practical and theoretical reasons, what we actually maximize is not the <strong>Likelihood</strong> but the <strong>log-Likelihood</strong>. The maximum will be in the same place for both functions, but the latter is MUCH easier to work with.</p>
 <p>Likelihood: <span class="math display">\[{\cal L}(\mu_0, \sigma_0 | {\bf X}) = \prod_{i=1}^n f(X_i|\mu_0, \sigma_0) \]</span></p>
 <p>Log-likelihood: <span class="math display">\[{\cal l}(\mu_0, \sigma_0 | {\bf X}) = \log({\cal L}) = \sum_{i=1}^n \log(f(X_i|\mu_0, \sigma_0)) \]</span></p>
@@ -639,8 +644,8 @@ NULL</code></pre>
 <p><img src="likelihoods_files/figure-html/unnamed-chunk-23-1.png" width="500" height="400"></p>
 </div>
 </div>
-</section><section id="confidence-intervals-a-bit-of-theory" class="level3" data-number="7.3.5"><h3 data-number="7.3.5" class="anchored" data-anchor-id="confidence-intervals-a-bit-of-theory">
-<span class="header-section-number">7.3.5</span> Confidence Intervals: A bit of theory</h3>
+</section><section id="confidence-intervals-a-bit-of-theory" class="level3" data-number="8.3.5"><h3 data-number="8.3.5" class="anchored" data-anchor-id="confidence-intervals-a-bit-of-theory">
+<span class="header-section-number">8.3.5</span> Confidence Intervals: A bit of theory</h3>
 <p>The peak of the (log)-likelihood surface gives you <strong>point estimates</strong> of parameters.</p>
 <p>Likelihood theory provides an additional enormously handy (asymptotically correct) result with respect to <strong>standard errors</strong> around the estimates. Specifically (in words): <strong>The variance around the point estimates is equal to the negative reciprocal of the second derivative of the log-likelihood at the maximum</strong>.</p>
 <p>This is actually very intuitive! The sharper the peak, the MORE NEGATIVE the second derivative, the SMALLER the (POSITIVE) variance. The flatter the peak, the LESS NEGATIVE the second derivative, i.e.&nbsp;the LARGER the variance.</p>
@@ -651,8 +656,8 @@ NULL</code></pre>
 <li><p>the <a href="http://en.wikipedia.org/wiki/Information_matrix"><strong>Fisher Information</strong></a> (<span class="math inline">\(\cal{I}\)</span>) is the Hessian of the log likelihood.</p></li>
 <li><p>the <a href="http://en.wikipedia.org/wiki/Inverse_of_a_matrix"><strong>inverse</strong></a> is the <em>n</em>-dimensional equivalent of “reciprocal”.</p></li>
 <li><p><span class="math inline">\(\Sigma\)</span> is the <strong>variance-covariance matrix</strong> of the parameter estimates.</p></li>
-</ul></section><section id="confidence-intervals-application" class="level3" data-number="7.3.6"><h3 data-number="7.3.6" class="anchored" data-anchor-id="confidence-intervals-application">
-<span class="header-section-number">7.3.6</span> Confidence Intervals: Application</h3>
+</ul></section><section id="confidence-intervals-application" class="level3" data-number="8.3.6"><h3 data-number="8.3.6" class="anchored" data-anchor-id="confidence-intervals-application">
+<span class="header-section-number">8.3.6</span> Confidence Intervals: Application</h3>
 <p>Ask <code><a href="https://rdrr.io/r/stats/optim.html">optim()</a></code> to compute the Hessian:</p>
 <div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-24_a0422a751fa33124a02bd6af7c87e847">
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">logLikelihood</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">mu</span>, <span class="va">sigma</span><span class="op">)</span></span>
@@ -712,10 +717,10 @@ $hessian
 <p><img src="./images/likelihoods/JohnNash.jpg" class="img-fluid"></p>
 <p>John Nash: creator (and skeptic) of <code>optim</code></p>
 <p>see: http://www.ibm.com/developerworks/library/ba-optimR-john-nash/</p>
-</section></section><section id="testing-hypotheses-and-model-selection-with-likelihoods" class="level2" data-number="7.4"><h2 data-number="7.4" class="anchored" data-anchor-id="testing-hypotheses-and-model-selection-with-likelihoods">
-<span class="header-section-number">7.4</span> Testing hypotheses and model selection with likelihoods</h2>
-<section id="likelihood-ratio-test" class="level3" data-number="7.4.1"><h3 data-number="7.4.1" class="anchored" data-anchor-id="likelihood-ratio-test">
-<span class="header-section-number">7.4.1</span> Likelihood Ratio Test:</h3>
+</section></section><section id="testing-hypotheses-and-model-selection-with-likelihoods" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="testing-hypotheses-and-model-selection-with-likelihoods">
+<span class="header-section-number">8.4</span> Testing hypotheses and model selection with likelihoods</h2>
+<section id="likelihood-ratio-test" class="level3" data-number="8.4.1"><h3 data-number="8.4.1" class="anchored" data-anchor-id="likelihood-ratio-test">
+<span class="header-section-number">8.4.1</span> Likelihood Ratio Test:</h3>
 <ul>
 <li><p>Model 0 and Model 1 are NESTED</p></li>
 <li><p>(i.e.&nbsp;Model 0 is a special case of Model 1) with <span class="math inline">\(k_0\)</span> and <span class="math inline">\(k_1\)</span> parameters.</p></li>
@@ -755,8 +760,8 @@ $hessian
 <pre><code>[1] 0.1083316</code></pre>
 </div>
 </div>
-</section><section id="information-criteria" class="level3" data-number="7.4.2"><h3 data-number="7.4.2" class="anchored" data-anchor-id="information-criteria">
-<span class="header-section-number">7.4.2</span> Information Criteria</h3>
+</section><section id="information-criteria" class="level3" data-number="8.4.2"><h3 data-number="8.4.2" class="anchored" data-anchor-id="information-criteria">
+<span class="header-section-number">8.4.2</span> Information Criteria</h3>
 <p>If models are not nested (most interesting sets of models aren’t) we can’t use a likelihood ratio test. Instead, we use the very very widely applied Akaike Information Criterion (AIC):<br><span class="math display">\[ AIC =  - 2 \log(\cal L) + 2 k\]</span></p>
 <div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-32_d7446995f24f6d20571395d854660652">
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>AIC0  <span class="op">=</span> <span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="va">fit0</span><span class="op">$</span><span class="va">value</span> <span class="op">+</span> <span class="fl">2</span><span class="op">*</span><span class="fl">2</span><span class="op">)</span>,</span>
@@ -776,8 +781,8 @@ $hessian
 </div>
 </div>
 <p><strong>Which? Why?</strong> - a complicated debate, different underlying assumptions But generally - if you want to be more parsimonious (i.e.&nbsp;protect from overfitting) BIC is a better bet.</p>
-</section><section id="in-summary" class="level3" data-number="7.4.3"><h3 data-number="7.4.3" class="anchored" data-anchor-id="in-summary">
-<span class="header-section-number">7.4.3</span> In summary</h3>
+</section><section id="in-summary" class="level3" data-number="8.4.3"><h3 data-number="8.4.3" class="anchored" data-anchor-id="in-summary">
+<span class="header-section-number">8.4.3</span> In summary</h3>
 <p>If you have <strong>data</strong> and you can write a <strong>probability model</strong> in terms of <strong>parameters</strong>, no matter how strange or arbitrary seeming, there’s a good chance you can:</p>
 <ol type="1">
 <li>
@@ -786,8 +791,8 @@ $hessian
 <li>
 <strong>compare competing models</strong>,</li>
 <li>and probably obtain <strong>confidence intervals</strong>.</li>
-</ol></section></section><section id="panda-pregnancy-test-example" class="level2" data-number="7.5"><h2 data-number="7.5" class="anchored" data-anchor-id="panda-pregnancy-test-example">
-<span class="header-section-number">7.5</span> Panda pregnancy test example</h2>
+</ol></section></section><section id="panda-pregnancy-test-example" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="panda-pregnancy-test-example">
+<span class="header-section-number">8.5</span> Panda pregnancy test example</h2>
 <p><img src="./images/likelihoods/pandatest1.png" class="img-fluid"></p>
 <p><img src="./images/likelihoods/pandatest2.png" class="img-fluid"></p>
 <p>Likelihood ratio test = pregnancy test</p>
@@ -795,8 +800,8 @@ $hessian
 <p><span class="math inline">\(p\)</span>-value of birth: 0.08</p>
 <p><img src="./images/likelihoods/pandatest4.png" class="img-fluid"></p>
 <p><span class="math inline">\(p\)</span>-value of birth: 1e-11</p>
-</section><section id="applying-likelihoods-to-movement-data" class="level2" data-number="7.6"><h2 data-number="7.6" class="anchored" data-anchor-id="applying-likelihoods-to-movement-data">
-<span class="header-section-number">7.6</span> Applying Likelihoods to movement data</h2>
+</section><section id="applying-likelihoods-to-movement-data" class="level2" data-number="8.6"><h2 data-number="8.6" class="anchored" data-anchor-id="applying-likelihoods-to-movement-data">
+<span class="header-section-number">8.6</span> Applying Likelihoods to movement data</h2>
 <p>We have seen that movement data often has:</p>
 <ol type="1">
 <li>Skewed, Positive, <strong>step Length</strong> Distribution</li>
@@ -809,8 +814,8 @@ $hessian
 <center>
 <img src="./images/likelihoods/Kareiva.png" style="width: 400px;"><img src="./images/likelihoods/Patlak.png" style="width: 400px;">
 </center>
-<section id="correlated-random-walk" class="level3" data-number="7.6.1"><h3 data-number="7.6.1" class="anchored" data-anchor-id="correlated-random-walk">
-<span class="header-section-number">7.6.1</span> Correlated Random Walk</h3>
+<section id="correlated-random-walk" class="level3" data-number="8.6.1"><h3 data-number="8.6.1" class="anchored" data-anchor-id="correlated-random-walk">
+<span class="header-section-number">8.6.1</span> Correlated Random Walk</h3>
 <p>Typical step-length model - the <a href="http://en.wikipedia.org/wiki/Weibull_distribution">Weibull distribution</a>: <span class="math display">\[f(x;\alpha, \beta) = \frac{\alpha}{\beta}\left(\frac{x}{\beta}\right)^{\alpha-1}e^{-(x/\beta)^{k}}\]</span> <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are the <em>shape</em> and <em>scale</em> parameter, respectively.</p>
 <div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-34_ce3145e0a1916274b8bb5fff4c9c56da">
 <div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Weibull.html">dweibull</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">6</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1.2</span><span class="op">)</span>, ylab<span class="op">=</span><span class="st">"density"</span>, xlab<span class="op">=</span><span class="st">""</span>, col<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
@@ -832,8 +837,8 @@ $hessian
 <p><img src="likelihoods_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="600"></p>
 </div>
 </div>
-</section><section id="mle-of-weibull-parameters" class="level3" data-number="7.6.2"><h3 data-number="7.6.2" class="anchored" data-anchor-id="mle-of-weibull-parameters">
-<span class="header-section-number">7.6.2</span> MLE of Weibull parameters</h3>
+</section><section id="mle-of-weibull-parameters" class="level3" data-number="8.6.2"><h3 data-number="8.6.2" class="anchored" data-anchor-id="mle-of-weibull-parameters">
+<span class="header-section-number">8.6.2</span> MLE of Weibull parameters</h3>
 <p>Here’s some sample data:</p>
 <div class="cell" data-hash="likelihoods_cache/html/SRW_94e1210cbcaa37ea6573c15e017b4a48">
 <div class="sourceCode" id="cb52"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/arima.sim.html">arima.sim</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">100</span>, model<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>ar<span class="op">=</span><span class="fl">.7</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
@@ -888,8 +893,8 @@ NULL</code></pre>
 </div>
 <p><strong>Not Bad!</strong></p>
 <p><font color="darkblue"></font></p>
-</section></section><section id="exercise-1" class="level2" data-number="7.7"><h2 data-number="7.7" class="anchored" data-anchor-id="exercise-1">
-<span class="header-section-number">7.7</span> Exercise 1</h2>
+</section></section><section id="exercise-1" class="level2" data-number="8.7"><h2 data-number="8.7" class="anchored" data-anchor-id="exercise-1">
+<span class="header-section-number">8.7</span> Exercise 1</h2>
 <p>Use <strong>optim()</strong> to estimate the <span class="math inline">\(\kappa\)</span> parameter in the Wrapped cauchy distribution Visualize the quality of the fits by comparing distribution curves to histograms.</p>
 <p>Follow the template for the Weibull:</p>
 <div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-39_efc2e8a230eed4334c4b798b424d0b9a">
@@ -902,8 +907,8 @@ NULL</code></pre>
 </div>
 <p></p>
 <p><font color="darkblue"></font></p>
-<section id="exercise-2" class="level3" data-number="7.7.1"><h3 data-number="7.7.1" class="anchored" data-anchor-id="exercise-2">
-<span class="header-section-number">7.7.1</span> Exercise 2</h3>
+<section id="exercise-2" class="level3" data-number="8.7.1"><h3 data-number="8.7.1" class="anchored" data-anchor-id="exercise-2">
+<span class="header-section-number">8.7.1</span> Exercise 2</h3>
 <p>Following the template below:</p>
 <ol type="1">
 <li><p>Estimate the Weibull step-length and wrapped Cauchy turning angle parameters for your movement data of choice.</p></li>
@@ -1053,12 +1058,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./visualization.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Visualization</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualization</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./dependent_data.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Dependent Data</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Dependent Data</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
