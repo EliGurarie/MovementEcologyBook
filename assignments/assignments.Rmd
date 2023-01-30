@@ -2,7 +2,7 @@
 title: "Exercises and Assignments"
 subtitle: "[EFB 796: Techniques and Concepts in Movemenent Ecology](../index.html)" 
 author: "Elie Gurarie"
-date: "2023-01-23"
+date: "Winter/Spring 2023"
 output: 
   html_document:
     toc: true
