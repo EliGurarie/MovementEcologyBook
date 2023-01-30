@@ -139,36 +139,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p><font color="blue"> Unless specified otherwise, homework assignments should be emailed to the instructor as <em>knitted</em> R Markdown document with minimal (if any) code. </font></p>
-<section id="week-1-due-friday-jan-27-2023" class="level1">
+<p><font color="blue"> Unless specified otherwise, homework assignments should be emailed to the instructor as <em>knitted</em> R Markdown document with minimal (if any) code. Print the markdown to a pdf, and provide the <code>.Rmd</code> file as well.</font></p>
+<section id="week-2-due-friday-feb-3-2023" class="level1">
+<h1>Week 2: (due Friday Feb 3, 2023)</h1>
+<section id="i.-more-manipulation-of-movement-data" class="level2">
+<h2 class="anchored" data-anchor-id="i.-more-manipulation-of-movement-data">I. More manipulation of movement data</h2>
+<p>Pick a movement data set of your choice with <strong>multiple</strong> individuals (but no more than 20). Ideally, a dataset that you plan to investigate yourself. Alternatively, work with some subset of the Ya Ha Tinda elk dataset on Movebank, following the instructions in <a href="../movement_data_in_R.html">Chapter: Movement Data in R</a>.</p>
+<ol type="a">
+<li><p>Create a table that reports for each individual (i) the number of locations, (ii) the start, end time and duration of the monitoring, (iii) the median, mean and standard deviation of the <em>duty cycle</em> (i.e.&nbsp;the duration between subsequent observations).</p></li>
+<li><p>Report the following statistics:</p>
+<ol type="1">
+<li>The mean, standard deviation, median, range, and interquartile range (25% and 75% quantiles) of the number of locations per individual;</li>
+<li>The median, mean, and standard deviation of the location frequency (aka “duty cycle”) over all the individuals.</li>
+</ol></li>
+</ol>
+</section>
+<section id="ii.-some-figures" class="level2">
+<h2 class="anchored" data-anchor-id="ii.-some-figures">II. Some Figures</h2>
+<p>Produce the following plots:</p>
+<ol type="1">
+<li>A boxplot of the number of locations per individual</li>
+<li>A plot of the overall duration of each individual’s data (like the ones in the chapter).</li>
+<li>A plot of the duration for each individual’s data that also illustrates the gaps in the monitoring.</li>
+</ol>
+</section>
+<section id="iii.-some-movement-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="iii.-some-movement-statistics">III. Some Movement Statistics</h2>
+<ol type="1">
+<li><p>For each location, compute the step-length <em>preceding</em> that location, the time interval of that step, and the movement rate.</p></li>
+<li><p>Produce a box-plot of the movement rate across all individuals against <em>month</em> of year, i.e.&nbsp;not just “Jan-Feb” and “July-August” like in the example, but for <em>each</em> month.</p></li>
+<li><p>Can you detect any patterns? Discuss.</p></li>
+<li><p><strong>Extrmely valuable extra credit:</strong> Fit some smoother (e.g.&nbsp;a GAM model or a LOESS smoother) to those movement rates across the year.</p></li>
+</ol>
+<p><font color="darkgrey"></font></p><font color="darkgrey">
+</font></section><font color="darkgrey">
+</font></section><font color="darkgrey">
+</font><section id="week-1-due-friday-jan-27-2023" class="level1"><font color="darkgrey">
 <h1>Week 1: (<strong>due Friday Jan 27, 2023</strong>)</h1>
 <section id="i.-basic-manipulations-of-movement-data" class="level2">
-<h2 class="anchored" data-anchor-id="i.-basic-manipulations-of-movement-data">I. <strong>Basic manipulations of movement data</strong></h2>
-<p>Take a movement data set of a single individual of your choice (if you don’t have one handy, the instructor will happily provide). Then:</p>
-<ul>
-<li><ol type="a">
+<h2 class="anchored" data-anchor-id="i.-basic-manipulations-of-movement-data">I. Basic manipulations of movement data</h2>
+<ol type="a">
 <li>Provide a brief summary of the data - what is it, where did it come from,</li>
-</ol></li>
-<li><ol start="2" type="a">
 <li>Load the data, convert the coordinates to complex numbers, plot the data (with a fixed aspect ratio)</li>
-</ol></li>
-<li><ol start="3" type="a">
 <li>Report some basic stats: how many observations are there; what is the sampling rate (aka <em>duty cycle</em>); what is the total extent in the east-west direction and north-south direction?</li>
-</ol></li>
-<li><ol start="4" type="a">
 <li>Compute the <strong>step lengths</strong> (<span class="math inline">\(S\)</span>), report the mean, standard deviation, and draw a histogram,</li>
-</ol></li>
-<li><ol start="5" type="a">
 <li>Compute the <strong>absolute orientations</strong> of the steps (<span class="math inline">\(\Phi\)</span>), report the <em>mean</em> (<span class="math inline">\(\widehat{\mu} = \overline{\Phi}\)</span>), the <em>mean cosine</em> (<span class="math inline">\(\widehat{\rho} = \overline{\cos(\Phi - \widehat{\mu})}\)</span>), and draw a histogram and rose diagram of the angles.</li>
-</ol></li>
-<li><ol start="6" type="a">
 <li>Perform the steps above for <strong>turning angles</strong> (<span class="math inline">\(\Theta\)</span>).<br>
 </li>
-</ol></li>
-<li><ol start="7" type="a">
 <li>What do you think the statistic <span class="math inline">\(\widehat{\rho}\)</span> tells you?</li>
-</ol></li>
-</ul>
+</ol>
 </section>
 <section id="ii.-simple-statistics-on-spatial-data-with-some-self-learning." class="level2">
 <h2 class="anchored" data-anchor-id="ii.-simple-statistics-on-spatial-data-with-some-self-learning.">II. <strong>Simple statistics on spatial data</strong> (with some self-learning).</h2>
@@ -194,19 +213,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>I emailed you a file, <code>AmericanBeech.csv</code> which contains the coordinates of American beech trees (<em>Fagus grandifola</em>) measured at SUNY-ESF’s Adirondack Research Station in 1985, 2000 and 2009 (data courtesy of <a href="https://www.esf.edu/faculty/dovciak/">M. Dovciak</a>).</p>
-<ul>
-<li><ol type="a">
-<li>Load those data, convert the coordinates to complex numbers, and plot.</li>
-</ol></li>
-<li><ol start="2" type="a">
-<li>Use <code>outer</code> and <code>apply</code> to compute the distance from each tree to it’s nearest neighbor,</li>
-</ol></li>
-<li><ol start="3" type="a">
-<li>Report the mean nearest neighbor distance, the inter-quartile intervals, and plot a histogram. Describe</li>
-</ol></li>
-</ul>
+<ol type="a">
+<li><p>Load those data, convert the coordinates to complex numbers, and plot.</p></li>
+<li><p>Use <code>outer</code> and <code>apply</code> to compute the distance from each tree to it’s nearest neighbor,</p></li>
+<li><p>Report the mean nearest neighbor distance, the inter-quartile intervals, and plot a histogram. Describe</p></li>
+</ol>
 <blockquote class="blockquote">
-<p>Note/Hint: (b) is a bit tricky, but when you get it, it’s very elegant (in my opinion). Just as a hint, you will need to create a new function that takes two locations, and computes the distance between them. Here’s a template:</p>
+<p>Note: (b) is a bit tricky, but when you get it, it’s very elegant (in my opinion). Just as a hint, you will need to create a new function that takes two locations, and computes the distance between them. Here’s a template:</p>
 </blockquote>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>getD <span class="ot">&lt;-</span> <span class="cf">function</span>(Z1, Z1){</span>
@@ -215,9 +228,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="iii.-articulate-briefly" class="level2">
+</font><section id="iii.-articulate-briefly" class="level2"><font color="darkgrey">
 <h2 class="anchored" data-anchor-id="iii.-articulate-briefly">III. Articulate (briefly) …</h2>
 <p>your goals for this class and - if possible - an idea for a final project.</p>
+</font><p><font color="darkgrey"></font></p>
 </section>
 </section>
 
