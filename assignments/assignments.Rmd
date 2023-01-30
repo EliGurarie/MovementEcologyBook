@@ -1,0 +1,97 @@
+---
+title: "Exercises and Assignments"
+subtitle: "[EFB 796: Techniques and Concepts in Movemenent Ecology](../index.html)" 
+author: "Elie Gurarie"
+date: "2023-01-23"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+  theme: "cosmo"
+---
+
+<font color = "blue"> Unless specified otherwise, homework assignments should be emailed to the instructor as *knitted* R Markdown document with minimal (if any) code. Print the markdown to a pdf, and provide the `.Rmd` file as well.</font>
+
+# Week 2: (due Friday Feb 3, 2023)
+
+## I. More manipulation of movement data
+
+Pick a movement data set of your choice with **multiple** individuals (but no more than 20). Ideally, a dataset that you plan to investigate yourself. Alternatively, work with some subset of the Ya Ha Tinda elk dataset on Movebank, following the instructions in [Chapter: Movement Data in R](../movement_data_in_R.html).
+
+a)  Create a table that reports for each individual (i) the number of locations, (ii) the start, end time and duration of the monitoring, (iii) the median, mean and standard deviation of the *duty cycle* (i.e. the duration between subsequent observations).
+
+b)  Report the following statistics:
+
+    1.  The mean, standard deviation, median, range, and interquartile range (25% and 75% quantiles) of the number of locations per individual;
+    2.  The median, mean, and standard deviation of the location frequency (aka "duty cycle") over all the individuals.
+
+## II. Some Figures
+
+Produce the following plots:
+
+1.  A boxplot of the number of locations per individual
+2.  A plot of the overall duration of each individual's data (like the ones in the chapter).
+3.  A plot of the duration for each individual's data that also illustrates the gaps in the monitoring.
+
+## III. Some Movement Statistics
+
+1.  For each location, compute the step-length *preceding* that location, the time interval of that step, and the movement rate.
+
+2.  Produce a box-plot of the movement rate across all individuals against *month* of year, i.e. not just "Jan-Feb" and "July-August" like in the example, but for *each* month.
+
+3.  Can you detect any patterns? Discuss.
+
+4.  **Extrmely valuable extra credit:** Fit some smoother (e.g. a GAM model or a LOESS smoother) to those movement rates across the year.
+
+<font color = "darkgrey">
+
+# Week 1: (**due Friday Jan 27, 2023**)
+
+## I. Basic manipulations of movement data
+
+a. Provide a brief summary of the data - what is it, where did it come from,
+b. Load the data, convert the coordinates to complex numbers, plot the data (with a fixed aspect ratio)
+c. Report some basic stats: how many observations are there; what is the sampling rate (aka *duty cycle*); what is the total extent in the east-west direction and north-south direction?
+d. Compute the **step lengths** ($S$), report the mean, standard deviation, and draw a histogram,
+e. Compute the **absolute orientations** of the steps ($\Phi$), report the *mean* ($\widehat{\mu} = \overline{\Phi}$), the *mean cosine* ($\widehat{\rho} = \overline{\cos(\Phi - \widehat{\mu})}$), and draw a histogram and rose diagram of the angles.
+f. Perform the steps above for **turning angles** ($\Theta$).\
+g. What do you think the statistic $\widehat{\rho}$ tells you?
+
+## II. **Simple statistics on spatial data** (with some self-learning).
+
+There are several amazing and underappreciated base R functions. For example, `outer`, which takes TWO vectors and ONE function (that takes two arguments) and applies that functon to every combination of the two vectors. For example, here's a multiplication table (to 5's):
+
+```{r}
+a <- 1:5
+b <- 1:5
+outer(a,b,"*")
+```
+
+Another very useful function is `apply`, which lets you apply a function across rows or columns of a matrix. So, for example, here's the sum of the rows of this table:
+
+```{r}
+apply(outer(a,b,"*"), 1, sum)
+```
+
+I emailed you a file, `AmericanBeech.csv` which contains the coordinates of American beech trees (*Fagus grandifola*) measured at SUNY-ESF's Adirondack Research Station in 1985, 2000 and 2009 (data courtesy of [M. Dovciak](https://www.esf.edu/faculty/dovciak/)).
+
+(a) Load those data, convert the coordinates to complex numbers, and plot.
+
+(b) Use `outer` and `apply` to compute the distance from each tree to it's nearest neighbor,
+
+(c) Report the mean nearest neighbor distance, the inter-quartile intervals, and plot a histogram. Describe
+
+> Note: (b) is a bit tricky, but when you get it, it's very elegant (in my opinion). Just as a hint, you will need to create a new function that takes two locations, and computes the distance between them. Here's a template:
+
+```{r, eval = FALSE}
+getD <- function(Z1, Z1){
+  ...
+  return(distance)
+}
+```
+
+## III. Articulate (briefly) ...
+
+your goals for this class and - if possible - an idea for a final project.
+
+</font> 
