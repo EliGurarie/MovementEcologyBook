@@ -10,7 +10,10 @@ output:
   theme: "cosmo"
 ---
 
-<font color = "blue"> Unless specified otherwise, homework assignments should be emailed to the instructor as *knitted* R Markdown document with minimal (if any) code. Print the markdown to a pdf, and provide the `.Rmd` file as well.</font>
+<font color = "darkblue">*Unless specified otherwise, homework assignments should be emailed to the instructor as* **knitted R Markdown documents** *with minimal (if any) code. Print (or compile) the markdown to a pdf, and provide the `.Rmd` file as well.*
+
+*Current homeworks are dark, older ones are in dark grey below.*
+</font>
 
 # Week 2: (due Friday Feb 3, 2023)
 
@@ -45,7 +48,7 @@ Produce the following plots:
 
 <font color = "darkgrey">
 
-# Week 1: (**due Friday Jan 27, 2023**)
+# Week 1: (due Friday Jan 27, 2023)
 
 ## I. Basic manipulations of movement data
 
@@ -57,7 +60,7 @@ e. Compute the **absolute orientations** of the steps ($\Phi$), report the *mean
 f. Perform the steps above for **turning angles** ($\Theta$).\
 g. What do you think the statistic $\widehat{\rho}$ tells you?
 
-## II. **Simple statistics on spatial data** (with some self-learning).
+## II. Simple statistics on spatial data (with some self-learning).
 
 There are several amazing and underappreciated base R functions. For example, `outer`, which takes TWO vectors and ONE function (that takes two arguments) and applies that functon to every combination of the two vectors. For example, here's a multiplication table (to 5's):
 
