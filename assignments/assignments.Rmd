@@ -17,7 +17,7 @@ output:
 
 # Week 2: (due Friday Feb 3, 2023)
 
-## I. More manipulation of movement data
+### I. More manipulation of movement data
 
 Pick a movement data set of your choice with **multiple** individuals (but no more than 20). Ideally, a dataset that you plan to investigate yourself. Alternatively, work with some subset of the Ya Ha Tinda elk dataset on Movebank, following the instructions in [Chapter: Movement Data in R](../movement_data_in_R.html).
 
@@ -28,7 +28,7 @@ b)  Report the following statistics:
     1.  The mean, standard deviation, median, range, and interquartile range (25% and 75% quantiles) of the number of locations per individual;
     2.  The median, mean, and standard deviation of the location frequency (aka "duty cycle") over all the individuals.
 
-## II. Some Figures
+### II. Some Figures
 
 Produce the following plots:
 
@@ -36,7 +36,7 @@ Produce the following plots:
 2.  A plot of the overall duration of each individual's data (like the ones in the chapter).
 3.  A plot of the duration for each individual's data that also illustrates the gaps in the monitoring.
 
-## III. Some Movement Statistics
+### III. Some Movement Statistics
 
 1.  For each location, compute the step-length *preceding* that location, the time interval of that step, and the movement rate.
 
@@ -50,7 +50,7 @@ Produce the following plots:
 
 # Week 1: (due Friday Jan 27, 2023)
 
-## I. Basic manipulations of movement data
+### I. Basic manipulations of movement data
 
 a. Provide a brief summary of the data - what is it, where did it come from,
 b. Load the data, convert the coordinates to complex numbers, plot the data (with a fixed aspect ratio)
@@ -60,7 +60,7 @@ e. Compute the **absolute orientations** of the steps ($\Phi$), report the *mean
 f. Perform the steps above for **turning angles** ($\Theta$).\
 g. What do you think the statistic $\widehat{\rho}$ tells you?
 
-## II. Simple statistics on spatial data (with some self-learning).
+### II. Simple statistics on spatial data (with some self-learning).
 
 There are several amazing and underappreciated base R functions. For example, `outer`, which takes TWO vectors and ONE function (that takes two arguments) and applies that functon to every combination of the two vectors. For example, here's a multiplication table (to 5's):
 
@@ -93,7 +93,7 @@ getD <- function(Z1, Z1){
 }
 ```
 
-## III. Articulate (briefly) ...
+### III. Articulate (briefly) ...
 
 your goals for this class and - if possible - an idea for a final project.
 
