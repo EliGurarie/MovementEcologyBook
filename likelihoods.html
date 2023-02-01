@@ -757,7 +757,7 @@ $hessian
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">LRT</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="op">-</span><span class="va">fit1</span><span class="op">$</span><span class="va">value</span> <span class="op">+</span> <span class="va">fit0</span><span class="op">$</span><span class="va">value</span><span class="op">)</span></span>
 <span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Chisquare.html">pchisq</a></span><span class="op">(</span><span class="va">LRT</span>, <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1083316</code></pre>
+<pre><code>[1] 0.007766346</code></pre>
 </div>
 </div>
 </section><section id="information-criteria" class="level3" data-number="8.4.2"><h3 data-number="8.4.2" class="anchored" data-anchor-id="information-criteria">
@@ -768,7 +768,7 @@ $hessian
 <span>  AIC1  <span class="op">=</span> <span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="va">fit1</span><span class="op">$</span><span class="va">value</span> <span class="op">+</span> <span class="fl">2</span><span class="op">*</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    AIC0     AIC1 
-79.56228 80.98389 </code></pre>
+68.76431 65.67773 </code></pre>
 </div>
 </div>
 <p>Or … Bayesian Information Criterion (BIC) <span class="math display">\[ BIC =  - 2 \log(\cal L) + k \log(n) \]</span></p>
@@ -777,7 +777,7 @@ $hessian
 <span>  BIC1  <span class="op">=</span> <span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="va">fit1</span><span class="op">$</span><span class="va">value</span> <span class="op">+</span> <span class="fl">3</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    BIC0     BIC1 
-83.54521 86.95828 </code></pre>
+72.74724 71.65213 </code></pre>
 </div>
 </div>
 <p><strong>Which? Why?</strong> - a complicated debate, different underlying assumptions But generally - if you want to be more parsimonious (i.e.&nbsp;protect from overfitting) BIC is a better bet.</p>
@@ -867,14 +867,14 @@ $hessian
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">Weibull.fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/optim.html">optim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, <span class="va">Weibull.Like</span>, Z<span class="op">=</span><span class="va">Z</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$par
-[1] 2.020257 1.926387
+[1] 1.980664 1.891559
 
 $value
-[1] 124.6168
+[1] 122.5206
 
 $counts
 function gradient 
-      63       NA 
+      67       NA 
 
 $convergence
 [1] 0
