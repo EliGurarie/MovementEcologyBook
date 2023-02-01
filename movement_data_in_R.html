@@ -1589,14 +1589,42 @@ winter summer
 </div>
 <p>Note there are lot of 0’s in the data, which is rather remarkable considering the relative imprecision of GPS data - certainly high enough to show variation at the 1 meter scale. This is an evident <font color="red"> red flag </font> … one might be inclined to simply remove those data entirely.</p>
 <p>Without going into too much detail of the statistical analysis of these data, the most appropriate statistical test would use a linear mixed effects model with individuals as random effects, and look something like this:</p>
-<div class="cell" data-hash="movement_data_in_R_cache/html/unnamed-chunk-29_bb36aba8213651ca6d14cff55efc8245">
+<div class="cell" data-hash="movement_data_in_R_cache/html/unnamed-chunk-29_3c4d9c831f3e7636c72af75e6e5e3512">
 <div class="sourceCode" id="cb80"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">MR</span><span class="op">)</span> <span class="op">~</span> <span class="va">season</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">season</span><span class="op">|</span><span class="va">ID</span><span class="op">)</span>, </span>
-<span>            data <span class="op">=</span> <span class="va">elk_winter_summer</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">MR</span> <span class="op">!=</span> <span class="fl">0</span> <span class="op">&amp;</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">MR</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>            data <span class="op">=</span> <span class="va">elk_winter_summer</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">MR</span> <span class="op">!=</span> <span class="fl">0</span> <span class="op">&amp;</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">MR</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML ['lmerMod']
+Formula: log(MR) ~ season + (1 + season | ID)
+   Data: elk_winter_summer %&gt;% subset(MR != 0 &amp; !is.na(MR))
+
+REML criterion at convergence: 70408.4
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-4.2795 -0.6753  0.0264  0.7044  3.2786 
+
+Random effects:
+ Groups   Name         Variance Std.Dev. Corr 
+ ID       (Intercept)  3.355    1.832         
+          seasonsummer 1.001    1.000    -0.14
+ Residual              2.295    1.515         
+Number of obs: 19164, groups:  ID, 10
+
+Fixed effects:
+             Estimate Std. Error t value
+(Intercept)   -4.6853     0.6123  -7.653
+seasonsummer  -0.2238     0.3738  -0.599
+
+Correlation of Fixed Effects:
+            (Intr)
+seasonsummr -0.285</code></pre>
 </div>
-<p>Perhaps surprisingly, movement rates are slightly lower in the summer - but not with meaningful statistical significance (|<span class="math inline">\(t\)</span> value| &lt; 1).</p>
-<p>Note, the residuals are quite well-behaved with the log-transformation.</p>
+</div>
+<p>Movement rates are slightly lower in the summer - but, perhaps surprisingly, not with meaningful statistical significance (|<span class="math inline">\(t\)</span> value| &lt; 1).</p>
+<p>Note that the residuals are quite well-behaved with the log-transformation.</p>
 <div class="cell" data-hash="movement_data_in_R_cache/html/residuals_bef1b101939064ef0ec70b4ba1fc1c26">
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="movement_data_in_R_files/figure-html/residuals-1.png" class="img-fluid" width="672"></p>
 </div>
