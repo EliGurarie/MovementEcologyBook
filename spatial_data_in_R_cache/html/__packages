@@ -1,0 +1,13 @@
+knitr
+dplyr
+sf
+sp
+raster
+fasterize
+ggplot2
+mapview
+ggspatial
+basemaps
+geosphere
+maps
+mapdata
