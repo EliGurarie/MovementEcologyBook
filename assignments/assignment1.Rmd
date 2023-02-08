@@ -27,8 +27,6 @@ knitr::opts_chunk$set(echo = TRUE, eval = TRUE, cache = TRUE, message = FALSE, w
 require(knitr)
 ```
 
-# Week 1: (due Friday Jan 27, 2023)
-
 ### I. Basic manipulations of movement data
 
 a. Provide a brief summary of the data - what is it, where did it come from, 

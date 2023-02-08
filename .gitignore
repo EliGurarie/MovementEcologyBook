@@ -3,7 +3,5 @@
 .RData
 .Ruserdata
 */*cache/
-*/*files/
 */*/*/cache/
-*/*/*/files/
 _data/
