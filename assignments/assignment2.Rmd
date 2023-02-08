@@ -1,0 +1,228 @@
+---
+title: "Assignment 2 (solutions)"
+subtitle: "[EFB 796: Techniques and Concepts in Movemenent Ecology](../index.html)" 
+author: "Elie Gurarie"
+date: "Winter/Spring 2023"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cosmo
+---
+
+```{css, echo = FALSE}
+blockquote {
+    padding: 10px 20px;
+    margin: 0 0 20px;
+    font-size: 16px;
+    color: darkgreen;
+    font-family: "Garamond";
+    background: #DFD;
+    border-left: 5px solid #262; 
+}
+```
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, cache = TRUE, message = FALSE, warning = FALSE)
+require(knitr)
+```
+
+
+### I. More manipulation of movement data
+
+Pick a movement data set of your choice with **multiple** individuals (but no more than 20). Ideally, a dataset that you plan to investigate yourself. Alternatively, work with some subset of the Ya Ha Tinda elk dataset on Movebank, following the instructions in [Chapter: Movement Data in R](../movement_data_in_R.html).
+
+> We'll work with a dataset in the `amt` package of [fishers (*Martes pennanti*)](https://en.wikipedia.org/wiki/Fisher_(animal)) from Albany, NY.  We'll simplify again to *x*, *y*, *time* and *id*, and turn it from a "tibble" to a data frame.  The details of the code below aren't important, but they allow this example to be fully replicable. 
+
+```{r}
+require(amt)
+data(amt_fisher)
+fisher <- data.frame(amt_fisher[,c("x_","y_","t_","id")])
+names(fisher) <- c("x","y","time","id")
+str(fisher)
+```
+
+
+a)  Create a table that reports for each individual (i) the number of locations, (ii) the start, end time and duration of the monitoring, (iii) the median, mean and standard deviation of the *duty cycle* (i.e. the duration between subsequent observations).
+
+> First, let's see how many individuals we have:
+
+```{r}
+table(fisher$id)
+```
+
+> Just four, two females and two males.  We can now summarize these data per individual.  I like `plyr` commands for this, i.e. `ddply` combined with `summarize`:
+
+```{r}
+require(plyr); require(magrittr)
+duration.table <- fisher %>% ddply("id", summarize, 
+                 n.locs = length(x), 
+                 start = min(time) %>% as.Date, 
+                 end = max(time) %>% as.Date,
+                 duration = difftime(end, start, units = "days") %>% round(1))
+duration.table
+```
+
+> That's quite tidy!  To get some of the details of the duty cycles, I'll first compute the intervals by "id", and *then* summarize:
+
+```{r}
+dutycycle.table <- fisher %>% ddply("id", summarize, 
+                 dT = difftime(time[-1],time[-length(time)], units = "mins")) %>% 
+  ddply("id", summarize, 
+        dT.median = median(dT), dT.mean = mean(dT), dT.sd = sd(dT))
+dutycycle.table
+```
+
+> Just from these numbers it is clear that there are some VERY large gaps in the data.  ***How can I tell?***
+
+b)  Report the following statistics:
+
+    1.  The mean, standard deviation, median, range, and interquartile range (25% and 75% quantiles) of the number of locations per individual;
+    
+> Quick & easy with the table we had before, and the handy `summary` function:    
+
+```{r}
+summary(duration.table$n.locs)
+```
+
+> Ok, technically the standard deviation is missing:
+
+```{r}
+sd(duration.table$n.locs)
+```
+
+> Not very informative with only 4 individuals.  But still - basically excellent datasets
+    
+    2.  The median, mean, and standard deviation of the location frequency (aka "duty cycle") over all the individuals.
+
+> We shouldn't use the summary table we put together in the previous section here, but ALL the raw time intervals:
+
+```{r}
+dT.table <- fisher %>% ddply("id", summarize, 
+                 dT = difftime(time[-1],time[-length(time)], units = "mins"))
+summary(dT.table$dT %>% as.numeric)
+```
+
+> Ok - so MAINLY an ungodly 2 minutes between intervals.  But also - at least in one place - a leap of 1650 minutes, or 27.5 hours. There will be holes! 
+
+
+
+### II. Some Figures
+
+Produce the following plots:
+
+1.  A boxplot of the number of locations per individual
+
+> This question did not make very much sense.  But technically, it is a single, uninteresting box with whiskers. 
+
+```{r}
+boxplot(duration.table$n.locs)
+```
+
+> Beautiful!
+
+2.  A plot of the overall duration of each individual's data (like the ones in the chapter).
+
+> Using the `ggplot` example from Ophélie's notes:
+
+```{r}
+require(ggplot2)
+fisher %>% ddply("id", summarize, start = min(time), end = max(time)) %>% 
+                   ggplot(aes(xmin = start, xmax = end, y = id)) + 
+                   geom_linerange()
+```
+
+> Ok - these animals were followed for very short, very intense periods over af five year period. We might get a slightly better idea if we *facet* by the animals and *free* the time-scales:
+
+```{r}
+fisher %>% ddply("id", summarize, start = min(time), end = max(time)) %>% 
+  ggplot(aes(xmin = start, xmax = end, y = id)) + 
+  geom_linerange() + facet_wrap(.~id, ncol = 2, scales = "free_x")
+```
+
+> Not an extremely useful plot!  But mainly we can see that the studies occurred primarily in February, with one female tracked in December. 
+
+3.  A plot of the duration for each individual's data that also illustrates the gaps in the monitoring.
+
+> For these data, this is actually a bit tricky because the observation frequency is SO high. Here's my version:
+
+```{r}
+fisher %>% 
+  ggplot(aes(time, y = id)) + 
+  geom_point(cex = 0.5, alpha = 0.4) + facet_wrap(.~id, ncol = 2, scales = "free_x")
+```
+
+> Lots of little gaps!
+
+### III. Some Movement Statistics
+
+1.  For each location, compute the step-length *preceding* that location, the time interval of that step, and the movement rate.
+
+```{r}
+fisher.mr <- fisher %>% ddply("id", mutate, z= x+1i*y, step = c(NA, diff(z)),
+                 dT = c(NA, difftime(time[-1], time[-length(time)], units = "min")) %>% as.numeric,
+                 move.rate = Mod(step)/dT)
+```
+
+
+2.  Produce a box-plot of the movement rate across all individuals against *month* of year, i.e. not just "Jan-Feb" and "July-August" like in the example, but for *each* month.
+
+> All of the movements here occurred in winter.  So instead, we'll break down by hour of day (also an interesting question):
+
+```{r}
+require(lubridate) 
+fisher.mr %>% ggplot(aes(factor(hour(time)), move.rate)) + 
+  geom_boxplot() + ylab("movement rate: m/min")
+```
+
+> Even from these plots it is clear that the fishers aren´t so active in the afternoons.... HOWEVER, it is VERY VERY important to note the time zone of the data collection!   Thankfully, that is stored in the time data:
+
+```{r}
+tz(fisher$time)
+```
+
+> Yikes!  Albany, NY, is not in UTC.  We need to change the time zone to local time, and then recreate the figure:
+
+```{r}
+fisher$time <- with_tz(fisher$time, tzone = "America/New_York")
+fisher.mr <- fisher %>% ddply("id", mutate, z= x+1i*y, step = c(NA, diff(z)),
+                 dT = c(NA, difftime(time[-1], time[-length(time)], units = "min")) %>% as.numeric,
+                 move.rate = Mod(step)/dT)
+fisher.mr %>% ggplot(aes(factor(hour(time)), move.rate)) + 
+  geom_boxplot() + ylab("movement rate: m/min")
+```
+
+> There are some outlying points and an extremely typical right skew to the movement rate distributions (& also an evident outlier).  The right skew is perhaps easiest to deal with with a log-scaled axis.  Here is another version that does that, and also breaks the patterns down by individual:
+
+```{r}
+fisher.mr %>% ggplot(aes(factor(lubridate::hour(time)), move.rate, fill = id, col = id)) + 
+  geom_boxplot(alpha = 0.5) + ylab("movement rate: m/min") +
+  scale_y_log10() + facet_wrap(.~id)
+```
+
+3.  Can you detect any patterns? Discuss.
+
+> Considerable inter-individual variation (welcome to animal behavior!)  Essentially similar patterns, but extremely pronounced for F2. Note the wide range of movement rates: from well under 0.1 m / min to well over 20 m / min, with consistent means (when active) of around 10 m/min. Given the extremely high resolution of the data, there is a high likelihood that GPS data errors are artifically increasing speeds.   
+
+4.  **Extremely valuable extra credit:** Fit some smoother (e.g. a GAM model or a LOESS smoother) to those movement rates across the year.
+
+> Here's a nice comparison of patterns across individuals:
+
+```{r}
+require(lubridate)
+fisher.mr %>% mutate(timeofday = hour(time) + minute(time)/60) %>% 
+  ggplot(aes(timeofday, move.rate, col = id)) + 
+  ylab("movement rate: m/min") + 
+  geom_smooth(method = "gam")  + 
+  scale_y_log10()
+```
+
+> The `geom_smooth` function plops down a smoother (in this case "gam") in a very naive way.  In fact, the confidence intervals here are WAY too narrow because of autocorrelation in the movement data - something we'll learn about more later in the class. But the overall pattern is clear.  If you want to find an active fisher in the winter, you're much better off just about any time between 6pm and 5am.  But don´t expect to find anyone at noon. 
+
+![](https://albinger.files.wordpress.com/2017/11/fisher-with-a-broken-tail-jackson-beardy-1972.jpg?w=640)
+
+<center> [Fisher With A Broken Tail. Jackson Beardy (Aniishinabe). 1972](https://albinger.me/2017/11/21/anishinaabek-beadwork-and-painting-at-the-r-o-m/) 
+
+According to Ojibwe legend, the fisher saved humanity from endless winter, and was immortalized in a constellation (Ursa Major) when the sky people broke his tail. This is the origin of the two seasons: winter and summer.</center>
+

@@ -7,15 +7,53 @@ output:
   html_document:
     toc: true
     toc_float: true
-  theme: "cosmo"
+    theme: cosmo
 ---
 
-<font color = "darkblue">*Unless specified otherwise, homework assignments should be emailed to the instructor as* **knitted R Markdown documents** *with minimal (if any) code. Print (or compile) the markdown to a pdf, and provide the `.Rmd` file as well.*
-
-*Current homeworks are dark, older ones are in dark grey below.*
+> Unless specified otherwise, homework assignments should be emailed to the instructor as **knitted R Markdown documents**. Print (or compile) the markdown to a pdf, and provide the `.Rmd` file as well.
+> Links to older **homework solutions** are below. 
 </font>
 
+# Week 3: (due Monday Feb 13, 2023)
+
+## I. Making maps with your spatial data
+
+For this assignment, we recommend using whatever dataset(s) you hope to use for your final project. If you don't have access to these yet, you can work with a Movebank (or via Dr. G) dataset of your choice.
+
+The assignment is to make a *pretty* (static) map with your movement data and at least one additional spatial variable of some kind (e.g., raster of environmental data, vector data of roads or barriers or habitat, etc.). You can make this map using any R package you want as long as you can make a "pretty" map with it but we recommend trying one of the packages introduced in class (e.g., ggspatial, basemaps...). Your map should include at minimum, a background map of some kind (could just be a polygon of land, could be a basemap (e.g., an OSM basemap from `ggspatial` or `basemaps`), labeled X/Y axes, a legend, and of course, your data (movement data, additional spatial data). If you are feeling fancy/brave, try to add a north arrow and scale bar!
+
+Remember to make sure that all your layers have the same CRS, GCS or PCS, and spatial extent... don't hesitate to email Nicki for help (barbour\@esf.edu). And if you need help finding spatial data for your project, Elie likely has some layers he can send you.
+
+## II. Making maps ... with birds!
+
+On Monday we watched a very interesting lecture by Marie-Josée Fortin of the University of Toronto on modeling spatial data.  The code and data from that lecture are available here: https://github.com/eco4cast/Statistical-Methods-Seminar-Series/tree/main/fortin_spatial-models. I believe the data are [ovenbirds (*Seiurus aurocapilla*)](https://en.wikipedia.org/wiki/Ovenbird), with a [nice song](https://upload.wikimedia.org/wikipedia/commons/6/64/Seiurus_aurocapilla_-_Ovenbird_-_XC77882.ogg) and the main question Prof. Fortin was exploring was whether or not their abundance is related to forest cover. 
+
+You can download the data directly in R as follows:
+
+```{r}
+library(curl)
+url <-  curl("https://raw.githubusercontent.com/eco4cast/Statistical-Methods-Seminar-Series/main/fortin_spatial-models/bird_forest.csv")
+birds <- read.csv(url)
+str(birds)
+```
+
+Professor Fortin plotted the data in a very straightforward way, something like this:
+
+```{r, fig.height = 5, fig.width = 6, echo = -1}
+par(mar = c(2,2,1,1), tck = 0.01)
+plot(birds$xUTM, birds$yUTM, cex = sqrt(birds$Bird), asp = 1)
+```
+
+You can *just* make out the outlines of several Great Lakes in this image. (Did Syracuse make it onto this map?)
+
+The challenge is to come up with a way to present this information on a more informative and attractive way.  
+
+
+<font color = "#343">
+
 # Week 2: (due Friday Feb 3, 2023)
+
+[**Solutions here**](assignment2.html)
 
 ### I. More manipulation of movement data
 
@@ -44,21 +82,21 @@ Produce the following plots:
 
 3.  Can you detect any patterns? Discuss.
 
-4.  **Extrmely valuable extra credit:** Fit some smoother (e.g. a GAM model or a LOESS smoother) to those movement rates across the year.
-
-<font color = "darkgrey">
+4.  **Extremely valuable extra credit:** Fit some smoother (e.g. a GAM model or a LOESS smoother) to those movement rates across the year.
 
 # Week 1: (due Friday Jan 27, 2023)
 
+[**Solutions here**](assignment1.html)
+
 ### I. Basic manipulations of movement data
 
-a. Provide a brief summary of the data - what is it, where did it come from,
-b. Load the data, convert the coordinates to complex numbers, plot the data (with a fixed aspect ratio)
-c. Report some basic stats: how many observations are there; what is the sampling rate (aka *duty cycle*); what is the total extent in the east-west direction and north-south direction?
-d. Compute the **step lengths** ($S$), report the mean, standard deviation, and draw a histogram,
-e. Compute the **absolute orientations** of the steps ($\Phi$), report the *mean* ($\widehat{\mu} = \overline{\Phi}$), the *mean cosine* ($\widehat{\rho} = \overline{\cos(\Phi - \widehat{\mu})}$), and draw a histogram and rose diagram of the angles.
-f. Perform the steps above for **turning angles** ($\Theta$).\
-g. What do you think the statistic $\widehat{\rho}$ tells you?
+a.  Provide a brief summary of the data - what is it, where did it come from,
+b.  Load the data, convert the coordinates to complex numbers, plot the data (with a fixed aspect ratio)
+c.  Report some basic stats: how many observations are there; what is the sampling rate (aka *duty cycle*); what is the total extent in the east-west direction and north-south direction?
+d.  Compute the **step lengths** ($S$), report the mean, standard deviation, and draw a histogram,
+e.  Compute the **absolute orientations** of the steps ($\Phi$), report the *mean* ($\widehat{\mu} = \overline{\Phi}$), the *mean cosine* ($\widehat{\rho} = \overline{\cos(\Phi - \widehat{\mu})}$), and draw a histogram and rose diagram of the angles.
+f.  Perform the steps above for **turning angles** ($\Theta$).\
+g.  What do you think the statistic $\widehat{\rho}$ tells you?
 
 ### II. Simple statistics on spatial data (with some self-learning).
 
@@ -97,4 +135,4 @@ getD <- function(Z1, Z1){
 
 your goals for this class and - if possible - an idea for a final project.
 
-</font> 
+</font>

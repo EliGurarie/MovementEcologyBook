@@ -1,0 +1,233 @@
+---
+title: "Assignment 1 (solutions)"
+subtitle: "[EFB 796: Techniques and Concepts in Movemenent Ecology](../index.html)" 
+author: "Elie Gurarie"
+date: "Winter/Spring 2023"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cosmo
+---
+
+```{css, echo = FALSE}
+blockquote {
+    padding: 10px 20px;
+    margin: 0 0 20px;
+    font-size: 16px;
+    color: darkgreen;
+    font-family: "Garamond";
+    background: #DFD;
+    border-left: 5px solid #262; 
+}
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, cache = TRUE, message = FALSE, warning = FALSE)
+require(knitr)
+```
+
+# Week 1: (due Friday Jan 27, 2023)
+
+### I. Basic manipulations of movement data
+
+a. Provide a brief summary of the data - what is it, where did it come from, 
+
+
+> In part to illustrate some places where movement data are "tucked away" in R, here's an example of a [mouflon (*Ovis gmelini*)](https://en.wikipedia.org/wiki/Mouflon) in the `adehabitatLT` package. This particular mouflon was tracked in 2003 somewhere in southern France, data from the Office National de la Chasse et de la Faune Sauvage - the national game and wildlife agency of France. 
+</font>
+
+b.  Load the data, convert the coordinates to complex numbers, plot the data (with a fixed aspect ratio)
+
+> The following bit of code extracts one of two mouflons in the package, retaining only the *x*, *y* and *date* (time) columns, which as all we need.  Note that the time vector is already in POSIX format. 
+
+```{r}
+require(adehabitatLT)
+# See all the data in the package by running:
+## >  data(package = "adehabitatLT")
+data(mouflon)  # loads the data.  
+mouflon <- as.data.frame(mouflon[[1]][,1:3])
+str(mouflon)
+```
+
+> There is a bit of an issue with some missing observations in these data
+
+```{r}
+table(is.na(mouflon$x))
+```
+
+> A simple way to tidy those (for our purposes) is simply:
+
+```{r}
+mouflon <- na.omit(mouflon)
+```
+
+
+
+> Creating a complex vector and plotting the movement:
+
+```{r}
+mouflon$z <- mouflon$x + 1i * mouflon$y
+plot(mouflon$z, asp = 1, type = "o")
+```
+
+c.  Report some basic stats: how many observations are there; what is the sampling rate (aka *duty cycle*); what is the total extent in the east-west direction and north-south direction?
+
+> Check out this R markdown trick for reporting stats.  If I type:
+
+```{eval = FALSE}
+There are `r nrow(mouflon)` locations in the data base, spanning `r round(diff(range(mouflon$x)))` m East-West, and `r round(diff(range(mouflon$y)))` m North-South. 
+```
+
+> The output is: *There are `r nrow(mouflon)` locations in the data base, spanning `r round(diff(range(mouflon$x)))` m East-West, and `r round(diff(range(mouflon$y)))` m North-South.*, and so on.  The other important piece of infromation I asked for was the sampling rate, which is obtained by:
+
+```{r}
+dT <- difftime(mouflon$date[-1], mouflon$date[-nrow(mouflon)], "minutes")
+table(round(dT,-1))
+```
+
+> almost all of the time intervals are 20 minutes, with a few 40 minute intervals (because of single missing locations), and one of 140 minutes (because of 6 missing locations). 
+
+d.  Compute the **step lengths** ($S$), report the mean, standard deviation, and draw a histogram,
+
+```{r}
+dS <- Mod(diff(mouflon$z))
+mean(dS)
+sd(dS)
+hist(dS, breaks = 50, col = "grey",xlab = "step length (m)")
+```
+
+> So, in 20 minutes the mouflon typically moves 50 m (sd 50 m).  **POP QUIZ: What is a distribution where the mean and standard deviation are equal?**  Note also that since not ALL step durations are 20 minutes, this is a slightly biased analysis.
+
+```{r}
+mouflon[which.max(dS) + c(-1:1),]
+```
+
+
+
+
+
+e.  Compute the **absolute orientations** of the steps ($\Phi$), report the *mean* ($\widehat{\mu} = \overline{\Phi}$), the *mean cosine* ($\widehat{\rho} = \overline{\cos(\Phi)}$), and draw a histogram and rose diagram of the angles.
+
+> The key is to take the argument of the *steps*, i.e. of `diff(z)`:
+
+```{r}
+Phi <- Arg(diff(mouflon$z))
+```
+
+> The rest follows directly
+
+```{r, echo = -1}
+par(mfrow = c(1,2))
+mean(Phi)
+mean(cos(Phi))
+hist(Phi, breaks = 20, col = "grey")
+require(circular)
+rose.diag(Phi, bins = 24, prop = 2, col = "grey")
+```
+
+> The angles are more less uniformy distributed between $-\pi$ and $\pi$ - as expected. The mean AND mean cosine are near 0, indiciating no overall orientation to the movement. 
+
+f.  Perform the steps above for **turning angles** ($\Theta$).
+
+> The turning angles are the *differences* in the absolute orientations: 
+
+```{r}
+Theta <- diff(Phi)
+```
+
+> The rest follows directly as abbove:
+
+```{r, echo = -1}
+par(mfrow = c(1,2))
+mean(Theta)
+mean(cos(Theta))
+hist(Theta, breaks = 20, col = "grey")
+rose.diag(Theta, bins = 24, prop = 2, col = "grey")
+```
+
+> In this particular example, the turning angles are ALSO surprisingly uniform, and the mean cosine ($\rho$) is amazingly negative.  In MOST cases, it will be positive, to reflect a general persistence of movement in the same direction.  his is NOT typical of movement data, and (presumably) reflects the fact that the mouflon are (a) in a highly mountainous and often range limited.  If you look at the movement data, you will see that there are highly stationary states and a few displacements.  We can explore that hypothesis a little bit by filterin the data to larger step lengths.  Thus:
+
+```{r}
+steps <- diff(mouflon$z)
+long_steps <- steps[Mod(steps) > 50]
+mean(cos(diff(Arg(long_steps))))
+rose.diag(cos(diff(Arg(long_steps))), prop = 2, col = "grey")
+```
+
+> Ah!  Much better. The $\widehat{\rho} > 0$, and most of the angles are "forward" looking. 
+
+g.  What do you think the statistic $\widehat{\rho}$ tells you?
+
+> If $\rho = 1$, all the movement is in the same direction.  If $\rho = 0$ the turning angles are completely random.  If $\rho < 0$ the movements tend to go back and forth. 
+
+![](https://www.art-prints-on-demand.com/kunst/karljoseph_brodtmann/Mouflon.jpg)
+
+<center>Mouflon - by Karl Joseph Brodtmann</center>
+
+
+### II. Simple statistics on spatial data (with some self-learning).
+
+I emailed you a file, `AmericanBeech.csv` which contains the coordinates of American beech trees (*Fagus grandifola*) measured at SUNY-ESF's Adirondack Research Station in 1985, 2000 and 2009 (data courtesy of [M. Dovciak](https://www.esf.edu/faculty/dovciak/)).
+
+(a) Load those data, convert the coordinates to complex numbers, and plot.
+
+```{r, echo =-1, eval = -2}
+require(magrittr); beech <- read.csv("_data/AmericanBeech.csv") %>% 
+  subset(EAST < 50 & NORTH < 50)
+beech <- read.csv("AmericanBeech.csv")
+str(beech)
+Z <- beech$EAST + 1i*beech$NORTH
+plot(Z, asp = 1)
+```
+
+(b) Use `outer` and `apply` to compute the distance from each tree to it's nearest neighbor,
+
+> To use `outer()`, you need a function that takes two arguments and returns a single value.  But those arguments can be *complex*!  So the distance between two points functions can be:
+
+```{r}
+getDistance <- function(z1, z2) Mod(z2 - z1)
+```
+
+> Applying this across all combinations of points giv es:
+
+```{r}
+D.matrix <- outer(Z, Z, getDistance)
+```
+
+Let's take a quick peek at this matix:
+
+```{r}
+D.matrix[1:5,1:5]
+```
+
+> This matrix is symmetric, because the distance between tree 1 and tree 2 is equal to the distance between tree 2 and tree 1.  And it has 0's along the diagonal, because the distance between a tree and itself is 0.  Actually, *any* symmetric matrix with 0's along the diagonals can be considered a  [distance matrix](https://en.wikipedia.org/wiki/Distance_matrix) (or - formally - a distance matrix in a [*metric space*](https://en.wikipedia.org/wiki/Metric_space)). The diagonal is not very interesting, so we could replace all of those 0's with NA's:
+
+```{r}
+diag(D.matrix) <- NA
+```
+
+> Now that we have a distance matrix, we can use `apply` along the rows (or columns) get the distance of the nearest tree:
+
+```{r}
+NN.distances <- apply(D.matrix, 1, min, na.rm = TRUE)
+```
+
+> If you want to do everthing in one line, it would look like this:
+
+```{r}
+NN.distances <- apply(outer(Z, Z, function(z1, z2) Mod(z1-z2)), 
+                      1, function(x) min(x[x>0]))
+```
+
+> High-level stuff!  Two bespoke functions defined within a single line of code!
+
+(c) Report the mean nearest neighbor distance, the inter-quartile intervals, and plot a histogram. Describe.
+
+```{r}
+summary(NN.distances)
+hist(NN.distances, breaks = 40, col = "grey")
+```
+
+>  The mean & median nearest neighber distance between trees is about 2 meters, but it looks like there might be some *inhibition* in the growth of the beech trees, i.e. below the 2 meter peak, it is much less likely to find another tree within, say 1 meter.  There are real, biological  reasons for this, of course, that even non-plant ecologists might surmise!  
+
