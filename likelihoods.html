@@ -337,6 +337,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2"><span class="toc-section-number">8.7.1</span>  Exercise 2</a></li>
   </ul>
 </li>
+  <li>
+<a href="#a-step-length---turning-angle-dependency-model" id="toc-a-step-length---turning-angle-dependency-model" class="nav-link" data-scroll-target="#a-step-length---turning-angle-dependency-model"><span class="toc-section-number">9</span>  A step length - turning angle dependency model</a>
+  <ul class="collapse">
+<li><a href="#estimating-the-parameters" id="toc-estimating-the-parameters" class="nav-link" data-scroll-target="#estimating-the-parameters"><span class="toc-section-number">9.1</span>  Estimating the parameters</a></li>
+  <li><a href="#confidence-intervals-around-this-estimate" id="toc-confidence-intervals-around-this-estimate" class="nav-link" data-scroll-target="#confidence-intervals-around-this-estimate"><span class="toc-section-number">9.2</span>  Confidence intervals around this estimate</a></li>
+  <li><a href="#testing-on-a-truly-random-walk" id="toc-testing-on-a-truly-random-walk" class="nav-link" data-scroll-target="#testing-on-a-truly-random-walk"><span class="toc-section-number">9.3</span>  Testing on a truly random walk</a></li>
+  <li><a href="#testing-on-some-data" id="toc-testing-on-some-data" class="nav-link" data-scroll-target="#testing-on-some-data"><span class="toc-section-number">9.4</span>  Testing on some data!</a></li>
+  <li><a href="#confidence-intervals-with-hessians" id="toc-confidence-intervals-with-hessians" class="nav-link" data-scroll-target="#confidence-intervals-with-hessians"><span class="toc-section-number">9.5</span>  Confidence intervals with Hessians</a></li>
+  </ul>
+</li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/edit/main/likelihoods.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
@@ -921,6 +931,291 @@ NULL</code></pre>
 <span><span class="va">Sigma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html">solve</a></span><span class="op">(</span><span class="va">Weibull.fit</span><span class="op">$</span><span class="va">hessian</span><span class="op">)</span></span>
 <span><span class="va">se</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">Sigma</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>hat <span class="op">=</span> <span class="va">Weibull.fit</span><span class="op">$</span><span class="va">par</span>, CI.low <span class="op">=</span> <span class="va">Weibull.fit</span><span class="op">$</span><span class="va">par</span>  <span class="op">-</span> <span class="fl">1.96</span><span class="op">*</span><span class="va">se</span>, CI.high <span class="op">=</span> <span class="va">Weibull.fit</span><span class="op">$</span><span class="va">par</span>  <span class="op">+</span> <span class="fl">1.96</span><span class="op">*</span><span class="va">se</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section><section id="a-step-length---turning-angle-dependency-model" class="level1" data-number="9"><h1 data-number="9">
+<span class="header-section-number">9</span> A step length - turning angle dependency model</h1>
+<p>One model that would capture that would make the <span class="math inline">\(\kappa\)</span> coefficient a function of step length, e.g.: <span class="math display">\[ \rho_i = \rho_0 + (1-\rho_0) (1 - \exp(\alpha S_i))\]</span></p>
+<div class="cell" data-hash="likelihoods_cache/html/FunkyModel_3677e63e3ca823cf0dda851b32def91a">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fl">.5</span></span>
+<span><span class="va">rho0</span> <span class="op">&lt;-</span> <span class="fl">0.2</span></span>
+<span><span class="va">f</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">rho0</span><span class="op">=</span><span class="fl">0</span>, <span class="va">alpha</span><span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="va">rho0</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">rho0</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="va">alpha</span><span class="op">*</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">alphas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0.5</span>,<span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,type<span class="op">=</span><span class="st">"n"</span>,xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">3</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span>, ylab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">rho</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">alphas</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu">f</span><span class="op">(</span><span class="va">x</span>, alpha <span class="op">=</span> <span class="va">alphas</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span>, add<span class="op">=</span><span class="cn">TRUE</span>, col<span class="op">=</span><span class="va">i</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"right"</span>, col<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, legend <span class="op">=</span> <span class="va">alphas</span>, lty<span class="op">=</span><span class="fl">1</span>, title<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">alpha</span><span class="op">)</span>, bty<span class="op">=</span><span class="st">"n"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="likelihoods_files/figure-html/FunkyModel-1.png" class="img-fluid" width="1000"></p>
+</div>
+</div>
+<p>Here, the <span class="math inline">\(\rho_0\)</span> is a base line clustering, and <span class="math inline">\(\alpha\)</span> is a strength of the dependence on step lengths; these are similar to intercepts and slopes.</p>
+<p>Let’s see how this model looks, by simulating the process and visualizing:</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-41_cebd69c659b4f1a29536fe68582e2355">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># initailize parameter values</span></span>
+<span><span class="va">rho0</span> <span class="op">&lt;-</span> <span class="fl">0.2</span>; <span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="va">S</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span></span>
+<span><span class="va">f</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">rho0</span>, <span class="va">alpha</span><span class="op">)</span> <span class="va">rho0</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">rho0</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="va">alpha</span><span class="op">*</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">theta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/CircStats/man/rwrpcauchy.html">rwrpcauchy</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">0</span>, rho<span class="op">=</span><span class="fu">f</span><span class="op">(</span><span class="va">S</span>, <span class="va">rho0</span>, <span class="va">alpha</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># constrain theta to -pi to pi</span></span>
+<span><span class="va">theta</span><span class="op">[</span><span class="va">theta</span> <span class="op">&gt;</span> <span class="va">pi</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">theta</span><span class="op">[</span><span class="va">theta</span> <span class="op">&gt;</span> <span class="va">pi</span><span class="op">]</span> <span class="op">-</span> <span class="fl">2</span><span class="op">*</span><span class="va">pi</span></span>
+<span><span class="co"># rose diagram of turning angles</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/CircStats/man/rose.diag.html">rose.diag</a></span><span class="op">(</span><span class="va">theta</span>, bins<span class="op">=</span><span class="fl">24</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># plot the movement from steps and angles</span></span>
+<span><span class="va">phi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="va">theta</span><span class="op">)</span></span>
+<span><span class="va">dZ</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/complex.html">complex</a></span><span class="op">(</span>arg <span class="op">=</span> <span class="va">phi</span>, mod <span class="op">=</span> <span class="va">S</span><span class="op">)</span></span>
+<span><span class="va">Z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="va">dZ</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Z</span>, type<span class="op">=</span><span class="st">"o"</span>, asp<span class="op">=</span><span class="fl">1</span>, pch<span class="op">=</span><span class="fl">16</span>, cex<span class="op">=</span><span class="fl">0.7</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">.2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">theta</span>, <span class="va">S</span>, pch<span class="op">=</span><span class="fl">19</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">.2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="likelihoods_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid" width="1200"></p>
+</div>
+</div>
+<p>This movement looks similar to the other track, but the longer steps are more linear. The third plot illustrated the relationship between smaller turning angles and longer step-lengths, though it is quite noisy.</p>
+<section id="estimating-the-parameters" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="estimating-the-parameters">
+<span class="header-section-number">9.1</span> Estimating the parameters</h2>
+<p>Can we pick out the relationship? Estimate those parameters?</p>
+<p>We can write down the (negative log-) likelihood function of these data given the model: <span class="math display">\[{\cal l} = \log({\cal L}(\rho_0, \alpha | {\bf S}, {\bf \theta})) = \sum_{i=1}^n \log(f(S_i, \theta_i | \rho_0, \alpha) \]</span></p>
+<p>Encode in R:</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-42_00dba113b871644153f78f51fd8fa8f1">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">LL</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p</span>, <span class="va">S</span>, <span class="va">theta</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">rho0</span> <span class="op">&lt;-</span> <span class="va">p</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span>  <span class="va">alpha</span> <span class="op">&lt;-</span> <span class="va">p</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
+<span>  <span class="va">rho</span> <span class="op">&lt;-</span> <span class="fu">f</span><span class="op">(</span><span class="va">S</span>, <span class="va">rho0</span>, <span class="va">alpha</span><span class="op">)</span></span>
+<span>  <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/CircStats/man/dwrpcauchy.html">dwrpcauchy</a></span><span class="op">(</span><span class="va">theta</span>, <span class="fl">0</span>, <span class="va">rho</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co"># +1e-10))</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>and run the <code><a href="https://rdrr.io/r/stats/optim.html">optim()</a></code> function. Remember: the <code><a href="https://rdrr.io/r/stats/optim.html">optim()</a></code> function takes as the first argument a <strong>vector</strong> of initial guesses for the parameter values (I arbitrarily entered 0 and 0), the function that needs to be minimized (in this case the negative log likelihood) and any data that actually enters the log-likelihood function.</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-43_caf70c65bc38a272cf1cc364ac426bbd">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/optim.html">optim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, <span class="va">LL</span>, S <span class="op">=</span> <span class="va">S</span>, theta <span class="op">=</span> <span class="va">theta</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$par
+[1] 0.2006841 1.0066825
+
+$value
+[1] 1105.535
+
+$counts
+function gradient 
+      55       NA 
+
+$convergence
+[1] 0
+
+$message
+NULL</code></pre>
+</div>
+</div>
+<p>The original parameter values were 0.2 and 1 … so the maximum likelihood estimates are pretty good! To extact the estimates from an <code><a href="https://rdrr.io/r/stats/optim.html">optim()</a></code> run, you just return the <code>par</code> element:</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-44_8b5d10cfaee885e18273511076416b05">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">p.fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/optim.html">optim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="va">theta</span><span class="op">)</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>, <span class="va">LL</span>, S <span class="op">=</span> <span class="va">S</span>, theta <span class="op">=</span> <span class="va">theta</span><span class="op">)</span></span>
+<span><span class="va">p.fit</span><span class="op">$</span><span class="va">par</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2007244 1.0067530</code></pre>
+</div>
+</div>
+</section><section id="confidence-intervals-around-this-estimate" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="confidence-intervals-around-this-estimate">
+<span class="header-section-number">9.2</span> Confidence intervals around this estimate</h2>
+<p>So we have a guess for those parameter values, but how good is it? One relatively straightforward way to obtain confidence intervals is a bootstrap. As before, this is quite easy: we just write a function that returns the statistics of interest (in this case the maximum likelihood estimates from the <code><a href="https://rdrr.io/r/stats/optim.html">optim()</a></code> function )</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-45_7d31805209e8986adc2147db87fa89c0">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="va">getParameters</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">i</span>, <span class="va">p0</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/stats/optim.html">optim</a></span><span class="op">(</span><span class="va">p0</span>, <span class="va">LL</span>, S <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">S</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, theta <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">theta</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">par</span></span>
+<span>  <span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/boot/man/boot.html">boot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">S</span>, <span class="va">theta</span><span class="op">)</span>, <span class="va">getParameters</span>, R <span class="op">=</span> <span class="fl">1000</span>, p0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">b</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ORDINARY NONPARAMETRIC BOOTSTRAP
+
+
+Call:
+boot(data = data.frame(S, theta), statistic = getParameters, 
+    R = 1000, p0 = c(0, 0))
+
+
+Bootstrap Statistics :
+     original        bias    std. error
+t1* 0.2006841 -0.0002114639  0.03771896
+t2* 1.0066825  0.0009416152  0.03748183</code></pre>
+</div>
+</div>
+<p>The standard errors are quite narrow. We can see how the true value compare to the bootstrap distribution quite easily as well:</p>
+<div class="cell" data-hash="likelihoods_cache/html/bootstrpdistributions_c63fdc6ef779c2bbadc1612adefcbbd2">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">b</span><span class="op">$</span><span class="va">t</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, col<span class="op">=</span><span class="st">"grey"</span>, bor<span class="op">=</span><span class="st">"darkgrey"</span>, breaks<span class="op">=</span><span class="fl">30</span>, main<span class="op">=</span><span class="st">"Estimates of rho0"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="va">rho0</span>, col<span class="op">=</span><span class="fl">2</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">b</span><span class="op">$</span><span class="va">t</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>, col<span class="op">=</span><span class="st">"grey"</span>, bor<span class="op">=</span><span class="st">"darkgrey"</span>, breaks<span class="op">=</span><span class="fl">30</span>, main<span class="op">=</span><span class="st">"Estimates of alpha"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="va">alpha</span>, col<span class="op">=</span><span class="fl">2</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="likelihoods_files/figure-html/bootstrpdistributions-1.png" class="img-fluid" width="1000"></p>
+</div>
+</div>
+</section><section id="testing-on-a-truly-random-walk" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="testing-on-a-truly-random-walk">
+<span class="header-section-number">9.3</span> Testing on a truly random walk</h2>
+<p>Totally random walk (<span class="math inline">\(\rho_0 = 0, \alpha = 0\)</span>):</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-46_acb995042b00fab2e54fe950d61a6e30">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">S</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span></span>
+<span><span class="va">theta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/CircStats/man/rwrpcauchy.html">rwrpcauchy</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">0</span>, rho<span class="op">=</span><span class="fu">f</span><span class="op">(</span><span class="va">S</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">theta</span><span class="op">[</span><span class="va">theta</span> <span class="op">&gt;</span> <span class="va">pi</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">theta</span><span class="op">[</span><span class="va">theta</span> <span class="op">&gt;</span> <span class="va">pi</span><span class="op">]</span> <span class="op">-</span> <span class="fl">2</span><span class="op">*</span><span class="va">pi</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/CircStats/man/rose.diag.html">rose.diag</a></span><span class="op">(</span><span class="va">theta</span>, bins<span class="op">=</span><span class="fl">24</span><span class="op">)</span></span>
+<span><span class="va">phi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="va">theta</span><span class="op">)</span></span>
+<span><span class="va">dZ</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/complex.html">complex</a></span><span class="op">(</span>arg <span class="op">=</span> <span class="va">phi</span>, mod <span class="op">=</span> <span class="va">S</span><span class="op">)</span></span>
+<span><span class="va">Z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="va">dZ</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Z</span>, type<span class="op">=</span><span class="st">"o"</span>, asp<span class="op">=</span><span class="fl">1</span>, pch<span class="op">=</span><span class="fl">16</span>, cex<span class="op">=</span><span class="fl">0.7</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">.2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">theta</span>, <span class="va">S</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="likelihoods_files/figure-html/unnamed-chunk-46-1.png" class="img-fluid" width="1200"></p>
+</div>
+</div>
+<p>Bootstrap and check out the bootstrap distributions:</p>
+<div class="cell" data-hash="likelihoods_cache/html/bootstrpdistributions2_5231c265c7708343ce9552f7dced2475">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/boot/man/boot.html">boot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">S</span>, <span class="va">theta</span><span class="op">)</span>, <span class="va">getParameters</span>, R <span class="op">=</span> <span class="fl">1000</span>, p0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">b</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ORDINARY NONPARAMETRIC BOOTSTRAP
+
+
+Call:
+boot(data = data.frame(S, theta), statistic = getParameters, 
+    R = 1000, p0 = c(0, 0))
+
+
+Bootstrap Statistics :
+       original       bias    std. error
+t1*  0.03943914 -0.001095362  0.03254585
+t2* -0.02298790  0.000896164  0.02158245</code></pre>
+</div>
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">b</span><span class="op">$</span><span class="va">t</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, col<span class="op">=</span><span class="st">"grey"</span>, bor<span class="op">=</span><span class="st">"darkgrey"</span>, breaks<span class="op">=</span><span class="fl">20</span>, main<span class="op">=</span><span class="st">"Estimates of rho0"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="fl">0</span>, col<span class="op">=</span><span class="fl">2</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">b</span><span class="op">$</span><span class="va">t</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>, col<span class="op">=</span><span class="st">"grey"</span>, bor<span class="op">=</span><span class="st">"darkgrey"</span>, breaks<span class="op">=</span><span class="fl">20</span>, main<span class="op">=</span><span class="st">"Estimates of a"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="fl">0</span>, col<span class="op">=</span><span class="fl">2</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">b</span><span class="op">$</span><span class="va">t</span>, pch<span class="op">=</span><span class="fl">19</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0.2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="likelihoods_files/figure-html/bootstrpdistributions2-1.png" class="img-fluid" width="1000"></p>
+</div>
+</div>
+<p>Looks like both estimates are not significantly different from zero! So this little test seems to have worked.</p>
+</section><section id="testing-on-some-data" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="testing-on-some-data">
+<span class="header-section-number">9.4</span> Testing on some data!</h2>
+<p>There is an R package with a bunch of useful tools for analysis of animal movement and habitat use called <code>adehabitatLT</code>. This package contains some data on movement of an African buffalo (<em>Syncerus caffer</em>) in national park in Niger.</p>
+<p>Tracks and distributions of step lengths and turning angles are illsutrated below.</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-47_fa1d696e9ae839dda102526cdf8e1439">
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va">adehabitatLT</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># load the buffalo movement data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">buffalo</span><span class="op">)</span></span>
+<span><span class="va">buffalo</span> <span class="op">&lt;-</span> <span class="va">buffalo</span><span class="op">$</span><span class="va">traj</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Extracting the relevant variables from the movement data and plotting some relationships:</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-48_09ce949c2c63bd87cdf6e11305decde5">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">buffalo</span>, xlab<span class="op">=</span><span class="st">""</span>, ylab<span class="op">=</span><span class="st">""</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># extract step lengths (in kilometer) and turning angles</span></span>
+<span><span class="va">S</span> <span class="op">&lt;-</span> <span class="va">buffalo</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">dist</span><span class="op">/</span><span class="fl">1000</span>  </span>
+<span><span class="va">theta</span> <span class="op">&lt;-</span> <span class="va">buffalo</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">rel.angle</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">S</span>, col<span class="op">=</span><span class="st">"grey"</span>, bor<span class="op">=</span><span class="st">"darkgrey"</span>, breaks<span class="op">=</span><span class="fl">30</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/CircStats/man/rose.diag.html">rose.diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">theta</span><span class="op">)</span>, bins<span class="op">=</span><span class="fl">16</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">theta</span>, <span class="va">S</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">.2</span><span class="op">)</span>, pch<span class="op">=</span><span class="fl">16</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="likelihoods_files/figure-html/unnamed-chunk-48-1.png" class="img-fluid" width="600"></p>
+</div>
+</div>
+<p>It is hard to see if there is a relationship between turning angles and step lengths. But we can fit our model with our likelihood!</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-49_8dad8f2541e8d4cd25935f5f3d8aae31">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># remove NAs</span></span>
+<span><span class="va">buffalo.data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">S</span>,<span class="va">theta</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">(</span><span class="va">buffalo.fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/optim.html">optim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, <span class="va">LL</span>, S <span class="op">=</span> <span class="va">buffalo.data</span><span class="op">$</span><span class="va">S</span>, theta <span class="op">=</span> <span class="va">buffalo.data</span><span class="op">$</span><span class="va">theta</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$par
+[1] -0.08272493  2.10858103
+
+$value
+[1] 2180.403
+
+$counts
+function gradient 
+      63       NA 
+
+$convergence
+[1] 0
+
+$message
+NULL</code></pre>
+</div>
+</div>
+<p>The estimates are <span class="math inline">\(\rho_0 = -0.08\)</span> and <span class="math inline">\(a = 2.1\)</span>.</p>
+<p>Are these significantly different from 0? Compute the bootstrap distribution.</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-50_eeb8ec7fc6bc60235273822be83243b6">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/boot/man/boot.html">boot</a></span><span class="op">(</span><span class="va">buffalo.data</span>, <span class="va">getParameters</span>, R <span class="op">=</span> <span class="fl">1000</span>, p0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">b</span><span class="op">$</span><span class="va">t</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, col<span class="op">=</span><span class="st">"grey"</span>, bor<span class="op">=</span><span class="st">"darkgrey"</span>, breaks<span class="op">=</span><span class="fl">30</span>, xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">rho</span><span class="op">[</span><span class="fl">0</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="va">buffalo.fit</span><span class="op">$</span><span class="va">par</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, col<span class="op">=</span><span class="fl">2</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">b</span><span class="op">$</span><span class="va">t</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>, col<span class="op">=</span><span class="st">"grey"</span>, bor<span class="op">=</span><span class="st">"darkgrey"</span>, breaks<span class="op">=</span><span class="fl">30</span>, xlab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">alpha</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="va">buffalo.fit</span><span class="op">$</span><span class="va">par</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, col<span class="op">=</span><span class="fl">2</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="likelihoods_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid" width="600"></p>
+</div>
+</div>
+<p>95% confidence interval and p-values on <span class="math inline">\(\rho_0\)</span> and <span class="math inline">\(\alpha\)</span>:</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-51_98b1b40f198c6efefd46e97d348c5bf3">
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">buffalo.fit</span><span class="op">$</span><span class="va">par</span> <span class="op">%&gt;%</span> <span class="va">data.frame</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>CI <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">b</span><span class="op">$</span><span class="va">t</span>, <span class="fl">2</span>, <span class="va">quantile</span>, p<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.025</span>, <span class="fl">0.975</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            .     CI.2.5%    CI.97.5%
+1 -0.08272493 -0.14516499 -0.02378824
+2  2.10858103  1.85294446  2.39726395</code></pre>
+</div>
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">b</span><span class="op">$</span><span class="va">t</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">b</span><span class="op">$</span><span class="va">t</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.003</code></pre>
+</div>
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">b</span><span class="op">$</span><span class="va">t</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span> <span class="op">&lt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">b</span><span class="op">$</span><span class="va">t</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<p><font col="blue"> What null hypotheses are we testing here? </font></p>
+<p><strong>Based on this result, what do you conclude about the relationship between step lengths (i.e.~speeds) and turning angles for Buffalo movements?</strong></p>
+<p>This is (for the record) a novel result.</p>
+</section><section id="confidence-intervals-with-hessians" class="level2" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="confidence-intervals-with-hessians">
+<span class="header-section-number">9.5</span> Confidence intervals with Hessians</h2>
+<p>These bootstrap distributions are awfully symmetric and normal looking, suggesting that we should get very similar results using the Hessian:</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-52_a5edcdd5948820cd8ea7c91ea07ee419">
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">buffalo.hessian</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/optim.html">optim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, <span class="va">LL</span>, </span>
+<span>                          S <span class="op">=</span> <span class="va">buffalo.data</span><span class="op">$</span><span class="va">S</span>, theta <span class="op">=</span> <span class="va">buffalo.data</span><span class="op">$</span><span class="va">theta</span>, </span>
+<span>                          hessian<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">$</span><span class="va">hessian</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          [,1]      [,2]
+[1,] 1678.1923 238.68452
+[2,]  238.6845  87.72981</code></pre>
+</div>
+</div>
+<p>The variance-covariance matrix of the Hessian:</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-53_e7bb3ab22f627541d476ccc0f8718c9c">
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/solve.html">solve</a></span><span class="op">(</span><span class="va">buffalo.hessian</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              [,1]         [,2]
+[1,]  0.0009719979 -0.002644493
+[2,] -0.0026444927  0.018593445</code></pre>
+</div>
+</div>
+<p>Note that there is a negative covariance between the two parameters (typical for slope-intercept type relationships).</p>
+<p>The standard errors:</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-54_f848b82886c9335609d9ba8eecd24770">
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">p.ses</span> <span class="op">&lt;-</span> <span class="va">buffalo.hessian</span> <span class="op">%&gt;%</span> <span class="va">solve</span> <span class="op">%&gt;%</span> <span class="va">sqrt</span> <span class="op">%&gt;%</span> <span class="va">diag</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.03117688 0.13635778</code></pre>
+</div>
+</div>
+<p>And 95% confidence intervals:</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-55_2d0c4f19572af99a4688da737dcccf70">
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">buffalo.fit</span><span class="op">$</span><span class="va">par</span> <span class="op">%&gt;%</span> <span class="va">data.frame</span> <span class="op">%&gt;%</span> <span class="fu">mutate</span><span class="op">(</span>CI.lo <span class="op">=</span> <span class="va">.</span> <span class="op">-</span> <span class="fl">2</span><span class="op">*</span><span class="va">p.ses</span>, CI.high <span class="op">=</span> <span class="va">.</span> <span class="op">+</span> <span class="fl">2</span><span class="op">*</span><span class="va">p.ses</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            .      CI.lo     CI.high
+1 -0.08272493 -0.1450787 -0.02037117
+2  2.10858103  1.8358655  2.38129660</code></pre>
+</div>
 </div>
 
 
