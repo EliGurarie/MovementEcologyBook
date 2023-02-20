@@ -58,13 +58,11 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 </head>
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">
-<span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Why do we need special statistics?</span>
-</h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Why do we need special statistics?</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -237,10 +235,8 @@ ul.task-list li input[type="checkbox"] {
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/edit/main/whyspecialstats.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title d-none d-lg-block">
-<span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Why do we need special statistics?</span>
-</h1>
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title"><span id="sec-specialstats" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Why do we need special statistics?</span></span></h1>
 </div>
 
 
@@ -255,9 +251,13 @@ ul.task-list li input[type="checkbox"] {
 
 </header><p>“Classical” statistics were built around controlled experiments (historically: agricultural! and beer brewing!) where the inference relies on models where the <strong>response</strong> is one-dimensional, independent and identically distributed, and sampled with some design which maps directly onto a specific hypothesis. Thus, we are used to stats that look something like this:</p>
 <center>
-<img src="images/Chapter01/chickexample.png" class="img-fluid" style="width:70.0%">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/Chapter01/chickexample.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption class="figure-caption">Chick size against diet type = boring statistics!</figcaption><p></p>
+</figure>
+</div>
 </center>
-<p>Here the question is straightforward: how does diet affect chick weight? The chicks were presumably randomized, the experiment was presumably controlled, the experience of the chicks identical save for the diet, and the outcome (weight) measured. The process is modeled straightforwardly as:</p>
+<p>Here the question is straightforward: how does diet affect chick weight? The chicks were presumably randomized, the experiment was presumably controlled (i.e.&nbsp;the experience of the chicks nearly identical, save for the diet variable), and the outcome (weight) measured. The process is modeled straightforwardly as:</p>
 <p><span class="math display">\[M1: Y_{ij} = \alpha_i + \epsilon_{ij}\]</span></p>
 <p>where <em>i</em> indexes the diet, <span class="math inline">\(\alpha_i\)</span> is the diet-specific mean, and <span class="math inline">\(\epsilon_{ij}\)</span> is the individual piece of unexplained variation. The question here is straightforward: <em>Do differnet diets have different effects on chick growth?</em>, and is answered - essentially - by comparing the likelihood of this model to a model where the diet effect (<span class="math inline">\(\alpha\)</span>) is the same:</p>
 <p><span class="math display">\[M0: Y_{ij} = \alpha + \epsilon_{ij}\]</span></p>
@@ -270,9 +270,9 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell" data-hash="whyspecialstats_cache/html/Ch1_loadPackages_cd0f55f4bb5caf1180f5cf3ea6ea71b4">
 
 </div>
-<section id="spatial-data" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="spatial-data">
+<section id="spatial-data" class="level2 page-columns page-full" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="spatial-data">
 <span class="header-section-number">3.1</span> Spatial data</h2>
-<p>Spatial data is simply data that contains spatial coordinates - in practice, we are almost always only concerned with two dimensions (<span class="math inline">\({\bf X, Y}\)</span>) with perhaps a set of additional observations <span class="math inline">\(A\)</span>. <em>footnote</em>: We use boldfacing to indicate vectors (e.g.&nbsp;of length <span class="math inline">\(n\)</span>), and capitals to indicate matrices such that <span class="math inline">\(A\)</span> is a <span class="math inline">\(n \times k\)</span> matrix for <span class="math inline">\(k\)</span> observations. Spatial data may represent a complete set of observations, for example it can represent the locations of all trees of a certain size in a given study plot. Often in such cases there are questions that can be asked about the generating <em>process</em> which determines the distribution of those locations. When describing a process, the coordinates themselves and alone can be considered a “response”. For example, a typical question might be: are the trees clustered, inhibiting each other, or randomly distributed? This is referred to as analyzing a <strong>point process</strong> (see Chapter <strong>XX</strong>).</p>
+<div class="page-columns page-full"><p>Spatial data is simply data that contains spatial coordinates - in practice, we are almost always only concerned with two dimensions (<span class="math inline">\({\bf X, Y}\)</span>) with perhaps a set of additional observations <span class="math inline">\(A\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Spatial data may represent a complete set of observations, for example it can represent the locations of all trees of a certain size in a given study plot. Often in such cases there are questions that can be asked about the generating <em>process</em> which determines the distribution of those locations. When describing a process, the coordinates themselves and alone can be considered a “response”. For example, a typical question might be: are the trees clustered, inhibiting each other, or randomly distributed? This is referred to as analyzing a <strong>point process</strong> (see Chapter <strong>XX</strong>).</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;We use boldfacing to indicate vectors (e.g.&nbsp;of length <span class="math inline">\(n\)</span>), and capitals to indicate matrices such that <span class="math inline">\(A\)</span> is a <span class="math inline">\(n \times k\)</span> matrix for <span class="math inline">\(k\)</span> observations.</p></li></div></div>
 <div class="cell" data-hash="whyspecialstats_cache/html/AmericanBeech_38291da5d7dd1015704b633d2039b94f">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
