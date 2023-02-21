@@ -14,6 +14,45 @@ output:
 > Links to older **homework solutions** are below. 
 </font>
 
+# Week 4: (due Monday Feb 20, 2023)
+
+This week, you're going to do some deep dives into your movement data of choice using the fanstatstic mathemagics of likelihoods.  For this assignment, pick just one individual (elephant, wolf, caribou, fisher, buffalo, whatever you can scrape up), ideally with well over 100 locations and more or less regular intervals.  
+
+## I. Estimate and illustrate the turning angle and step-length distributions. 
+
+Use **optim()** to estimate:
+
+1. The shape and scale parameters of the Weibull distribution for step-lengths.  Provide point estimates and confidence intervals. 
+2. The $\kappa$ parameter in the Wrapped-cauchy distribution for these data. Provide point estimates and confidence intervals. 
+3. Visualize the quality of both fits by comparing distribution curves to histograms. 
+
+The likelihood for the Weibull distribution and an example for fitting to data is in the [book chapter](https://eligurarie.github.io/MovementEcologyBook/likelihoods.html). For the Cauchy distribution, simply follow the template for the Weibull, but replace the `dweibull` with the `dwrpcauchy()` function from the `CircStats` package.
+
+## II. Multi-modal step lenghts
+
+We saw in class with the buffalo data that the Weibull distribution was absolutely lousy at capturing the (very typical) bimodality of movement data. There are lots of locations when animals simply don't move.  In this exercise, fit a *bimodal Weibull model* to your movement data. In this model, there will be 5 parameters $\alpha_1$ and $\beta_1$ are the shape and scale, respectively, in one state, $\alpha_2$ and $\beta_2$ are the shape and scale in the second state, and $p$ is the proportion of time spent in the first state. 
+
+At first blush this might seem really hard.  But [this link](https://terpconnect.umd.edu/~egurarie/teaching/MovementAtAukeBay/materials/MultimodalFitting.html) does exactly this for a bimodal *normal* distribution.  So you will need to apply an **exactly analogous** approach, just with a slightly different distribution. 
+
+## III. Test whether there is a relationship ...
+
+between turning angles and step lengths in your data.  This might seem hard, but, in fact (or - in theory - ) you should be able to directly apply the `FunkyModel.Likelihood()` function described in the [book chapter](https://eligurarie.github.io/MovementEcologyBook/likelihoods.html). 
+
+
+```{r, eval=FALSE, echo = FALSE}
+Weibull.likelihood <- function(p, Z){ 
+  S = Mod(diff(Z))
+  -sum(dweibull(S, p[1], p[2], log=TRUE))
+}
+(Weibull.fit <- optim(c(shape = 1, scale = 1), Weibull.likelihood, Z=Z))
+Sigma <- solve(Weibull.fit$hessian)
+se <- sqrt(diag(Sigma))
+cbind(hat = Weibull.fit$par, CI.low = Weibull.fit$par  - 1.96*se, CI.high = Weibull.fit$par  + 1.96*se)
+```
+
+
+<font color = "#343">
+
 # Week 3: (due Monday Feb 13, 2023)
 
 ## I. Making maps with your spatial data
@@ -49,7 +88,6 @@ You can *just* make out the outlines of several Great Lakes in this image. (Did 
 The challenge is to come up with a way to present this information on a more informative and attractive way.  
 
 
-<font color = "#343">
 
 # Week 2: (due Friday Feb 3, 2023)
 

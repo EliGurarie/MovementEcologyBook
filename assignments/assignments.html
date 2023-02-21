@@ -1518,6 +1518,58 @@ the instructor as <strong>knitted R Markdown documents</strong>. Print
 file as well. Links to older <strong>homework solutions</strong> are
 below. </font></p>
 </blockquote>
+<div id="week-4-due-monday-feb-20-2023" class="section level1">
+<h1>Week 4: (due Monday Feb 20, 2023)</h1>
+<p>This week, you’re going to do some deep dives into your movement data
+of choice using the fanstatstic mathemagics of likelihoods. For this
+assignment, pick just one individual (elephant, wolf, caribou, fisher,
+buffalo, whatever you can scrape up), ideally with well over 100
+locations and more or less regular intervals.</p>
+<div id="i.-estimate-and-illustrate-the-turning-angle-and-step-length-distributions." class="section level2">
+<h2>I. Estimate and illustrate the turning angle and step-length
+distributions.</h2>
+<p>Use <strong>optim()</strong> to estimate:</p>
+<ol style="list-style-type: decimal">
+<li>The shape and scale parameters of the Weibull distribution for
+step-lengths. Provide point estimates and confidence intervals.</li>
+<li>The <span class="math inline">\(\kappa\)</span> parameter in the
+Wrapped-cauchy distribution for these data. Provide point estimates and
+confidence intervals.</li>
+<li>Visualize the quality of both fits by comparing distribution curves
+to histograms.</li>
+</ol>
+<p>The likelihood for the Weibull distribution and an example for
+fitting to data is in the <a href="https://eligurarie.github.io/MovementEcologyBook/likelihoods.html">book
+chapter</a>. For the Cauchy distribution, simply follow the template for
+the Weibull, but replace the <code>dweibull</code> with the
+<code>dwrpcauchy()</code> function from the <code>CircStats</code>
+package.</p>
+</div>
+<div id="ii.-multi-modal-step-lenghts" class="section level2">
+<h2>II. Multi-modal step lenghts</h2>
+<p>We saw in class with the buffalo data that the Weibull distribution
+was absolutely lousy at capturing the (very typical) bimodality of
+movement data. There are lots of locations when animals simply don’t
+move. In this exercise, fit a <em>bimodal Weibull model</em> to your
+movement data. In this model, there will be 5 parameters <span class="math inline">\(\alpha_1\)</span> and <span class="math inline">\(\beta_1\)</span> are the shape and scale,
+respectively, in one state, <span class="math inline">\(\alpha_2\)</span> and <span class="math inline">\(\beta_2\)</span> are the shape and scale in the
+second state, and <span class="math inline">\(p\)</span> is the
+proportion of time spent in the first state.</p>
+<p>At first blush this might seem really hard. But <a href="https://terpconnect.umd.edu/~egurarie/teaching/MovementAtAukeBay/materials/MultimodalFitting.html">this
+link</a> does exactly this for a bimodal <em>normal</em> distribution.
+So you will need to apply an <strong>exactly analogous</strong>
+approach, just with a slightly different distribution.</p>
+</div>
+<div id="iii.-test-whether-there-is-a-relationship" class="section level2">
+<h2>III. Test whether there is a relationship …</h2>
+<p>between turning angles and step lengths in your data. This might seem
+hard, but, in fact (or - in theory - ) you should be able to directly
+apply the <code>FunkyModel.Likelihood()</code> function described in the
+<a href="https://eligurarie.github.io/MovementEcologyBook/likelihoods.html">book
+chapter</a>.</p>
+<p><font color="#343"></p>
+</div>
+</div>
 <div id="week-3-due-monday-feb-13-2023" class="section level1">
 <h1>Week 3: (due Monday Feb 13, 2023)</h1>
 <div id="i.-making-maps-with-your-spatial-data" class="section level2">
@@ -1571,7 +1623,6 @@ something like this:</p>
 this image. (Did Syracuse make it onto this map?)</p>
 <p>The challenge is to come up with a way to present this information on
 a more informative and attractive way.</p>
-<p><font color="#343"></p>
 </div>
 </div>
 <div id="week-2-due-friday-feb-3-2023" class="section level1">

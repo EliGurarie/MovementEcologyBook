@@ -81,6 +81,25 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -295,51 +314,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#why-a-chapter-on-likelihoods" id="toc-why-a-chapter-on-likelihoods" class="nav-link active" data-scroll-target="#why-a-chapter-on-likelihoods"><span class="toc-section-number">8.1</span>  Why a chapter on Likelihoods?</a></li>
-  <li><a href="#a-short-definition-of-a-likelihood" id="toc-a-short-definition-of-a-likelihood" class="nav-link" data-scroll-target="#a-short-definition-of-a-likelihood"><span class="toc-section-number">8.2</span>  A short definition of a likelihood</a></li>
-  <li>
-<a href="#lets-be-a-bit-more-specific-please" id="toc-lets-be-a-bit-more-specific-please" class="nav-link" data-scroll-target="#lets-be-a-bit-more-specific-please"><span class="toc-section-number">8.3</span>  Let’s be a bit more specific, please!</a>
+<li>
+<a href="#why-a-chapter-on-likelihoods" id="toc-why-a-chapter-on-likelihoods" class="nav-link active" data-scroll-target="#why-a-chapter-on-likelihoods"><span class="toc-section-number">8.1</span>  Why a chapter on Likelihoods?</a>
   <ul class="collapse">
-<li><a href="#defining-a-likelihood" id="toc-defining-a-likelihood" class="nav-link" data-scroll-target="#defining-a-likelihood"><span class="toc-section-number">8.3.1</span>  Defining a Likelihood</a></li>
-  <li><a href="#joint-likelihoods" id="toc-joint-likelihoods" class="nav-link" data-scroll-target="#joint-likelihoods"><span class="toc-section-number">8.3.2</span>  Joint Likelihoods</a></li>
+<li><a href="#a-short-definition-of-a-likelihood" id="toc-a-short-definition-of-a-likelihood" class="nav-link" data-scroll-target="#a-short-definition-of-a-likelihood"><span class="toc-section-number">8.1.1</span>  A short definition of a likelihood</a></li>
+  <li><a href="#not-helpful" id="toc-not-helpful" class="nav-link" data-scroll-target="#not-helpful"><span class="toc-section-number">8.1.2</span>  Not helpful!</a></li>
+  <li><a href="#please-give-me-an-example" id="toc-please-give-me-an-example" class="nav-link" data-scroll-target="#please-give-me-an-example"><span class="toc-section-number">8.1.3</span>  Please give me an example!</a></li>
+  <li><a href="#defining-a-likelihood" id="toc-defining-a-likelihood" class="nav-link" data-scroll-target="#defining-a-likelihood"><span class="toc-section-number">8.1.4</span>  Defining a Likelihood</a></li>
+  <li><a href="#joint-likelihoods" id="toc-joint-likelihoods" class="nav-link" data-scroll-target="#joint-likelihoods"><span class="toc-section-number">8.1.5</span>  Joint Likelihoods</a></li>
   </ul>
 </li>
   <li>
-<a href="#the-maximum-likelihood-estimator" id="toc-the-maximum-likelihood-estimator" class="nav-link" data-scroll-target="#the-maximum-likelihood-estimator"><span class="toc-section-number">8.4</span>  The <strong>Maximum Likelihood Estimator</strong></a>
+<a href="#the-maximum-likelihood-estimator" id="toc-the-maximum-likelihood-estimator" class="nav-link" data-scroll-target="#the-maximum-likelihood-estimator"><span class="toc-section-number">8.2</span>  The <strong>Maximum Likelihood Estimator</strong></a>
   <ul class="collapse">
-<li><a href="#numerically-finding-the-mle" id="toc-numerically-finding-the-mle" class="nav-link" data-scroll-target="#numerically-finding-the-mle"><span class="toc-section-number">8.4.1</span>  Numerically finding the MLE</a></li>
-  <li><a href="#comparing-models-side-by-side" id="toc-comparing-models-side-by-side" class="nav-link" data-scroll-target="#comparing-models-side-by-side"><span class="toc-section-number">8.4.2</span>  Comparing models side by side</a></li>
-  <li><a href="#comparing-with-method-of-moment-estimators-mmes" id="toc-comparing-with-method-of-moment-estimators-mmes" class="nav-link" data-scroll-target="#comparing-with-method-of-moment-estimators-mmes"><span class="toc-section-number">8.4.3</span>  Comparing with Method of Moment Estimators (MME’s)</a></li>
-  <li><a href="#log-likelihoods" id="toc-log-likelihoods" class="nav-link" data-scroll-target="#log-likelihoods"><span class="toc-section-number">8.4.4</span>  Log-likelihoods</a></li>
-  <li><a href="#confidence-intervals-a-bit-of-theory" id="toc-confidence-intervals-a-bit-of-theory" class="nav-link" data-scroll-target="#confidence-intervals-a-bit-of-theory"><span class="toc-section-number">8.4.5</span>  Confidence Intervals: A bit of theory</a></li>
-  <li><a href="#confidence-intervals-application" id="toc-confidence-intervals-application" class="nav-link" data-scroll-target="#confidence-intervals-application"><span class="toc-section-number">8.4.6</span>  Confidence Intervals: Application</a></li>
+<li><a href="#numerically-finding-the-mle" id="toc-numerically-finding-the-mle" class="nav-link" data-scroll-target="#numerically-finding-the-mle"><span class="toc-section-number">8.2.1</span>  Numerically finding the MLE</a></li>
+  <li><a href="#comparing-models-side-by-side" id="toc-comparing-models-side-by-side" class="nav-link" data-scroll-target="#comparing-models-side-by-side"><span class="toc-section-number">8.2.2</span>  Comparing models side by side</a></li>
+  <li><a href="#comparing-with-method-of-moment-estimators-mmes" id="toc-comparing-with-method-of-moment-estimators-mmes" class="nav-link" data-scroll-target="#comparing-with-method-of-moment-estimators-mmes"><span class="toc-section-number">8.2.3</span>  Comparing with Method of Moment Estimators (MME’s)</a></li>
+  <li><a href="#log-likelihoods" id="toc-log-likelihoods" class="nav-link" data-scroll-target="#log-likelihoods"><span class="toc-section-number">8.2.4</span>  Log-likelihoods</a></li>
+  <li><a href="#confidence-intervals" id="toc-confidence-intervals" class="nav-link" data-scroll-target="#confidence-intervals"><span class="toc-section-number">8.2.5</span>  Confidence Intervals</a></li>
   </ul>
 </li>
   <li>
-<a href="#testing-hypotheses-and-model-selection-with-likelihoods" id="toc-testing-hypotheses-and-model-selection-with-likelihoods" class="nav-link" data-scroll-target="#testing-hypotheses-and-model-selection-with-likelihoods"><span class="toc-section-number">8.5</span>  Testing hypotheses and model selection with likelihoods</a>
+<a href="#testing-hypotheses-and-model-selection-with-likelihoods" id="toc-testing-hypotheses-and-model-selection-with-likelihoods" class="nav-link" data-scroll-target="#testing-hypotheses-and-model-selection-with-likelihoods"><span class="toc-section-number">8.3</span>  Testing hypotheses and model selection with likelihoods</a>
   <ul class="collapse">
-<li><a href="#likelihood-ratio-test" id="toc-likelihood-ratio-test" class="nav-link" data-scroll-target="#likelihood-ratio-test"><span class="toc-section-number">8.5.1</span>  Likelihood Ratio Test:</a></li>
-  <li><a href="#information-criteria" id="toc-information-criteria" class="nav-link" data-scroll-target="#information-criteria"><span class="toc-section-number">8.5.2</span>  Information Criteria</a></li>
-  <li><a href="#in-summary" id="toc-in-summary" class="nav-link" data-scroll-target="#in-summary"><span class="toc-section-number">8.5.3</span>  In summary</a></li>
+<li><a href="#likelihood-ratio-test" id="toc-likelihood-ratio-test" class="nav-link" data-scroll-target="#likelihood-ratio-test"><span class="toc-section-number">8.3.1</span>  Likelihood Ratio Test:</a></li>
+  <li><a href="#information-criteria" id="toc-information-criteria" class="nav-link" data-scroll-target="#information-criteria"><span class="toc-section-number">8.3.2</span>  Information Criteria</a></li>
   </ul>
 </li>
   <li>
-<a href="#applying-likelihoods-to-movement-data" id="toc-applying-likelihoods-to-movement-data" class="nav-link" data-scroll-target="#applying-likelihoods-to-movement-data"><span class="toc-section-number">8.6</span>  Applying likelihoods to movement data</a>
+<a href="#applying-likelihoods-to-the-correlated-random-walk" id="toc-applying-likelihoods-to-the-correlated-random-walk" class="nav-link" data-scroll-target="#applying-likelihoods-to-the-correlated-random-walk"><span class="toc-section-number">8.4</span>  Applying likelihoods to the Correlated Random Walk</a>
   <ul class="collapse">
-<li><a href="#correlated-random-walk" id="toc-correlated-random-walk" class="nav-link" data-scroll-target="#correlated-random-walk"><span class="toc-section-number">8.6.1</span>  Correlated Random Walk</a></li>
-  <li><a href="#mle-of-weibull-parameters" id="toc-mle-of-weibull-parameters" class="nav-link" data-scroll-target="#mle-of-weibull-parameters"><span class="toc-section-number">8.6.2</span>  MLE of Weibull parameters</a></li>
+<li><a href="#mle-of-weibull-parameters" id="toc-mle-of-weibull-parameters" class="nav-link" data-scroll-target="#mle-of-weibull-parameters"><span class="toc-section-number">8.4.1</span>  MLE of Weibull parameters</a></li>
   </ul>
 </li>
   <li>
-<a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1"><span class="toc-section-number">8.7</span>  Exercise 1</a>
+<a href="#now-for-something-really-fancy" id="toc-now-for-something-really-fancy" class="nav-link" data-scroll-target="#now-for-something-really-fancy"><span class="toc-section-number">8.5</span>  Now for something really fancy</a>
   <ul class="collapse">
-<li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2"><span class="toc-section-number">8.7.1</span>  Exercise 2</a></li>
+<li><a href="#estimating-the-parameters" id="toc-estimating-the-parameters" class="nav-link" data-scroll-target="#estimating-the-parameters"><span class="toc-section-number">8.5.1</span>  Estimating the parameters</a></li>
+  <li><a href="#testing-on-a-truly-random-walk" id="toc-testing-on-a-truly-random-walk" class="nav-link" data-scroll-target="#testing-on-a-truly-random-walk"><span class="toc-section-number">8.5.2</span>  Testing on a truly random walk</a></li>
+  <li><a href="#testing-on-some-data" id="toc-testing-on-some-data" class="nav-link" data-scroll-target="#testing-on-some-data"><span class="toc-section-number">8.5.3</span>  Testing on some data!</a></li>
   </ul>
 </li>
-  <li><a href="#a-step-length---turning-angle-dependency-model" id="toc-a-step-length---turning-angle-dependency-model" class="nav-link" data-scroll-target="#a-step-length---turning-angle-dependency-model"><span class="toc-section-number">8.8</span>  A step length - turning angle dependency model</a></li>
-  <li><a href="#estimating-the-parameters" id="toc-estimating-the-parameters" class="nav-link" data-scroll-target="#estimating-the-parameters"><span class="toc-section-number">8.9</span>  Estimating the parameters</a></li>
-  <li><a href="#testing-on-a-truly-random-walk" id="toc-testing-on-a-truly-random-walk" class="nav-link" data-scroll-target="#testing-on-a-truly-random-walk"><span class="toc-section-number">8.10</span>  Testing on a truly random walk</a></li>
-  <li><a href="#testing-on-some-data" id="toc-testing-on-some-data" class="nav-link" data-scroll-target="#testing-on-some-data"><span class="toc-section-number">8.11</span>  Testing on some data!</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="toc-section-number">8.6</span>  References</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/edit/main/likelihoods.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
@@ -369,8 +385,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The <em>likelihood function</em> is the single most important, versatile, and widely-used tool for performing <em>inference</em>. It is the natural link between <em>observations</em> (i.e.&nbsp;data) and <em>probabilistic models</em> (i.e.&nbsp;statistical models). The overwhelming majority of statistical analyses - certainly in wildlife ecology - in which models are specified and fitted and selected and hypothesis tests are performed in the service of inferential conclusions, relies on defining and computing a likelihood function and figuring out a way to maximize it. The parameters fitted using this basic strategy - the <em>maximum likelihood estimators</em> (MLE’s) have some very powerful and convenient properties. For example, the standard errors around those estimates can be computed quickly and efficiently - using almost the same process that maximized the likelihood - and that MLE’s are proven to have the smallest standard errors (i.e.&nbsp;are the <em>most precise</em>) estimators. Furthermore, likelihoods underlie rigorous hypothesis tests, e.g.&nbsp;via <em>likelihood ratio tests</em>, and even more flexible (and extremely widely used) <em>information criterion</em>-based model comparison tools, like AIC, BIC, and others. And as important as likelihoods are to <em>classical inference</em>, they are equally essential to understanding and implementing <em>Bayesian inference</em>.</p>
 <p>Despite all of these frankly astonishing properties, likelihoods are almost never taught explicitly in courses - outside of statistics departments, and even then often only in graduate school. Highly literate and skilled quantitatively minded practitioners can be hard pressed to even <em>define</em> a likelihood. While there is a bit of conceptual leap (or inversion) in understanding what a likelihood actually <em>is</em> (the equation at the top of the chapter sums it up entirely) - they are, in fact, straightforward to understand and to communicate. That, at least, is the central hypothesis of this chapter.</p>
 <div class="page-columns page-full"><p>Much of the magic of likelihoods is, perhaps, obscured by the fact that they are hidden behind the black-box of statistical tools in statistical software and the limited<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> set of models and model assumptions that you can fit with those tools. But if you can <em>write your own likelihood</em>, then you can fit models that are not nearly as straightforward as the ones in the black boxes. Given the many non-standard nuances of movement data (see chapter <a href="whyspecialstats.html"><span>Chapter&nbsp;3</span></a>), it is <em>very, very easy</em> to come up with a particular piece of inference for which you will want to <em>design</em> your own likelihood function. We provide one example at the end of this chapter.</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;In the lively, teeming, global activity of applied statistics, there is, obviously, a tremendous proliferation of models that <em>can</em> be fitted with “out-of-the-box” tools. Starting with linear models, through mixed additive generalized linear models, to hidden Markov models, to models with explicit spatial and temporal auto-correlation, and on and on. But the world (or at least the processes and data that we might want to model) is orders of magnitude more complex than all the black boxes put together.</p></li></div></div>
-</section><section id="a-short-definition-of-a-likelihood" class="level2 page-columns page-full" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="a-short-definition-of-a-likelihood">
-<span class="header-section-number">8.2</span> A short definition of a likelihood</h2>
+<section id="a-short-definition-of-a-likelihood" class="level3" data-number="8.1.1"><h3 data-number="8.1.1" class="anchored" data-anchor-id="a-short-definition-of-a-likelihood">
+<span class="header-section-number">8.1.1</span> A short definition of a likelihood</h3>
+<p><strong>Likelihoods</strong> turn <strong>probabilities</strong> on their heads.</p>
 <center>
 <div class="cell" data-layout-align="center" data-hash="likelihoods_cache/html/fig-man_f36d3d401318f9b57a146505bbe9a778">
 <div class="cell-output-display">
@@ -382,11 +399,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </center>
-<p><strong>Likelihoods</strong> turn <strong>probabilities</strong> on their heads.]</p>
-<p>A probability statement (or, perhaps better, a probability <em>question</em>) asks: <span class="math inline">\(\Pr({\bf X}|\theta)\)</span>? I.e. what is the probability (i.e.&nbsp;a score between 0 and 1 that reflects the likelihood of an occurrence) of a particular <strong>event</strong> (or observation or data, <span class="math inline">\(\bf X\)</span>) given a particular model (or parameter set, <span class="math inline">\(\Theta\)</span>). A likelihood statement asks the opposite question: <span class="math inline">\({\cal L}(\Theta | {\bf X})\)</span>, i.e.&nbsp;what is the <em>likelihood</em> of a particular model (<span class="math inline">\(\Theta\)</span>) given a particular set of observations (<span class="math inline">\(\bf X\)</span>).</p>
+</section><section id="not-helpful" class="level3 page-columns page-full" data-number="8.1.2"><h3 data-number="8.1.2" class="anchored" data-anchor-id="not-helpful">
+<span class="header-section-number">8.1.2</span> Not helpful!</h3>
+<p>Ok, a probability statement (or, perhaps better, a probability <em>question</em>) asks: <span class="math inline">\(\Pr({\bf X}|\theta)\)</span>? I.e. what is the probability (i.e.&nbsp;a score between 0 and 1 that reflects the likelihood of an occurrence) of a particular <strong>event</strong> (or observation or data, <span class="math inline">\(\bf X\)</span>) given a particular model (or parameter set, <span class="math inline">\(\Theta\)</span>). A likelihood statement asks the opposite question: <span class="math inline">\({\cal L}(\Theta | {\bf X})\)</span>, i.e.&nbsp;what is the <em>likelihood</em> of a particular model (<span class="math inline">\(\Theta\)</span>) given a particular set of observations (<span class="math inline">\(\bf X\)</span>).</p>
 <div class="page-columns page-full"><p>Even at this abstract level, it should be clear the the <em>likelihood question</em> is the more relevant one for inference. Since we do not <em>know</em> any probabilistic models, except for all those completely artificial games that are played in probability class, like flipped coins, and six-sided dice, and decks of cards, and mysterious urns with different colored balls.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> For <strong>every other application</strong>, we can make <em>observations</em> (collect <span class="math inline">\(\bf X\)</span>) and what we want to know is what’s good <em>model</em> (<span class="math inline">\(\Theta\)</span>).</p><div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;The mathematical foundations probability theory are disproportionately due to the idle gambling games of French noblemen in the 17th century, who happened to be acquainted with some <a href="https://www.cut-the-knot.org/Probability/ChevalierDeMere.shtml">pretty bright bulbs</a>.</p></li></div></div>
-</section><section id="lets-be-a-bit-more-specific-please" class="level2 page-columns page-full" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="lets-be-a-bit-more-specific-please">
-<span class="header-section-number">8.3</span> Let’s be a bit more specific, please!</h2>
+</section><section id="please-give-me-an-example" class="level3 page-columns page-full" data-number="8.1.3"><h3 data-number="8.1.3" class="anchored" data-anchor-id="please-give-me-an-example">
+<span class="header-section-number">8.1.3</span> Please give me an example!</h3>
 <p>Ok, let’s build off a specific example. Imagine, we <em>know</em> the true distribution of adult human (<em>Homo sapiens</em>) male heights, is 175 cm (5’ 9’’), with a standard deviation of 20 cm <strong>and</strong> that the distribution is Gaussian or normal. We notate this as: <span class="math display">\[X \sim {\cal N}(\mu_0 = 175, \sigma_0 = 20)\]</span></p>
 <p>This is a <em>probability model</em>, i.e.&nbsp;it tells us that: <span class="math display">\[P(x &lt; X &lt; x+dx) = \phi(x|\mu, \sigma)dx\]</span> where <span class="math inline">\(f(x|\mu, \sigma)\)</span>, is the <em>density function</em> of the normal distribution with <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>. As a reminder, that function looks like this: <span class="math display">\[\phi(x|\mu, \sigma) = {1\over \sigma\sqrt{2\pi}} e^{-{1 \over 2}\left({x - \mu\over{\sigma}}\right)^2}\]</span> and it has the familiar bell shaped curve. Recall that the 95% of the probability is within 1.96 (or, just, 2) standard deviations of the mean, thus our model states that 95% of all mean are between 135 cm (4’ 5’‘) and 215 cm (7’). Maybe this is reasonable, maybe a bit wide, but we’re assuming this is the <strong>truth</strong>.</p>
 <p>This <strong>probability statement</strong> means you can make some definitive probabilistic statements. For example, if you got a hold of a single 210 cm (6’ 11’’) tall person, you can say with certainty that:</p>
@@ -410,8 +428,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>So 39% of men (in this model) are somewhere in that interval.</p>
-<section id="defining-a-likelihood" class="level3 page-columns page-full" data-number="8.3.1"><h3 data-number="8.3.1" class="anchored" data-anchor-id="defining-a-likelihood">
-<span class="header-section-number">8.3.1</span> Defining a Likelihood</h3>
+</section><section id="defining-a-likelihood" class="level3 page-columns page-full" data-number="8.1.4"><h3 data-number="8.1.4" class="anchored" data-anchor-id="defining-a-likelihood">
+<span class="header-section-number">8.1.4</span> Defining a Likelihood</h3>
 <div class="page-columns page-full"><p>This is all fine and well, but, in fact, we <em>don’t know</em> what the <em>true distribution</em> of human male adult heights is.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. Instead, you are - say - an alien (or profound amnesiac) who beams into (or comes to) onto a professional basketball court, and out trots a human male who is 210 cm tall. Aha! Data:</p><div class="no-row-height column-margin column-container"><li id="fn4"><p><sup>4</sup>&nbsp;it can be argued that there <em>is</em> not “true distribution*, at least not without accounting for ALL the possible multiverses. But that’s outside scope of this discussion.</p></li></div></div>
 <p><span class="math display">\[ X_1 = \{210\}\]</span></p>
 <p>To “flip this on its head”“, we ask a new question: What is the <em>likelihood</em> that the mean and standard deviation of human heights are, in fact, 175 and 20, respectively GIVEN that we observed one male who is <span class="math inline">\(X_1 = 175\)</span> feet tall?</p>
@@ -429,68 +447,71 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p><span class="math inline">\(L_1\)</span> is clearly, much much greater than our original likelihood, i.e.&nbsp;this set of parameters is much likelier than the original set of parameters. Indeed, the ratio <span class="math inline">\(L_1 / L_0 = 92.5\)</span>. We can make an unambiguous and strong statement: <strong>Model 1</strong> is <strong>more than 900x more</strong> <strong><em>likely</em></strong> than the <strong>Null Model</strong>!</p>
-</section><section id="joint-likelihoods" class="level3" data-number="8.3.2"><h3 data-number="8.3.2" class="anchored" data-anchor-id="joint-likelihoods">
-<span class="header-section-number">8.3.2</span> Joint Likelihoods</h3>
+</section><section id="joint-likelihoods" class="level3" data-number="8.1.5"><h3 data-number="8.1.5" class="anchored" data-anchor-id="joint-likelihoods">
+<span class="header-section-number">8.1.5</span> Joint Likelihoods</h3>
 <center>
 <img src="./images/likelihoods/bballteam.jpg" style="width: 200px;">
 </center>
 <p>We’re very happy with our new model (it’s 900 times better than the null model!) But are perhaps a bit uncomfortable with the small sample size. Thankfully, four more basketball players come jogging out of the locker room, we measure their heights (with our robotic alien ayes) and now have more data! Here are their heights:</p>
-<p><span class="math display">\[X \sim \{190, 200, 210, 220, 230\}\]</span></p>
+<p><span class="math display">\[X \sim \{190, 200, 210, 220, 230\}\]</span> Let’s immediately capture this data in R:</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-6_cc2d3064a5e458a7f9049a4c6b27c257">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">190</span>, <span class="fl">200</span>, <span class="fl">210</span>, <span class="fl">220</span>, <span class="fl">230</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>At this point, I might have reasonable suspicion that neither our null-model (M0) nor or adapted model (M1) might be appropriate for this subset of humans. Visualize these data-points against our null-model:</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-6_15a3ad0965f71422dfb3cdea8a2aaf1e">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mu0</span> <span class="op">&lt;-</span> <span class="fl">180</span>; <span class="va">sigma0</span> <span class="op">&lt;-</span> <span class="fl">20</span></span>
-<span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">190</span>, <span class="fl">200</span>, <span class="fl">210</span>, <span class="fl">220</span>, <span class="fl">230</span><span class="op">)</span></span>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-7_0d6d9e2dc2482017e7ef2dc6bff5474a">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mu0</span> <span class="op">&lt;-</span> <span class="fl">180</span>; <span class="va">sigma0</span> <span class="op">&lt;-</span> <span class="fl">20</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">mu0</span>, <span class="va">sigma0</span><span class="op">)</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">120</span>,<span class="fl">240</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.02</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span><span class="va">X</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">X</span>,<span class="va">mu0</span>,<span class="va">sigma0</span><span class="op">)</span>, pch<span class="op">=</span><span class="fl">19</span>, col<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span><span class="va">X</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">X</span>,<span class="va">mu0</span>,<span class="va">sigma0</span><span class="op">)</span>, type<span class="op">=</span><span class="st">"h"</span>, col<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="likelihoods_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="600"></p>
+<p><img src="likelihoods_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="600"></p>
 </div>
 </div>
 <p>Now, we can compute the likelihood of the null parameters given all of these observations.The likelihood (a <strong>joint likelihood</strong>) is just the product of the likelihood for each of these points, because it is equal to the <em>joint density distribution</em> … this is because the <em>Probability</em> of <span class="math inline">\(n\)</span> independent events is the <em>product</em> of the probabilities:</p>
 <p><span class="math display">\[{\cal L}(\mu_0, \sigma_0 | {\bf X}) = \prod_{i=1}^n f(X_i|\mu_0, \sigma_0) \]</span></p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-7_7ce0efd67f50c0835248948caf0e001d">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">L0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/prod.html">prod</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">mu0</span>, <span class="va">sigma0</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-8_3d196ebed05120721ae2bf5d38be6cea">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">L0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/prod.html">prod</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">mu0</span>, <span class="va">sigma0</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3.263065e-12</code></pre>
 </div>
 </div>
 <p>This is a very small number, but again - it is meaningless without having a comparison. Let’s compute the joint likelihood of our alternative model:</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-8_9f5eb63b1d32e452b16718523b0f32ea">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mu1</span> <span class="op">&lt;-</span> <span class="fl">210</span>; <span class="va">sigma1</span> <span class="op">&lt;-</span> <span class="fl">0.1</span></span>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-9_b03cf114da23a51dd8860907b800b676">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mu1</span> <span class="op">&lt;-</span> <span class="fl">210</span>; <span class="va">sigma1</span> <span class="op">&lt;-</span> <span class="fl">0.1</span></span>
 <span><span class="op">(</span><span class="va">L1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/prod.html">prod</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">mu1</span>, <span class="va">sigma1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
 </div>
-<p>To machine power, the second model is MUCH LESS likely than the first model! To illustrate this:</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-9_4cfc43576d6bb5755c591b27da32a8d1">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">mu1</span>, <span class="va">sigma1</span><span class="op">)</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">185</span>,<span class="fl">235</span><span class="op">)</span>, n<span class="op">=</span><span class="fl">1000</span>, main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span><span class="va">X</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">X</span>,<span class="va">mu1</span>,<span class="va">sigma1</span><span class="op">)</span>, pch<span class="op">=</span><span class="fl">19</span>, col<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span><span class="va">X</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">X</span>,<span class="va">mu1</span>,<span class="va">sigma1</span><span class="op">)</span>, type<span class="op">=</span><span class="st">"h"</span>, col<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To machine power, the second model is MUCH LESS likely than the first model! In fact, the machine can’t multiply probabilities that small and returns a 0.</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-10_98686c770781a5fbedb08fe49db973bb">
 <div class="cell-output-display">
-<p><img src="likelihoods_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="600"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="likelihoods_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="600"></p>
+<p></p><figcaption class="figure-caption">Comparison of basketball player data against three models.</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 <p>You see that the points far away from the mean peak have extremely low probability, which brings the likelihood of this model way down.</p>
-</section></section><section id="the-maximum-likelihood-estimator" class="level2 page-columns page-full" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="the-maximum-likelihood-estimator">
-<span class="header-section-number">8.4</span> The <strong>Maximum Likelihood Estimator</strong>
+</section></section><section id="the-maximum-likelihood-estimator" class="level2 page-columns page-full" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="the-maximum-likelihood-estimator">
+<span class="header-section-number">8.2</span> The <strong>Maximum Likelihood Estimator</strong>
 </h2>
 <p>So - how do we find the parameters that maximize the likelihood? These parameters are called the <strong>Maximum Likelihood Estimators</strong> (MLE’s), and are the “best” parameters in that they are the most precise. Remember, every estimate is a random variable, and therefore comes with some variance[^index-5]. It can be shown that MLE’s have the smallest of those possible variances, in other words the estimates have the smallest <em>standard error</em>. The technical notation for a MLE is:</p>
 <p><span class="math display">\[\{ \widehat{\theta_\mathrm{mle}}\} \subseteq \{ \underset{\theta\in\Theta}{\operatorname{arg\,max}}\ {\cal L}(\theta\,|\,X_1,\ldots,X_n) \}\]</span> Translating this to English <em>the MLE estimators of parameters</em> <span class="math inline">\(\theta\)</span> are those values of <span class="math inline">\(\theta\)</span> for which the likelihood function is maximized.</p>
 <p>Let’s look at a range of possible values for <span class="math inline">\(\widehat{\mu}\)</span> and <span class="math inline">\(\widehat{\sigma}\)</span> for our basketball player example. We can do this pretty efficiently in R.</p>
 <p>First, pick some values to explore:</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-10_d101a6649cd58a2ca364de5a706b924c">
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-11_7143293b6d83d19ddf17ec91fea9d045">
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mus</span> <span class="op">&lt;-</span> <span class="fl">180</span><span class="op">:</span><span class="fl">240</span></span>
 <span><span class="va">sigmas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">35</span>,<span class="fl">.5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, write a function that computes the likelihood (which, as we recall, is a function of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>, and “assumes” <span class="math inline">\(\bf X\)</span>)</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-11_bf31bc1c95c5de30948c4403ad6f8ac3">
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-12_2e4f5c78133fd3fc9e6ae35e92459fba">
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Likelihood</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">mu</span>, <span class="va">sigma</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/prod.html">prod</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">mu</span>, <span class="va">sigma</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And compute this likelihood for all the combinations of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> above, using the mighty <code><a href="https://rdrr.io/r/base/outer.html">outer()</a></code> function:</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-12_30844ef720996175b5b81f5b810170e1">
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-13_05780bfb31c8575154a877fe11a89dc0">
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">L.matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/outer.html">outer</a></span><span class="op">(</span><span class="va">mus</span>, <span class="va">sigmas</span>, <span class="fu"><a href="https://rdrr.io/r/base/Vectorize.html">Vectorize</a></span><span class="op">(</span><span class="va">Likelihood</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><em>Note (as a technical aside) that to get the <code>Likelihood()</code> function to work within <code><a href="https://rdrr.io/r/base/outer.html">outer()</a></code>, it had to be “vectorized”. Happily, there is a function (<code><a href="https://rdrr.io/r/base/Vectorize.html">Vectorize()</a></code>) that does just that.</em></p>
@@ -501,56 +522,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Clearly, there is a sharp peak in the likelihood around <span class="math inline">\(\widehat{\mu} = 210\)</span> and somewhere just under <span class="math inline">\(\widehat{\sigma} = 15\)</span>. From our limited sets of values, we can find the values at the maximum:</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-13_aedc93a18f3b4471b680d5eb9199a986">
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">max.indices</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">L.matrix</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">L.matrix</span><span class="op">)</span>, arr.ind <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-14_af90ec7c9677b4241b7a97fcc6e3600a">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>  mu.hat <span class="op">=</span> <span class="va">mus</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/row.html">row</a></span><span class="op">(</span><span class="va">L.matrix</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span><span class="op">(</span><span class="va">L.matrix</span><span class="op">)</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>  sigma.hat <span class="op">=</span> <span class="va">sigmas</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/col.html">col</a></span><span class="op">(</span><span class="va">L.matrix</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span><span class="op">(</span><span class="va">L.matrix</span><span class="op">)</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     row col
-[1,]  31  19</code></pre>
-</div>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">mu.hat</span> <span class="op">&lt;-</span> <span class="va">mus</span><span class="op">[</span><span class="va">max.indices</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 210</code></pre>
-</div>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">sigma.hat</span> <span class="op">&lt;-</span> <span class="va">sigmas</span><span class="op">[</span><span class="va">max.indices</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 14</code></pre>
+<pre><code>   mu.hat sigma.hat 
+      210        14 </code></pre>
 </div>
 </div>
 <p>And the (irrelevant) value of the likelihood is</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-14_ff07763723ff669707680af10f40bbd5">
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">L.matrix</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-15_79319d2309d538a9b5834a3f622ca2a0">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">L.matrix</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.465602e-09</code></pre>
 </div>
 </div>
-<section id="numerically-finding-the-mle" class="level3" data-number="8.4.1"><h3 data-number="8.4.1" class="anchored" data-anchor-id="numerically-finding-the-mle">
-<span class="header-section-number">8.4.1</span> Numerically finding the MLE</h3>
+<section id="numerically-finding-the-mle" class="level3" data-number="8.2.1"><h3 data-number="8.2.1" class="anchored" data-anchor-id="numerically-finding-the-mle">
+<span class="header-section-number">8.2.1</span> Numerically finding the MLE</h3>
 <p>We don’t need to do this search ourselves - that’s why we invented electronic computing devices. The powerhouse function for optimizing functions in R is <code><a href="https://rdrr.io/r/stats/optim.html">optim()</a></code>, but it takes some getting used to. The (minimal) syntax is:</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-15_340c6ae6fbeab357aa01609801a0e960">
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/optim.html">optim</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">FUN</span>, <span class="va">...</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-16_aacb2957539552783770bb4ff9720afc">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/optim.html">optim</a></span><span class="op">(</span><span class="va">par</span>, <span class="va">fn</span>, <span class="va">...</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>where:</p>
 <ol type="1">
 <li>
-<code>p</code> is a required vector of your initial guess for the parameters.</li>
+<code>par</code> is a required vector of your initial guess for the parameters.</li>
 <li>
-<code>FUN(p, ...)</code> is a function that takes as its first argument a vector of parameters <code>p</code>
+<code>fn(par, ...)</code> is a function that takes as its first argument a vector of parameters <code>par</code>
 </li>
-<li>The <code>...</code> refers to other arguments passed to <code>FUN</code>. Most importantly, this will be data!</li>
+<li>The <code>...</code> refers to other arguments passed to <code>fn</code>. Most importantly, this will be data!</li>
 </ol>
-<p>See how I make it work below:</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-16_913e24a2117d5e0b7be4b4d0e20f3aab">
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/optim.html">optim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">180</span>,<span class="fl">20</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="op">-</span><span class="fu">Likelihood</span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="va">p</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>An extremely important and confusing nuance to using <code>optim</code> is that is MINIMIZES. This is very natural, as the canonical <a href="https://en.wikipedia.org/wiki/Optimization_problem">optimization problem</a> is the minimization of a so-called <em>objective function</em>. Therefore, the <code>FUN</code> have to return the <em>negative</em> of the likelihood, if we want to maximize the likelihood.</p>
+<p>See how I make it work below, using our “naive” model (mean = 175, sd = 20) of adult male height. Note the trick of naming the parameters (<code>p["mu"]</code> and <code>p["sigma"]</code>) rather than indexing them by number - that’s all most always a good idea, especially as vectors get longer and longer. This will also come in handy when we interpret the output:</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-17_85f088906ac151f7f752e12bea8a734a">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Likelihood</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">mu</span>, <span class="va">sigma</span>, <span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/prod.html">prod</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">mu</span>, <span class="va">sigma</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">p0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>mu <span class="op">=</span> <span class="fl">175</span>, sigma <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/optim.html">optim</a></span><span class="op">(</span><span class="va">p0</span>, <span class="kw">function</span><span class="op">(</span><span class="va">p</span>, <span class="va">x</span><span class="op">)</span> <span class="op">-</span><span class="fu">Likelihood</span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="st">"mu"</span><span class="op">]</span>, <span class="va">p</span><span class="op">[</span><span class="st">"sigma"</span><span class="op">]</span>, <span class="va">x</span><span class="op">)</span>, x <span class="op">=</span> <span class="va">X</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$par
-[1] 209.99818  14.14396
+       mu     sigma 
+209.99981  14.14376 
 
 $value
 [1] -1.466355e-09
 
 $counts
 function gradient 
-      55       NA 
+      63       NA 
 
 $convergence
 [1] 0
@@ -560,21 +580,21 @@ NULL</code></pre>
 </div>
 </div>
 <p>So - lots of output, but the key numbers we’re interested in are the top two, under <code>$par</code>. These are: <span class="math inline">\(\widehat{\mu} = 209.998\)</span> and <span class="math inline">\(\widehat{\sigma} = 14.144\)</span>. Good! This is consistent with our likelihood profile. The <code>$value</code> is very close to the (negative of the) maximum likelihood that we “hand-calculated”.</p>
-</section><section id="comparing-models-side-by-side" class="level3" data-number="8.4.2"><h3 data-number="8.4.2" class="anchored" data-anchor-id="comparing-models-side-by-side">
-<span class="header-section-number">8.4.2</span> Comparing models side by side</h3>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-17_46af73ea973d2e90a45b5b8de0cea1e8">
+</section><section id="comparing-models-side-by-side" class="level3" data-number="8.2.2"><h3 data-number="8.2.2" class="anchored" data-anchor-id="comparing-models-side-by-side">
+<span class="header-section-number">8.2.2</span> Comparing models side by side</h3>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-18_7d7805e3785b8771bda8c48280aa55b4">
 <div class="cell-output-display">
-<p><img src="likelihoods_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="600"></p>
+<p><img src="likelihoods_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="600"></p>
 </div>
 </div>
 <p>You can get a feel for the constraints on the MLE model. First, it is balances around the mean value. Second, if the <span class="math inline">\(\sigma\)</span> were smaller, the contribution of the outlying points would become much smaller and bring the likelihood down; if <span class="math inline">\(\sigma\)</span> were any larger, then the flattening would bring down too far the contribution of the central points.</p>
-</section><section id="comparing-with-method-of-moment-estimators-mmes" class="level3" data-number="8.4.3"><h3 data-number="8.4.3" class="anchored" data-anchor-id="comparing-with-method-of-moment-estimators-mmes">
-<span class="header-section-number">8.4.3</span> Comparing with Method of Moment Estimators (MME’s)</h3>
+</section><section id="comparing-with-method-of-moment-estimators-mmes" class="level3" data-number="8.2.3"><h3 data-number="8.2.3" class="anchored" data-anchor-id="comparing-with-method-of-moment-estimators-mmes">
+<span class="header-section-number">8.2.3</span> Comparing with Method of Moment Estimators (MME’s)</h3>
 <p>Now … you might think that’s a whole lot of crazy to estimate a simple <strong>mean</strong> and <strong>variance</strong>. You may have guessed that the best estimate of the <em>mean</em> is the <em>sample mean</em>:</p>
 <p><span class="math display">\[\widehat{\mu} = \overline{X} = {1\over n} \sum_{i=1}^n X_i\]</span> and the <em>standard deviation</em> is best estimated by the <em>sample standard deviation</em>:</p>
 <p><span class="math display">\[\widehat{\sigma^2} = s_x^2 = {1\over n-1}\sum (X_i - \overline{X})^2\]</span> The mean estimate matches, but the sample standard deviation doesn’t quite:</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-18_69050cd517793b2ff404f1e55ac15312">
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-19_51f6f70678bbe7ed5c3e2be515a7b5e7">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 15.81139</code></pre>
 </div>
@@ -584,106 +604,127 @@ NULL</code></pre>
 <blockquote class="blockquote">
 <p>Note: this is a special case where the MLE is actually computable by hand, but in general it is not - and best to obtain numerically, as the examples that follow show.</p>
 </blockquote>
-</section><section id="log-likelihoods" class="level3 page-columns page-full" data-number="8.4.4"><h3 data-number="8.4.4" class="anchored" data-anchor-id="log-likelihoods">
-<span class="header-section-number">8.4.4</span> Log-likelihoods</h3>
-<p>For a combination of practical and theoretical reasons, what we actually maximize is not the <strong>Likelihood</strong> but the <strong>log-Likelihood</strong>. The maximum will be in the same place for both functions, since they’re both monotonic, but the latter is MUCH easier to work with.</p>
+</section><section id="log-likelihoods" class="level3 page-columns page-full" data-number="8.2.4"><h3 data-number="8.2.4" class="anchored" data-anchor-id="log-likelihoods">
+<span class="header-section-number">8.2.4</span> Log-likelihoods</h3>
+<p>For a combination of practical and theoretical reasons, what we actually maximize is not the <strong>likelihood</strong> but the <strong>log-likelihood</strong>. The maximum will be in the same place for both functions, since <span class="math inline">\(\log(x)\)</span> is a <a href="https://en.wikipedia.org/wiki/Monotonic_function">monotonic function</a>, but logs are much easier to work with. Notably, the log function converts <em>products</em> (which either explode or - in the case of probability - collapse to very very near zero very very quickly), into tidy sums:</p>
 <p>Likelihood: <span class="math display">\[{\cal L}(\mu_0, \sigma_0 | {\bf X}) = \prod_{i=1}^n f(X_i|\mu_0, \sigma_0) \]</span></p>
 <p>Log-likelihood: <span class="math display">\[{\cal l}(\mu_0, \sigma_0 | {\bf X}) = \log({\cal L}) = \sum_{i=1}^n \log(f(X_i|\mu_0, \sigma_0)) \]</span></p>
-<div class="page-columns page-full"><p>Sums are much easier to manipulate with algebra and handle computationally than products. Also, they help turn very very very small numbers and very very very large numbers to very very very ordinary numbers.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p><div class="no-row-height column-margin column-container"><li id="fn5"><p><sup>5</sup>&nbsp;The number of particles in the universe is about 10^80 … its log is 184. The ratio of the mass of an electron to the size of the sun is 10^-60 … its log is -134.</p></li></div></div>
-<div class="cell" data-caption="" data-hash="likelihoods_cache/html/unnamed-chunk-19_9a7e95c16646770700122f5909b8c47f">
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">L.matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/outer.html">outer</a></span><span class="op">(</span><span class="va">mus</span>, <span class="va">sigmas</span>, <span class="fu"><a href="https://rdrr.io/r/base/Vectorize.html">Vectorize</a></span><span class="op">(</span><span class="va">Likelihood</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/image.html">image</a></span><span class="op">(</span><span class="va">mus</span>, <span class="va">sigmas</span>, <span class="va">L.matrix</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">topo.colors</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/contour.html">contour</a></span><span class="op">(</span><span class="va">mus</span>, <span class="va">sigmas</span>, <span class="va">L.matrix</span>, add<span class="op">=</span><span class="cn">TRUE</span>, col<span class="op">=</span><span class="st">"white"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="page-columns page-full"><p>Sums are much easier to manipulate with algebra and handle computationally than products. Also, they help turn very very very small numbers and very very very large numbers to very very very ordinary numbers.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p><div class="no-row-height column-margin column-container"><li id="fn5"><p><sup>5</sup>&nbsp;The number of particles in the universe is about 10^80 … its log is 184. The ratio of the mass of an electron to the size of the sun is 10^-60 … its log is -134. Even I can count to -134.</p></li></div></div>
+<div class="cell" data-hash="likelihoods_cache/html/LikelihoodVsLoglikelihood_ebf6bac96f35a61306695475b5efbb17">
 <div class="cell-output-display">
-<p><img src="likelihoods_files/figure-html/unnamed-chunk-19-1.png" width="500" height="400"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="likelihoods_files/figure-html/LikelihoodVsLoglikelihood-1.png" class="img-fluid figure-img" width="800"></p>
+<p></p><figcaption class="figure-caption">The log likelihood is a lot flatter, but the maximum is the same.</figcaption><p></p>
+</figure>
 </div>
 </div>
-<div class="cell" data-caption="" data-hash="likelihoods_cache/html/unnamed-chunk-20_0fc1358c4223a7daf78d8297239a9d7a">
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ll.matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/outer.html">outer</a></span><span class="op">(</span><span class="va">mus</span>, <span class="va">sigmas</span>, <span class="fu"><a href="https://rdrr.io/r/base/Vectorize.html">Vectorize</a></span><span class="op">(</span><span class="va">logLikelihood</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/image.html">image</a></span><span class="op">(</span><span class="va">mus</span>, <span class="va">sigmas</span>, <span class="va">ll.matrix</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">topo.colors</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/contour.html">contour</a></span><span class="op">(</span><span class="va">mus</span>, <span class="va">sigmas</span>, <span class="va">ll.matrix</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, nlevels <span class="op">=</span> <span class="fl">400</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">.2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="likelihoods_files/figure-html/unnamed-chunk-20-1.png" width="500" height="400"></p>
 </div>
-</div>
-</section><section id="confidence-intervals-a-bit-of-theory" class="level3" data-number="8.4.5"><h3 data-number="8.4.5" class="anchored" data-anchor-id="confidence-intervals-a-bit-of-theory">
-<span class="header-section-number">8.4.5</span> Confidence Intervals: A bit of theory</h3>
-<p>The peak of the (log)-likelihood surface gives you <strong>point estimates</strong> of parameters.</p>
-<p>Likelihood theory provides an additional enormously handy (asymptotically correct) result with respect to <strong>standard errors</strong> around the estimates. Specifically (in words): <strong>The variance around the point estimates is equal to the negative reciprocal of the second derivative of the log-likelihood at the maximum</strong>.</p>
-<p>This is actually very intuitive! The sharper the peak, the <strong>more negative</strong> the second derivative, the <strong>smaller</strong> the (positive) variance. The flatter the peak, the <strong>less negative</strong> the second derivative, i.e.&nbsp;the <strong>larger</strong> the variance.</p>
-<p><span class="math display">\[\Sigma(\theta) = {\cal I}(\theta)^{-1}\]</span></p>
-<p>Often (e.g.&nbsp;in these examples) we have several parameters here, so the jargon is fancier, but the idea is the same:</p>
-<ul>
-<li><p>the <a href="http://en.wikipedia.org/wiki/Hessian_matrix"><strong>Hessian</strong></a> is an <em>n</em>-dimensional second derivative - i.e.&nbsp;a matrix that summarizes the sharpness of the peak.</p></li>
-<li><p>the <a href="http://en.wikipedia.org/wiki/Information_matrix"><strong>Fisher Information</strong></a> (<span class="math inline">\(\cal{I}\)</span>) is - specifically - the Hessian of the log-likelihood.</p></li>
-<li><p>the <a href="http://en.wikipedia.org/wiki/Inverse_of_a_matrix"><strong>inverse</strong></a> is the <em>n</em>-dimensional equivalent of “reciprocal”.</p></li>
-<li><p><span class="math inline">\(\Sigma\)</span> is the <strong>variance-covariance matrix</strong> of the parameter estimates.</p></li>
-</ul></section><section id="confidence-intervals-application" class="level3" data-number="8.4.6"><h3 data-number="8.4.6" class="anchored" data-anchor-id="confidence-intervals-application">
-<span class="header-section-number">8.4.6</span> Confidence Intervals: Application</h3>
-<p>Ask <code><a href="https://rdrr.io/r/stats/optim.html">optim()</a></code> to compute the Hessian:</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-21_8835c2e806b2b169cb6ccf7c2ea21ad9">
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">logLikelihood</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">mu</span>, <span class="va">sigma</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">mu</span>, <span class="va">sigma</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">(</span><span class="va">param.fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/optim.html">optim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">180</span>,<span class="fl">20</span><span class="op">)</span>,  <span class="kw">function</span><span class="op">(</span><span class="va">p</span><span class="op">)</span> </span>
-<span>  <span class="op">-</span><span class="fu">logLikelihood</span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="va">p</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, hessian<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="page-columns page-full"><p>Because the log ofa probability is such an important quantity, in R there is always a default <code>log = TRUE/FALSE</code> option in its distribution functions. And the <code>optim</code> function<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> much, much prefers optimizing over sums than over probabilities. Putting that together here:</p><div class="no-row-height column-margin column-container"><li id="fn6"><p><sup>6</sup>&nbsp;Which, to be clear, can be infuriatingly finnicky!</p></li></div></div>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-20_3a048bf6c69cb76b1a5c960a1e77cf43">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">logLikelihood</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">mu</span>, <span class="va">sigma</span>, <span class="va">x</span><span class="op">)</span>  </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">mu</span>, <span class="va">sigma</span>, log <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/optim.html">optim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>mu <span class="op">=</span> <span class="fl">175</span>, sigma <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>, </span>
+<span>      <span class="kw">function</span><span class="op">(</span><span class="va">p</span>, <span class="va">x</span><span class="op">)</span> <span class="op">-</span><span class="fu">logLikelihood</span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="st">"mu"</span><span class="op">]</span>, <span class="va">p</span><span class="op">[</span><span class="st">"sigma"</span><span class="op">]</span>, x <span class="op">=</span> <span class="va">X</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$par
-[1] 209.99624  14.14095
+       mu     sigma 
+210.00200  14.14072 
 
 $value
 [1] 20.34049
 
 $counts
 function gradient 
-      53       NA 
+      61       NA 
 
 $convergence
 [1] 0
 
 $message
-NULL
-
-$hessian
-             [,1]         [,2]
-[1,] 2.500419e-02 1.329425e-05
-[2,] 1.329425e-05 5.002096e-02</code></pre>
+NULL</code></pre>
 </div>
 </div>
-<p>The inverse of a matrix (in R) is <code>solve(M)</code>:</p>
+<p>The calcualtion is nearly instant, the parameters are very close, and the maximum log-Likelihood is -20.34.</p>
+</section><section id="confidence-intervals" class="level3" data-number="8.2.5"><h3 data-number="8.2.5" class="anchored" data-anchor-id="confidence-intervals">
+<span class="header-section-number">8.2.5</span> Confidence Intervals</h3>
+<section id="a-bit-of-theory" class="level4" data-number="8.2.5.1"><h4 data-number="8.2.5.1" class="anchored" data-anchor-id="a-bit-of-theory">
+<span class="header-section-number">8.2.5.1</span> A bit of theory</h4>
+<p>The peak of the (log)-likelihood surface gives you <strong>point estimates</strong> of parameters. But likelihood theory provides an additional enormously handy (asymptotically correct) result with respect to <strong>standard errors</strong> around the estimates. Specifically (in semi-precise English words): <em>The variance around the point estimates is equal to the negative reciprocal of the second derivative of the log-likelihood at the maximum</em>.</p>
+<p>While that might seem like a mouthful of twists (negatives! reciprocals! derivatives!), this is actually a very intuitive result. Basically: the sharper the peak of the likelihood mountain, the more negative the second derivative, the smaller the (positive) variance. In contrast, a flat peak will have a less negative second derivative, and the estimate will have a larger the variance.</p>
+<p>All of the above is true in one dimension. But in almost all cases you are estimating multiple parameters. No worries, the principle and practice is the same, but the jargon (and underlying math) is a bit fancier.</p>
+<ul>
+<li><p>the <a href="http://en.wikipedia.org/wiki/Hessian_matrix"><strong>Hessian</strong></a> is an <em>n</em>-dimensional second derivative - i.e.&nbsp;a matrix that summarizes the sharpness of the peak.</p></li>
+<li><p>the <a href="http://en.wikipedia.org/wiki/Information_matrix"><strong>Fisher Information</strong></a> (<span class="math inline">\(\cal{I}\)</span>) is - specifically - the Hessian of the log-likelihood.</p></li>
+<li><p>the <a href="http://en.wikipedia.org/wiki/Inverse_of_a_matrix"><strong>inverse</strong></a> is the <em>n</em>-dimensional equivalent of “reciprocal”.</p></li>
+<li><p><span class="math inline">\(\Sigma\)</span> is the <strong>variance-covariance matrix</strong> of the parameter estimates.</p></li>
+</ul>
+<p>With that in mind, the (asymptotically correct) variance of a maximum likelihood estimator is given by the following compact formula:</p>
+<p><span class="math display">\[\Sigma(\theta) = {\cal I}(\theta)^{-1}\]</span></p>
+</section><section id="application" class="level4" data-number="8.2.5.2"><h4 data-number="8.2.5.2" class="anchored" data-anchor-id="application">
+<span class="header-section-number">8.2.5.2</span> Application</h4>
+<p>So - four steps: (1) obtain the Hessian, (2) take its inverse, and (3) take the square root of the diagonals of the matrix to get standard errors, and (4) convert to confidence intervals.</p>
+<ol type="1">
+<li>The hardest bit (numerically speaking) is to calculate the Hessian, but our workhorse <code><a href="https://rdrr.io/r/stats/optim.html">optim()</a></code> is happy to provide it with the <code>hessian = TRUE</code> argument:</li>
+</ol>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-21_79a3de329fa8b29e478389c8bbf45d32">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">logLikelihood</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">mu</span>, <span class="va">sigma</span>, <span class="va">x</span><span class="op">)</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">mu</span>, <span class="va">sigma</span>, log <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">param.fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/optim.html">optim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>mu <span class="op">=</span> <span class="fl">180</span>, sigma <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>, </span>
+<span>      <span class="kw">function</span><span class="op">(</span><span class="va">p</span>, <span class="va">x</span><span class="op">)</span> <span class="op">-</span><span class="fu">logLikelihood</span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="st">"mu"</span><span class="op">]</span>, <span class="va">p</span><span class="op">[</span><span class="st">"sigma"</span><span class="op">]</span>, <span class="va">x</span><span class="op">)</span>,</span>
+<span>      x <span class="op">=</span> <span class="va">X</span>, hessian<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">param.fit</span><span class="op">$</span><span class="va">hessian</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                mu        sigma
+mu    2.500419e-02 1.329514e-05
+sigma 1.329514e-05 5.002096e-02</code></pre>
+</div>
+</div>
+<ol start="2" type="1">
+<li>In R, the inverse of a matrix (in R) is given (somewhat unintuitively) by the <code><a href="https://rdrr.io/r/base/solve.html">solve()</a></code> function. The inverse of the hessian is the variance-covariance matrix of the parameter estimates. It is worth pausing here to make sure that they are not too correlated, which is the meaning of the off-diagonal elements of this matrix:</li>
+</ol>
 <div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-22_195e2cbb94262cbb221af6d9390787cd">
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">Sigma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html">solve</a></span><span class="op">(</span><span class="va">param.fit</span><span class="op">$</span><span class="va">hessian</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">Sigma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html">solve</a></span><span class="op">(</span><span class="va">param.fit</span><span class="op">$</span><span class="va">hessian</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>            [,1]        [,2]
-[1,] 39.99330163 -0.01062917
-[2,] -0.01062917 19.99162241</code></pre>
+<pre><code>               mu       sigma
+mu    39.99330163 -0.01062988
+sigma -0.01062988 19.99162241</code></pre>
 </div>
 </div>
-<p>The square root of the diagonal gives standard errors</p>
+<ol start="3" type="1">
+<li>The square root of the diagonal gives standard errors</li>
+</ol>
 <div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-23_862270956d46279e3acbaa5e66bef054">
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">se</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">Sigma</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">se</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">Sigma</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 6.324026 4.471199</code></pre>
+<pre><code>      mu    sigma 
+6.324026 4.471199 </code></pre>
 </div>
 </div>
-<p>And the confidence intervals are just:</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-24_ba231e7ec6c7d313c163c9d72020b6c3">
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>hat <span class="op">=</span> <span class="va">param.fit</span><span class="op">$</span><span class="va">par</span>, CI.low <span class="op">=</span> <span class="va">param.fit</span><span class="op">$</span><span class="va">par</span>  <span class="op">-</span> <span class="fl">1.96</span><span class="op">*</span><span class="va">se</span>, CI.high <span class="op">=</span> <span class="va">param.fit</span><span class="op">$</span><span class="va">par</span>  <span class="op">+</span> <span class="fl">1.96</span><span class="op">*</span><span class="va">se</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="4" type="1">
+<li>And the confidence intervals are just:</li>
+</ol>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-24_d0eccfe172f922449fd44233e820910b">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>hat <span class="op">=</span> <span class="va">param.fit</span><span class="op">$</span><span class="va">par</span>, </span>
+<span>      CI.low <span class="op">=</span> <span class="va">param.fit</span><span class="op">$</span><span class="va">par</span>  <span class="op">-</span> <span class="fl">1.96</span><span class="op">*</span><span class="va">se</span>, </span>
+<span>      CI.high <span class="op">=</span> <span class="va">param.fit</span><span class="op">$</span><span class="va">par</span>  <span class="op">+</span> <span class="fl">1.96</span><span class="op">*</span><span class="va">se</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>           hat   CI.low  CI.high
-[1,] 209.99624 197.6012 222.3913
-[2,]  14.14095   5.3774  22.9045</code></pre>
+<pre><code>            hat   CI.low  CI.high
+mu    209.99624 197.6012 222.3913
+sigma  14.14095   5.3774  22.9045</code></pre>
 </div>
 </div>
 <blockquote class="blockquote">
 <p><code>optim</code>: <strong><em>Is the engine under a great many hoods of R functions!</em></strong></p>
 </blockquote>
-<p><img src="./images/likelihoods/JohnNash.jpg" class="img-fluid"></p>
-<p>John Nash: creator (and skeptic) of <code>optim</code></p>
-<p>see: http://www.ibm.com/developerworks/library/ba-optimR-john-nash/</p>
-</section></section><section id="testing-hypotheses-and-model-selection-with-likelihoods" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="testing-hypotheses-and-model-selection-with-likelihoods">
-<span class="header-section-number">8.5</span> Testing hypotheses and model selection with likelihoods</h2>
-<section id="likelihood-ratio-test" class="level3" data-number="8.5.1"><h3 data-number="8.5.1" class="anchored" data-anchor-id="likelihood-ratio-test">
-<span class="header-section-number">8.5.1</span> Likelihood Ratio Test:</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="./images/likelihoods/JohnNash.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">John Nash is the creator (and skeptic) of <code>optim</code>. For a wonky history into <code>optim</code>’s plusses and minusses, see this insightful <a href="https://nashjc.wordpress.com/2016/11/10/why-optim-is-out-of-date/">blog post</a>.</figcaption><p></p>
+</figure>
+</div>
+</section></section></section><section id="testing-hypotheses-and-model-selection-with-likelihoods" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="testing-hypotheses-and-model-selection-with-likelihoods">
+<span class="header-section-number">8.3</span> Testing hypotheses and model selection with likelihoods</h2>
+<section id="likelihood-ratio-test" class="level3" data-number="8.3.1"><h3 data-number="8.3.1" class="anchored" data-anchor-id="likelihood-ratio-test">
+<span class="header-section-number">8.3.1</span> Likelihood Ratio Test:</h3>
 <ul>
 <li><p>Model 0 and Model 1 are NESTED</p></li>
 <li><p>(i.e.&nbsp;Model 0 is a special case of Model 1) with <span class="math inline">\(k_0\)</span> and <span class="math inline">\(k_1\)</span> parameters.</p></li>
@@ -693,16 +734,18 @@ $hessian
 <li><p>Likelihood Ratio Test Statistic: <span class="math display">\[\Lambda = -2 \log \left( \frac{L_0}{L_1}  \right) = 2 (l_1 - l_0)\]</span></p></li>
 <li><p>under Null hypothesis (i.e.&nbsp;Model 1) has distribution <span class="math inline">\(\Lambda \sim \text{Chi-squared} (d.f. = k_1 - k_0)\)</span></p></li>
 </ul>
-<p>An example:</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-25_84b6fa534a22e3f556aad19a9571e618">
+<section id="an-example" class="level4" data-number="8.3.1.1"><h4 data-number="8.3.1.1" class="anchored" data-anchor-id="an-example">
+<span class="header-section-number">8.3.1.1</span> An example</h4>
+<p>We will use home-made likelihoods to dig into the simplest and most familiar linear regression. In the simulated data below, there is considerable noise on a possible negative relationship between X and Y:</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-25_323ab23a078ae77d4511662837dcb11b">
 <div class="cell-output-display">
-<p><img src="likelihoods_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="600"></p>
+<p><img src="likelihoods_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" style="width:80.0%"></p>
 </div>
 </div>
-<p>Competing models: <span class="math display">\[M0: Y_i = \beta_0 + \epsilon_i\]</span> <span class="math display">\[M1: Y_i = \beta_0 + \beta_1 X_i + \epsilon_i\]</span> where <span class="math inline">\(\epsilon\)</span> are iid Gaussian.</p>
-<p>Defining (negative) log-likelihood functions</p>
+<p>We have two competing models: <span class="math display">\[M0: Y_i = \beta_0 + \epsilon_i\]</span> <span class="math display">\[M1: Y_i = \beta_0 + \beta_1 X_i + \epsilon_i\]</span> where <span class="math inline">\(\epsilon\)</span> are i.i.d. Gaussian residuals.</p>
+<p>We defining (negative) log-likelihood functions for this linear regression. Note that this time, we have two data objects in our likelihood: X and Y.</p>
 <div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-26_d6ecd16c2fae5cd596d9a987e489d960">
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">LL0</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">par</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">beta0</span>, <span class="va">sigma</span><span class="op">)</span>, <span class="va">X</span>, <span class="va">Y</span><span class="op">)</span><span class="op">{</span></span>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">LL0</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">par</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">beta0</span>, <span class="va">sigma</span><span class="op">)</span>, <span class="va">X</span>, <span class="va">Y</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">Y</span>, mean <span class="op">=</span> <span class="va">par</span><span class="op">[</span><span class="st">'beta0'</span><span class="op">]</span>, sd <span class="op">=</span> <span class="va">par</span><span class="op">[</span><span class="st">'sigma'</span><span class="op">]</span>, log<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span><span class="va">LL1</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">par</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">beta0</span>, <span class="va">beta1</span>, <span class="va">sigma</span><span class="op">)</span>, <span class="va">X</span>, <span class="va">Y</span><span class="op">)</span><span class="op">{</span></span>
@@ -710,45 +753,86 @@ $hessian
 <span>  <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">Y</span>, mean <span class="op">=</span> <span class="va">Y.hat</span>, sd <span class="op">=</span> <span class="va">par</span><span class="op">[</span><span class="st">'sigma'</span><span class="op">]</span>, log<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">)</span></span>
 <span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Obtaining estimates</p>
+<p>We use <code>optim</code> to obtain estimates:</p>
 <div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-27_b201eab4ee65b18691efb6ddb284e679">
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/optim.html">optim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>beta0<span class="op">=</span><span class="fl">0</span>, sigma<span class="op">=</span><span class="fl">1</span><span class="op">)</span>, <span class="va">LL0</span>, X <span class="op">=</span> <span class="va">X</span>, Y <span class="op">=</span> <span class="va">Y</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/optim.html">optim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>beta0<span class="op">=</span><span class="fl">0</span>, sigma<span class="op">=</span><span class="fl">1</span><span class="op">)</span>, <span class="va">LL0</span>, X <span class="op">=</span> <span class="va">X</span>, Y <span class="op">=</span> <span class="va">Y</span><span class="op">)</span></span>
 <span><span class="va">fit1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/optim.html">optim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>beta0 <span class="op">=</span> <span class="fl">0</span>, beta1 <span class="op">=</span> <span class="fl">0</span>, sigma <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, <span class="va">LL1</span>, X <span class="op">=</span> <span class="va">X</span>, Y <span class="op">=</span> <span class="va">Y</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Performing test:</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-28_a7b72a1384018ee0b104588f63cc3359">
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">LRT</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="op">-</span><span class="va">fit1</span><span class="op">$</span><span class="va">value</span> <span class="op">+</span> <span class="va">fit0</span><span class="op">$</span><span class="va">value</span><span class="op">)</span></span>
-<span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Chisquare.html">pchisq</a></span><span class="op">(</span><span class="va">LRT</span>, <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Inspect the parameters:</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-28_eeb95895832d585a092619b81a485caa">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit0</span><span class="op">$</span><span class="va">par</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 8.754952e-05</code></pre>
+<pre><code>    beta0     sigma 
+1.2506021 0.9163669 </code></pre>
+</div>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit1</span><span class="op">$</span><span class="va">par</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     beta0      beta1      sigma 
+ 1.1670651 -0.4251247  0.8429260 </code></pre>
 </div>
 </div>
-</section><section id="information-criteria" class="level3" data-number="8.5.2"><h3 data-number="8.5.2" class="anchored" data-anchor-id="information-criteria">
-<span class="header-section-number">8.5.2</span> Information Criteria</h3>
-<p>If models are not nested (most interesting sets of models aren’t) we can’t use a likelihood ratio test. Instead, we use the very very widely applied Akaike Information Criterion (AIC):<br><span class="math display">\[ AIC =  - 2 \log(\cal L) + 2 k\]</span></p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-29_60815d5824c6594f5b933b9af398073e">
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>AIC0  <span class="op">=</span> <span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="va">fit0</span><span class="op">$</span><span class="va">value</span> <span class="op">+</span> <span class="fl">2</span><span class="op">*</span><span class="fl">2</span><span class="op">)</span>,</span>
+<p>And performing the test. Recall - the <em>likelihood ratio</em> is the <em>difference of the log-likelihoods</em>, and that the log-likelihood is the <em>negative</em> of the <code>value</code> that has been optimized. The degrees of freedom is just the difference between the number of parameters in model 1 (3 parameters) and model 2 (1 parametr)</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-29_91bf46f7124cebc121ec58d083586eea">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">LRT</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="op">-</span><span class="va">fit1</span><span class="op">$</span><span class="va">value</span> <span class="op">+</span> <span class="va">fit0</span><span class="op">$</span><span class="va">value</span><span class="op">)</span></span>
+<span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Chisquare.html">pchisq</a></span><span class="op">(</span><span class="va">LRT</span>, df <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.06770992</code></pre>
+</div>
+</div>
+<p>So there is a significantly negative slope. Of course, we can make that inference also by looking at the confidence intervals around that estimate:</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-30_ae54a12f95f99fcbe08b955c74efe9c0">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/optim.html">optim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>beta0 <span class="op">=</span> <span class="fl">0</span>, beta1 <span class="op">=</span> <span class="fl">0</span>, sigma <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, <span class="va">LL1</span>, X <span class="op">=</span> <span class="va">X</span>, Y <span class="op">=</span> <span class="va">Y</span>, hessian <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">se</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/solve.html">solve</a></span><span class="op">(</span><span class="va">fit1</span><span class="op">$</span><span class="va">hessian</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>hat <span class="op">=</span> <span class="va">fit1</span><span class="op">$</span><span class="va">par</span>, <span class="va">se</span>, </span>
+<span>      CI.low <span class="op">=</span> <span class="va">fit1</span><span class="op">$</span><span class="va">par</span>  <span class="op">-</span> <span class="fl">1.96</span><span class="op">*</span><span class="va">se</span>, </span>
+<span>      CI.high <span class="op">=</span> <span class="va">fit1</span><span class="op">$</span><span class="va">par</span>  <span class="op">+</span> <span class="fl">1.96</span><span class="op">*</span><span class="va">se</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             hat        se     CI.low    CI.high
+beta0  1.0165368 0.2610965  0.5047878  1.5282859
+beta1 -0.8858764 0.2486389 -1.3732086 -0.3985443
+sigma  1.1472530 0.1814175  0.7916746  1.5028314</code></pre>
+</div>
+</div>
+<p>The slope parameter’s confidence intervals are well below 0. Note that the true values I used were <span class="math inline">\(\beta_0 = 1, \beta_1 = -0.8, \sigma = 1\)</span>, so rather excellent estimates. It’s always fun to compare these with the R function that does this the way you’d ordinarily do this:</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-31_6aa5b3b167455e413223c3646be20876">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Y</span><span class="op">~</span><span class="va">X</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">coef</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              Estimate Std. Error   t value    Pr(&gt;|t|)
+(Intercept)  1.0165030  0.2751980  3.693715 0.001661759
+X           -0.8858727  0.2620676 -3.380321 0.003333638</code></pre>
+</div>
+</div>
+<p>The estimates are <strong>extremely similar</strong>! But isn’t it somehow more satisfying to have written the likelihood function oneself? Like eating a home-baked cake over a store-bought cake.</p>
+</section></section><section id="information-criteria" class="level3" data-number="8.3.2"><h3 data-number="8.3.2" class="anchored" data-anchor-id="information-criteria">
+<span class="header-section-number">8.3.2</span> Information Criteria</h3>
+<p>If models are not nested (most interesting sets of models aren’t) we can’t use a likelihood ratio test. Instead, we use the very very widely applied Akaike Information Criterion (AIC), which is given by a very simple formula of the likelihood:</p>
+<p><span class="math display">\[ AIC =  - 2 \log(\cal L) + 2 k\]</span></p>
+<p>where <span class="math inline">\(k\)</span> is the number of parameters you estimated. As a rule of thumb, the <em>lowest</em> AIC is best, and models that have a difference within 2 AIC are considered … <em>preferred</em>. Or, even, <em>best</em>. Not exactly “significant”, but there is no real test anymore, just a broad comparison.</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-32_d7446995f24f6d20571395d854660652">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>AIC0  <span class="op">=</span> <span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="va">fit0</span><span class="op">$</span><span class="va">value</span> <span class="op">+</span> <span class="fl">2</span><span class="op">*</span><span class="fl">2</span><span class="op">)</span>,</span>
 <span>  AIC1  <span class="op">=</span> <span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="va">fit1</span><span class="op">$</span><span class="va">value</span> <span class="op">+</span> <span class="fl">2</span><span class="op">*</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    AIC0     AIC1 
-78.92724 67.53940 </code></pre>
+61.26318 74.24919 </code></pre>
 </div>
 </div>
-<p>Or … Bayesian Information Criterion (BIC) <span class="math display">\[ BIC =  - 2 \log(\cal L) + k \log(n) \]</span></p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-30_8ac06bf2758d2819892dcaaa479b86b4">
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>BIC0  <span class="op">=</span> <span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="va">fit0</span><span class="op">$</span><span class="va">value</span> <span class="op">+</span> <span class="fl">2</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<p>Alternatively, the Bayesian Information Criterion (BIC) <span class="math display">\[ BIC =  - 2 \log(\cal L) + k \log(n) \]</span></p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-33_2e1e41216637338065e415eb526a32c3">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>BIC0  <span class="op">=</span> <span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="va">fit0</span><span class="op">$</span><span class="va">value</span> <span class="op">+</span> <span class="fl">2</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  BIC1  <span class="op">=</span> <span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="va">fit1</span><span class="op">$</span><span class="va">value</span> <span class="op">+</span> <span class="fl">3</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    BIC0     BIC1 
-82.91017 73.51379 </code></pre>
+65.24611 80.22359 </code></pre>
 </div>
 </div>
 <p><strong>Which? Why?</strong> - a complicated debate, different underlying assumptions But generally - if you want to be more parsimonious (i.e.&nbsp;protect from overfitting) BIC is a better bet.</p>
-</section><section id="in-summary" class="level3" data-number="8.5.3"><h3 data-number="8.5.3" class="anchored" data-anchor-id="in-summary">
-<span class="header-section-number">8.5.3</span> In summary</h3>
+<blockquote class="blockquote">
+<h3 id="in-summary" data-number="8.3.3" class="anchored">
+<span class="header-section-number">8.3.3</span> In summary</h3>
 <p>If you have <strong>data</strong> and you can write a <strong>probability model</strong> in terms of <strong>parameters</strong>, no matter how strange or arbitrary seeming, there’s a good chance you can 1. <strong>estimate those parameters</strong>, 2. <strong>compare competing models</strong>, and 3. obtain <strong>confidence intervals</strong>. Amazing!</p>
-</section></section><section id="applying-likelihoods-to-movement-data" class="level2" data-number="8.6"><h2 data-number="8.6" class="anchored" data-anchor-id="applying-likelihoods-to-movement-data">
-<span class="header-section-number">8.6</span> Applying likelihoods to movement data</h2>
+</blockquote>
+</section></section><section id="applying-likelihoods-to-the-correlated-random-walk" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="applying-likelihoods-to-the-correlated-random-walk">
+<span class="header-section-number">8.4</span> Applying likelihoods to the Correlated Random Walk</h2>
 <p>We have seen that movement data often has:</p>
 <ol type="1">
 <li>Skewed, Positive, <strong>step Length</strong> Distribution</li>
@@ -757,38 +841,33 @@ $hessian
 <center>
 <img src="./images/likelihoods/CauchyWeibull.png" style="width: 600px;">
 </center>
-<p>This combination is known as the <strong>Correlated Random Walk (CRW)</strong> model, probably the most commonly used basic movement model in ecology.</p>
-<center>
-<img src="./images/likelihoods/Kareiva.png" style="width: 400px;"><img src="./images/likelihoods/Patlak.png" style="width: 400px;">
-</center>
-<section id="correlated-random-walk" class="level3" data-number="8.6.1"><h3 data-number="8.6.1" class="anchored" data-anchor-id="correlated-random-walk">
-<span class="header-section-number">8.6.1</span> Correlated Random Walk</h3>
-<p>Typical step-length model - the <a href="http://en.wikipedia.org/wiki/Weibull_distribution">Weibull distribution</a>: <span class="math display">\[f(x;\alpha, \beta) = \frac{\alpha}{\beta}\left(\frac{x}{\beta}\right)^{\alpha-1}e^{-(x/\beta)^{k}}\]</span> <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are the <em>shape</em> and <em>scale</em> parameter, respectively.</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-31_714de7f2d453afdc3981ec5b369196cf">
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Weibull.html">dweibull</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">6</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1.2</span><span class="op">)</span>, ylab<span class="op">=</span><span class="st">"density"</span>, xlab<span class="op">=</span><span class="st">""</span>, col<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<p>This combination is known as the <strong>Correlated Random Walk (CRW)</strong> model, probably the most commonly used basic movement model in ecology (<span class="citation" data-cites="Kareiva1983">Kareiva and Shigesada (<a href="#ref-Kareiva1983" role="doc-biblioref">1983</a>)</span> coined the term, but <span class="citation" data-cites="Patlak1953">Patlak (<a href="#ref-Patlak1953" role="doc-biblioref">1953</a>)</span> really analyzed the heck out of it in a largely forgotten work decades earlier).</p>
+<p>Typical step-length model - the <a href="http://en.wikipedia.org/wiki/Weibull_distribution">Weibull distribution</a>: <span class="math display">\[f(x;\alpha, \beta) = \frac{\alpha}{\beta}\left(\frac{x}{\beta}\right)^{\alpha-1}e^{-(x/\beta)^{k}}\]</span> <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are the <em>shape</em> and <em>scale</em> parameter, respectively. In R, it’s given by the <code><a href="https://rdrr.io/r/stats/Weibull.html">dweibull()</a></code> function.</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-34_ce3145e0a1916274b8bb5fff4c9c56da">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Weibull.html">dweibull</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">6</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1.2</span><span class="op">)</span>, ylab<span class="op">=</span><span class="st">"density"</span>, xlab<span class="op">=</span><span class="st">""</span>, col<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Weibull.html">dweibull</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, add<span class="op">=</span><span class="cn">TRUE</span>, col<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Weibull.html">dweibull</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">6</span>, <span class="fl">2</span><span class="op">)</span>, add<span class="op">=</span><span class="cn">TRUE</span>, col<span class="op">=</span><span class="fl">4</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, col<span class="op">=</span><span class="fl">2</span><span class="op">:</span><span class="fl">4</span>, lwd<span class="op">=</span><span class="fl">2</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">6</span><span class="op">)</span>, title<span class="op">=</span><span class="st">"Shape parameter"</span>, bty<span class="op">=</span><span class="st">"n"</span>, cex<span class="op">=</span><span class="fl">1.5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="likelihoods_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="600"></p>
+<p><img src="likelihoods_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="600"></p>
 </div>
 </div>
-<p>Typical turning angle model - <a href="http://en.wikipedia.org/wiki/Wrapped_Cauchy_distribution">wrapped Cauchy distribution</a>: <span class="math display">\[f(\theta;\mu,\kappa)=\frac{1}{2\pi}\,\,\frac{\sinh\kappa}{\cosh\kappa-\cos(\theta-\mu)}\]</span> <span class="math inline">\(\mu\)</span> is the mean angle (usually 0) and <span class="math inline">\(\kappa\)</span> is clustering parameter- equal to <span class="math inline">\(E(cos(\theta))\)</span>.</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-32_169ce729fdcdcc07a96b401686e94e01">
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va">CircStats</span><span class="op">)</span> <span class="co"># NOT in base!</span></span>
+<p>A common turning angle model - <a href="http://en.wikipedia.org/wiki/Wrapped_Cauchy_distribution">wrapped Cauchy distribution</a>: <span class="math display">\[f(\theta|\mu,\kappa)=\frac{1}{2\pi}\,\,\frac{\sinh\kappa}{\cosh\kappa-\cos(\theta-\mu)}\]</span> where <span class="math inline">\(\mu\)</span> is the mean angle (usually 0) and <span class="math inline">\(\kappa\)</span> is clustering parameter. This parameter, which ranges from -1 to 1, is conveniently estimated (using methods of moments) as the average cosine of the turning angles: <span class="math inline">\(E(cos(\theta))\)</span>. The wrapped Cauchy distribution is in the <code>CircStats</code> package, under <code><a href="https://rdrr.io/pkg/CircStats/man/dwrpcauchy.html">dwrpcauchy()</a></code>.</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-35_d4e35d00f55227277c0302a45239ee26">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va">CircStats</span><span class="op">)</span> <span class="co"># NOT in base!</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/CircStats/man/dwrpcauchy.html">dwrpcauchy</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="va">pi</span>,<span class="va">pi</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1.5</span><span class="op">)</span>, lwd<span class="op">=</span><span class="fl">2</span>, ylab<span class="op">=</span><span class="st">"density"</span>, xlab<span class="op">=</span><span class="st">""</span>, col<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/CircStats/man/dwrpcauchy.html">dwrpcauchy</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0</span>, <span class="fl">0.5</span><span class="op">)</span>,  add<span class="op">=</span><span class="cn">TRUE</span>, col<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/CircStats/man/dwrpcauchy.html">dwrpcauchy</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0</span>, <span class="fl">0.8</span><span class="op">)</span>,add<span class="op">=</span><span class="cn">TRUE</span>, col<span class="op">=</span><span class="fl">4</span>, n<span class="op">=</span><span class="fl">1001</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, col<span class="op">=</span><span class="fl">2</span><span class="op">:</span><span class="fl">4</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0.5</span>,<span class="fl">0.8</span><span class="op">)</span>, title<span class="op">=</span><span class="st">"Shape parameter"</span>, bty<span class="op">=</span><span class="st">"n"</span>, cex<span class="op">=</span><span class="fl">1.5</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="likelihoods_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="600"></p>
+<p><img src="likelihoods_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="600"></p>
 </div>
 </div>
-</section><section id="mle-of-weibull-parameters" class="level3" data-number="8.6.2"><h3 data-number="8.6.2" class="anchored" data-anchor-id="mle-of-weibull-parameters">
-<span class="header-section-number">8.6.2</span> MLE of Weibull parameters</h3>
+<section id="mle-of-weibull-parameters" class="level3" data-number="8.4.1"><h3 data-number="8.4.1" class="anchored" data-anchor-id="mle-of-weibull-parameters">
+<span class="header-section-number">8.4.1</span> MLE of Weibull parameters</h3>
 <p>Here’s some sample data:</p>
 <div class="cell" data-hash="likelihoods_cache/html/SRW_94e1210cbcaa37ea6573c15e017b4a48">
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/arima.sim.html">arima.sim</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">100</span>, model<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>ar<span class="op">=</span><span class="fl">.7</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/arima.sim.html">arima.sim</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">100</span>, model<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>ar<span class="op">=</span><span class="fl">.7</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">Z</span> <span class="op">&lt;-</span> <span class="va">X</span> <span class="op">+</span> <span class="fl">1i</span><span class="op">*</span><span class="va">Y</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Z</span>, type<span class="op">=</span><span class="st">"o"</span>, asp<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -796,28 +875,15 @@ $hessian
 </div>
 </div>
 <p>A function that returns the likelihood as a function of the parameters and data</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-33_7c4b0f730646a84ea789835fcd717f99">
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Weibull.likelihood</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p</span>, <span class="va">Z</span><span class="op">)</span><span class="op">{</span> </span>
-<span>  <span class="va">S</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/complex.html">Mod</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="va">Z</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Weibull.html">dweibull</a></span><span class="op">(</span><span class="va">S</span>, <span class="va">p</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="va">p</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, log<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>That function will work, but we can add a neat trick to keep tracks of the parameters we’re estimating by naming th parameters:</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-34_9612e2f8ea0d7d4604ac84bfc4a83a16">
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Weibull.likelihood</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p</span>, <span class="va">Z</span><span class="op">)</span><span class="op">{</span> </span>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-36_bfef1897bdb30ca561081f23a9ee2ae7">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Weibull.likelihood</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p</span>, <span class="va">Z</span><span class="op">)</span><span class="op">{</span> </span>
 <span>  <span class="va">S</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/complex.html">Mod</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="va">Z</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Weibull.html">dweibull</a></span><span class="op">(</span><span class="va">S</span>, <span class="va">p</span><span class="op">[</span><span class="st">"shape"</span><span class="op">]</span>, <span class="va">p</span><span class="op">[</span><span class="st">"scale"</span><span class="op">]</span>, log<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<blockquote class="blockquote">
-<p><strong>Note 1:</strong> we use <strong>log()</strong> because it is <em>much</em> easier to SUM LOGS than it is to MULTIPLY SMALL NUMBERS.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p><strong>Note 2:</strong> we return the <strong>NEGATIVE</strong> of the likelihood because the <code><a href="https://rdrr.io/r/stats/optim.html">optim()</a></code> function likes to <strong>MINIMIZE</strong> rather than <strong>MAXIMIZE</strong>.</p>
-</blockquote>
 <p>Run the optimization:</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-35_a1adc4434705d5de0ec9126a8721452a">
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">Weibull.fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/optim.html">optim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, <span class="va">Weibull.likelihood</span>, Z<span class="op">=</span><span class="va">Z</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-37_2368e72546c5aa9845d73a2759daa737">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">Weibull.fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/optim.html">optim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, <span class="va">Weibull.likelihood</span>, Z<span class="op">=</span><span class="va">Z</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$par
    shape    scale 
@@ -838,52 +904,25 @@ NULL</code></pre>
 </div>
 </div>
 <p>Visually assess the fit:</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-36_5e91409e29b82be4eab5b7884fd4ac17">
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/complex.html">Mod</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="va">Z</span><span class="op">)</span><span class="op">)</span>, freq<span class="op">=</span><span class="cn">FALSE</span>, col<span class="op">=</span><span class="st">"grey"</span>, breaks<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-38_48d338cd875c6c1f4132f1cbda28f0cf">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/complex.html">Mod</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="va">Z</span><span class="op">)</span><span class="op">)</span>, freq<span class="op">=</span><span class="cn">FALSE</span>, col<span class="op">=</span><span class="st">"grey"</span>, breaks<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Weibull.html">dweibull</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">Weibull.fit</span><span class="op">$</span><span class="va">par</span><span class="op">[</span><span class="st">"shape"</span><span class="op">]</span>, <span class="va">Weibull.fit</span><span class="op">$</span><span class="va">par</span><span class="op">[</span><span class="st">"scale"</span><span class="op">]</span><span class="op">)</span>, add<span class="op">=</span><span class="cn">TRUE</span>, col<span class="op">=</span><span class="fl">2</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="likelihoods_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="600"></p>
+<p><img src="likelihoods_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="600"></p>
 </div>
 </div>
-<p><strong>Not Bad!</strong></p>
-<p><font color="darkblue"></font></p>
-</section></section><section id="exercise-1" class="level2" data-number="8.7"><h2 data-number="8.7" class="anchored" data-anchor-id="exercise-1">
-<span class="header-section-number">8.7</span> Exercise 1</h2>
-<p>Use <strong>optim()</strong> to estimate the <span class="math inline">\(\kappa\)</span> parameter in the Wrapped-cauchy distribution for these data. Visualize the quality of the fits by comparing distribution curves to histograms. Follow the template for the Weibull, but replace the Weibull distribution with the Cauchy distribution, which is found in the <code><a href="https://rdrr.io/pkg/CircStats/man/dwrpcauchy.html">CircStats::dwrpcauchy()</a></code> function.</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-37_2128d59c794cb6ae4233d213fd23aa95">
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Weibull.likelihood</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p</span>, <span class="va">Z</span><span class="op">)</span><span class="op">{</span> </span>
-<span>  <span class="va">S</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/complex.html">Mod</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="va">Z</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Weibull.html">dweibull</a></span><span class="op">(</span><span class="va">S</span>, <span class="va">p</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="va">p</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, log<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span><span class="op">(</span><span class="va">Weibull.fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/optim.html">optim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, <span class="va">Weibull.likelihood</span>, Z<span class="op">=</span><span class="va">Z</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p></p>
-<p><font color="darkblue"></font></p>
-<section id="exercise-2" class="level3" data-number="8.7.1"><h3 data-number="8.7.1" class="anchored" data-anchor-id="exercise-2">
-<span class="header-section-number">8.7.1</span> Exercise 2</h3>
-<p>Following the template below:</p>
-<ol type="1">
-<li><p>Estimate the Weibull step-length and wrapped Cauchy turning angle parameters for your movement data of choice.</p></li>
-<li><p>Visualize the quality of the fits by comparing distribution curves to histograms.</p></li>
-<li><p>Compute standard errors around those estimates.</p></li>
-</ol>
-<p><font color="darkred"> For discussion: <em>What do YOU think about the CRW model?</em> </font> </p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-38_d9d81d12950d3174f9c0515052e0b987">
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Weibull.fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/optim.html">optim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, <span class="va">Weibull.likelihood</span>, Z<span class="op">=</span><span class="va">Z</span>, hessian<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="va">Sigma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html">solve</a></span><span class="op">(</span><span class="va">Weibull.fit</span><span class="op">$</span><span class="va">hessian</span><span class="op">)</span></span>
-<span><span class="va">se</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">Sigma</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>hat <span class="op">=</span> <span class="va">Weibull.fit</span><span class="op">$</span><span class="va">par</span>, CI.low <span class="op">=</span> <span class="va">Weibull.fit</span><span class="op">$</span><span class="va">par</span>  <span class="op">-</span> <span class="fl">1.96</span><span class="op">*</span><span class="va">se</span>, CI.high <span class="op">=</span> <span class="va">Weibull.fit</span><span class="op">$</span><span class="va">par</span>  <span class="op">+</span> <span class="fl">1.96</span><span class="op">*</span><span class="va">se</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section></section><section id="a-step-length---turning-angle-dependency-model" class="level2" data-number="8.8"><h2 data-number="8.8" class="anchored" data-anchor-id="a-step-length---turning-angle-dependency-model">
-<span class="header-section-number">8.8</span> A step length - turning angle dependency model</h2>
-<p>One model that would capture that would make the <span class="math inline">\(\kappa\)</span> coefficient a function of step length, e.g.: <span class="math display">\[ \rho_i = \rho_0 + (1-\rho_0) (1 - \exp(\alpha S_i))\]</span></p>
-<div class="cell" data-hash="likelihoods_cache/html/FunkyModel_8002fd678d0d7b4436205159028b04ac">
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fl">.5</span></span>
-<span><span class="va">rho0</span> <span class="op">&lt;-</span> <span class="fl">0.2</span></span>
-<span><span class="va">f</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">rho0</span><span class="op">=</span><span class="fl">0</span>, <span class="va">alpha</span><span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="va">rho0</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">rho0</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="va">alpha</span><span class="op">*</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<p>Not Bad! Using this technique to estimate <span class="math inline">\(\widehat{\kappa}\)</span> is left as an exercise.</p>
+</section></section><section id="now-for-something-really-fancy" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="now-for-something-really-fancy">
+<span class="header-section-number">8.5</span> Now for something really fancy</h2>
+<p>Namely, a step length - turning angle dependency model! It is an unwritten assumption in the CRW literature that step lengths and turning angles are (statistically) independent. In fact, it seems quite plausible that longer step lengths would be associated with more directed movements. I have never seen anyone explicitly test that hypothesis, except in the (very common) context of separating movements into multiple states.</p>
+<p>So, let use write down a model that has the property we hypothesize to be true for many animals - i.e.&nbsp;longer step-lengths are more directed. One model that would capture that would make the <span class="math inline">\(\kappa\)</span> coefficient a function of step length, e.g.: <span class="math display">\[ \kappa_i = \kappa_0 + (1-\kappa_0) (1 - \exp(\alpha S_i))\]</span></p>
+<div class="cell" data-hash="likelihoods_cache/html/FunkyModel_76625482d4a237aeab850f75b502e528">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fl">.5</span></span>
+<span><span class="va">kappa0</span> <span class="op">&lt;-</span> <span class="fl">0.2</span></span>
+<span><span class="va">f</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">kappa0</span><span class="op">=</span><span class="fl">0</span>, <span class="va">alpha</span><span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="va">kappa0</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">kappa0</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="va">alpha</span><span class="op">*</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">alphas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0.5</span>,<span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,type<span class="op">=</span><span class="st">"n"</span>,xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">3</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span>, ylab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">rho</span><span class="op">)</span>, xlab <span class="op">=</span> <span class="st">"step length"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,type<span class="op">=</span><span class="st">"n"</span>,xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">3</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span>, ylab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">kappa</span><span class="op">)</span>, xlab <span class="op">=</span> <span class="st">"step length"</span><span class="op">)</span></span>
 <span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">alphas</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu">f</span><span class="op">(</span><span class="va">x</span>, alpha <span class="op">=</span> <span class="va">alphas</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span>, add<span class="op">=</span><span class="cn">TRUE</span>, col<span class="op">=</span><span class="va">i</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"right"</span>, col<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, legend <span class="op">=</span> <span class="va">alphas</span>, lty<span class="op">=</span><span class="fl">1</span>, title<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">alpha</span><span class="op">)</span>, bty<span class="op">=</span><span class="st">"n"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -891,14 +930,15 @@ NULL</code></pre>
 <p><img src="likelihoods_files/figure-html/FunkyModel-1.png" class="img-fluid" width="800"></p>
 </div>
 </div>
-<p>Here, the <span class="math inline">\(\rho_0\)</span> is a base line clustering, and <span class="math inline">\(\alpha\)</span> is a strength of the dependence on step lengths; these are similar to intercepts and slopes.</p>
+<p>Here, the <span class="math inline">\(\kappa_0\)</span> is a base line clustering, and <span class="math inline">\(\alpha\)</span> is a strength of the dependence on step lengths; these are similar to intercepts and slopes.</p>
 <p>Let’s see how this model looks, by simulating the process and visualizing:</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-39_578a9ba2180208391807f07d48388bef">
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># initailize parameter values</span></span>
-<span><span class="va">rho0</span> <span class="op">&lt;-</span> <span class="fl">0.2</span>; <span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-39_88c0e72e483b97429e42f99bab1abfe6">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># initailize parameter values</span></span>
+<span><span class="va">kappa0</span> <span class="op">&lt;-</span> <span class="fl">0.2</span>; <span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span><span class="va">S</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span></span>
-<span><span class="va">f</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">rho0</span>, <span class="va">alpha</span><span class="op">)</span> <span class="va">rho0</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">rho0</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="va">alpha</span><span class="op">*</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">theta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/CircStats/man/rwrpcauchy.html">rwrpcauchy</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">0</span>, rho<span class="op">=</span><span class="fu">f</span><span class="op">(</span><span class="va">S</span>, <span class="va">rho0</span>, <span class="va">alpha</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">funkykappa</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">kappa0</span>, <span class="va">alpha</span><span class="op">)</span> <span class="va">kappa0</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">kappa0</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="va">alpha</span><span class="op">*</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">theta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/CircStats/man/rwrpcauchy.html">rwrpcauchy</a></span><span class="op">(</span><span class="fl">1000</span>, location <span class="op">=</span> <span class="fl">0</span>, rho <span class="op">=</span> <span class="fu">funkykappa</span><span class="op">(</span><span class="va">S</span>, <span class="va">kappa0</span>, <span class="va">alpha</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># constrain theta to -pi to pi</span></span>
 <span><span class="va">theta</span><span class="op">[</span><span class="va">theta</span> <span class="op">&gt;</span> <span class="va">pi</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">theta</span><span class="op">[</span><span class="va">theta</span> <span class="op">&gt;</span> <span class="va">pi</span><span class="op">]</span> <span class="op">-</span> <span class="fl">2</span><span class="op">*</span><span class="va">pi</span></span>
@@ -916,24 +956,25 @@ NULL</code></pre>
 </div>
 </div>
 <p>This movement looks similar to the other track, but the longer steps are more linear. The third plot illustrated the relationship between smaller turning angles and longer step-lengths, though it is quite noisy.</p>
-</section><section id="estimating-the-parameters" class="level2" data-number="8.9"><h2 data-number="8.9" class="anchored" data-anchor-id="estimating-the-parameters">
-<span class="header-section-number">8.9</span> Estimating the parameters</h2>
+<section id="estimating-the-parameters" class="level3" data-number="8.5.1"><h3 data-number="8.5.1" class="anchored" data-anchor-id="estimating-the-parameters">
+<span class="header-section-number">8.5.1</span> Estimating the parameters</h3>
 <p>Can we pick out the relationship? Estimate those parameters?</p>
-<p>We can write down the (negative log-) likelihood function of these data given the model: <span class="math display">\[{\cal l} = \log({\cal L}(\rho_0, \alpha | {\bf S}, {\bf \theta})) = \sum_{i=1}^n \log(f(S_i, \theta_i | \rho_0, \alpha) \]</span></p>
+<p>The negative log-likelihood function of this model given the data is:</p>
+<p><span class="math display">\[{\cal l} = \log({\cal L}(\kappa_0, \alpha | {\bf S}, {\bf \theta})) = \sum_{i=1}^n \log(f(S_i, \theta_i | \kappa_0, \alpha) \]</span></p>
 <p>Encode in R:</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-40_4523391879bd058551867d2ab9bf13d2">
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">FunkyModel.Likelihood</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p</span>, <span class="va">S</span>, <span class="va">theta</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">rho</span> <span class="op">&lt;-</span> <span class="fu">f</span><span class="op">(</span><span class="va">S</span>, <span class="va">p</span><span class="op">[</span><span class="st">"rho0"</span><span class="op">]</span>, <span class="va">p</span><span class="op">[</span><span class="st">"alpha"</span><span class="op">]</span><span class="op">)</span></span>
-<span>  <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/CircStats/man/dwrpcauchy.html">dwrpcauchy</a></span><span class="op">(</span><span class="va">theta</span>, <span class="fl">0</span>, <span class="va">rho</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-40_2c161d723f8f47baf1d17508e464755b">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">FunkyModel.Likelihood</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p</span>, <span class="va">S</span>, <span class="va">theta</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">kappa</span> <span class="op">&lt;-</span> <span class="fu">f</span><span class="op">(</span><span class="va">S</span>, <span class="va">p</span><span class="op">[</span><span class="st">"kappa0"</span><span class="op">]</span>, <span class="va">p</span><span class="op">[</span><span class="st">"alpha"</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/CircStats/man/dwrpcauchy.html">dwrpcauchy</a></span><span class="op">(</span><span class="va">theta</span>, <span class="fl">0</span>, <span class="va">kappa</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>and run the <code><a href="https://rdrr.io/r/stats/optim.html">optim()</a></code> function. Remember: the <code><a href="https://rdrr.io/r/stats/optim.html">optim()</a></code> function takes as the first argument a <strong>vector</strong> of initial guesses for the parameter values (I arbitrarily entered 0 and 0), the function that needs to be minimized (in this case the negative log likelihood) and any data that actually enters the log-likelihood function.</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-41_bd08549f4bd255c43723ecd1283a17bf">
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">funkymodel.fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/optim.html">optim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>rho0 <span class="op">=</span> <span class="fl">0</span>, alpha <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, <span class="va">FunkyModel.Likelihood</span>, </span>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-41_ec672d7382efd80134d5a8e8c9c4623c">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">funkymodel.fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/optim.html">optim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>kappa0 <span class="op">=</span> <span class="fl">0</span>, alpha <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, <span class="va">FunkyModel.Likelihood</span>, </span>
 <span>                         S <span class="op">=</span> <span class="va">S</span>, theta <span class="op">=</span> <span class="va">theta</span>, hessian <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$par
-     rho0     alpha 
+   kappa0     alpha 
 0.1948638 0.9803800 
 
 $value
@@ -950,34 +991,32 @@ $message
 NULL
 
 $hessian
-           rho0     alpha
-rho0  1319.3033  816.3407
-alpha  816.3407 1171.1951</code></pre>
+          kappa0     alpha
+kappa0 1319.3033  816.3407
+alpha   816.3407 1171.1951</code></pre>
 </div>
 </div>
-<p>The original parameter values were 0.2 and 1 … so the maximum likelihood estimates are pretty good! To extract the estimates from an <code><a href="https://rdrr.io/r/stats/optim.html">optim()</a></code> run, you just return the <code>par</code> element:</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-42_39b07001f576dc1345f747e66bacc01e">
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">funkymodel.fit</span><span class="op">$</span><span class="va">par</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The original parameter values were 0.2 and 1 … so the maximum likelihood estimates are pretty good! Parameters and standard errors:</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-42_9ef49c0910c3ecaef3894dce35e99aa2">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">funkymodel.fit</span><span class="op">$</span><span class="va">par</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     rho0     alpha 
 0.1948638 0.9803800 </code></pre>
 </div>
-</div>
-<p>Standard errors:</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-43_38e156e9b096d30330007a5617109d5d">
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/solve.html">solve</a></span><span class="op">(</span><span class="va">funkymodel.fit</span><span class="op">$</span><span class="va">hessian</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/solve.html">solve</a></span><span class="op">(</span><span class="va">funkymodel.fit</span><span class="op">$</span><span class="va">hessian</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      rho0      alpha 
 0.03650750 0.03874715 </code></pre>
 </div>
 </div>
+<p>Pretty precise!</p>
 <p>Here’s a tidy function that performs the complete fit:</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-44_bb0fc4c7566b6270b8d000f5c33ab6af">
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">estimateFunkyModel</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">steplengths</span>, <span class="va">turningangles</span>, <span class="va">p0</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>rho0 <span class="op">=</span> <span class="fl">0</span>, alpha <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">f</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">rho0</span><span class="op">=</span><span class="fl">0</span>, <span class="va">alpha</span><span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="va">rho0</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">rho0</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="va">alpha</span><span class="op">*</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-43_02518fd47c462c33e0884421fc69eb02">
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">estimateFunkyModel</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">steplengths</span>, <span class="va">turningangles</span>, <span class="va">p0</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>kappa0 <span class="op">=</span> <span class="fl">0</span>, alpha <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">funkykappa</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">kappa0</span>, <span class="va">alpha</span><span class="op">)</span> <span class="va">kappa0</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">kappa0</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="va">alpha</span><span class="op">*</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="va">FunkyModel.Likelihood</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p</span>, <span class="va">S</span>, <span class="va">theta</span><span class="op">)</span><span class="op">{</span></span>
-<span>    <span class="va">rho</span> <span class="op">&lt;-</span> <span class="fu">f</span><span class="op">(</span><span class="va">S</span>, <span class="va">p</span><span class="op">[</span><span class="st">"rho0"</span><span class="op">]</span>, <span class="va">p</span><span class="op">[</span><span class="st">"alpha"</span><span class="op">]</span><span class="op">)</span></span>
-<span>    <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/CircStats/man/dwrpcauchy.html">dwrpcauchy</a></span><span class="op">(</span><span class="va">theta</span>, <span class="fl">0</span>, <span class="va">rho</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="va">kappa</span> <span class="op">&lt;-</span> <span class="fu">funkykappa</span><span class="op">(</span><span class="va">S</span>, <span class="va">p</span><span class="op">[</span><span class="st">"kappa0"</span><span class="op">]</span>, <span class="va">p</span><span class="op">[</span><span class="st">"alpha"</span><span class="op">]</span><span class="op">)</span></span>
+<span>    <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/CircStats/man/dwrpcauchy.html">dwrpcauchy</a></span><span class="op">(</span><span class="va">theta</span>, <span class="fl">0</span>, <span class="va">kappa</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
 <span>  <span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/optim.html">optim</a></span><span class="op">(</span><span class="va">p0</span>, <span class="va">FunkyModel.Likelihood</span>, </span>
 <span>               S <span class="op">=</span> <span class="va">steplengths</span>, theta <span class="op">=</span> <span class="va">turningangles</span>, hessian <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -986,8 +1025,8 @@ alpha  816.3407 1171.1951</code></pre>
 <span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s test it!</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-45_9f262ef4943adcece6cf67f65b0bb666">
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">estimateFunkyModel</span><span class="op">(</span>steplengths <span class="op">=</span> <span class="va">S</span>, turningangles <span class="op">=</span> <span class="va">theta</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-44_78bf53133b203aa18fcf4780e33f05cf">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">estimateFunkyModel</span><span class="op">(</span>steplengths <span class="op">=</span> <span class="va">S</span>, turningangles <span class="op">=</span> <span class="va">theta</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       estimate    CI.low   CI.high
 rho0  0.1948638 0.1218488 0.2678788
@@ -995,36 +1034,36 @@ alpha 0.9803800 0.9028857 1.0578743</code></pre>
 </div>
 </div>
 <p>Those confidence intervals are really tight, and very significantly different from 0. This model clearly lets us know that that step lengths and turning angles are NOT independent.</p>
-</section><section id="testing-on-a-truly-random-walk" class="level2" data-number="8.10"><h2 data-number="8.10" class="anchored" data-anchor-id="testing-on-a-truly-random-walk">
-<span class="header-section-number">8.10</span> Testing on a truly random walk</h2>
-<p>Let’s test this against a CRW where there is no relationship (<span class="math inline">\(\rho_0 = 0.5, \alpha = 0\)</span>):</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-46_2d0a7eeb755abf43b3c1c0bf34b77d35">
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">S</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span></span>
-<span><span class="va">theta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/CircStats/man/rwrpcauchy.html">rwrpcauchy</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">0</span>, rho<span class="op">=</span><span class="fu">f</span><span class="op">(</span><span class="va">S</span>, <span class="fl">.5</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+</section><section id="testing-on-a-truly-random-walk" class="level3" data-number="8.5.2"><h3 data-number="8.5.2" class="anchored" data-anchor-id="testing-on-a-truly-random-walk">
+<span class="header-section-number">8.5.2</span> Testing on a truly random walk</h3>
+<p>Let’s test this against a CRW where there is no relationship (<span class="math inline">\(\kappa_0 = 0.5, \alpha = 0\)</span>):</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-45_07cd9741277a45154dccb4b7390b9393">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">S</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">rexp</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span></span>
+<span><span class="va">theta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/CircStats/man/rwrpcauchy.html">rwrpcauchy</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">0</span>, rho<span class="op">=</span><span class="fu">funkykappa</span><span class="op">(</span><span class="va">S</span>, <span class="fl">.5</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">theta</span><span class="op">[</span><span class="va">theta</span> <span class="op">&gt;</span> <span class="va">pi</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">theta</span><span class="op">[</span><span class="va">theta</span> <span class="op">&gt;</span> <span class="va">pi</span><span class="op">]</span> <span class="op">-</span> <span class="fl">2</span><span class="op">*</span><span class="va">pi</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/CircStats/man/rose.diag.html">rose.diag</a></span><span class="op">(</span><span class="va">theta</span>, bins<span class="op">=</span><span class="fl">24</span><span class="op">)</span></span>
 <span><span class="va">phi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="va">theta</span><span class="op">)</span>; <span class="va">dZ</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/complex.html">complex</a></span><span class="op">(</span>arg <span class="op">=</span> <span class="va">phi</span>, mod <span class="op">=</span> <span class="va">S</span><span class="op">)</span>; <span class="va">Z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="va">dZ</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Z</span>, type<span class="op">=</span><span class="st">"o"</span>, asp<span class="op">=</span><span class="fl">1</span>, pch<span class="op">=</span><span class="fl">16</span>, cex<span class="op">=</span><span class="fl">0.7</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">.2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">theta</span>, <span class="va">S</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="likelihoods_files/figure-html/unnamed-chunk-46-1.png" class="img-fluid" width="1000"></p>
+<p><img src="likelihoods_files/figure-html/unnamed-chunk-45-1.png" class="img-fluid" width="1000"></p>
 </div>
 </div>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-47_7f0d42a539ec43ea2d3f2372370e0d59">
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">estimateFunkyModel</span><span class="op">(</span>steplengths <span class="op">=</span> <span class="va">S</span>, turningangles <span class="op">=</span> <span class="va">theta</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-46_f54f6fc1081916a3258eabe50378c626">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">estimateFunkyModel</span><span class="op">(</span>steplengths <span class="op">=</span> <span class="va">S</span>, turningangles <span class="op">=</span> <span class="va">theta</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          estimate      CI.low    CI.high
 rho0   0.493446206  0.44719489 0.53969752
 alpha -0.009932846 -0.06916545 0.04929976</code></pre>
 </div>
 </div>
-<p>The <span class="math inline">\(\rho\)</span> estimate is excellent (0.48 [95% C.I. - 0.43, 0.53]), and the <span class="math inline">\(\alpha\)</span> estimate is NOT significantly different from zero. So we confirm that the turning angles and step lengths are independent.</p>
-</section><section id="testing-on-some-data" class="level2" data-number="8.11"><h2 data-number="8.11" class="anchored" data-anchor-id="testing-on-some-data">
-<span class="header-section-number">8.11</span> Testing on some data!</h2>
+<p>The <span class="math inline">\(\kappa\)</span> estimate is excellent (0.48 [95% C.I. - 0.43, 0.53]), and the <span class="math inline">\(\alpha\)</span> estimate is NOT significantly different from zero. So we confirm that the turning angles and step lengths are independent.</p>
+</section><section id="testing-on-some-data" class="level3" data-number="8.5.3"><h3 data-number="8.5.3" class="anchored" data-anchor-id="testing-on-some-data">
+<span class="header-section-number">8.5.3</span> Testing on some data!</h3>
 <p>There is an R package with a bunch of useful tools for analysis of animal movement and habitat use called <code>adehabitatLT</code>. This package contains some data on movement of an African buffalo (<em>Syncerus caffer</em>) in national park in Niger.</p>
-<p>Tracks and distributions of step lengths and turning angles are illsutrated below.</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-48_a372160d49593ca0b254371a9fc12ae0">
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jmsigner/amt">amt</a></span><span class="op">)</span></span>
+<p>Tracks and distributions of step lengths and turning angles are illustrated below.</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-47_ff04d5067be0662394f0c9d0d7f80441">
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jmsigner/amt">amt</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">amt_fisher</span><span class="op">)</span></span>
 <span><span class="va">Leroy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">amt_fisher</span>, <span class="va">name</span> <span class="op">==</span> <span class="st">"Leroy"</span><span class="op">)</span></span>
 <span><span class="va">Leroy</span> <span class="op">&lt;-</span> <span class="va">Leroy</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Z <span class="op">=</span> <span class="va">x_</span> <span class="op">+</span> <span class="fl">1i</span> <span class="op">*</span> <span class="va">y_</span>, </span>
@@ -1035,8 +1074,8 @@ alpha -0.009932846 -0.06916545 0.04929976</code></pre>
 <span>  <span class="va">na.omit</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">dT</span> <span class="op">&lt;</span> <span class="fl">60</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Extracting the relevant variables from the movement data and plotting some relationships:</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-49_b4be17921d53bee892dd94c9b1313e14">
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Leroy</span><span class="op">$</span><span class="va">Z</span>, xlab<span class="op">=</span><span class="st">""</span>, ylab<span class="op">=</span><span class="st">""</span>, asp <span class="op">=</span> <span class="fl">1</span>, type <span class="op">=</span> <span class="st">"o"</span>, cex <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span></span>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-48_4e19e40e2d118de28148bbca647e99dd">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Leroy</span><span class="op">$</span><span class="va">Z</span>, xlab<span class="op">=</span><span class="st">""</span>, ylab<span class="op">=</span><span class="st">""</span>, asp <span class="op">=</span> <span class="fl">1</span>, type <span class="op">=</span> <span class="st">"o"</span>, cex <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># extract step lengths (in kilometer) and turning angles</span></span>
 <span><span class="va">S</span> <span class="op">&lt;-</span> <span class="va">Leroy</span><span class="op">$</span><span class="va">steplengths</span></span>
@@ -1046,23 +1085,33 @@ alpha -0.009932846 -0.06916545 0.04929976</code></pre>
 <span><span class="fu"><a href="https://rdrr.io/pkg/CircStats/man/rose.diag.html">rose.diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">theta</span><span class="op">)</span>, bins<span class="op">=</span><span class="fl">16</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">theta</span>, <span class="va">S</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">.2</span><span class="op">)</span>, pch<span class="op">=</span><span class="fl">16</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="likelihoods_files/figure-html/unnamed-chunk-49-1.png" class="img-fluid" width="600"></p>
+<p><img src="likelihoods_files/figure-html/unnamed-chunk-48-1.png" class="img-fluid" width="800"></p>
 </div>
 </div>
-<p>It is hard to see if there is a relationship between turning angles and step lengths. But we can fit our model with our likelihood!</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-50_0506aa7b70332176dec7047306dac1c8">
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">estimateFunkyModel</span><span class="op">(</span>steplengths <span class="op">=</span> <span class="va">Leroy</span><span class="op">$</span><span class="va">steplengths</span><span class="op">/</span><span class="fl">1e2</span>, </span>
+<p>It is hard to see visually if there is a relationship between turning angles and step lengths. But it is easy if we can fit our model with our likelihood!</p>
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-49_1ecdc399466ecf63f86add937e2ddc3b">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">estimateFunkyModel</span><span class="op">(</span>steplengths <span class="op">=</span> <span class="va">Leroy</span><span class="op">$</span><span class="va">steplengths</span><span class="op">/</span><span class="fl">1e2</span>, </span>
 <span>                   turningangles <span class="op">=</span> <span class="va">Leroy</span><span class="op">$</span><span class="va">turningangles</span>, </span>
-<span>                   p0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>rho0 <span class="op">=</span> <span class="fl">0</span>, alpha <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>                   p0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>kappa0 <span class="op">=</span> <span class="fl">0</span>, alpha <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>        estimate     CI.low    CI.high
-rho0  -0.3393364 -0.4024082 -0.2762647
-alpha  0.1622015  0.1355044  0.1888986</code></pre>
+<pre><code>         estimate     CI.low    CI.high
+kappa0 -0.3393364 -0.4024082 -0.2762647
+alpha   0.1622015  0.1355044  0.1888986</code></pre>
 </div>
 </div>
 <p>Note how strong the relationship is: <span class="math inline">\(\alpha = 0.16\)</span>, 95% C.I. (0.135, 0.189). A <strong>very</strong> strong relationship. This is (for the record) a novel result.</p>
+</section></section><section id="references" class="level2" data-number="8.6"><h2 data-number="8.6" class="anchored" data-anchor-id="references">
+<span class="header-section-number">8.6</span> References</h2>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-Kareiva1983" class="csl-entry" role="doc-biblioentry">
+Kareiva, P. M., and N. Shigesada. 1983. <span>“Analyzing Insect Movement as a Correlated Random Walk.”</span> <em>Oecologia</em> 56: 234–38. <a href="https://doi.org/10.1007/BF00379695">https://doi.org/10.1007/BF00379695</a>.
+</div>
+<div id="ref-Patlak1953" class="csl-entry" role="doc-biblioentry">
+Patlak, C. S. 1953. <span>“A Mathematical Contribution to the Study of Orientation of Organisms.”</span> <em>Bulletin of Mathematical Biophysics</em> 15: 431–76. <a href="https://doi.org/10.1007/BF02476435">https://doi.org/10.1007/BF02476435</a>.
+</div>
+</div>
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
