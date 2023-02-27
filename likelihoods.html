@@ -109,7 +109,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./dependent_data.html" rel="next">
+<link href="./time_series.html" rel="next">
 <link href="./visualization.html" rel="prev">
 <link href="./cover.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -248,7 +248,12 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dependent_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Dependent Data</span></a>
+  <a href="./time_series.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Time Series</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./spatial_correlation.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Dependent Data II: Spatial correlations</span></a>
   </div>
 </li>
       </ul>
@@ -263,27 +268,27 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./discrete_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Discrete time movement models</span></a>
+  <a href="./discrete_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Discrete time movement models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./continuous_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Continuous time movement models</span></a>
+  <a href="./continuous_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Continuous time movement models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_ranges.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Home ranges</span></a>
+  <a href="./home_ranges.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Home ranges</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./behavioral_changes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Behavioral Changes</span></a>
+  <a href="./behavioral_changes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Behavioral Changes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./hmms.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Hidden Markov and State-Space Modeling</span></a>
+  <a href="./hmms.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Hidden Markov and State-Space Modeling</span></a>
   </div>
 </li>
       </ul>
@@ -298,12 +303,12 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./resource_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Resource Selection</span></a>
+  <a href="./resource_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Resource Selection</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./step_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Step Selection Functions</span></a>
+  <a href="./step_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Step Selection Functions</span></a>
   </div>
 </li>
       </ul>
@@ -382,7 +387,7 @@ div.csl-indent {
 <p><font color="darkblue"> <span class="math display">\[\huge {\cal L}(\Theta | {\bf X}) = \Pr({\bf X} | \Theta)\]</span> </font></p>
 <section id="why-a-chapter-on-likelihoods" class="level2 page-columns page-full" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="why-a-chapter-on-likelihoods">
 <span class="header-section-number">8.1</span> Why a chapter on Likelihoods?</h2>
-<p>The <em>likelihood function</em> is the single most important, versatile, and widely-used tool for performing <em>inference</em>. It is the natural link between <em>observations</em> (i.e.&nbsp;data) and <em>probabilistic models</em> (i.e.&nbsp;statistical models). The overwhelming majority of statistical analyses - certainly in wildlife ecology - in which models are specified and fitted and selected and hypothesis tests are performed in the service of inferential conclusions, relies on defining and computing a likelihood function and figuring out a way to maximize it. The parameters fitted using this basic strategy - the <em>maximum likelihood estimators</em> (MLE’s) have some very powerful and convenient properties. For example, the standard errors around those estimates can be computed quickly and efficiently - using almost the same process that maximized the likelihood - and that MLE’s are proven to have the smallest standard errors (i.e.&nbsp;are the <em>most precise</em>) estimators. Furthermore, likelihoods underlie rigorous hypothesis tests, e.g.&nbsp;via <em>likelihood ratio tests</em>, and even more flexible (and extremely widely used) <em>information criterion</em>-based model comparison tools, like AIC, BIC, and others. And as important as likelihoods are to <em>classical inference</em>, they are equally essential to understanding and implementing <em>Bayesian inference</em>.</p>
+<p>The <em>likelihood function</em> is the single most important, versatile, and widely-used tool for performing <em>inference</em>. It is the natural link between <em>observations</em> (i.e.&nbsp;data) and <em>probabilistic models</em> (i.e.&nbsp;statistical models). The overwhelming majority of statistical analyses - certainly in wildlife ecology - in which models are specified and fitted and selected and hypothesis tests are performed in the service of inferential conclusions, relies on defining and computing a likelihood function and figuring out a way to maximize it. The parameters fitted using this basic strategy - the <em>maximum likelihood estimators</em> (MLE’s) have some very powerful and convenient properties. For example, the standard errors around those estimates can be computed quickly and efficiently using almost the same process that maximized the likelihood. Also MLE’s are mathematically proven to have the smallest standard errors (i.e.&nbsp;are the <em>most precise</em>) of all possible estimators. Furthermore, likelihoods underlie rigorous hypothesis tests, e.g.&nbsp;via <em>likelihood ratio tests</em>, and even more flexible and extremely widely used <em>information criterion</em>-based model comparison and selection tools, like AIC, BIC, and variants. And as important as likelihoods are to <em>classical inference</em>, they are equally essential to understanding and implementing <em>Bayesian inference</em>.</p>
 <p>Despite all of these frankly astonishing properties, likelihoods are almost never taught explicitly in courses - outside of statistics departments, and even then often only in graduate school. Highly literate and skilled quantitatively minded practitioners can be hard pressed to even <em>define</em> a likelihood. While there is a bit of conceptual leap (or inversion) in understanding what a likelihood actually <em>is</em> (the equation at the top of the chapter sums it up entirely) - they are, in fact, straightforward to understand and to communicate. That, at least, is the central hypothesis of this chapter.</p>
 <div class="page-columns page-full"><p>Much of the magic of likelihoods is, perhaps, obscured by the fact that they are hidden behind the black-box of statistical tools in statistical software and the limited<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> set of models and model assumptions that you can fit with those tools. But if you can <em>write your own likelihood</em>, then you can fit models that are not nearly as straightforward as the ones in the black boxes. Given the many non-standard nuances of movement data (see chapter <a href="whyspecialstats.html"><span>Chapter&nbsp;3</span></a>), it is <em>very, very easy</em> to come up with a particular piece of inference for which you will want to <em>design</em> your own likelihood function. We provide one example at the end of this chapter.</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;In the lively, teeming, global activity of applied statistics, there is, obviously, a tremendous proliferation of models that <em>can</em> be fitted with “out-of-the-box” tools. Starting with linear models, through mixed additive generalized linear models, to hidden Markov models, to models with explicit spatial and temporal auto-correlation, and on and on. But the world (or at least the processes and data that we might want to model) is orders of magnitude more complex than all the black boxes put together.</p></li></div></div>
 <section id="a-short-definition-of-a-likelihood" class="level3" data-number="8.1.1"><h3 data-number="8.1.1" class="anchored" data-anchor-id="a-short-definition-of-a-likelihood">
@@ -701,7 +706,7 @@ sigma -0.01062988 19.99162241</code></pre>
 </div>
 </div>
 <ol start="4" type="1">
-<li>And the confidence intervals are just:</li>
+<li>And the confidence intervals are given by:</li>
 </ol>
 <div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-24_d0eccfe172f922449fd44233e820910b">
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>hat <span class="op">=</span> <span class="va">param.fit</span><span class="op">$</span><span class="va">par</span>, </span>
@@ -743,7 +748,7 @@ sigma  14.14095   5.3774  22.9045</code></pre>
 </div>
 </div>
 <p>We have two competing models: <span class="math display">\[M0: Y_i = \beta_0 + \epsilon_i\]</span> <span class="math display">\[M1: Y_i = \beta_0 + \beta_1 X_i + \epsilon_i\]</span> where <span class="math inline">\(\epsilon\)</span> are i.i.d. Gaussian residuals.</p>
-<p>We defining (negative) log-likelihood functions for this linear regression. Note that this time, we have two data objects in our likelihood: X and Y.</p>
+<p>We define the (negative) log-likelihood functions for this linear regression. Note that this time, we have two data objects in our likelihood: X and Y.</p>
 <div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-26_d6ecd16c2fae5cd596d9a987e489d960">
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">LL0</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">par</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">beta0</span>, <span class="va">sigma</span><span class="op">)</span>, <span class="va">X</span>, <span class="va">Y</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">Y</span>, mean <span class="op">=</span> <span class="va">par</span><span class="op">[</span><span class="st">'beta0'</span><span class="op">]</span>, sd <span class="op">=</span> <span class="va">par</span><span class="op">[</span><span class="st">'sigma'</span><span class="op">]</span>, log<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">)</span></span>
@@ -916,15 +921,15 @@ NULL</code></pre>
 <span class="header-section-number">8.5</span> Now for something really fancy</h2>
 <p>Namely, a step length - turning angle dependency model! It is an unwritten assumption in the CRW literature that step lengths and turning angles are (statistically) independent. In fact, it seems quite plausible that longer step lengths would be associated with more directed movements. I have never seen anyone explicitly test that hypothesis, except in the (very common) context of separating movements into multiple states.</p>
 <p>So, let use write down a model that has the property we hypothesize to be true for many animals - i.e.&nbsp;longer step-lengths are more directed. One model that would capture that would make the <span class="math inline">\(\kappa\)</span> coefficient a function of step length, e.g.: <span class="math display">\[ \kappa_i = \kappa_0 + (1-\kappa_0) (1 - \exp(\alpha S_i))\]</span></p>
-<div class="cell" data-hash="likelihoods_cache/html/FunkyModel_76625482d4a237aeab850f75b502e528">
+<div class="cell" data-hash="likelihoods_cache/html/FunkyModel_b186e5325a5aedc1042b913f3e004ca1">
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fl">.5</span></span>
 <span><span class="va">kappa0</span> <span class="op">&lt;-</span> <span class="fl">0.2</span></span>
-<span><span class="va">f</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">kappa0</span><span class="op">=</span><span class="fl">0</span>, <span class="va">alpha</span><span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="va">kappa0</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">kappa0</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="va">alpha</span><span class="op">*</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">funkykappa</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">kappa0</span><span class="op">=</span><span class="fl">0</span>, <span class="va">alpha</span><span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="va">kappa0</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">kappa0</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="va">alpha</span><span class="op">*</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">alphas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0.5</span>,<span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,type<span class="op">=</span><span class="st">"n"</span>,xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">3</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span>, ylab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">kappa</span><span class="op">)</span>, xlab <span class="op">=</span> <span class="st">"step length"</span><span class="op">)</span></span>
 <span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">alphas</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu">f</span><span class="op">(</span><span class="va">x</span>, alpha <span class="op">=</span> <span class="va">alphas</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span>, add<span class="op">=</span><span class="cn">TRUE</span>, col<span class="op">=</span><span class="va">i</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu">funkykappa</span><span class="op">(</span><span class="va">x</span>, alpha <span class="op">=</span> <span class="va">alphas</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span>, add<span class="op">=</span><span class="cn">TRUE</span>, col<span class="op">=</span><span class="va">i</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"right"</span>, col<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, legend <span class="op">=</span> <span class="va">alphas</span>, lty<span class="op">=</span><span class="fl">1</span>, title<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">alpha</span><span class="op">)</span>, bty<span class="op">=</span><span class="st">"n"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="likelihoods_files/figure-html/FunkyModel-1.png" class="img-fluid" width="800"></p>
@@ -962,9 +967,9 @@ NULL</code></pre>
 <p>The negative log-likelihood function of this model given the data is:</p>
 <p><span class="math display">\[{\cal l} = \log({\cal L}(\kappa_0, \alpha | {\bf S}, {\bf \theta})) = \sum_{i=1}^n \log(f(S_i, \theta_i | \kappa_0, \alpha) \]</span></p>
 <p>Encode in R:</p>
-<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-40_2c161d723f8f47baf1d17508e464755b">
+<div class="cell" data-hash="likelihoods_cache/html/unnamed-chunk-40_55f05055b190d30f730759d2c433b582">
 <div class="sourceCode" id="cb60"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">FunkyModel.Likelihood</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p</span>, <span class="va">S</span>, <span class="va">theta</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">kappa</span> <span class="op">&lt;-</span> <span class="fu">f</span><span class="op">(</span><span class="va">S</span>, <span class="va">p</span><span class="op">[</span><span class="st">"kappa0"</span><span class="op">]</span>, <span class="va">p</span><span class="op">[</span><span class="st">"alpha"</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="va">kappa</span> <span class="op">&lt;-</span> <span class="fu">funkykappa</span><span class="op">(</span><span class="va">S</span>, <span class="va">p</span><span class="op">[</span><span class="st">"kappa0"</span><span class="op">]</span>, <span class="va">p</span><span class="op">[</span><span class="st">"alpha"</span><span class="op">]</span><span class="op">)</span></span>
 <span>  <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/CircStats/man/dwrpcauchy.html">dwrpcauchy</a></span><span class="op">(</span><span class="va">theta</span>, <span class="fl">0</span>, <span class="va">kappa</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1250,8 +1255,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./dependent_data.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Dependent Data</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./time_series.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Time Series</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
