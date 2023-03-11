@@ -321,35 +321,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#comparing-models" id="toc-comparing-models" class="nav-link" data-scroll-target="#comparing-models"> <span class="header-section-number">9.7.11</span> Comparing models …</a></li>
   </ul>
 </li>
-  <li>
-<a href="#an-important-twist-moving-average-models" id="toc-an-important-twist-moving-average-models" class="nav-link" data-scroll-target="#an-important-twist-moving-average-models"> <span class="header-section-number">9.8</span> An important twist: Moving average models</a>
-  <ul class="collapse">
-<li><a href="#armapq-model" id="toc-armapq-model" class="nav-link" data-scroll-target="#armapq-model"> <span class="header-section-number">9.8.1</span> ARMA(p,q) model</a></li>
-  <li><a href="#selecting-armapq" id="toc-selecting-armapq" class="nav-link" data-scroll-target="#selecting-armapq"> <span class="header-section-number">9.8.2</span> Selecting ARMA(p,q)</a></li>
-  <li><a href="#forecasting" id="toc-forecasting" class="nav-link" data-scroll-target="#forecasting"> <span class="header-section-number">9.8.3</span> Forecasting</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#classical-decomposition-with-trend-and-seasonality" id="toc-classical-decomposition-with-trend-and-seasonality" class="nav-link" data-scroll-target="#classical-decomposition-with-trend-and-seasonality"> <span class="header-section-number">9.9</span> Classical Decomposition, with trend and seasonality</a>
-  <ul class="collapse">
-<li><a href="#co2-data-from-mauna-loa" id="toc-co2-data-from-mauna-loa" class="nav-link" data-scroll-target="#co2-data-from-mauna-loa"> <span class="header-section-number">9.9.1</span> CO<sub>2</sub> data from Mauna Loa</a></li>
-  <li><a href="#linear-detrending" id="toc-linear-detrending" class="nav-link" data-scroll-target="#linear-detrending"> <span class="header-section-number">9.9.2</span> Linear detrending</a></li>
-  <li><a href="#classical-decomposition-of-co2-data" id="toc-classical-decomposition-of-co2-data" class="nav-link" data-scroll-target="#classical-decomposition-of-co2-data"> <span class="header-section-number">9.9.3</span> “Classical” decomposition of CO<sub>2</sub> data</a></li>
-  <li><a href="#one-line-in-r-decompose" id="toc-one-line-in-r-decompose" class="nav-link" data-scroll-target="#one-line-in-r-decompose"> <span class="header-section-number">9.9.4</span> One line in R: <code>decompose()</code></a></li>
-  <li><a href="#a-caution-about-polynomial-fits" id="toc-a-caution-about-polynomial-fits" class="nav-link" data-scroll-target="#a-caution-about-polynomial-fits"> <span class="header-section-number">9.9.5</span> A caution about polynomial fits:</a></li>
-  <li><a href="#incidentally" id="toc-incidentally" class="nav-link" data-scroll-target="#incidentally"> <span class="header-section-number">9.9.6</span> Incidentally:</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#population-cycles" id="toc-population-cycles" class="nav-link" data-scroll-target="#population-cycles"> <span class="header-section-number">9.10</span> Population cycles</a>
-  <ul class="collapse">
-<li><a href="#cross-correlation-functions" id="toc-cross-correlation-functions" class="nav-link" data-scroll-target="#cross-correlation-functions"> <span class="header-section-number">9.10.1</span> Cross-correlation functions</a></li>
-  <li><a href="#cross-correlation-of-lynx-and-hare" id="toc-cross-correlation-of-lynx-and-hare" class="nav-link" data-scroll-target="#cross-correlation-of-lynx-and-hare"> <span class="header-section-number">9.10.2</span> Cross-correlation of lynx and hare</a></li>
-  </ul>
-</li>
-  <li><a href="#some-intermediate-conclusions" id="toc-some-intermediate-conclusions" class="nav-link" data-scroll-target="#some-intermediate-conclusions"> <span class="header-section-number">9.11</span> Some intermediate conclusions</a></li>
-  <li><a href="#in-final-conclusion" id="toc-in-final-conclusion" class="nav-link" data-scroll-target="#in-final-conclusion"> <span class="header-section-number">9.12</span> In final conclusion</a></li>
-  <li><a href="#additional-resource" id="toc-additional-resource" class="nav-link" data-scroll-target="#additional-resource"> <span class="header-section-number">9.13</span> Additional Resource</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/edit/main/time_series.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
@@ -931,79 +902,134 @@ LH.gls1.2     4  5 212.3965 225.3214 -101.1983 3 vs 4 8.053612  0.0045</code></p
 <li>Even for very simple time-series and questions about simple linear trends … it is easy to make false inference (both see patterns that are not there, or fail to detect patterns that are there) if you don’t take auto-correlations into account!</li>
 </ul>
 </blockquote>
-</section></section><section id="an-important-twist-moving-average-models" class="level2" data-number="9.8"><h2 data-number="9.8" class="anchored" data-anchor-id="an-important-twist-moving-average-models">
-<span class="header-section-number">9.8</span> An important twist: Moving average models</h2>
-<ul>
-<li>
-<p>First-order moving average model: MA(1)</p>
-<p><span class="math display">\[ Z_t = Z_t + \psi Z_{t-1} \]</span></p>
-</li>
-</ul>
-<p>i.e.&nbsp;the “random shock” (aka “innovation”) depends on the previous “random shock”.</p>
-<ul>
-<li>
-<p><span class="math inline">\(q\)</span>-th order moving average model: MA(<span class="math inline">\(q\)</span>)</p>
-<pre><code>  $$\epsilon_t = \psi_1 \,Z_{t-1} + \psi_2 \, Z_{t-2} + ... + \psi_q Z_{t-q} + Z_t$$ </code></pre>
-</li>
-</ul>
-<p>Assessed via the {}</p>
-<p><span class="math display">\[\phi(k) =\mathop{\text{Corr}}(X_t-{\cal P}(X_t\mid X_{t+1},\ldots,X_{t+k-1}) \qquad X_{t+k}-{\cal P}(X_{t+k}\mid X_{t+1},\ldots,X_{t+k-1}))\]</span></p>
-<p>where: <span class="math inline">\({\cal P}(Y\mid X)\)</span> is the best linear projection of <span class="math inline">\(Y\)</span> on <span class="math inline">\(X\)</span>, i.e.~we’ve regressed away all of the lags and are left only with the cross-correlation of the residuals.</p>
-<section id="pacfh-of-an-ar1-is-0-at-h0" class="level4" data-number="9.8.0.1"><h4 data-number="9.8.0.1" class="anchored" data-anchor-id="pacfh-of-an-ar1-is-0-at-h0">
-<span class="header-section-number">9.8.0.1</span> PACF(h) of an AR(1) is 0 at <span class="math inline">\(h&gt;0\)</span>
-</h4>
-<div class="cell" data-hash="time_series_cache/html/unnamed-chunk-23_b22772e361a09af487627c4ee33d2f9a">
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">phi</span> <span class="op">&lt;-</span> <span class="fl">0.8</span>; <span class="va">nu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
-<span><span class="va">esp.AR</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>,<span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span> <span class="va">esp.AR</span><span class="op">[</span><span class="va">i</span><span class="op">+</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">phi</span><span class="op">*</span><span class="va">esp.AR</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">+</span> <span class="va">nu</span><span class="op">[</span><span class="va">i</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-hash="time_series_cache/html/ARplot_516fbd1b3005062847a529706b74faf2">
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">pacf</a></span><span class="op">(</span><span class="va">esp.AR</span>, main<span class="op">=</span><span class="st">"pacf"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="time_series_files/figure-html/ARplot-1.png" class="img-fluid" width="600"></p>
-</div>
-</div>
-</section><section id="acfh-of-an-ma1-is-0-at-h1" class="level4" data-number="9.8.0.2"><h4 data-number="9.8.0.2" class="anchored" data-anchor-id="acfh-of-an-ma1-is-0-at-h1">
-<span class="header-section-number">9.8.0.2</span> ACF(h) of an MA(1) is 0 at <span class="math inline">\(h&gt;1\)</span>
-</h4>
-<div class="cell" data-hash="time_series_cache/html/MAsim_43f02c70e81cb7bdf317d4eaf70d44f9">
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">psi</span> <span class="op">&lt;-</span> <span class="fl">0.8</span>;  <span class="va">nu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">101</span><span class="op">)</span></span>
-<span><span class="va">esp.MA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>,<span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="fl">101</span><span class="op">)</span> <span class="va">esp.MA</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">nu</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">+</span> <span class="va">psi</span><span class="op">*</span><span class="va">nu</span><span class="op">[</span><span class="va">i</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-hash="time_series_cache/html/MAplot_d754169c01ebb8cece14b856936353e8">
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">pacf</a></span><span class="op">(</span><span class="va">esp.MA</span>, main<span class="op">=</span><span class="st">"pacf"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="time_series_files/figure-html/MAplot-1.png" class="img-fluid" width="600"></p>
-</div>
-</div>
-</section><section id="armapq-model" class="level3" data-number="9.8.1"><h3 data-number="9.8.1" class="anchored" data-anchor-id="armapq-model">
-<span class="header-section-number">9.8.1</span> ARMA(p,q) model</h3>
-<div class="cell" data-hash="time_series_cache/html/ARMAsim_c46a3183e68926fc82c72f192a3c362f">
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/arima.sim.html">arima.sim</a></span><span class="op">(</span>model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>ar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.9</span>, <span class="op">-</span><span class="fl">.5</span><span class="op">)</span>, ma <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>,<span class="op">-</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span>, <span class="fl">1000</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="time_series_files/figure-html/ARMAsim-1.png" class="img-fluid" width="600"></p>
-</div>
-</div>
-<p>A lot of the traditional wizardry of time-series analysis is looking at acf’s and pacf’s and deducing the ARMA model.</p>
-</section><section id="selecting-armapq" class="level3" data-number="9.8.2"><h3 data-number="9.8.2" class="anchored" data-anchor-id="selecting-armapq">
-<span class="header-section-number">9.8.2</span> Selecting ARMA(p,q)</h3>
-<p>We can just ask AIC to help us out.</p>
-<div class="cell" data-hash="time_series_cache/html/unnamed-chunk-24_3fbcbd23fd0447c632b19daa67fdc55b">
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">get.aic.table</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">Y</span><span class="op">)</span><span class="op">{</span></span>
-<span><span class="va">aic.table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/AIC.html">AIC</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/arima.html">arima</a></span><span class="op">(</span><span class="va">Y</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/arima.html">arima</a></span><span class="op">(</span><span class="va">Y</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/arima.html">arima</a></span><span class="op">(</span><span class="va">Y</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/arima.html">arima</a></span><span class="op">(</span><span class="va">Y</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/arima.html">arima</a></span><span class="op">(</span><span class="va">Y</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>, </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/arima.html">arima</a></span><span class="op">(</span><span class="va">Y</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>,  <span class="fu"><a href="https://rdrr.io/r/stats/arima.html">arima</a></span><span class="op">(</span><span class="va">Y</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/arima.html">arima</a></span><span class="op">(</span><span class="va">Y</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/arima.html">arima</a></span><span class="op">(</span><span class="va">Y</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">0</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/arima.html">arima</a></span><span class="op">(</span><span class="va">Y</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">0</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">aic.table</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">aic.table</span><span class="op">$</span><span class="va">AIC</span><span class="op">)</span>,<span class="op">]</span></span>
-<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-hash="time_series_cache/html/unnamed-chunk-25_cb5965a2a9bf664d034e084d02f3f7ca">
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/arima.sim.html">arima.sim</a></span><span class="op">(</span>model <span class="op">=</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>ar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.9</span>, <span class="op">-</span><span class="fl">.5</span><span class="op">)</span>,</span>
-<span>       ma <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>,<span class="op">-</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span>, <span class="fl">1000</span><span class="op">)</span></span>
-<span><span class="fu">get.aic.table</span><span class="op">(</span><span class="va">Y</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                     df      AIC
+
+<!--
+
+
+## An important twist: Moving average models
+
+- First-order moving average model: MA(1)
+
+
+  $$ Z_t = Z_t + \psi Z_{t-1} $$
+
+
+i.e. the "random shock" (aka "innovation") depends on the previous "random shock". 
+    
+- $q$-th order moving average model: MA($q$)
+
+
+        $$\epsilon_t = \psi_1 \,Z_{t-1} + \psi_2 \, Z_{t-2} + ... + \psi_q Z_{t-q} + Z_t$$ 
+
+
+    
+Assessed via the {\bf partial autocorrelation function}
+
+
+$$\phi(k) =\mathop{\text{Corr}}(X_t-{\cal P}(X_t\mid X_{t+1},\ldots,X_{t+k-1}) \qquad X_{t+k}-{\cal P}(X_{t+k}\mid X_{t+1},\ldots,X_{t+k-1}))$$
+
+
+
+where:  ${\cal P}(Y\mid X)$ is the best linear projection of $Y$ on $X$, i.e.~we've regressed away all of the lags and are left only with the cross-correlation of the residuals.
+
+#### PACF(h) of an AR(1) is 0 at $h>0$
+
+
+::: {.cell hash='time_series_cache/html/unnamed-chunk-23_b22772e361a09af487627c4ee33d2f9a'}
+
+```{.r .cell-code}
+phi <- 0.8; nu <- rnorm(100)
+esp.AR <- c(rnorm(1),rep(NA,100))
+for(i in 1:100) esp.AR[i+1] <- phi*esp.AR[i] + nu[i]
+```
+:::
+
+::: {.cell hash='time_series_cache/html/ARplot_516fbd1b3005062847a529706b74faf2'}
+
+```{.r .cell-code}
+pacf(esp.AR, main="pacf")
+```
+
+::: {.cell-output-display}
+![](time_series_files/figure-html/ARplot-1.png){width=600}
+:::
+:::
+
+
+
+#### ACF(h) of an MA(1) is 0 at $h>1$
+
+
+::: {.cell hash='time_series_cache/html/MAsim_43f02c70e81cb7bdf317d4eaf70d44f9'}
+
+```{.r .cell-code}
+psi <- 0.8;  nu <- rnorm(101)
+esp.MA <- c(rnorm(1),rep(NA,100))
+for(i in 2:101) esp.MA[i] <- nu[i] + psi*nu[i-1]
+```
+:::
+
+::: {.cell hash='time_series_cache/html/MAplot_d754169c01ebb8cece14b856936353e8'}
+
+```{.r .cell-code}
+pacf(esp.MA, main="pacf")
+```
+
+::: {.cell-output-display}
+![](time_series_files/figure-html/MAplot-1.png){width=600}
+:::
+:::
+
+
+
+### ARMA(p,q) model
+
+
+::: {.cell hash='time_series_cache/html/ARMAsim_c46a3183e68926fc82c72f192a3c362f'}
+
+```{.r .cell-code}
+Y <- arima.sim(model = list(ar = c(0.9, -.5), ma = c(-2,-4)), 1000)
+```
+
+::: {.cell-output-display}
+![](time_series_files/figure-html/ARMAsim-1.png){width=600}
+:::
+:::
+
+
+A lot of the traditional wizardry of time-series analysis is looking at acf's and pacf's and deducing the ARMA model.
+
+
+
+### Selecting ARMA(p,q)
+
+We can just ask AIC to help us out. 
+
+
+::: {.cell hash='time_series_cache/html/unnamed-chunk-24_3fbcbd23fd0447c632b19daa67fdc55b'}
+
+```{.r .cell-code}
+get.aic.table <- function(Y){
+aic.table <- AIC(
+  arima(Y, c(1,0,0)), arima(Y, c(0,0,1)), arima(Y, c(1,0,1)), arima(Y, c(2,0,0)), arima(Y, c(0,0,2)), 
+  arima(Y, c(1,0,2)),  arima(Y, c(2,0,1)), arima(Y, c(2,0,2)), arima(Y, c(3,0,2)), arima(Y, c(3,0,3)))
+aic.table[order(aic.table$AIC),]
+}
+```
+:::
+
+::: {.cell hash='time_series_cache/html/unnamed-chunk-25_cb5965a2a9bf664d034e084d02f3f7ca'}
+
+```{.r .cell-code}
+Y <- arima.sim(model = 
+  list(ar = c(0.9, -.5),
+       ma = c(-2,-4)), 1000)
+get.aic.table(Y)
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+                     df      AIC
 arima(Y, c(2, 0, 2))  6 5601.295
 arima(Y, c(3, 0, 2))  7 5601.761
 arima(Y, c(3, 0, 3))  8 5602.790
@@ -1013,13 +1039,20 @@ arima(Y, c(0, 0, 2))  4 5682.829
 arima(Y, c(1, 0, 1))  4 5758.919
 arima(Y, c(2, 0, 0))  4 5824.927
 arima(Y, c(0, 0, 1))  3 5954.010
-arima(Y, c(1, 0, 0))  3 6397.916</code></pre>
-</div>
-</div>
-<div class="cell" data-hash="time_series_cache/html/unnamed-chunk-26_e50ccbf4f06fd39261e92b3bdcc6313c">
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">get.aic.table</span><span class="op">(</span><span class="va">LakeHuron</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                     df      AIC
+arima(Y, c(1, 0, 0))  3 6397.916
+```
+:::
+:::
+
+::: {.cell hash='time_series_cache/html/unnamed-chunk-26_e50ccbf4f06fd39261e92b3bdcc6313c'}
+
+```{.r .cell-code}
+get.aic.table(LakeHuron)
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+                     df      AIC
 arima(Y, c(1, 0, 1))  4 214.4905
 arima(Y, c(2, 0, 0))  4 215.2664
 arima(Y, c(1, 0, 2))  5 216.4645
@@ -1029,13 +1062,20 @@ arima(Y, c(1, 0, 0))  3 219.1959
 arima(Y, c(3, 0, 2))  7 219.6967
 arima(Y, c(3, 0, 3))  8 221.1937
 arima(Y, c(0, 0, 2))  4 230.9306
-arima(Y, c(0, 0, 1))  3 255.2950</code></pre>
-</div>
-</div>
-<div class="cell" data-hash="time_series_cache/html/unnamed-chunk-27_6d9123eaf92ec7b3758f661f1f23722c">
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">get.aic.table</span><span class="op">(</span><span class="va">LH.lm</span><span class="op">$</span><span class="va">res</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                     df      AIC
+arima(Y, c(0, 0, 1))  3 255.2950
+```
+:::
+:::
+
+::: {.cell hash='time_series_cache/html/unnamed-chunk-27_6d9123eaf92ec7b3758f661f1f23722c'}
+
+```{.r .cell-code}
+get.aic.table(LH.lm$res)
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+                     df      AIC
 arima(Y, c(2, 0, 0))  4 210.5032
 arima(Y, c(1, 0, 1))  4 210.5176
 arima(Y, c(1, 0, 2))  5 212.1225
@@ -1045,17 +1085,30 @@ arima(Y, c(3, 0, 2))  7 215.2280
 arima(Y, c(1, 0, 0))  3 216.5835
 arima(Y, c(3, 0, 3))  8 216.6927
 arima(Y, c(0, 0, 2))  4 217.8177
-arima(Y, c(0, 0, 1))  3 235.2032</code></pre>
-</div>
-</div>
-<p>Note that any MA effects get (mostly) explained away by accounting for the time trend.</p>
-</section><section id="forecasting" class="level3" data-number="9.8.3"><h3 data-number="9.8.3" class="anchored" data-anchor-id="forecasting">
-<span class="header-section-number">9.8.3</span> Forecasting</h3>
-<div class="cell" data-hash="time_series_cache/html/Forecast_5573450a45c44ef672d5aed84ff94c11">
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://pkg.robjhyndman.com/forecast/">forecast</a></span><span class="op">)</span></span>
-<span><span class="op">(</span><span class="va">LH.forecast</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/forecast.html">forecast</a></span><span class="op">(</span><span class="fu"><a href="https://pkg.robjhyndman.com/forecast/reference/Arima.html">Arima</a></span><span class="op">(</span><span class="va">LH.lm</span><span class="op">$</span><span class="va">res</span>, order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, include.mean<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>    Point Forecast      Lo 80    Hi 80      Lo 95    Hi 95
+arima(Y, c(0, 0, 1))  3 235.2032
+```
+:::
+:::
+
+
+Note that any MA effects get (mostly) explained away by accounting for the time trend.
+
+
+
+
+
+### Forecasting
+
+::: {.cell hash='time_series_cache/html/Forecast_5573450a45c44ef672d5aed84ff94c11'}
+
+```{.r .cell-code}
+require(forecast)
+(LH.forecast <- forecast(Arima(LH.lm$res, order = c(2,0,0), include.mean=FALSE)))
+```
+
+::: {.cell-output .cell-output-stdout}
+```
+    Point Forecast      Lo 80    Hi 80      Lo 95    Hi 95
  99    1.545023949  0.6695495 2.420498  0.2061013 2.883947
 100    0.929893256 -0.3113219 2.171108 -0.9683815 2.828168
 101    0.482673894 -0.9084677 1.873816 -1.6448936 2.610241
@@ -1065,241 +1118,348 @@ arima(Y, c(0, 0, 1))  3 235.2032</code></pre>
 105   -0.010247304 -1.4662334 1.445739 -2.2369859 2.216491
 106   -0.013531751 -1.4695223 1.442459 -2.2402771 2.213214
 107   -0.010602506 -1.4666002 1.445395 -2.2373588 2.216154
-108   -0.006697958 -1.4627065 1.449311 -2.2334709 2.220075</code></pre>
-</div>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">LH.forecast</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="time_series_files/figure-html/Forecast-1.png" class="img-fluid" width="600"></p>
-</div>
-</div>
-<p>Forecasting with trend: (with apologies for ugly code)</p>
-<div class="cell" data-hash="time_series_cache/html/unnamed-chunk-28_112532abba8fd8e3c0f89004764c6ec4">
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">LakeHuron</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1870</span>,<span class="fl">2012</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">570</span>,<span class="fl">585</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">T.new</span> <span class="op">&lt;-</span> <span class="fl">1972</span><span class="op">:</span><span class="fl">2000</span></span>
-<span><span class="va">LH.forecast</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/forecast.html">forecast</a></span><span class="op">(</span><span class="fu"><a href="https://pkg.robjhyndman.com/forecast/reference/Arima.html">Arima</a></span><span class="op">(</span><span class="va">LH.lm</span><span class="op">$</span><span class="va">res</span>, order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, include.mean<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>, h<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">T.new</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="cn">T</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/time.html">time</a></span><span class="op">(</span><span class="va">LakeHuron</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">LH.lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">LakeHuron</span><span class="op">)</span><span class="op">~</span><span class="cn">T</span><span class="op">)</span></span>
-<span><span class="va">LH.predict</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">LH.lm</span>, newdata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>T <span class="op">=</span> <span class="va">T.new</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">T.new</span>, <span class="va">LH.predict</span> <span class="op">+</span> <span class="va">LH.forecast</span><span class="op">$</span><span class="va">mean</span>, col<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/polygon.html">polygon</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">T.new</span>,  <span class="va">T.new</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">T.new</span><span class="op">)</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">LH.predict</span> <span class="op">+</span> <span class="va">LH.forecast</span><span class="op">$</span><span class="va">lower</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, <span class="op">(</span><span class="va">LH.predict</span> <span class="op">+</span> <span class="va">LH.forecast</span><span class="op">$</span><span class="va">upper</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">T.new</span><span class="op">)</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">.2</span><span class="op">)</span>, bor<span class="op">=</span><span class="cn">NA</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/polygon.html">polygon</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">T.new</span>,  <span class="va">T.new</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">T.new</span><span class="op">)</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">LH.predict</span> <span class="op">+</span> <span class="va">LH.forecast</span><span class="op">$</span><span class="va">lower</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>, <span class="op">(</span><span class="va">LH.predict</span> <span class="op">+</span> <span class="va">LH.forecast</span><span class="op">$</span><span class="va">upper</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">T.new</span><span class="op">)</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">.2</span><span class="op">)</span>, bor<span class="op">=</span><span class="cn">NA</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="time_series_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="600"></p>
-</div>
-</div>
-<p>Out of curiousity, I downloaded the Lake Huron water levels up to 2012 from :</p>
-<div class="cell" data-hash="time_series_cache/html/unnamed-chunk-29_ddfd6488120b0d288c67020934ed5987">
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">LH</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/miHuronAnnualData.csv"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>bty<span class="op">=</span><span class="st">"l"</span>, cex.lab<span class="op">=</span><span class="fl">1.25</span>, las<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">LakeHuron</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1870</span>,<span class="fl">2017</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">572</span>,<span class="fl">585</span><span class="op">)</span>, ylab<span class="op">=</span><span class="st">"Lake Huron water level (feet)"</span><span class="op">)</span></span>
-<span><span class="va">T.new</span> <span class="op">&lt;-</span> <span class="fl">1972</span><span class="op">:</span><span class="fl">2017</span></span>
-<span><span class="va">LH.forecast</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/forecast.html">forecast</a></span><span class="op">(</span><span class="fu"><a href="https://pkg.robjhyndman.com/forecast/reference/Arima.html">Arima</a></span><span class="op">(</span><span class="va">LH.lm</span><span class="op">$</span><span class="va">res</span>, order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, include.mean<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>, h<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">T.new</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="cn">T</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/time.html">time</a></span><span class="op">(</span><span class="va">LakeHuron</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">LH.lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">LakeHuron</span><span class="op">)</span><span class="op">~</span><span class="cn">T</span><span class="op">)</span></span>
-<span><span class="va">LH.predict</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">LH.lm</span>, newdata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>T <span class="op">=</span> <span class="va">T.new</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">T.new</span>, <span class="va">LH.predict</span> <span class="op">+</span> <span class="va">LH.forecast</span><span class="op">$</span><span class="va">mean</span>, col<span class="op">=</span><span class="st">"darkblue"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/polygon.html">polygon</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">T.new</span>,  <span class="va">T.new</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">T.new</span><span class="op">)</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">LH.predict</span> <span class="op">+</span> <span class="va">LH.forecast</span><span class="op">$</span><span class="va">lower</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, <span class="op">(</span><span class="va">LH.predict</span> <span class="op">+</span> <span class="va">LH.forecast</span><span class="op">$</span><span class="va">upper</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">T.new</span><span class="op">)</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">.2</span><span class="op">)</span>, bor<span class="op">=</span><span class="cn">NA</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/polygon.html">polygon</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">T.new</span>,  <span class="va">T.new</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">T.new</span><span class="op">)</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">LH.predict</span> <span class="op">+</span> <span class="va">LH.forecast</span><span class="op">$</span><span class="va">lower</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>, <span class="op">(</span><span class="va">LH.predict</span> <span class="op">+</span> <span class="va">LH.forecast</span><span class="op">$</span><span class="va">upper</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">T.new</span><span class="op">)</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html">rgb</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">.2</span><span class="op">)</span>, bor<span class="op">=</span><span class="cn">NA</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">LH</span><span class="op">$</span><span class="va">year</span>, <span class="va">LH</span><span class="op">$</span><span class="va">AnnAvg</span><span class="op">*</span><span class="fl">3.28084</span>, type<span class="op">=</span><span class="st">"l"</span>, col<span class="op">=</span><span class="fl">2</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="time_series_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="600"></p>
-</div>
-</div>
-<p>Conclusion? This is a time series with a weak trend and lots of variability - forecasting won’t give you much, except perhaps in the very short term.</p>
-<p>But the question is important: http://research.noaa.gov/News/NewsArchive/LatestNews/TabId/684/ArtMID/1768/ArticleID/10466/NOAA-Seeks-Answers-to-Great-Lakes-Water-Level-Changes–.aspx</p>
-<div class="cell" data-hash="time_series_cache/html/unnamed-chunk-30_936cb5fe812f3d44bf692a79f00d9365">
-<div class="cell-output-display">
-<p><img src="./images/time_series/NoaaResearch.png" class="img-fluid" width="600"></p>
-</div>
-</div>
-</section></section><section id="classical-decomposition-with-trend-and-seasonality" class="level2" data-number="9.9"><h2 data-number="9.9" class="anchored" data-anchor-id="classical-decomposition-with-trend-and-seasonality">
-<span class="header-section-number">9.9</span> Classical Decomposition, with trend and seasonality</h2>
-<p><span class="math display">\[
+108   -0.006697958 -1.4627065 1.449311 -2.2334709 2.220075
+```
+:::
+
+```{.r .cell-code}
+plot(LH.forecast)
+```
+
+::: {.cell-output-display}
+![](time_series_files/figure-html/Forecast-1.png){width=600}
+:::
+:::
+
+
+
+Forecasting with  trend:
+(with apologies for ugly code)
+
+
+::: {.cell hash='time_series_cache/html/unnamed-chunk-28_112532abba8fd8e3c0f89004764c6ec4'}
+
+```{.r .cell-code}
+plot(LakeHuron, xlim=c(1870,2012), ylim=c(570,585))
+T.new <- 1972:2000
+LH.forecast <- forecast(Arima(LH.lm$res, order = c(2,0,0), include.mean=FALSE), h=length(T.new))
+T <- as.numeric(time(LakeHuron))
+
+LH.lm <- lm(as.numeric(LakeHuron)~T)
+LH.predict <- predict(LH.lm, newdata = list(T = T.new))
+
+lines(T.new, LH.predict + LH.forecast$mean, col=2)
+polygon(c(T.new,  T.new[length(T.new):1]), c(LH.predict + LH.forecast$lower[,1], (LH.predict + LH.forecast$upper[,1])[length(T.new):1]), col=rgb(0,0,1,.2), bor=NA)
+polygon(c(T.new,  T.new[length(T.new):1]), c(LH.predict + LH.forecast$lower[,2], (LH.predict + LH.forecast$upper[,2])[length(T.new):1]), col=rgb(0,0,1,.2), bor=NA)
+```
+
+::: {.cell-output-display}
+![](time_series_files/figure-html/unnamed-chunk-28-1.png){width=600}
+:::
+:::
+
+
+
+
+
+Out of curiousity, I downloaded the Lake Huron water levels up to 2012 from \url{http://www.glerl.noaa.gov/data/now/wlevels/levels.html}:
+
+
+::: {.cell hash='time_series_cache/html/unnamed-chunk-29_ddfd6488120b0d288c67020934ed5987'}
+
+```{.r .cell-code}
+LH <- read.csv("data/miHuronAnnualData.csv")
+par(bty="l", cex.lab=1.25, las=1)
+plot(LakeHuron, xlim=c(1870,2017), ylim=c(572,585), ylab="Lake Huron water level (feet)")
+T.new <- 1972:2017
+LH.forecast <- forecast(Arima(LH.lm$res, order = c(2,0,0), include.mean=FALSE), h=length(T.new))
+T <- as.numeric(time(LakeHuron))
+
+LH.lm <- lm(as.numeric(LakeHuron)~T)
+LH.predict <- predict(LH.lm, newdata = list(T = T.new))
+
+lines(T.new, LH.predict + LH.forecast$mean, col="darkblue")
+polygon(c(T.new,  T.new[length(T.new):1]), c(LH.predict + LH.forecast$lower[,1], (LH.predict + LH.forecast$upper[,1])[length(T.new):1]), col=rgb(0,0,1,.2), bor=NA)
+polygon(c(T.new,  T.new[length(T.new):1]), c(LH.predict + LH.forecast$lower[,2], (LH.predict + LH.forecast$upper[,2])[length(T.new):1]), col=rgb(0,0,1,.2), bor=NA)
+
+lines(LH$year, LH$AnnAvg*3.28084, type="l", col=2, lwd=2)
+```
+
+::: {.cell-output-display}
+![](time_series_files/figure-html/unnamed-chunk-29-1.png){width=600}
+:::
+:::
+
+
+Conclusion?  \red{\emph{Tough!}}  This is a time series with a weak trend and lots of variability - forecasting won't give you much, except perhaps in the very short term.
+
+But the question is important: http://research.noaa.gov/News/NewsArchive/LatestNews/TabId/684/ArtMID/1768/ArticleID/10466/NOAA-Seeks-Answers-to-Great-Lakes-Water-Level-Changes--.aspx
+
+
+::: {.cell hash='time_series_cache/html/unnamed-chunk-30_936cb5fe812f3d44bf692a79f00d9365'}
+::: {.cell-output-display}
+![](./images/time_series/NoaaResearch.png){width=600px}
+:::
+:::
+
+
+
+
+
+## Classical Decomposition, with trend and seasonality
+
+
+
+$$
 {Y_t = m_t + s_t + X_t}
-\]</span></p>
-<p>where:</p>
-<ul>
-<li>
-<span class="math inline">\(m_t\)</span> is the component</li>
-<li>
-<span class="math inline">\(s_t\)</span> is the component</li>
-<li>
-<span class="math inline">\(s_{t+d} = s_t\)</span>, where <span class="math inline">\(d\)</span> is the
-<ul>
-<li>Usually, we know the period <span class="math inline">\(d\)</span> (and do not need to estimate it)
-<ul>
-<li>
-<span class="math inline">\(X_t\)</span> is a random component, that is (hopefully) stationary</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<section id="co2-data-from-mauna-loa" class="level3" data-number="9.9.1"><h3 data-number="9.9.1" class="anchored" data-anchor-id="co2-data-from-mauna-loa">
-<span class="header-section-number">9.9.1</span> CO<sub>2</sub> data from Mauna Loa</h3>
-<div class="cell" data-hash="time_series_cache/html/unnamed-chunk-31_c97b876b3d8048e64cdc5086aa9fd4e9">
-<div class="cell-output-display">
-<p><img src="time_series_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="600"></p>
-</div>
-</div>
-</section><section id="linear-detrending" class="level3" data-number="9.9.2"><h3 data-number="9.9.2" class="anchored" data-anchor-id="linear-detrending">
-<span class="header-section-number">9.9.2</span> Linear detrending</h3>
-<div class="cell" data-hash="time_series_cache/html/CO2Detrend_6a12fe801ff1962f902f0d241510d4c4">
-<div class="cell-output-display">
-<p><img src="time_series_files/figure-html/CO2Detrend-1.png" class="img-fluid" width="600"></p>
-</div>
-</div>
-<p>Not very satisfactory</p>
-</section><section id="classical-decomposition-of-co2-data" class="level3" data-number="9.9.3"><h3 data-number="9.9.3" class="anchored" data-anchor-id="classical-decomposition-of-co2-data">
-<span class="header-section-number">9.9.3</span> “Classical” decomposition of CO<sub>2</sub> data</h3>
-<p><span class="math display">\[Y_t = m_t + s_t + X_t}\]</span></p>
-<p>Key bits of code (try this at home!):</p>
-<div class="cell" data-hash="time_series_cache/html/unnamed-chunk-32_379355264e5c129d7575a48bf7b9f187">
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># time series objects have "time" attributes</span></span>
-<span>  <span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/time.html">time</a></span><span class="op">(</span><span class="va">co2</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="va">co2.lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">co2</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span><span class="op">(</span><span class="va">t</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="va">Y.trend</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">co2.lm</span><span class="op">)</span></span>
-<span><span class="co"># tapply to average away at "cycle" of periodic  data</span></span>
-<span>  <span class="va">co2.detrended</span> <span class="op">&lt;-</span> <span class="va">co2</span> <span class="op">-</span> <span class="va">Y.trend</span></span>
-<span>  <span class="va">st</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tapply.html">tapply</a></span><span class="op">(</span><span class="va">co2.detrended</span>, <span class="fu"><a href="https://rdrr.io/r/stats/time.html">cycle</a></span><span class="op">(</span><span class="va">co2</span><span class="op">)</span>, <span class="va">mean</span><span class="op">)</span></span>
-<span>  <span class="va">Y.seasonal</span> <span class="op">&lt;-</span> <span class="va">st</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/stats/time.html">cycle</a></span><span class="op">(</span><span class="va">co2</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="co"># random component  </span></span>
-<span>  <span class="va">Y.random</span> <span class="op">&lt;-</span> <span class="va">co2.detrended</span> <span class="op">-</span> <span class="va">Y.seasonal</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-hash="time_series_cache/html/ClassicalCO2_d80cce204d9d7c45e594c5a993d93b29">
-<div class="cell-output-display">
-<p><img src="time_series_files/figure-html/ClassicalCO2-1.png" class="img-fluid" width="1000"></p>
-</div>
-</div>
-<ul>
-<li>
-<span class="math inline">\(m_t\)</span>: fit a cubic polynomial</li>
-<li>obtain detrended series: <span class="math inline">\(V_t = Y_t - m_t\)</span>.</li>
-<li>Seasonal component: <span class="math inline">\(s_{t+i} = {1\over 12} \sum\limits_{d=1}^{n/d} V_{t+d+i}\)</span>
-</li>
-<li>Random componenent: <span class="math inline">\(X_t = AR(p)\)</span>
-</li>
-</ul></section><section id="one-line-in-r-decompose" class="level3" data-number="9.9.4"><h3 data-number="9.9.4" class="anchored" data-anchor-id="one-line-in-r-decompose">
-<span class="header-section-number">9.9.4</span> One line in R: <code>decompose()</code>
-</h3>
-<div class="cell" data-hash="time_series_cache/html/decomposeCO2_fcc74e5d7501466f848b5cd1a5302c85">
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/decompose.html">decompose</a></span><span class="op">(</span><span class="va">co2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="time_series_files/figure-html/decomposeCO2-1.png" class="img-fluid" width="600"></p>
-</div>
-</div>
-<p>Note: The trend term here is non-parametric, but a moving window filter (size <span class="math inline">\(d\)</span>):</p>
-<p><span class="math display">\[ m_t = {1 \over 2} \sum_{i = t-d/2}^{t+d/2} Y_{i} \]</span></p>
-<p>This is a good smoothing technique, but not useful for prediction</p>
-</section><section id="a-caution-about-polynomial-fits" class="level3" data-number="9.9.5"><h3 data-number="9.9.5" class="anchored" data-anchor-id="a-caution-about-polynomial-fits">
-<span class="header-section-number">9.9.5</span> A caution about polynomial fits:</h3>
-<p>They look great in the region they are fitting …</p>
-<div class="cell" data-hash="time_series_cache/html/CO2goodandbad_45e36796a3bd4b8d91087b84a09a0c43">
-<div class="cell-output-display">
-<p><img src="time_series_files/figure-html/CO2goodandbad-1.png" class="img-fluid" width="600"></p>
-</div>
-<div class="cell-output-display">
-<p><img src="time_series_files/figure-html/CO2goodandbad-2.png" class="img-fluid" width="600"></p>
-</div>
-</div>
-<p>but the better they fit, the less reliable they are far away.</p>
-</section><section id="incidentally" class="level3" data-number="9.9.6"><h3 data-number="9.9.6" class="anchored" data-anchor-id="incidentally">
-<span class="header-section-number">9.9.6</span> Incidentally:</h3>
-<p>In 2013, CO<sub>2</sub> at Mauna Loa hit 400 ppm for the first time</p>
-<center>
-<div class="cell" data-hash="time_series_cache/html/SciAm_00c41dc5162c2c867c88f327d3e874f3">
-<div class="cell-output-display">
-<p><img src="./images/time_series/Slate.png" class="img-fluid" width="300"></p>
-</div>
-</div>
-</center>
-<p>In 2016, CO<sub>2</sub><a href="https://www.scientificamerican.com/article/earth-s-co2-passes-the-400-ppm-threshold-maybe-permanently/">went over 400 ppm permanently</a>.</p>
-<center>
-<div class="cell" data-hash="time_series_cache/html/Slate_3926848298eb58d303febd8bf5fbc729">
-<div class="cell-output-display">
-<p><img src="./images/time_series/scientificamerican.png" class="img-fluid" width="600"></p>
-</div>
-</div>
-</center>
-<p>How well could we have predicted that from our time-series model?</p>
-</section></section><section id="population-cycles" class="level2" data-number="9.10"><h2 data-number="9.10" class="anchored" data-anchor-id="population-cycles">
-<span class="header-section-number">9.10</span> Population cycles</h2>
-<center>
-<div class="cell" data-hash="time_series_cache/html/LH_db401453c03802897d56e5e3b5f534e8">
-<div class="cell-output-display">
-<p><img src="./images/time_series/LynxVHare.png" class="img-fluid" width="300"></p>
-</div>
-</div>
-<div class="cell" data-hash="time_series_cache/html/LH2_d4f3687c00c5e58e18fcfdbf8b0a2e09">
-<div class="cell-output-display">
-<p><img src="./images/time_series/LynxHare.jpg" class="img-fluid" width="400"></p>
-</div>
-</div>
-</center>
-<section id="cross-correlation-functions" class="level3" data-number="9.10.1"><h3 data-number="9.10.1" class="anchored" data-anchor-id="cross-correlation-functions">
-<span class="header-section-number">9.10.1</span> Cross-correlation functions</h3>
-<section id="recall-autocorrelation" class="level5" data-number="9.10.1.0.1"><h5 data-number="9.10.1.0.1" class="anchored" data-anchor-id="recall-autocorrelation">
-<span class="header-section-number">9.10.1.0.1</span> Recall autocorrelation:</h5>
-<ul>
-<li>Autocorrelation function: <span class="math inline">\(\rho(h) = {\text{E}[(X_t - \mu_x)(Y_{t+h} - \mu_y)] \over \sigma_x^2}\)</span>
-</li>
-<li>Sample autocorrelation: {<span class="math inline">\(\widehat{\gamma}(h) = {1 \over n s_x^2} \sum_{t=1}^{n-|h|} (X_{t+|h|} - \overline{X})(X_t - \overline{X})\)</span>}</li>
-</ul></section><section id="analogously" class="level5" data-number="9.10.1.0.2"><h5 data-number="9.10.1.0.2" class="anchored" data-anchor-id="analogously">
-<span class="header-section-number">9.10.1.0.2</span> Analogously:</h5>
-<ul>
-<li>Cross-correlation function:</li>
-</ul>
-<p><span class="math display">\[ \rho_{xy}(h) = {\text{E}[(X_t - \mu_x)(Y_{t+h} - \mu_y)] \over \sigma_x \sigma_y} \]</span></p>
-<ul>
-<li>Sample cross-correlation:</li>
-</ul>
-<p><span class="math display">\[ \widehat{\gamma}(h) = {1 \over n s_x s_y} \sum_{t=1}^{n-|h|} (Y_{t+|h|} - \overline{X})(X_t - \overline{X})\]</span></p>
-<p><em>Cross-correlation allows identification of relationships BETWEEN time-series over different lags.</em></p>
-</section></section><section id="cross-correlation-of-lynx-and-hare" class="level3" data-number="9.10.2"><h3 data-number="9.10.2" class="anchored" data-anchor-id="cross-correlation-of-lynx-and-hare">
-<span class="header-section-number">9.10.2</span> Cross-correlation of lynx and hare</h3>
-<p>In R, simply: <code>ccf(Hare, Lynx)</code></p>
-<div class="cell" data-hash="time_series_cache/html/CCF1_3cfc0677e037e5a20c2692eb2a447f2e">
-<div class="cell-output-display">
-<p><img src="./images/time_series/CCF1.png" class="img-fluid" width="600"></p>
-</div>
-</div>
-<div class="cell" data-hash="time_series_cache/html/CCF2_c9efff0451c67869d02341e562a49ac0">
-<div class="cell-output-display">
-<p><img src="./images/time_series/CCF2.png" class="img-fluid" width="600"></p>
-</div>
-</div>
-<p>Which of these effects is more important: Less Lynx leads to more Hare? More Hare leads to more Lynx? More Lynx leads to less Hare? Less Hare leads to less Lynx? <strong>These are difficult, but not impossible, questions to parse!</strong></p>
-</section></section><section id="some-intermediate-conclusions" class="level2" data-number="9.11"><h2 data-number="9.11" class="anchored" data-anchor-id="some-intermediate-conclusions">
-<span class="header-section-number">9.11</span> Some intermediate conclusions</h2>
-<ul>
-<li>If you do not account for correlation in your data, it is easy to make false inferences…</li>
-<li>BUT, there are interesting things to be learned from studying the (terrifying) lack of independence.</li>
-<li>A general strategy is to systematically extract all the patterns or otherwise reduce the data until you have extracted the stationary piece.</li>
-<li>Many basic concepts from regression are useful.</li>
-<li>There are many easy-to-use tools in R (and elsewhere) that, like Virgil, hold your hand as you make your journey through the inferno of dependent data.</li>
-<li>There are many ways to slice a time-series! As with any analysis - you have to be persistent and dig around and be creative.</li>
-</ul></section><section id="in-final-conclusion" class="level2" data-number="9.12"><h2 data-number="9.12" class="anchored" data-anchor-id="in-final-conclusion">
-<span class="header-section-number">9.12</span> In final conclusion</h2>
-<center>
-<div class="cell" data-hash="time_series_cache/html/havehope_3f02903829318a51ee00ba962b50b2aa">
-<div class="cell-output-display">
-<p><img src="./images/time_series/havehope.png" class="img-fluid" width="800"></p>
-</div>
-</div>
-</center>
-</section><section id="additional-resource" class="level2" data-number="9.13"><h2 data-number="9.13" class="anchored" data-anchor-id="additional-resource">
-<span class="header-section-number">9.13</span> Additional Resource</h2>
-<p>The main R guru for time series is <a href="https://robjhyndman.com/">Rob Hyndman</a>, author of the <a href="https://cran.r-project.org/web/packages/forecast/index.html"><code>forecast</code></a> package.</p>
-<p>See the <a href="https://cran.r-project.org/web/views/TimeSeries.html">CRAN Task View: Time Series Analysis</a> for many many packages related to time series analysis.</p>
-<p>An important ones (that I use and that we’ll use in lab) is: <a href="https://cran.r-project.org/web/packages/zoo/index.html"><code>zoo</code></a>.</p>
+$$
 
 
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+
+where:
+  
+- $m_t$ is the \emph{slowly varying trend} component 
+- $s_t$ is the \emph{seasonal} component 
+- $s_{t+d} = s_t$, where $d$ is the \emph{period}
+    - Usually, we know the period $d$ (and do not need to estimate it) 
+        - $X_t$ is a random component, that is (hopefully) stationary
+    
+### CO<sub>2</sub> data from Mauna Loa
+
+
+::: {.cell hash='time_series_cache/html/unnamed-chunk-31_c97b876b3d8048e64cdc5086aa9fd4e9'}
+::: {.cell-output-display}
+![](time_series_files/figure-html/unnamed-chunk-31-1.png){width=600}
+:::
+:::
+
+
+### Linear detrending
+
+
+::: {.cell hash='time_series_cache/html/CO2Detrend_6a12fe801ff1962f902f0d241510d4c4'}
+::: {.cell-output-display}
+![](time_series_files/figure-html/CO2Detrend-1.png){width=600}
+:::
+:::
+
+
+Not very satisfactory
+
+### "Classical" decomposition of CO<sub>2</sub> data
+
+
+
+$$Y_t = m_t + s_t + X_t}$$
+
+
+
+Key bits of code (try this at home!):
+
+::: {.cell hash='time_series_cache/html/unnamed-chunk-32_379355264e5c129d7575a48bf7b9f187'}
+
+```{.r .cell-code}
+# time series objects have "time" attributes
+  t <- as.vector(time(co2))
+  co2.lm <- lm(co2 ~ poly(t, 3))
+  Y.trend <-  predict(co2.lm)
+# tapply to average away at "cycle" of periodic  data
+  co2.detrended <- co2 - Y.trend
+  st <- tapply(co2.detrended, cycle(co2), mean)
+  Y.seasonal <- st[cycle(co2)]
+# random component  
+  Y.random <- co2.detrended - Y.seasonal
+```
+:::
+
+::: {.cell hash='time_series_cache/html/ClassicalCO2_d80cce204d9d7c45e594c5a993d93b29'}
+::: {.cell-output-display}
+![](time_series_files/figure-html/ClassicalCO2-1.png){width=1000}
+:::
+:::
+
+
+
+- $m_t$: fit a cubic polynomial
+- obtain detrended series: $V_t = Y_t - m_t$.
+- Seasonal component: $s_{t+i} = {1\over 12} \sum\limits_{d=1}^{n/d} V_{t+d+i}$
+- Random componenent: $X_t = AR(p)$
+
+
+### One line in R: `decompose()`
+
+
+::: {.cell hash='time_series_cache/html/decomposeCO2_fcc74e5d7501466f848b5cd1a5302c85'}
+
+```{.r .cell-code}
+plot(decompose(co2))
+```
+
+::: {.cell-output-display}
+![](time_series_files/figure-html/decomposeCO2-1.png){width=600}
+:::
+:::
+
+
+Note: The trend term here is non-parametric, but a moving window filter (size $d$):
+
+
+$$ m_t = {1 \over 2} \sum_{i = t-d/2}^{t+d/2} Y_{i} $$
+
+
+This is a good smoothing technique, but not useful for prediction
+
+
+### A caution about polynomial fits:
+
+They look great in the region they are fitting ...
+
+
+::: {.cell hash='time_series_cache/html/CO2goodandbad_45e36796a3bd4b8d91087b84a09a0c43'}
+::: {.cell-output-display}
+![](time_series_files/figure-html/CO2goodandbad-1.png){width=600}
+:::
+
+::: {.cell-output-display}
+![](time_series_files/figure-html/CO2goodandbad-2.png){width=600}
+:::
+:::
+
+
+but the better they fit, the less reliable they are far away.
+
+
+### Incidentally:
+
+In 2013, CO<sub>2</sub> at Mauna Loa hit 400 ppm for the first time 
+
+<center>
+
+::: {.cell hash='time_series_cache/html/SciAm_00c41dc5162c2c867c88f327d3e874f3'}
+::: {.cell-output-display}
+![](./images/time_series/Slate.png){width=300px}
+:::
+:::
+
+</center>
+
+In 2016, CO<sub>2</sub> [went over 400 ppm permanently](https://www.scientificamerican.com/article/earth-s-co2-passes-the-400-ppm-threshold-maybe-permanently/). 
+
+<center>
+
+::: {.cell hash='time_series_cache/html/Slate_3926848298eb58d303febd8bf5fbc729'}
+::: {.cell-output-display}
+![](./images/time_series/scientificamerican.png){width=600px}
+:::
+:::
+
+</center>
+
+How well could we have predicted that from our time-series model?
+
+
+## Population cycles
+
+<center>
+
+::: {.cell hash='time_series_cache/html/LH_db401453c03802897d56e5e3b5f534e8'}
+::: {.cell-output-display}
+![](./images/time_series/LynxVHare.png){width=300px}
+:::
+:::
+
+::: {.cell hash='time_series_cache/html/LH2_d4f3687c00c5e58e18fcfdbf8b0a2e09'}
+::: {.cell-output-display}
+![](./images/time_series/LynxHare.jpg){width=400px}
+:::
+:::
+
+</center>
+
+### Cross-correlation functions
+
+##### Recall autocorrelation:
+
+- Autocorrelation function: $\rho(h) =  {\text{E}[(X_t - \mu_x)(Y_{t+h} - \mu_y)] \over \sigma_x^2}$
+- Sample autocorrelation: {$\widehat{\gamma}(h) = {1 \over n s_x^2} \sum_{t=1}^{n-|h|} (X_{t+|h|} - \overline{X})(X_t - \overline{X})$}
+    
+##### Analogously:
+    
+- Cross-correlation function: 
+
+
+$$ \rho_{xy}(h) = {\text{E}[(X_t - \mu_x)(Y_{t+h} - \mu_y)] \over \sigma_x \sigma_y} $$
+
+
+- Sample cross-correlation: 
+
+
+$$ \widehat{\gamma}(h) = {1 \over n s_x s_y} \sum_{t=1}^{n-|h|} (Y_{t+|h|} - \overline{X})(X_t - \overline{X})$$
+
+
+
+*Cross-correlation allows identification of relationships BETWEEN time-series over different lags.*
+
+
+### Cross-correlation of lynx and hare
+In R, simply: `ccf(Hare, Lynx)`
+
+
+::: {.cell hash='time_series_cache/html/CCF1_3cfc0677e037e5a20c2692eb2a447f2e'}
+::: {.cell-output-display}
+![](./images/time_series/CCF1.png){width=600px}
+:::
+:::
+
+::: {.cell hash='time_series_cache/html/CCF2_c9efff0451c67869d02341e562a49ac0'}
+::: {.cell-output-display}
+![](./images/time_series/CCF2.png){width=600px}
+:::
+:::
+
+
+Which of these effects is more important: Less Lynx leads to more Hare?  More Hare leads to more Lynx?  More Lynx leads to less Hare?  Less Hare leads to less Lynx? **These are difficult, but not impossible, questions to parse!**
+
+
+
+## Some intermediate conclusions
+    
+- If you do not account for correlation in your data, it is easy to make false inferences... 
+- BUT, there are interesting things to be learned from studying the (terrifying) lack of independence. 
+- A general strategy is to systematically extract all the patterns or otherwise reduce the data until you have extracted the stationary piece. 
+- Many basic concepts from regression are useful. 
+- There are many easy-to-use tools in R (and elsewhere) that, like Virgil, hold your hand as you make your journey through the inferno of dependent data. 
+- There are many ways to slice a time-series! As with any analysis - you have to be persistent and dig around and be creative. 
+    
+
+## In final conclusion
+
+<center>
+
+::: {.cell hash='time_series_cache/html/havehope_3f02903829318a51ee00ba962b50b2aa'}
+::: {.cell-output-display}
+![](./images/time_series/havehope.png){width=800}
+:::
+:::
+
+</center>
+
+
+
+## Additional Resource
+
+The main R guru for time series is [Rob Hyndman](https://robjhyndman.com/), author of the [`forecast`](https://cran.r-project.org/web/packages/forecast/index.html) package. 
+
+See the [CRAN Task View: Time Series Analysis](https://cran.r-project.org/web/views/TimeSeries.html) for many many packages related to time series analysis. 
+
+An important ones (that I use and that we'll use in lab) is: [`zoo`](https://cran.r-project.org/web/packages/zoo/index.html).  
+
+
+
+-->
+
+
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");

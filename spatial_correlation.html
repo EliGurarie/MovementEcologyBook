@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="E Gurarie, N Barbour, O Couriot, M Hebblewhite">
+<title>Techniques and Concepts in Movement Ecology - 10&nbsp; Dependent Data II: Spatial correlations</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./discrete_movement_models.html" rel="next">
+<link href="./time_series.html" rel="prev">
+<link href="./cover.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">
+<span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Dependent Data II: Spatial correlations</span>
+</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Techniques and Concepts in Movement Ecology</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle sidebar-tool" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./introductions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction(s)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">I. Foundations</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./questionsinmovementecology.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Kinds of movements, and kinds of questions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./whyspecialstats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Why do we need special statistics?</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">II. Basic Manipulations</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./complex_numbers.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Complex Numbers are Simple</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./spatial_data_in_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Spatial data in R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./movement_data_in_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Movement data in R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualization</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">III. Statistical foundations</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./likelihoods.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Likelihood Theory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./time_series.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Time Series</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./spatial_correlation.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Dependent Data II: Spatial correlations</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">IV. Models of movement</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./discrete_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Discrete time movement models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./continuous_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Continuous time movement models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./home_ranges.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Home ranges</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./behavioral_changes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Behavioral Changes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./hmms.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Hidden Markov and State-Space Modeling</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">V. Resource and Step-Selection</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./resource_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Resource Selection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./step_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Step Selection Functions</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#recalling-generalized-least-squares" id="toc-recalling-generalized-least-squares" class="nav-link active" data-scroll-target="#recalling-generalized-least-squares"> <span class="header-section-number">10.1</span> Recalling generalized least squares</a></li>
+  <li>
+<a href="#spatial-autocorrelation" id="toc-spatial-autocorrelation" class="nav-link" data-scroll-target="#spatial-autocorrelation"> <span class="header-section-number">10.2</span> Spatial autocorrelation</a>
+  <ul class="collapse">
+<li><a href="#example-soil-quality-data" id="toc-example-soil-quality-data" class="nav-link" data-scroll-target="#example-soil-quality-data"> <span class="header-section-number">10.2.1</span> Example: Soil Quality Data</a></li>
+  <li><a href="#linear-model" id="toc-linear-model" class="nav-link" data-scroll-target="#linear-model"> <span class="header-section-number">10.2.2</span> Linear model</a></li>
+  <li><a href="#adding-spatial-correlation" id="toc-adding-spatial-correlation" class="nav-link" data-scroll-target="#adding-spatial-correlation"> <span class="header-section-number">10.2.3</span> Adding Spatial Correlation</a></li>
+  <li><a href="#same-model-with-lme" id="toc-same-model-with-lme" class="nav-link" data-scroll-target="#same-model-with-lme"> <span class="header-section-number">10.2.4</span> Same Model with lme</a></li>
+  <li><a href="#challenges" id="toc-challenges" class="nav-link" data-scroll-target="#challenges"> <span class="header-section-number">10.2.5</span> Challenges</a></li>
+  </ul>
+</li>
+  <li><a href="#exercise-ozone" id="toc-exercise-ozone" class="nav-link" data-scroll-target="#exercise-ozone"> <span class="header-section-number">10.3</span> Exercise: Ozone</a></li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/edit/main/spatial_correlation.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block">
+<span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Dependent Data II: Spatial correlations</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>E. Gurarie </p>
+          </div>
+  </div>
+    
+    
+  </div>
+  
+
+</header><div class="cell">
+
+</div>
+<section id="recalling-generalized-least-squares" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="recalling-generalized-least-squares">
+<span class="header-section-number">10.1</span> Recalling generalized least squares</h2>
+<p>Last lecture we talked about modeling correlations in the residuals of a linear model:</p>
+<p><span class="math display">\[Y_i = \beta X_{ij} + \epsilon_{ij}\]</span></p>
+<p>where <span class="math display">\[\epsilon \sim {\cal N}(0, \Sigma)\]</span> and <span class="math inline">\(\Sigma\)</span> is the variance-covariance matrix</p>
+<p>Remember that for AR(1):</p>
+<p><span class="math display">\[ \text{Cor}(\epsilon_t, \epsilon_{t-h}) = \phi^h \]</span></p>
+<p>So the residual variance-covariance for an AR(1) is just: <small></small></p>
+<p><span class="math display">\[\Sigma = \sigma^2 \begin{bmatrix}
+  1       &amp; \phi   &amp; \phi^2 &amp; \phi^3 &amp; ... &amp; \phi^{n-1} \\
+  \phi    &amp; 1      &amp; \phi   &amp; \phi^2 &amp; ... &amp; \phi^{n-2} \\
+  \phi^2  &amp; \phi   &amp; 1      &amp; \phi   &amp; ... &amp; \phi^{n-3} \\
+  \phi^3  &amp; \phi^2 &amp; \phi   &amp;   1  &amp; &amp; \vdots \\
+  \vdots  &amp; \vdots &amp; \vdots &amp; &amp; \ddots &amp; \vdots\\
+  \phi^{n-1} &amp; \phi^{n-2} &amp; \phi^{n-3} &amp; ... &amp; ...&amp; 1
+  \end{bmatrix}\]</span> </p>
+<p><span class="math inline">\(\Sigma\)</span> is estimated with two parameters, <span class="math inline">\(\phi\)</span> and <span class="math inline">\(\sigma^2\)</span></p>
+</section><section id="spatial-autocorrelation" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="spatial-autocorrelation">
+<span class="header-section-number">10.2</span> Spatial autocorrelation</h2>
+<p>The Gaussian (most commonly modeled) spatial correlation structure quantifies the correlation between (the residuals) of two points, assuming that it onnly depends on their distance:</p>
+<p><span class="math display">\[\text{Cor}(\epsilon_{i,j}, \epsilon_{i,j}) = \exp \left(- \left({r_{i,j} \over \lambda}\right)^2\right) \]</span></p>
+<p>Where <span class="math inline">\(r_{ij} = ||{x_i,y_i}|| - ||{x_j,y_j}||\)</span>, i.e.&nbsp;the distance between the two points, and <span class="math inline">\(\lambda\)</span> is a single parameter that quantifies the scale of spatial correlation. Note that:</p>
+<ul>
+<li>at <span class="math inline">\(r = 0\)</span>, the correlation is 1</li>
+<li>as <span class="math inline">\(r \to \infty\)</span>, the correlation goes to 0</li>
+<li>at <span class="math inline">\(r = \lambda\)</span>, the correlation is <span class="math inline">\(1/e\)</span>
+</li>
+</ul>
+<p>The last fact is a useful way to interpret <span class="math inline">\(\lambda\)</span> … as long as points are within distance <span class="math inline">\(\lambda\)</span> of each other, they will be affecting each importantly.</p>
+<p>As with serial autocorrelation (in time), the biggest risk of not accounting for spatial correlations is that you might detect spurious results, i.e.&nbsp;<em>p</em>-values will be artificially too low.</p>
+<section id="example-soil-quality-data" class="level3" data-number="10.2.1"><h3 data-number="10.2.1" class="anchored" data-anchor-id="example-soil-quality-data">
+<span class="header-section-number">10.2.1</span> Example: Soil Quality Data</h3>
+<p>The <code>gls</code> and <code>nlme</code> functions in R can fit this (and a few other) spatial correlation structures in a linear modeling framework. As an example, here is one I found online which measures soil thickness as a function of quality at different locations ::: {.cell warnings=‘false’}</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">spdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"https://terpconnect.umd.edu/~egurarie/teaching/Biol709/data/soildata.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      east     north      thick     soil
+1 70.66202 47.164981 0.70810547 4.512566
+2 60.53693 77.351026 0.01785133 2.519441
+3 87.18226  3.530827 1.11171322 8.133484
+4 83.21457 21.109702 1.11715551 4.535713
+5 75.42334 81.719902 0.36837944 5.274376
+6 89.70406 22.805068 1.03328925 4.590200</code></pre>
+</div>
+<p>:::</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.2.2</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="spatial_correlation_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section><section id="linear-model" class="level3" data-number="10.2.2"><h3 data-number="10.2.2" class="anchored" data-anchor-id="linear-model">
+<span class="header-section-number">10.2.2</span> Linear model</h3>
+<p>A straightworward linear model suggests that quality (which is measured at the surface) is a significant predictor of thickness (which is harder to measure):</p>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">soil.lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">thick</span><span class="op">~</span><span class="va">soil</span>, <span class="va">spdata</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">soil.lm</span><span class="op">)</span><span class="op">$</span><span class="va">coef</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              Estimate Std. Error  t value     Pr(&gt;|t|)
+(Intercept) 0.47128554 0.06475729 7.277722 8.512716e-11
+soil        0.03572402 0.01385732 2.577989 1.142602e-02</code></pre>
+</div>
+</div>
+<p>The syntax to perform this fit is identical using <code>gls</code>, which by default fits a simple linear model:</p>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://svn.r-project.org/R-packages/trunk/nlme/">nlme</a></span><span class="op">)</span></span>
+<span><span class="va">soil.gls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/nlme/man/gls.html">gls</a></span><span class="op">(</span><span class="va">thick</span><span class="op">~</span><span class="va">soil</span>, <span class="va">spdata</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">soil.gls</span><span class="op">)</span><span class="op">$</span><span class="va">coef</span>, <span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">soil.gls</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            summary(soil.gls)$coef numDF    F-value      p-value
+(Intercept)             0.47128554     1 483.045263 1.170154e-39
+soil                    0.03572402     1   6.646029 1.142602e-02</code></pre>
+</div>
+</div>
+<p>The coefficients (and p-values) are equal.</p>
+</section><section id="adding-spatial-correlation" class="level3" data-number="10.2.3"><h3 data-number="10.2.3" class="anchored" data-anchor-id="adding-spatial-correlation">
+<span class="header-section-number">10.2.3</span> Adding Spatial Correlation</h3>
+<p>Is done as follows:</p>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">soil.gls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/nlme/man/gls.html">gls</a></span><span class="op">(</span><span class="va">thick</span><span class="op">~</span><span class="va">soil</span>, <span class="va">spdata</span>, </span>
+<span>                correlation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/nlme/man/corGaus.html">corGaus</a></span><span class="op">(</span><span class="fl">1</span>,<span class="op">~</span><span class="va">east</span> <span class="op">+</span> <span class="va">north</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">soil.gls</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Generalized least squares fit by REML
+  Model: thick ~ soil 
+  Data: spdata 
+        AIC       BIC   logLik
+  -324.0889 -313.7491 166.0445
+
+Correlation Structure: Gaussian spatial correlation
+ Formula: ~east + north 
+ Parameter estimate(s):
+   range 
+19.87503 
+
+Coefficients:
+                 Value  Std.Error   t-value p-value
+(Intercept)  0.6409182 0.07577223  8.458484  0.0000
+soil        -0.0000164 0.00006041 -0.271171  0.7868
+
+ Correlation: 
+     (Intr)
+soil -0.039
+
+Standardized residuals:
+        Min          Q1         Med          Q3         Max 
+-2.22586599 -0.79832354 -0.02467059  0.80239334  1.65427242 
+
+Residual standard error: 0.2879282 
+Degrees of freedom: 100 total; 98 residual</code></pre>
+</div>
+</div>
+<p>Note the syntax</p>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">corGauss</span><span class="op">(</span><span class="fl">1</span>, <span class="op">~</span><span class="va">east</span><span class="op">+</span><span class="va">west</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Read about how this works in the <code>?corGauss</code> help file and see a list of other correlation structures in <code>nlme</code> in the <code><a href="https://rdrr.io/pkg/nlme/man/corClasses.html">?corClasses</a></code> help file</p>
+</section><section id="same-model-with-lme" class="level3" data-number="10.2.4"><h3 data-number="10.2.4" class="anchored" data-anchor-id="same-model-with-lme">
+<span class="header-section-number">10.2.4</span> Same Model with lme</h3>
+<p>The <code>lme</code> syntax is nearly identical. But: - because because it is a more general (and powerful) function, it is a bit more sluggish. - because it is designed for mixed effects models, it DEMANDS a “random effect”, which in this case is th column of dummy 1’s</p>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="http://had.co.nz/plyr">plyr</a></span><span class="op">)</span></span>
+<span><span class="va">soil.lme</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/nlme/man/lme.html">lme</a></span><span class="op">(</span>fixed <span class="op">=</span> <span class="va">thick</span> <span class="op">~</span> <span class="va">soil</span>, data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/plyr/man/mutate.html">mutate</a></span><span class="op">(</span><span class="va">spdata</span>, dummy <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, </span>
+<span>                correlation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/nlme/man/corGaus.html">corGaus</a></span><span class="op">(</span><span class="fl">1</span>,<span class="op">~</span><span class="va">east</span> <span class="op">+</span> <span class="va">north</span><span class="op">)</span>,</span>
+<span>                random <span class="op">=</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">|</span> <span class="va">dummy</span>, method <span class="op">=</span> <span class="st">"ML"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">soil.lme</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed-effects model fit by maximum likelihood
+  Data: mutate(spdata, dummy = 1) 
+        AIC      BIC   logLik
+  -343.0238 -329.998 176.5119
+
+Random effects:
+ Formula: ~1 | dummy
+         (Intercept)  Residual
+StdDev: 9.492085e-06 0.2852258
+
+Correlation Structure: Gaussian spatial correlation
+ Formula: ~east + north | dummy 
+ Parameter estimate(s):
+   range 
+19.87889 
+Fixed effects:  thick ~ soil 
+                 Value  Std.Error DF   t-value p-value
+(Intercept)  0.6409115 0.07583082 98  8.451861  0.0000
+soil        -0.0000163 0.00006036 98 -0.270433  0.7874
+ Correlation: 
+     (Intr)
+soil -0.039
+
+Standardized Within-Group Residuals:
+       Min         Q1        Med         Q3        Max 
+-2.2469318 -0.8058647 -0.0248815  0.8100185  1.6699683 
+
+Number of Observations: 100
+Number of Groups: 1 </code></pre>
+</div>
+</div>
+<p>But the conclusions are the same.</p>
+</section><section id="challenges" class="level3" data-number="10.2.5"><h3 data-number="10.2.5" class="anchored" data-anchor-id="challenges">
+<span class="header-section-number">10.2.5</span> Challenges</h3>
+<ul>
+<li>Auto-correlation structures are most easily defined for <strong>Gaussian</strong> models.</li>
+<li>For glm’s it is much more difficult to separate a modeled term from a residual term</li>
+<li>In general, these models can take a long time to fit - because inverting large matrices</li>
+<li>Combining both temporal and spatial autocorrelation is very difficult / not possible in these frameworks</li>
+<li>Bayesian MCMC can fit anything … but can take a long time to run.</li>
+<li>Probably the biggest, most powerful “gun” in the generalized / correlated / nested / mixed / additive modeling universe is: <strong>INLA</strong> (see: http://www.r-inla.org/) (integrated nested Laplace approximations).</li>
+</ul></section></section><section id="exercise-ozone" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="exercise-ozone">
+<span class="header-section-number">10.3</span> Exercise: Ozone</h2>
+<p>Load the Ozone data in the <code>plyr</code> package This is a 24x24x72 numeric array which contains monthly ozone averages on a coarse (24 x 24 grid) covering Central America, from Jan 1995 to Dec 2000. Below, for example, is a plot of ozone concentrations on August 1995:</p>
+<div class="cell">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="http://had.co.nz/plyr">plyr</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va">maps</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dnychka/fieldsRPackage">fields</a></span><span class="op">)</span></span>
+<span><span class="va">O3</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/plyr/man/ozone.html">ozone</a></span></span>
+<span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span><span class="op">(</span><span class="va">O3</span><span class="op">[</span>,,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">long</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">O3</span><span class="op">[</span>,,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/fields/man/image.plot.html">image.plot</a></span><span class="op">(</span><span class="va">long</span>,<span class="va">lat</span>,<span class="va">O3</span><span class="op">[</span>,,<span class="fl">8</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world"</span>, add<span class="op">=</span><span class="cn">TRUE</span>, lwd<span class="op">=</span><span class="fl">2</span>, fill<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="spatial_correlation_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="576"></p>
+</div>
+</div>
+<p>Note that these data can be easily “reshaped” to a more classic data frame using the <code>melt</code> function in <code>reshape2</code>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hadley/reshape">reshape2</a></span><span class="op">)</span></span>
+<span><span class="va">O3.df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reshape2/man/melt.html">melt</a></span><span class="op">(</span><span class="va">O3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">O3.df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    lat   long time value
+1 -21.2 -113.8    1   260
+2 -18.7 -113.8    1   258
+3 -16.2 -113.8    1   258
+4 -13.7 -113.8    1   254
+5 -11.2 -113.8    1   252
+6  -8.7 -113.8    1   252</code></pre>
+</div>
+</div>
+<p>To add the “correct” month and year to this data frame: ::: {.cell}</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">O3.df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/plyr/man/mutate.html">mutate</a></span><span class="op">(</span><span class="va">O3.df</span>, year <span class="op">=</span> <span class="fl">1995</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="op">(</span><span class="va">time</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">12</span><span class="op">)</span>, month <span class="op">=</span> <span class="va">time</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="op">(</span><span class="va">time</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>:::</p>
+<p>An important additional tweak - we don’t actually want to do spatial analysis in latitude/longitude. We need to convert to a consistent unit (e.g.&nbsp;in km). This is a fairly large area, and the distortion of the earth might distort any projection. But a quick way to deal with this is as follows:</p>
+<div class="cell">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/pbs-software/pbs-mapping">PBSmapping</a></span><span class="op">)</span></span>
+<span><span class="va">ll</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">O3.df</span>, <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>X <span class="op">=</span> <span class="va">long</span>, Y <span class="op">=</span> <span class="va">lat</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/attributes.html">attributes</a></span><span class="op">(</span><span class="va">ll</span><span class="op">)</span><span class="op">$</span><span class="va">projection</span> <span class="op">&lt;-</span> <span class="st">"LL"</span></span>
+<span><span class="va">xy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/PBSmapping/man/convUL.html">convUL</a></span><span class="op">(</span><span class="va">ll</span>, km<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">O3.df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">O3.df</span>, <span class="va">xy</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>For the analysis below, pick any month and year combination.</p>
+<ol type="1">
+<li><p>Map the ozone concentration for that month/year combination.</p></li>
+<li><p>Perform a straightforward linear regression of ozone concentrations against East and North. Does there appear to be a East-West or North-South trend in either of those directions?</p></li>
+<li><p>Estimate the spatial scale of autocorrelation in ozone concentrations.</p></li>
+</ol>
+<div class="cell">
+
+</div>
+<ol start="4" type="1">
+<li><p>Does taking that correlation into account change your conclusions about longitudinal or latitudinal trends in ozone concentration?</p></li>
+<li><p><strong><em>Bonus Problem</em></strong>: Write a function that performs this analysis for any year month combination. Perform it across all months. Are there any consistent <em>annual</em> patterns in (a) spatial scale of correlation and (b) longitudinal and latitudinal trends in ozone?</p></li>
+</ol>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./time_series.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Time Series</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./discrete_movement_models.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Discrete time movement models</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left"><a href="https://eligurarie.github.io/">E. Gurarie</a>, N. Barbour, O. Couriot, M. Hebblewhite (?), others (?)</div>   
+    <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a>.</div>
+  </div>
+</footer>
+
+
+</body></html>
