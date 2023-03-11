@@ -2,22 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.0.36">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="E Gurarie, N Barbour, O Couriot, M Hebblewhite">
 <title>Techniques and Concepts in Movement Ecology - 6&nbsp; Movement data in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
-ul.task-list li input[type="checkbox"] {
-  width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
-  vertical-align: middle;
-}
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -56,7 +51,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
+code span.bu { } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -69,7 +64,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -248,7 +243,12 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./dependent_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Dependent Data</span></a>
+  <a href="./time_series.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Time Series</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./spatial_correlation.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Dependent Data II: Spatial correlations</span></a>
   </div>
 </li>
       </ul>
@@ -263,27 +263,27 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./discrete_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Discrete time movement models</span></a>
+  <a href="./discrete_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Discrete time movement models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./continuous_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Continuous time movement models</span></a>
+  <a href="./continuous_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Continuous time movement models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_ranges.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Home ranges</span></a>
+  <a href="./home_ranges.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Home ranges</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./behavioral_changes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Behavioral Changes</span></a>
+  <a href="./behavioral_changes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Behavioral Changes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./hmms.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Hidden Markov and State-Space Modeling</span></a>
+  <a href="./hmms.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Hidden Markov and State-Space Modeling</span></a>
   </div>
 </li>
       </ul>
@@ -298,12 +298,12 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./resource_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Resource Selection</span></a>
+  <a href="./resource_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Resource Selection</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./step_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Step Selection Functions</span></a>
+  <a href="./step_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Step Selection Functions</span></a>
   </div>
 </li>
       </ul>
@@ -311,39 +311,39 @@ div.csl-indent {
     </ul>
 </div>
 </nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#preamble" id="toc-preamble" class="nav-link active" data-scroll-target="#preamble"><span class="toc-section-number">6.1</span>  Preamble</a></li>
+<li><a href="#preamble" id="toc-preamble" class="nav-link active" data-scroll-target="#preamble"> <span class="header-section-number">6.1</span> Preamble</a></li>
   <li>
-<a href="#movebank-data" id="toc-movebank-data" class="nav-link" data-scroll-target="#movebank-data"><span class="toc-section-number">6.2</span>  Movebank Data</a>
+<a href="#movebank-data" id="toc-movebank-data" class="nav-link" data-scroll-target="#movebank-data"> <span class="header-section-number">6.2</span> Movebank Data</a>
   <ul class="collapse">
-<li><a href="#loading-movement-data-in-r" id="toc-loading-movement-data-in-r" class="nav-link" data-scroll-target="#loading-movement-data-in-r"><span class="toc-section-number">6.2.1</span>  Loading movement data in R</a></li>
-  <li><a href="#load-the-data-from-your-computer" id="toc-load-the-data-from-your-computer" class="nav-link" data-scroll-target="#load-the-data-from-your-computer"><span class="toc-section-number">6.2.2</span>  Load the data from your computer</a></li>
-  <li><a href="#data-structure" id="toc-data-structure" class="nav-link" data-scroll-target="#data-structure"><span class="toc-section-number">6.2.3</span>  Data structure</a></li>
-  <li><a href="#manipulating-time" id="toc-manipulating-time" class="nav-link" data-scroll-target="#manipulating-time"><span class="toc-section-number">6.2.4</span>  Manipulating time</a></li>
+<li><a href="#loading-movement-data-in-r" id="toc-loading-movement-data-in-r" class="nav-link" data-scroll-target="#loading-movement-data-in-r"> <span class="header-section-number">6.2.1</span> Loading movement data in R</a></li>
+  <li><a href="#load-the-data-from-your-computer" id="toc-load-the-data-from-your-computer" class="nav-link" data-scroll-target="#load-the-data-from-your-computer"> <span class="header-section-number">6.2.2</span> Load the data from your computer</a></li>
+  <li><a href="#data-structure" id="toc-data-structure" class="nav-link" data-scroll-target="#data-structure"> <span class="header-section-number">6.2.3</span> Data structure</a></li>
+  <li><a href="#manipulating-time" id="toc-manipulating-time" class="nav-link" data-scroll-target="#manipulating-time"> <span class="header-section-number">6.2.4</span> Manipulating time</a></li>
   </ul>
 </li>
   <li>
-<a href="#exploring-raw-movement-data" id="toc-exploring-raw-movement-data" class="nav-link" data-scroll-target="#exploring-raw-movement-data"><span class="toc-section-number">6.3</span>  Exploring raw movement data</a>
+<a href="#exploring-raw-movement-data" id="toc-exploring-raw-movement-data" class="nav-link" data-scroll-target="#exploring-raw-movement-data"> <span class="header-section-number">6.3</span> Exploring raw movement data</a>
   <ul class="collapse">
-<li><a href="#how-many-individuals-are-there" id="toc-how-many-individuals-are-there" class="nav-link" data-scroll-target="#how-many-individuals-are-there"><span class="toc-section-number">6.3.1</span>  How many individuals are there?</a></li>
-  <li><a href="#how-many-femalesmales" id="toc-how-many-femalesmales" class="nav-link" data-scroll-target="#how-many-femalesmales"><span class="toc-section-number">6.3.2</span>  How many females/males?</a></li>
-  <li><a href="#how-many-locations-per-individual" id="toc-how-many-locations-per-individual" class="nav-link" data-scroll-target="#how-many-locations-per-individual"><span class="toc-section-number">6.3.3</span>  How many locations per individual?</a></li>
-  <li><a href="#what-is-the-duration-of-monitoring" id="toc-what-is-the-duration-of-monitoring" class="nav-link" data-scroll-target="#what-is-the-duration-of-monitoring"><span class="toc-section-number">6.3.4</span>  What is the duration of monitoring?</a></li>
-  <li><a href="#what-is-the-fix-rate" id="toc-what-is-the-fix-rate" class="nav-link" data-scroll-target="#what-is-the-fix-rate"><span class="toc-section-number">6.3.5</span>  What is the fix rate?</a></li>
+<li><a href="#how-many-individuals-are-there" id="toc-how-many-individuals-are-there" class="nav-link" data-scroll-target="#how-many-individuals-are-there"> <span class="header-section-number">6.3.1</span> How many individuals are there?</a></li>
+  <li><a href="#how-many-femalesmales" id="toc-how-many-femalesmales" class="nav-link" data-scroll-target="#how-many-femalesmales"> <span class="header-section-number">6.3.2</span> How many females/males?</a></li>
+  <li><a href="#how-many-locations-per-individual" id="toc-how-many-locations-per-individual" class="nav-link" data-scroll-target="#how-many-locations-per-individual"> <span class="header-section-number">6.3.3</span> How many locations per individual?</a></li>
+  <li><a href="#what-is-the-duration-of-monitoring" id="toc-what-is-the-duration-of-monitoring" class="nav-link" data-scroll-target="#what-is-the-duration-of-monitoring"> <span class="header-section-number">6.3.4</span> What is the duration of monitoring?</a></li>
+  <li><a href="#what-is-the-fix-rate" id="toc-what-is-the-fix-rate" class="nav-link" data-scroll-target="#what-is-the-fix-rate"> <span class="header-section-number">6.3.5</span> What is the fix rate?</a></li>
   </ul>
 </li>
   <li>
-<a href="#processing-data" id="toc-processing-data" class="nav-link" data-scroll-target="#processing-data"><span class="toc-section-number">6.4</span>  Processing data</a>
+<a href="#processing-data" id="toc-processing-data" class="nav-link" data-scroll-target="#processing-data"> <span class="header-section-number">6.4</span> Processing data</a>
   <ul class="collapse">
-<li><a href="#subsetting-by-season" id="toc-subsetting-by-season" class="nav-link" data-scroll-target="#subsetting-by-season"><span class="toc-section-number">6.4.1</span>  Subsetting by season</a></li>
-  <li><a href="#estimating-movement-rate" id="toc-estimating-movement-rate" class="nav-link" data-scroll-target="#estimating-movement-rate"><span class="toc-section-number">6.4.2</span>  Estimating movement rate</a></li>
-  <li><a href="#quick-analysis-of-movement-rates" id="toc-quick-analysis-of-movement-rates" class="nav-link" data-scroll-target="#quick-analysis-of-movement-rates"><span class="toc-section-number">6.4.3</span>  Quick analysis of movement rates</a></li>
+<li><a href="#subsetting-by-season" id="toc-subsetting-by-season" class="nav-link" data-scroll-target="#subsetting-by-season"> <span class="header-section-number">6.4.1</span> Subsetting by season</a></li>
+  <li><a href="#estimating-movement-rate" id="toc-estimating-movement-rate" class="nav-link" data-scroll-target="#estimating-movement-rate"> <span class="header-section-number">6.4.2</span> Estimating movement rate</a></li>
+  <li><a href="#quick-analysis-of-movement-rates" id="toc-quick-analysis-of-movement-rates" class="nav-link" data-scroll-target="#quick-analysis-of-movement-rates"> <span class="header-section-number">6.4.3</span> Quick analysis of movement rates</a></li>
   </ul>
 </li>
-  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions"><span class="toc-section-number">6.5</span>  Conclusions</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="toc-section-number">6.6</span>  References</a></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions"> <span class="header-section-number">6.5</span> Conclusions</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"> <span class="header-section-number">6.6</span> References</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/edit/main/movement_data_in_R.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
@@ -365,7 +365,6 @@ div.csl-indent {
           </div>
   </div>
     
-  
     
   </div>
   
@@ -391,17 +390,17 @@ div.csl-indent {
 </div>
 </section><section id="movebank-data" class="level2 page-columns page-full" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="movebank-data">
 <span class="header-section-number">6.2</span> Movebank Data</h2>
-<div class="page-columns page-full"><p>Here as an example we will use elk (<em>Cervus elaphus</em><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>) movement data from the <a href="https://www.umt.edu/yahatinda/"><em>Ya Ha Tinda Long-Term Elk Monitoring Project</em></a> <span class="citation" data-cites="Hebblewhite2020">(<a href="#ref-Hebblewhite2020" role="doc-biblioref">Hebblewhite et al. 2020</a>)</span>, which are hosted on Movebank (https://www.movebank.org). The dataset that we are using is a subset of the data, and contains GPS locations of 10 female Elk from Banff National Park, in Alberta. You can access the data as a <code>.csv</code> file at <a href="https://www.datarepository.movebank.org/handle/10255/move.1129">this link</a>. But it is worth visiting MoveBank, getting an account, and learning how to navigate the website. For example, you can log in on MoveBank, clicking <code>Data \&gt; Studies</code>, and changing from <em>Studies where I am the Data Manager</em> to <em>All studies</em>, and search <em>“Ya Ha Tinda elk project, Banff National Park, 2001-2020 (females)”</em> . Click on <code>Download &gt; Download data</code> and follow further instructions.</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Or is it <a href="https://www.researchgate.net/post/Use_of_Cervus_elaphus_versus_Cervus_canadensis_in_reference_to_North_American_elk_wapiti"><em>Cervus canadensis</em></a>?</p></li></div></div>
+<div class="page-columns page-full"><p>Here as an example we will use elk (<em>Cervus elaphus</em><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>) movement data from the <a href="https://www.umt.edu/yahatinda/"><em>Ya Ha Tinda Long-Term Elk Monitoring Project</em></a> <span class="citation" data-cites="Hebblewhite2020">(<a href="#ref-Hebblewhite2020" role="doc-biblioref">Hebblewhite et al. 2020</a>)</span>, which are hosted on Movebank (https://www.movebank.org). The dataset that we are using is a subset of the data, and contains GPS locations of 10 female Elk from Banff National Park, in Alberta. You can access the data as a <code>.csv</code> file at <a href="https://www.datarepository.movebank.org/handle/10255/move.1129">this link</a>. But it is worth visiting MoveBank, getting an account, and learning how to navigate the website. For example, you can log in on MoveBank, clicking <code>Data \&gt; Studies</code>, and changing from <em>Studies where I am the Data Manager</em> to <em>All studies</em>, and search <em>“Ya Ha Tinda elk project, Banff National Park, 2001-2020 (females)”</em> . Click on <code>Download &gt; Download data</code> and follow further instructions.</p><div class="no-row-height column-margin column-container"><li id="fn1" role="doc-endnote"><p><sup>1</sup>&nbsp;Or is it <a href="https://www.researchgate.net/post/Use_of_Cervus_elaphus_versus_Cervus_canadensis_in_reference_to_North_American_elk_wapiti"><em>Cervus canadensis</em></a>?</p></li></div></div>
 <section id="loading-movement-data-in-r" class="level3" data-number="6.2.1"><h3 data-number="6.2.1" class="anchored" data-anchor-id="loading-movement-data-in-r">
 <span class="header-section-number">6.2.1</span> Loading movement data in R</h3>
-<p>If you are working from data on Movebank - including data with controlled or limited access that you have access to - you can load the data with the <code><a href="https://bartk.gitlab.io/move/reference/getMovebankData.html">move::getMovebankData()</a></code> function [^1: recall, the <code>move::</code> notation just means that the function comes from the <code>move</code> package] using your own login and password. This is a two step process. First you have to create an object that contains your login information:</p>
+<p>If you are working from data on Movebank - including data with controlled or limited access that you have access to - you can load the data with the <code><a href="https://rdrr.io/pkg/move/man/getMovebankData.html">move::getMovebankData()</a></code> function [^1: recall, the <code>move::</code> notation just means that the function comes from the <code>move</code> package] using your own login and password. This is a two step process. First you have to create an object that contains your login information:</p>
 <div class="cell" data-hash="movement_data_in_R_cache/html/getData_fd58e8ce7451c430f67f069c995a6f83">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://bartk.gitlab.io/move/">move</a></span><span class="op">)</span></span>
-<span><span class="va">mylogin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://bartk.gitlab.io/move/reference/movebankLogin.html">movebankLogin</a></span><span class="op">(</span>username<span class="op">=</span><span class="st">'XXX'</span>, password<span class="op">=</span><span class="st">'XXX'</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">mylogin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/move/man/movebankLogin.html">movebankLogin</a></span><span class="op">(</span>username<span class="op">=</span><span class="st">'XXX'</span>, password<span class="op">=</span><span class="st">'XXX'</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Replacing the <code>XXX</code>’s with your private information. Next, you use that login in the <code>getMovebankData</code> function:</p>
 <div class="cell" data-hash="movement_data_in_R_cache/html/getData3_77f3b93b217cd59f1383cc519b42749d">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">elk_move</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://bartk.gitlab.io/move/reference/getMovebankData.html">getMovebankData</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">elk_move</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/move/man/getMovebankData.html">getMovebankData</a></span><span class="op">(</span></span>
 <span>  study <span class="op">=</span> <span class="st">"Ya Ha Tinda elk project, Banff National Park, 2001-2020 (females)"</span>,</span>
 <span>  login <span class="op">=</span> <span class="va">mylogin</span>, removeDuplicatedTimestamps<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -443,7 +442,7 @@ div.csl-indent {
 <pre><code>[1] "data.frame" "list"       "oldClass"   "vector"    </code></pre>
 </div>
 </div>
-<p>When using the <code><a href="https://bartk.gitlab.io/move/reference/getMovebankData.html">getMovebankData()</a></code> function, the resulting object is a <code>MoveStack</code>. We can use the <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code> (or just <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code>), to transform it into a data frame and see all the elements of the object. If you loaded the data from your computer, it is a <code>data.frame.</code></p>
+<p>When using the <code><a href="https://rdrr.io/pkg/move/man/getMovebankData.html">getMovebankData()</a></code> function, the resulting object is a <code>MoveStack</code>. We can use the <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code> (or just <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code>), to transform it into a data frame and see all the elements of the object. If you loaded the data from your computer, it is a <code>data.frame.</code></p>
 <p>The dimensions (number or rows and columns), by <code><a href="https://rdrr.io/r/base/dim.html">dim()</a></code>.</p>
 <div class="cell" data-hash="movement_data_in_R_cache/html/dimensions_e44a5f57325266060373239d122608d0">
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">elk_df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -542,7 +541,7 @@ div.csl-indent {
 </table>
 </div>
 </div>
-<div class="page-columns page-full"><p>Movement data at the very minimum contains <em>x</em> and <em>y</em> (here, columns <code>X</code> and <code>Y</code>) or longitude/latitude (<code>Lon</code> and <code>Lat</code>) coordinates, and an associated <em>timestamp</em> (<code>Time</code>). If there is more than one individual, there will also be a <em>unique identifier</em> (<code>ID</code>). Additional columns might also be provided, as here with the sex of the individual.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p><div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;A warning: you <em>might</em> have loaded data with the <code>readr::read_csv()</code> function instead of <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code> - that is the default behavior if you click on a data file in newer versions of Rstudio, for example. This function will convert all of the <code>sex</code> column to the Boolean <code>FALSE</code> - implying that all of these elk are abstinent. This is an example of new and improved versions of software <em>occasionally</em> being a wee bit too smart for their own good.</p></li></div></div>
+<div class="page-columns page-full"><p>Movement data at the very minimum contains <em>x</em> and <em>y</em> (here, columns <code>X</code> and <code>Y</code>) or longitude/latitude (<code>Lon</code> and <code>Lat</code>) coordinates, and an associated <em>timestamp</em> (<code>Time</code>). If there is more than one individual, there will also be a <em>unique identifier</em> (<code>ID</code>). Additional columns might also be provided, as here with the sex of the individual.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p><div class="no-row-height column-margin column-container"><li id="fn2" role="doc-endnote"><p><sup>2</sup>&nbsp;A warning: you <em>might</em> have loaded data with the <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> function instead of <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code> - that is the default behavior if you click on a data file in newer versions of Rstudio, for example. This function will convert all of the <code>sex</code> column to the Boolean <code>FALSE</code> - implying that all of these elk are abstinent. This is an example of new and improved versions of software <em>occasionally</em> being a wee bit too smart for their own good.</p></li></div></div>
 <p>More detail about the structure of the data frame is given by <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code>:</p>
 <div class="cell" data-hash="movement_data_in_R_cache/html/Structure_8f317072fbb4b41197165ba05e751ec4">
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">elk_df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -803,7 +802,7 @@ div.csl-indent {
 <div class="cell" data-hash="movement_data_in_R_cache/html/sex_5c759c5081ce75ddc446ce469b15c774">
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">elk_df</span> <span class="op">%&gt;%</span> <span class="fu">group_by</span><span class="op">(</span><span class="va">ID</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">summarize</span><span class="op">(</span>sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 10 × 2
+<pre><code># A tibble: 10 x 2
    ID          sex  
    &lt;fct&gt;       &lt;fct&gt;
  1 GR122       f    
@@ -967,7 +966,7 @@ FALSE
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">elk_df</span> <span class="op">%&gt;%</span> <span class="fu">group_by</span><span class="op">(</span><span class="va">ID</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>duration <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/difftime.html">difftime</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">Time</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">Time</span><span class="op">)</span>, units <span class="op">=</span> <span class="st">"days"</span><span class="op">)</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 10 × 2
+<pre><code># A tibble: 10 x 2
    ID          duration      
    &lt;fct&gt;       &lt;drtn&gt;        
  1 GR122        458.6099 days
@@ -1304,8 +1303,8 @@ winter summer
 <td style="text-align: left;">597856+5727141i</td>
 <td style="text-align: right;">NA</td>
 <td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: right;">NaN</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">GR122</td>
@@ -1637,7 +1636,7 @@ seasonsummr -0.285</code></pre>
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
 <div id="ref-Hebblewhite2020" class="csl-entry" role="doc-biblioentry">
-Hebblewhite, Mark, Evelyn H. Merrill, Hans Martin, Jodi E. Berg, Holger Bohm, and Scott L. Eggeman. 2020. <span>“Data from: <span>Study</span> "<span>Ya Ha Tinda</span> Elk Project, <span>Banff National Park</span>, 2001-2020 (Females)".”</span> <span>Movebank Data Repository</span>. <a href="https://doi.org/10.5441/001/1.5G4H5T6C">https://doi.org/10.5441/001/1.5G4H5T6C</a>.
+Hebblewhite, Mark, Evelyn H. Merrill, Hans Martin, Jodi E. Berg, Holger Bohm, and Scott L. Eggeman. 2020. <span>“Data from: <span>Study</span> "<span>Ya Ha Tinda Elk Project</span>, <span>Banff National Park</span>, 2001-2020 (<span>Females</span>)".”</span> <span>Movebank Data Repository</span>. <a href="https://doi.org/10.5441/001/1.5G4H5T6C">https://doi.org/10.5441/001/1.5G4H5T6C</a>.
 </div>
 </div>
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -1681,24 +1680,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
     setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -1726,50 +1708,31 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      let href = ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
     });
   }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
       });
-    }
+      return popup.innerHTML;
+    });
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
