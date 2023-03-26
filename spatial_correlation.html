@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.0.36">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="E Gurarie, N Barbour, O Couriot, M Hebblewhite">
-<title>Techniques and Concepts in Movement Ecology - 10&nbsp; Dependent Data II: Spatial correlations</title>
+<title>Techniques and Concepts in Movement Ecology - 11&nbsp; Spatial correlations</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -86,7 +86,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./discrete_movement_models.html" rel="next">
-<link href="./time_series.html" rel="prev">
+<link href="./mixed_models.html" rel="prev">
 <link href="./cover.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -121,7 +121,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
       <h1 class="quarto-secondary-nav-title">
-<span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Dependent Data II: Spatial correlations</span>
+<span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Spatial correlations</span>
 </h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
@@ -229,7 +229,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./spatial_correlation.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Dependent Data II: Spatial correlations</span></a>
+  <a href="./mixed_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Mixed models with autocorrelation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./spatial_correlation.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Spatial correlations</span></a>
   </div>
 </li>
       </ul>
@@ -244,27 +249,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./discrete_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Discrete time movement models</span></a>
+  <a href="./discrete_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Discrete time movement models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./continuous_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Continuous time movement models</span></a>
+  <a href="./continuous_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Continuous time movement models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./home_ranges.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Home ranges</span></a>
+  <a href="./home_ranges.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Home ranges</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./behavioral_changes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Behavioral Changes</span></a>
+  <a href="./behavioral_changes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Behavioral Changes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./hmms.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Hidden Markov and State-Space Modeling</span></a>
+  <a href="./hmms.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Hidden Markov and State-Space Modeling</span></a>
   </div>
 </li>
       </ul>
@@ -279,12 +284,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./resource_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Resource Selection</span></a>
+  <a href="./resource_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Resource Selection</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./step_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Step Selection Functions</span></a>
+  <a href="./step_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Step Selection Functions</span></a>
   </div>
 </li>
       </ul>
@@ -295,24 +300,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#recalling-generalized-least-squares" id="toc-recalling-generalized-least-squares" class="nav-link active" data-scroll-target="#recalling-generalized-least-squares"> <span class="header-section-number">10.1</span> Recalling generalized least squares</a></li>
+<li><a href="#recalling-generalized-least-squares" id="toc-recalling-generalized-least-squares" class="nav-link active" data-scroll-target="#recalling-generalized-least-squares"> <span class="header-section-number">11.1</span> Recalling generalized least squares</a></li>
   <li>
-<a href="#spatial-autocorrelation" id="toc-spatial-autocorrelation" class="nav-link" data-scroll-target="#spatial-autocorrelation"> <span class="header-section-number">10.2</span> Spatial autocorrelation</a>
+<a href="#spatial-autocorrelation" id="toc-spatial-autocorrelation" class="nav-link" data-scroll-target="#spatial-autocorrelation"> <span class="header-section-number">11.2</span> Spatial autocorrelation</a>
   <ul class="collapse">
-<li><a href="#example-soil-quality-data" id="toc-example-soil-quality-data" class="nav-link" data-scroll-target="#example-soil-quality-data"> <span class="header-section-number">10.2.1</span> Example: Soil Quality Data</a></li>
-  <li><a href="#linear-model" id="toc-linear-model" class="nav-link" data-scroll-target="#linear-model"> <span class="header-section-number">10.2.2</span> Linear model</a></li>
-  <li><a href="#adding-spatial-correlation" id="toc-adding-spatial-correlation" class="nav-link" data-scroll-target="#adding-spatial-correlation"> <span class="header-section-number">10.2.3</span> Adding Spatial Correlation</a></li>
-  <li><a href="#same-model-with-lme" id="toc-same-model-with-lme" class="nav-link" data-scroll-target="#same-model-with-lme"> <span class="header-section-number">10.2.4</span> Same Model with lme</a></li>
-  <li><a href="#challenges" id="toc-challenges" class="nav-link" data-scroll-target="#challenges"> <span class="header-section-number">10.2.5</span> Challenges</a></li>
+<li><a href="#example-soil-quality-data" id="toc-example-soil-quality-data" class="nav-link" data-scroll-target="#example-soil-quality-data"> <span class="header-section-number">11.2.1</span> Example: Soil Quality Data</a></li>
+  <li><a href="#linear-model" id="toc-linear-model" class="nav-link" data-scroll-target="#linear-model"> <span class="header-section-number">11.2.2</span> Linear model</a></li>
+  <li><a href="#adding-spatial-correlation" id="toc-adding-spatial-correlation" class="nav-link" data-scroll-target="#adding-spatial-correlation"> <span class="header-section-number">11.2.3</span> Adding Spatial Correlation</a></li>
+  <li><a href="#same-model-with-lme" id="toc-same-model-with-lme" class="nav-link" data-scroll-target="#same-model-with-lme"> <span class="header-section-number">11.2.4</span> Same Model with lme</a></li>
+  <li><a href="#challenges" id="toc-challenges" class="nav-link" data-scroll-target="#challenges"> <span class="header-section-number">11.2.5</span> Challenges</a></li>
   </ul>
 </li>
-  <li><a href="#exercise-ozone" id="toc-exercise-ozone" class="nav-link" data-scroll-target="#exercise-ozone"> <span class="header-section-number">10.3</span> Exercise: Ozone</a></li>
+  <li><a href="#exercise-ozone" id="toc-exercise-ozone" class="nav-link" data-scroll-target="#exercise-ozone"> <span class="header-section-number">11.3</span> Exercise: Ozone</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/edit/main/spatial_correlation.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title d-none d-lg-block">
-<span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Dependent Data II: Spatial correlations</span>
+<span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Spatial correlations</span>
 </h1>
 </div>
 
@@ -334,28 +339,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header><div class="cell">
 
 </div>
-<section id="recalling-generalized-least-squares" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="recalling-generalized-least-squares">
-<span class="header-section-number">10.1</span> Recalling generalized least squares</h2>
+<section id="recalling-generalized-least-squares" class="level2" data-number="11.1"><h2 data-number="11.1" class="anchored" data-anchor-id="recalling-generalized-least-squares">
+<span class="header-section-number">11.1</span> Recalling generalized least squares</h2>
 <p>Last lecture we talked about modeling correlations in the residuals of a linear model:</p>
-<p><span class="math display">\[Y_i = \beta X_{ij} + \epsilon_{ij}\]</span></p>
-<p>where <span class="math display">\[\epsilon \sim {\cal N}(0, \Sigma)\]</span> and <span class="math inline">\(\Sigma\)</span> is the variance-covariance matrix</p>
+<p><span class="math display">\[Y_i = \beta X_{ij} + \epsilon_{ij}\]</span> where <span class="math display">\[\epsilon \sim {\cal N}(0, \Sigma)\]</span> and <span class="math inline">\(\Sigma\)</span> is the variance-covariance matrix</p>
 <p>Remember that for AR(1):</p>
 <p><span class="math display">\[ \text{Cor}(\epsilon_t, \epsilon_{t-h}) = \phi^h \]</span></p>
-<p>So the residual variance-covariance for an AR(1) is just: <small></small></p>
-<p><span class="math display">\[\Sigma = \sigma^2 \begin{bmatrix}
+<p>So the residual variance-covariance for an AR(1) is just: <small> <span class="math display">\[\Sigma = \sigma^2 \begin{bmatrix}
   1       &amp; \phi   &amp; \phi^2 &amp; \phi^3 &amp; ... &amp; \phi^{n-1} \\
   \phi    &amp; 1      &amp; \phi   &amp; \phi^2 &amp; ... &amp; \phi^{n-2} \\
   \phi^2  &amp; \phi   &amp; 1      &amp; \phi   &amp; ... &amp; \phi^{n-3} \\
   \phi^3  &amp; \phi^2 &amp; \phi   &amp;   1  &amp; &amp; \vdots \\
   \vdots  &amp; \vdots &amp; \vdots &amp; &amp; \ddots &amp; \vdots\\
   \phi^{n-1} &amp; \phi^{n-2} &amp; \phi^{n-3} &amp; ... &amp; ...&amp; 1
-  \end{bmatrix}\]</span> </p>
+  \end{bmatrix}\]</span> </small></p>
 <p><span class="math inline">\(\Sigma\)</span> is estimated with two parameters, <span class="math inline">\(\phi\)</span> and <span class="math inline">\(\sigma^2\)</span></p>
-</section><section id="spatial-autocorrelation" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="spatial-autocorrelation">
-<span class="header-section-number">10.2</span> Spatial autocorrelation</h2>
+</section><section id="spatial-autocorrelation" class="level2" data-number="11.2"><h2 data-number="11.2" class="anchored" data-anchor-id="spatial-autocorrelation">
+<span class="header-section-number">11.2</span> Spatial autocorrelation</h2>
 <p>The Gaussian (most commonly modeled) spatial correlation structure quantifies the correlation between (the residuals) of two points, assuming that it onnly depends on their distance:</p>
-<p><span class="math display">\[\text{Cor}(\epsilon_{i,j}, \epsilon_{i,j}) = \exp \left(- \left({r_{i,j} \over \lambda}\right)^2\right) \]</span></p>
-<p>Where <span class="math inline">\(r_{ij} = ||{x_i,y_i}|| - ||{x_j,y_j}||\)</span>, i.e.&nbsp;the distance between the two points, and <span class="math inline">\(\lambda\)</span> is a single parameter that quantifies the scale of spatial correlation. Note that:</p>
+<p><span class="math display">\[\text{Cor}(\epsilon_{i,j}, \epsilon_{i,j}) = \exp \left(- \left({r_{i,j} \over \lambda}\right)^2\right) \]</span> Where <span class="math inline">\(r_{ij} = ||{x_i,y_i}|| - ||{x_j,y_j}||\)</span>, i.e.&nbsp;the distance between the two points, and <span class="math inline">\(\lambda\)</span> is a single parameter that quantifies the scale of spatial correlation. Note that:</p>
 <ul>
 <li>at <span class="math inline">\(r = 0\)</span>, the correlation is 1</li>
 <li>as <span class="math inline">\(r \to \infty\)</span>, the correlation goes to 0</li>
@@ -364,9 +366,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>The last fact is a useful way to interpret <span class="math inline">\(\lambda\)</span> … as long as points are within distance <span class="math inline">\(\lambda\)</span> of each other, they will be affecting each importantly.</p>
 <p>As with serial autocorrelation (in time), the biggest risk of not accounting for spatial correlations is that you might detect spurious results, i.e.&nbsp;<em>p</em>-values will be artificially too low.</p>
-<section id="example-soil-quality-data" class="level3" data-number="10.2.1"><h3 data-number="10.2.1" class="anchored" data-anchor-id="example-soil-quality-data">
-<span class="header-section-number">10.2.1</span> Example: Soil Quality Data</h3>
-<p>The <code>gls</code> and <code>nlme</code> functions in R can fit this (and a few other) spatial correlation structures in a linear modeling framework. As an example, here is one I found online which measures soil thickness as a function of quality at different locations ::: {.cell warnings=‘false’}</p>
+<section id="example-soil-quality-data" class="level3" data-number="11.2.1"><h3 data-number="11.2.1" class="anchored" data-anchor-id="example-soil-quality-data">
+<span class="header-section-number">11.2.1</span> Example: Soil Quality Data</h3>
+<p>The <code>gls</code> and <code>nlme</code> functions in R can fit this (and a few other) spatial correlation structures in a linear modeling framework. As an example, here is one I found online which measures soil thickness as a function of quality at different locations</p>
+<div class="cell" data-warnings="false">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">spdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"https://terpconnect.umd.edu/~egurarie/teaching/Biol709/data/soildata.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      east     north      thick     soil
@@ -377,7 +380,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 5 75.42334 81.719902 0.36837944 5.274376
 6 89.70406 22.805068 1.03328925 4.590200</code></pre>
 </div>
-<p>:::</p>
+</div>
 <div class="cell">
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: package 'ggplot2' was built under R version 4.2.2</code></pre>
@@ -386,8 +389,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="spatial_correlation_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</section><section id="linear-model" class="level3" data-number="10.2.2"><h3 data-number="10.2.2" class="anchored" data-anchor-id="linear-model">
-<span class="header-section-number">10.2.2</span> Linear model</h3>
+</section><section id="linear-model" class="level3" data-number="11.2.2"><h3 data-number="11.2.2" class="anchored" data-anchor-id="linear-model">
+<span class="header-section-number">11.2.2</span> Linear model</h3>
 <p>A straightworward linear model suggests that quality (which is measured at the surface) is a significant predictor of thickness (which is harder to measure):</p>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">soil.lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">thick</span><span class="op">~</span><span class="va">soil</span>, <span class="va">spdata</span><span class="op">)</span></span>
@@ -410,8 +413,8 @@ soil                    0.03572402     1   6.646029 1.142602e-02</code></pre>
 </div>
 </div>
 <p>The coefficients (and p-values) are equal.</p>
-</section><section id="adding-spatial-correlation" class="level3" data-number="10.2.3"><h3 data-number="10.2.3" class="anchored" data-anchor-id="adding-spatial-correlation">
-<span class="header-section-number">10.2.3</span> Adding Spatial Correlation</h3>
+</section><section id="adding-spatial-correlation" class="level3" data-number="11.2.3"><h3 data-number="11.2.3" class="anchored" data-anchor-id="adding-spatial-correlation">
+<span class="header-section-number">11.2.3</span> Adding Spatial Correlation</h3>
 <p>Is done as follows:</p>
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">soil.gls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/nlme/man/gls.html">gls</a></span><span class="op">(</span><span class="va">thick</span><span class="op">~</span><span class="va">soil</span>, <span class="va">spdata</span>, </span>
@@ -452,8 +455,8 @@ Degrees of freedom: 100 total; 98 residual</code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">corGauss</span><span class="op">(</span><span class="fl">1</span>, <span class="op">~</span><span class="va">east</span><span class="op">+</span><span class="va">west</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Read about how this works in the <code>?corGauss</code> help file and see a list of other correlation structures in <code>nlme</code> in the <code><a href="https://rdrr.io/pkg/nlme/man/corClasses.html">?corClasses</a></code> help file</p>
-</section><section id="same-model-with-lme" class="level3" data-number="10.2.4"><h3 data-number="10.2.4" class="anchored" data-anchor-id="same-model-with-lme">
-<span class="header-section-number">10.2.4</span> Same Model with lme</h3>
+</section><section id="same-model-with-lme" class="level3" data-number="11.2.4"><h3 data-number="11.2.4" class="anchored" data-anchor-id="same-model-with-lme">
+<span class="header-section-number">11.2.4</span> Same Model with lme</h3>
 <p>The <code>lme</code> syntax is nearly identical. But: - because because it is a more general (and powerful) function, it is a bit more sluggish. - because it is designed for mixed effects models, it DEMANDS a “random effect”, which in this case is th column of dummy 1’s</p>
 <div class="cell">
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="http://had.co.nz/plyr">plyr</a></span><span class="op">)</span></span>
@@ -494,8 +497,8 @@ Number of Groups: 1 </code></pre>
 </div>
 </div>
 <p>But the conclusions are the same.</p>
-</section><section id="challenges" class="level3" data-number="10.2.5"><h3 data-number="10.2.5" class="anchored" data-anchor-id="challenges">
-<span class="header-section-number">10.2.5</span> Challenges</h3>
+</section><section id="challenges" class="level3" data-number="11.2.5"><h3 data-number="11.2.5" class="anchored" data-anchor-id="challenges">
+<span class="header-section-number">11.2.5</span> Challenges</h3>
 <ul>
 <li>Auto-correlation structures are most easily defined for <strong>Gaussian</strong> models.</li>
 <li>For glm’s it is much more difficult to separate a modeled term from a residual term</li>
@@ -503,8 +506,8 @@ Number of Groups: 1 </code></pre>
 <li>Combining both temporal and spatial autocorrelation is very difficult / not possible in these frameworks</li>
 <li>Bayesian MCMC can fit anything … but can take a long time to run.</li>
 <li>Probably the biggest, most powerful “gun” in the generalized / correlated / nested / mixed / additive modeling universe is: <strong>INLA</strong> (see: http://www.r-inla.org/) (integrated nested Laplace approximations).</li>
-</ul></section></section><section id="exercise-ozone" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="exercise-ozone">
-<span class="header-section-number">10.3</span> Exercise: Ozone</h2>
+</ul></section></section><section id="exercise-ozone" class="level2" data-number="11.3"><h2 data-number="11.3" class="anchored" data-anchor-id="exercise-ozone">
+<span class="header-section-number">11.3</span> Exercise: Ozone</h2>
 <p>Load the Ozone data in the <code>plyr</code> package This is a 24x24x72 numeric array which contains monthly ozone averages on a coarse (24 x 24 grid) covering Central America, from Jan 1995 to Dec 2000. Below, for example, is a plot of ozone concentrations on August 1995:</p>
 <div class="cell">
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="http://had.co.nz/plyr">plyr</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va">maps</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dnychka/fieldsRPackage">fields</a></span><span class="op">)</span></span>
@@ -532,9 +535,10 @@ Number of Groups: 1 </code></pre>
 6  -8.7 -113.8    1   252</code></pre>
 </div>
 </div>
-<p>To add the “correct” month and year to this data frame: ::: {.cell}</p>
+<p>To add the “correct” month and year to this data frame:</p>
+<div class="cell">
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">O3.df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/plyr/man/mutate.html">mutate</a></span><span class="op">(</span><span class="va">O3.df</span>, year <span class="op">=</span> <span class="fl">1995</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="op">(</span><span class="va">time</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">12</span><span class="op">)</span>, month <span class="op">=</span> <span class="va">time</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="op">(</span><span class="va">time</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>:::</p>
+</div>
 <p>An important additional tweak - we don’t actually want to do spatial analysis in latitude/longitude. We need to convert to a consistent unit (e.g.&nbsp;in km). This is a fairly large area, and the distortion of the earth might distort any projection. But a quick way to deal with this is as follows:</p>
 <div class="cell">
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/pbs-software/pbs-mapping">PBSmapping</a></span><span class="op">)</span></span>
@@ -655,13 +659,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./time_series.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Time Series</span></span>
+      <a href="./mixed_models.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Mixed models with autocorrelation</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./discrete_movement_models.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Discrete time movement models</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Discrete time movement models</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
