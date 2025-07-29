@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.6.42">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="E Gurarie, N Barbour, O Couriot, M Hebblewhite">
-<title>Techniques and Concepts in Movement Ecology - 12&nbsp; Discrete time movement models</title>
+<title>12&nbsp; Discrete time movement models – Techniques and Concepts in Movement Ecology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -15,11 +15,12 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -30,7 +31,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -44,43 +45,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -98,16 +69,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap-6b83d258f39b401f2facfed0443b24af.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -116,30 +93,60 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
-}</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 </head>
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">
-<span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Discrete time movement models</span>
-</h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part4_movement_models/discrete_movement_models.html">IV. Models of movement</a></li><li class="breadcrumb-item"><a href="../part4_movement_models/discrete_movement_models.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Discrete time movement models</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Techniques and Concepts in Movement Ecology</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-  <a href="" class="quarto-reader-toggle sidebar-tool" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+    <a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
   </div>
@@ -147,206 +154,232 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../introductions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction(s)</span></a>
+  <a href="../introductions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction(s)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">I. Foundations</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">I. Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../questionsinmovementecology.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Kinds of movements, and kinds of questions</span></a>
+  <a href="../questionsinmovementecology.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Kinds of movements, and kinds of questions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../whyspecialstats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Why do we need special statistics?</span></a>
+  <a href="../whyspecialstats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Why do we need special statistics?</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">II. Basic Manipulations</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">II. Basic Manipulations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part2_data_and_manipulations/complex_numbers.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Complex Numbers are Simple</span></a>
+  <a href="../part2_data_and_manipulations/complex_numbers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Complex Numbers are Simple</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part2_data_and_manipulations/spatial_data_in_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Spatial data in R</span></a>
+  <a href="../part2_data_and_manipulations/spatial_data_in_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Spatial data in R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part2_data_and_manipulations/movement_data_in_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Movement data in R</span></a>
+  <a href="../part2_data_and_manipulations/movement_data_in_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Movement data in R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part2_data_and_manipulations/visualization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualization</span></a>
+  <a href="../part2_data_and_manipulations/visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualization</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">III. Statistical foundations</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">III. Statistical foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part3_statistical_foundations/likelihoods.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Likelihood Theory</span></a>
+  <a href="../part3_statistical_foundations/likelihoods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Likelihood Theory</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part3_statistical_foundations/time_series.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Time Series</span></a>
+  <a href="../part3_statistical_foundations/time_series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Time Series</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part3_statistical_foundations/mixed_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Mixed models (with autocorrelation!)</span></a>
+  <a href="../part3_statistical_foundations/mixed_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Mixed models (with autocorrelation!)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part3_statistical_foundations/spatial_correlation.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Spatial correlations</span></a>
+  <a href="../part3_statistical_foundations/spatial_correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Spatial correlations</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">IV. Models of movement</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">IV. Models of movement</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part4_movement_models/discrete_movement_models.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Discrete time movement models</span></a>
+  <a href="../part4_movement_models/discrete_movement_models.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Discrete time movement models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part4_movement_models/continuous_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Continuous time movement models</span></a>
+  <a href="../part4_movement_models/continuous_movement_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Continuous time movement models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part4_movement_models/home_ranges.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Home ranges</span></a>
+  <a href="../part4_movement_models/home_ranges.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Home ranges</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part4_movement_models/behavioral_changes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Behavioral Changes</span></a>
+  <a href="../part4_movement_models/behavioral_changes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Behavioral Changes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part4_movement_models/hmms.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Hidden Markov and State-Space Modeling</span></a>
+  <a href="../part4_movement_models/hmms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Hidden Markov and State-Space Modeling</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">V. Resource and Step-Selection</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">V. Resource and Step-Selection</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../resource_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Resource Selection</span></a>
+  <a href="../resource_selection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Resource Selection</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../step_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Step Selection Functions</span></a>
+  <a href="../step_selection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Step Selection Functions</span></span></a>
   </div>
 </li>
       </ul>
 </li>
     </ul>
 </div>
-</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
 <li>
-<a href="#d-random-walk" id="toc-d-random-walk" class="nav-link active" data-scroll-target="#d-random-walk"><span class="toc-section-number">12.1</span>  1D Random Walk</a>
+<a href="#d-random-walk" id="toc-d-random-walk" class="nav-link active" data-scroll-target="#d-random-walk"><span class="header-section-number">12.1</span> 1D Random Walk</a>
   <ul class="collapse">
-<li><a href="#properties" id="toc-properties" class="nav-link" data-scroll-target="#properties"><span class="toc-section-number">12.1.1</span>  Properties</a></li>
+<li><a href="#properties" id="toc-properties" class="nav-link" data-scroll-target="#properties"><span class="header-section-number">12.1.1</span> Properties</a></li>
   </ul>
 </li>
   <li>
-<a href="#d-random-walk-1" id="toc-d-random-walk-1" class="nav-link" data-scroll-target="#d-random-walk-1"><span class="toc-section-number">12.2</span>  2D Random Walk</a>
+<a href="#d-random-walk-1" id="toc-d-random-walk-1" class="nav-link" data-scroll-target="#d-random-walk-1"><span class="header-section-number">12.2</span> 2D Random Walk</a>
   <ul class="collapse">
-<li><a href="#properties-1" id="toc-properties-1" class="nav-link" data-scroll-target="#properties-1"><span class="toc-section-number">12.2.1</span>  Properties</a></li>
+<li><a href="#properties-1" id="toc-properties-1" class="nav-link" data-scroll-target="#properties-1"><span class="header-section-number">12.2.1</span> Properties</a></li>
   </ul>
 </li>
   <li>
-<a href="#d-auto-regression-process" id="toc-d-auto-regression-process" class="nav-link" data-scroll-target="#d-auto-regression-process"><span class="toc-section-number">12.3</span>  1D Auto-regression process</a>
+<a href="#d-auto-regression-process" id="toc-d-auto-regression-process" class="nav-link" data-scroll-target="#d-auto-regression-process"><span class="header-section-number">12.3</span> 1D Auto-regression process</a>
   <ul class="collapse">
-<li><a href="#properties-2" id="toc-properties-2" class="nav-link" data-scroll-target="#properties-2"><span class="toc-section-number">12.3.1</span>  Properties</a></li>
+<li><a href="#properties-2" id="toc-properties-2" class="nav-link" data-scroll-target="#properties-2"><span class="header-section-number">12.3.1</span> Properties</a></li>
   </ul>
 </li>
   <li>
-<a href="#d-autoregressive-walk" id="toc-d-autoregressive-walk" class="nav-link" data-scroll-target="#d-autoregressive-walk"><span class="toc-section-number">12.4</span>  2D autoregressive walk</a>
+<a href="#d-autoregressive-walk" id="toc-d-autoregressive-walk" class="nav-link" data-scroll-target="#d-autoregressive-walk"><span class="header-section-number">12.4</span> 2D autoregressive walk</a>
   <ul class="collapse">
-<li><a href="#properties-3" id="toc-properties-3" class="nav-link" data-scroll-target="#properties-3"><span class="toc-section-number">12.4.1</span>  Properties</a></li>
+<li><a href="#properties-3" id="toc-properties-3" class="nav-link" data-scroll-target="#properties-3"><span class="header-section-number">12.4.1</span> Properties</a></li>
   </ul>
 </li>
-  <li><a href="#correlated-random-walk" id="toc-correlated-random-walk" class="nav-link" data-scroll-target="#correlated-random-walk"><span class="toc-section-number">12.5</span>  Correlated Random Walk</a></li>
-  <li><a href="#multi-state-correlated-random-walk" id="toc-multi-state-correlated-random-walk" class="nav-link" data-scroll-target="#multi-state-correlated-random-walk"><span class="toc-section-number">12.6</span>  Multi-state Correlated Random Walk</a></li>
+  <li><a href="#correlated-random-walk" id="toc-correlated-random-walk" class="nav-link" data-scroll-target="#correlated-random-walk"><span class="header-section-number">12.5</span> Correlated Random Walk</a></li>
+  <li><a href="#multi-state-correlated-random-walk" id="toc-multi-state-correlated-random-walk" class="nav-link" data-scroll-target="#multi-state-correlated-random-walk"><span class="header-section-number">12.6</span> Multi-state Correlated Random Walk</a></li>
   <li>
-<a href="#digression-on-markov-chains" id="toc-digression-on-markov-chains" class="nav-link" data-scroll-target="#digression-on-markov-chains"><span class="toc-section-number">12.7</span>  Digression on Markov Chains</a>
+<a href="#digression-on-markov-chains" id="toc-digression-on-markov-chains" class="nav-link" data-scroll-target="#digression-on-markov-chains"><span class="header-section-number">12.7</span> Digression on Markov Chains</a>
   <ul class="collapse">
-<li><a href="#markov-property" id="toc-markov-property" class="nav-link" data-scroll-target="#markov-property"><span class="toc-section-number">12.7.1</span>  Markov property</a></li>
-  <li><a href="#probability-transition-matrix" id="toc-probability-transition-matrix" class="nav-link" data-scroll-target="#probability-transition-matrix"><span class="toc-section-number">12.7.2</span>  Probability transition matrix</a></li>
-  <li><a href="#example-1-children-play-frisbee" id="toc-example-1-children-play-frisbee" class="nav-link" data-scroll-target="#example-1-children-play-frisbee"><span class="toc-section-number">12.7.3</span>  Example 1: Children play frisbee</a></li>
+<li><a href="#markov-property" id="toc-markov-property" class="nav-link" data-scroll-target="#markov-property"><span class="header-section-number">12.7.1</span> Markov property</a></li>
+  <li><a href="#probability-transition-matrix" id="toc-probability-transition-matrix" class="nav-link" data-scroll-target="#probability-transition-matrix"><span class="header-section-number">12.7.2</span> Probability transition matrix</a></li>
+  <li><a href="#example-1-children-play-frisbee" id="toc-example-1-children-play-frisbee" class="nav-link" data-scroll-target="#example-1-children-play-frisbee"><span class="header-section-number">12.7.3</span> Example 1: Children play frisbee</a></li>
   </ul>
 </li>
-  <li><a href="#back-to-multi-state-crw" id="toc-back-to-multi-state-crw" class="nav-link" data-scroll-target="#back-to-multi-state-crw"><span class="toc-section-number">12.8</span>  Back to Multi-state CRW …</a></li>
-  <li><a href="#habitat-preference-model" id="toc-habitat-preference-model" class="nav-link" data-scroll-target="#habitat-preference-model"><span class="toc-section-number">12.9</span>  Habitat preference model</a></li>
-  <li><a href="#biased-random-walk" id="toc-biased-random-walk" class="nav-link" data-scroll-target="#biased-random-walk"><span class="toc-section-number">12.10</span>  Biased random walk</a></li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/edit/main/part4_movement_models/discrete_movement_models.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+  <li><a href="#back-to-multi-state-crw" id="toc-back-to-multi-state-crw" class="nav-link" data-scroll-target="#back-to-multi-state-crw"><span class="header-section-number">12.8</span> Back to Multi-state CRW …</a></li>
+  <li><a href="#habitat-preference-model" id="toc-habitat-preference-model" class="nav-link" data-scroll-target="#habitat-preference-model"><span class="header-section-number">12.9</span> Habitat preference model</a></li>
+  <li><a href="#biased-random-walk" id="toc-biased-random-walk" class="nav-link" data-scroll-target="#biased-random-walk"><span class="header-section-number">12.10</span> Biased random walk</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/edit/main/part4_movement_models/discrete_movement_models.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title d-none d-lg-block">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part4_movement_models/discrete_movement_models.html">IV. Models of movement</a></li><li class="breadcrumb-item"><a href="../part4_movement_models/discrete_movement_models.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Discrete time movement models</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">
 <span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Discrete time movement models</span>
 </h1>
 </div>
@@ -361,26 +394,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
-</header><div class="cell" data-hash="discrete_movement_models_cache/html/unnamed-chunk-2_7b6eb23eb7325df46a9684d90f1767c2">
 
-</div>
-<div class="cell" data-hash="discrete_movement_models_cache/html/unnamed-chunk-3_2a9e632e5ff108edf724a04878eaa72c">
-
-</div>
-<blockquote class="blockquote">
+</header><blockquote class="blockquote">
 <p>Note: this chapter draft is basically the content of a slide presentation, and therefore most sentences incomplete</p>
 </blockquote>
 <section id="d-random-walk" class="level2" data-number="12.1"><h2 data-number="12.1" class="anchored" data-anchor-id="d-random-walk">
 <span class="header-section-number">12.1</span> 1D Random Walk</h2>
 <p><span class="math display">\[X \sim \text{RW}_{1d}(\sigma)\]</span></p>
 <p><span class="math display">\[X_t = X_{t+1} + \sigma W_t\]</span> where <span class="math inline">\(W_t \sim {\cal N}(0,1)\)</span> = white noise</p>
-<div class="cell" data-hash="discrete_movement_models_cache/html/unnamed-chunk-4_24edcaafd4d00cc7f0f6fd457e87e6ad">
+<div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sigma</span> <span class="op">=</span> <span class="fl">2</span></span>
 <span><span class="va">Z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, sd <span class="op">=</span> <span class="va">sigma</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-hash="discrete_movement_models_cache/html/unnamed-chunk-5_57412a6defc941410cbac12904e5552d">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="discrete_movement_models_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="600"></p>
+<div>
+<figure class="figure"><p><img src="discrete_movement_models_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="600"></p>
+</figure>
+</div>
 </div>
 </div>
 <section id="properties" class="level3" data-number="12.1.1"><h3 data-number="12.1.1" class="anchored" data-anchor-id="properties">
@@ -390,14 +421,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span class="header-section-number">12.2</span> 2D Random Walk</h2>
 <p><span class="math display">\[{\bf Z} \sim \text{RW}_{2d}(\sigma)\]</span> <span class="math display">\[{\bf Z}_t = {\bf Z}_{t-1} + \sigma{\bf W}_t\]</span></p>
 <p>boldfacing means 2-d vector, but will drop going forward.</p>
-<div class="cell" data-hash="discrete_movement_models_cache/html/unnamed-chunk-6_b5da0294e10c8fc316c708c1724f978d">
+<div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sigma</span> <span class="op">&lt;-</span> <span class="fl">3</span>; <span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">Z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, sd <span class="op">=</span> <span class="va">sigma</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fl">1i</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, sd <span class="op">=</span> <span class="va">sigma</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-hash="discrete_movement_models_cache/html/unnamed-chunk-7_70acdd3cf715a47e61def156edf870ba">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="discrete_movement_models_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="600"></p>
+<div>
+<figure class="figure"><p><img src="discrete_movement_models_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="600"></p>
+</figure>
+</div>
 </div>
 </div>
 <section id="properties-1" class="level3" data-number="12.2.1"><h3 data-number="12.2.1" class="anchored" data-anchor-id="properties-1">
@@ -406,23 +440,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[\theta \sim \text{Unif}(-\pi, \pi)\]</span></p>
 <p><span class="math display">\[{|\bf S| / \sigma} \sim \text{Chi}(k = 2); \,\,  \text{E}({|\bf S|}) = \sqrt{2}\sigma\]</span></p>
 <p>You can use this result to estimate <span class="math inline">\(\sigma\)</span> - just take the mean step lengths and divide by <span class="math inline">\(\sqrt{2}\)</span></p>
-<div class="cell" data-hash="discrete_movement_models_cache/html/RW_CRW_ba15b0ba13d61d6ab5d691430a8c8ef2">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="discrete_movement_models_files/figure-html/RW_CRW-1.png" class="img-fluid" width="600"></p>
+<div>
+<figure class="figure"><p><img src="discrete_movement_models_files/figure-html/RW_CRW-1.png" class="img-fluid figure-img" width="600"></p>
+</figure>
+</div>
 </div>
 </div>
 </section></section><section id="d-auto-regression-process" class="level2" data-number="12.3"><h2 data-number="12.3" class="anchored" data-anchor-id="d-auto-regression-process">
 <span class="header-section-number">12.3</span> 1D Auto-regression process</h2>
 <p><span class="math display">\[X \sim \text{AR}_{1d}(\phi, \sigma)\]</span></p>
 <p><span class="math display">\[X_t = \phi X_{t+1} +\sigma W_t\]</span></p>
-<div class="cell" data-hash="discrete_movement_models_cache/html/unnamed-chunk-8_6e0a5725729255544981a3f91eb87bd0">
+<div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sigma</span> <span class="op">=</span> <span class="fl">2</span>; <span class="va">phi</span> <span class="op">=</span> <span class="fl">0.8</span>; <span class="va">n</span> <span class="op">=</span> <span class="fl">100</span>; </span>
 <span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="va">sigma</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="va">n</span><span class="op">)</span></span>
 <span>  <span class="va">X</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">phi</span><span class="op">*</span><span class="va">X</span><span class="op">[</span><span class="va">i</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="va">sigma</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>By the way: start making functions!</p>
-<div class="cell" data-hash="discrete_movement_models_cache/html/unnamed-chunk-9_687cf8ea71f7b4f3597e7637379d2c40">
+<div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">AR1D</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span> <span class="op">=</span> <span class="fl">100</span>, <span class="va">sigma</span> <span class="op">=</span> <span class="fl">2</span>, <span class="va">phi</span> <span class="op">=</span> <span class="fl">0.8</span>, <span class="va">mu</span> <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="va">sigma</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="va">n</span><span class="op">)</span></span>
@@ -430,9 +467,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>  <span class="va">X</span> <span class="op">+</span> <span class="va">mu</span></span>
 <span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-hash="discrete_movement_models_cache/html/unnamed-chunk-10_69594b665bd00ce154182196b573c511">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="discrete_movement_models_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="600"></p>
+<div>
+<figure class="figure"><p><img src="discrete_movement_models_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="600"></p>
+</figure>
+</div>
 </div>
 </div>
 <section id="properties-2" class="level3" data-number="12.3.1"><h3 data-number="12.3.1" class="anchored" data-anchor-id="properties-2">
@@ -443,17 +483,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span class="header-section-number">12.4</span> 2D autoregressive walk</h2>
 <p><span class="math display">\[{\bf Z} \sim \text{AR}_{2d}(\phi, \sigma)\]</span> <span class="math display">\[{\bf Z}_t = \phi {\bf Z}_{t-1} + \sigma {\bf W}_t\]</span></p>
 <p>Where everything is 2D. And easily scaled to a different mean <span class="math inline">\(\bf m\)</span></p>
-<div class="cell" data-hash="discrete_movement_models_cache/html/unnamed-chunk-11_6136effa68ce79eab4ebe61da061074c">
+<div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">AR2D</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span> <span class="op">=</span> <span class="fl">100</span>, <span class="va">phi</span> <span class="op">=</span> <span class="fl">0</span>, <span class="va">sigma</span> <span class="op">=</span> <span class="fl">1</span>, <span class="va">mu</span> <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="va">X</span> <span class="op">&lt;-</span> <span class="fu">AR1D</span><span class="op">(</span><span class="va">n</span>, <span class="va">sigma</span>, <span class="va">phi</span>, <span class="fu"><a href="https://rdrr.io/r/base/complex.html">Re</a></span><span class="op">(</span><span class="va">mu</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="va">Y</span> <span class="op">&lt;-</span> <span class="fu">AR1D</span><span class="op">(</span><span class="va">n</span>, <span class="va">sigma</span>, <span class="va">phi</span>, <span class="fu"><a href="https://rdrr.io/r/base/complex.html">Im</a></span><span class="op">(</span><span class="va">mu</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="va">X</span> <span class="op">+</span> <span class="fl">1i</span><span class="op">*</span><span class="va">Y</span></span>
 <span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-hash="discrete_movement_models_cache/html/unnamed-chunk-12_e8e1996fecebc3e2554648ec6132d52a">
+<div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">scantrack</span><span class="op">(</span><span class="fu">AR2D</span><span class="op">(</span><span class="fl">100</span>, <span class="fl">0.8</span>, <span class="fl">1</span>, <span class="fl">10</span><span class="op">+</span><span class="fl">1i</span><span class="op">*</span><span class="fl">5</span><span class="op">)</span>, cex <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="discrete_movement_models_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="600"></p>
+<div>
+<figure class="figure"><p><img src="discrete_movement_models_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="600"></p>
+</figure>
+</div>
 </div>
 </div>
 <section id="properties-3" class="level3" data-number="12.4.1"><h3 data-number="12.4.1" class="anchored" data-anchor-id="properties-3">
@@ -466,18 +509,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This means that the <em>step</em> process itself is NOT stationary / independent, but depends on <strong>absolute location</strong>.</p>
 <p>Specifically, the urge to “go home” is proportional to the distance from home.</p>
 <p>And, of course, there is auto-correlation in the locations:</p>
-<div class="cell" data-hash="discrete_movement_models_cache/html/unnamed-chunk-13_6c02c92044fad283472f992c1c586797">
+<div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Z</span> <span class="op">&lt;-</span> <span class="fu">AR2D</span><span class="op">(</span><span class="fl">100</span>, <span class="fl">0.8</span>, <span class="fl">1</span>, <span class="fl">10</span><span class="op">+</span><span class="fl">1i</span><span class="op">*</span><span class="fl">5</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">acf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/complex.html">Re</a></span><span class="op">(</span><span class="va">Z</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="discrete_movement_models_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="600"></p>
+<div>
+<figure class="figure"><p><img src="discrete_movement_models_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="600"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>But NOT in the steps themselves:</p>
-<div class="cell" data-hash="discrete_movement_models_cache/html/unnamed-chunk-14_c0ff6d18f87e7cc397f835e1ff759584">
+<div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">acf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/complex.html">Re</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="va">Z</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="discrete_movement_models_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="600"></p>
+<div>
+<figure class="figure"><p><img src="discrete_movement_models_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="600"></p>
+</figure>
+</div>
 </div>
 </div>
 </section></section><section id="correlated-random-walk" class="level2" data-number="12.5"><h2 data-number="12.5" class="anchored" data-anchor-id="correlated-random-walk">
@@ -495,7 +544,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote class="blockquote">
 <p><strong>The totally forgotten one:</strong> <img src="images/Patlak.png" class="img-fluid"></p>
 </blockquote>
-<div class="cell" data-hash="discrete_movement_models_cache/html/unnamed-chunk-15_2e1753648b7a6ee512605892a2559698">
+<div class="cell">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va">circular</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">CRW</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span> <span class="op">=</span> <span class="fl">100</span>, <span class="va">rho</span><span class="op">=</span><span class="fl">0.8</span>, <span class="va">alpha</span> <span class="op">=</span> <span class="fl">1</span>, <span class="va">beta</span> <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">{</span></span>
@@ -505,26 +554,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="va">S</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-hash="discrete_movement_models_cache/html/unnamed-chunk-16_8f8102adfb84f784efcf9abb31d10a40">
+<div class="cell">
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">pars</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu">scantrack</span><span class="op">(</span><span class="fu">CRW</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="discrete_movement_models_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="600"></p>
+<div>
+<figure class="figure"><p><img src="discrete_movement_models_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="600"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Also - flies off to infinity.</p>
 <p>Also - autocorrelated in position:</p>
-<div class="cell" data-hash="discrete_movement_models_cache/html/unnamed-chunk-17_d230b0574c98c547089c10517f5e089a">
+<div class="cell">
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">acf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/complex.html">Re</a></span><span class="op">(</span><span class="va">Z</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="discrete_movement_models_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="600"></p>
+<div>
+<figure class="figure"><p><img src="discrete_movement_models_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="600"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>but not in steps!</p>
-<div class="cell" data-hash="discrete_movement_models_cache/html/unnamed-chunk-18_81226561aae79bde2eeab2af3762cb5f">
+<div class="cell">
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">acf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/complex.html">Re</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="va">Z</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="discrete_movement_models_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="600"></p>
+<div>
+<figure class="figure"><p><img src="discrete_movement_models_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="600"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>(So is it really a <em>correlated</em> random walk?) ]</p>
@@ -557,9 +615,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Where <span class="math inline">\(\pi_t\)</span> is the distribution of the system over all states at time <span class="math inline">\(t\)</span>.</p>
 </section><section id="example-1-children-play-frisbee" class="level3" data-number="12.7.3"><h3 data-number="12.7.3" class="anchored" data-anchor-id="example-1-children-play-frisbee">
 <span class="header-section-number">12.7.3</span> Example 1: Children play frisbee</h3>
-<div class="cell" data-hash="discrete_movement_models_cache/html/FrisbeeKids_c83024c3c339af401662e0f618b26ea0">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="discrete_movement_models_files/figure-html/FrisbeeKids-1.png" class="img-fluid" width="400"></p>
+<div>
+<figure class="figure"><p><img src="discrete_movement_models_files/figure-html/FrisbeeKids-1.png" class="img-fluid figure-img" width="400"></p>
+</figure>
+</div>
 </div>
 </div>
 <p><span class="math display">\[\large{\bf M}= \begin{array}{c|cccc|}
@@ -571,7 +632,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     D &amp;0    &amp;   0&amp; 1 &amp; 0
         \end{array}\]</span></p>
 <p>Let’s give the frisbee to Alice, and see what happens:</p>
-<div class="cell" data-hash="discrete_movement_models_cache/html/unnamed-chunk-19_0d9f51b4ce1ae29d05eca695ea3c2f2b">
+<div class="cell">
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">3</span><span class="op">/</span><span class="fl">4</span>,<span class="fl">0</span>,<span class="fl">1</span><span class="op">/</span><span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span><span class="op">/</span><span class="fl">4</span>,<span class="fl">3</span><span class="op">/</span><span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">3</span>,<span class="fl">1</span><span class="op">/</span><span class="fl">3</span>,<span class="fl">0</span>,<span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">M</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Alice"</span>, <span class="st">"Boris"</span>, <span class="st">"Cheng"</span>, <span class="st">"Ditya"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">M</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">M</span><span class="op">)</span></span>
@@ -589,20 +650,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span><span class="op">}</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="va">Xs</span><span class="op">]</span>, collapse<span class="op">=</span><span class="st">"-"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "A-B-D-C-B-D-C-D-C-A-B-D-C-A-B-D-C-A-B-D-C-B-C-B-D-C-A-B-C-A-D"</code></pre>
+<pre><code>[1] "A-B-C-B-D-C-B-C-A-B-C-A-B-D-C-B-D-C-B-C-A-B-C-D-C-B-D-C-A-B-D"</code></pre>
 </div>
 </div>
 <p>This is called a <strong>realization</strong> of a stochastic process.</p>
 <p>Let us consider this process <em>probabilistically</em>. Again, we start with Alice (click below to animate - pay attention to the probabilities )</p>
-<div class="cell" data-animation.hook="gifski" data-hash="discrete_movement_models_cache/html/FrisbeeAnimation_e0fc8c07f0b36a153c812b514d532b31">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="discrete_movement_models_files/figure-html/FrisbeeAnimation-.gif" class="img-fluid" width="600"></p>
+<div>
+<figure class="figure"><p><img src="discrete_movement_models_files/figure-html/FrisbeeAnimation-.gif" class="img-fluid figure-img" width="600"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "pi_ 20 = 0.12,0.211,0.361,0.308"</code></pre>
 </div>
 </div>
-<p>The state: <span class="math inline">\(\pi^* = (0.12 , 0.21 , 0.361 , 0.308)\)</span> is referred to as <strong>stationary</strong>.</p>
+<p>The state: <span class="math inline">\(\pi^* =  (0.12 ,  0.21 ,  0.361 , 0.308)\)</span> is referred to as <strong>stationary</strong>.</p>
 <ol type="1">
 <li>The name can be a bit confusing: the frisbee is not stationary, it is always moving around.</li>
 <li>All states have a finite probablity (0 to 1) of being revisited forever and ever until the children’s arms fall off. Such states are termed <strong>recurrent</strong>, <strong>persistent</strong> or <strong>ergodic</strong>.</li>
@@ -611,7 +675,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>This is often quite easy to obtain.</p>
 <p>For example, via brute force matrix multiplication:</p>
-<div class="cell" data-hash="discrete_movement_models_cache/html/PowerMatFunction_75388ac4decd3e1b04f03d20907ab2e7">
+<div class="cell">
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">powermat</span><span class="op">=</span><span class="kw">function</span><span class="op">(</span><span class="va">M</span>,<span class="va">t</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="va">Mt</span> <span class="op">&lt;-</span> <span class="va">M</span></span>
 <span>  <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="va">t</span><span class="op">)</span> <span class="va">Mt</span> <span class="op">=</span> <span class="va">Mt</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">M</span></span>
@@ -626,7 +690,7 @@ PD 0.1203008 0.2105263 0.3609023 0.3082707</code></pre>
 </div>
 </div>
 <p>Or via matrix algebra:</p>
-<div class="cell" data-hash="discrete_movement_models_cache/html/SolveForPi_753b17fd2ee6e57b2e08d32cbf17f5cb">
+<div class="cell">
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span> <span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">M</span><span class="op">)</span></span>
 <span> <span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">M</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="va">n</span>,<span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span>,<span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
 <span> <span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>,<span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span>,<span class="fl">1</span><span class="op">)</span></span>
@@ -640,7 +704,7 @@ PD 0.1203008 0.2105263 0.3609023 0.3082707</code></pre>
 </section></section><section id="back-to-multi-state-crw" class="level2" data-number="12.8"><h2 data-number="12.8" class="anchored" data-anchor-id="back-to-multi-state-crw">
 <span class="header-section-number">12.8</span> Back to Multi-state CRW …</h2>
 <p>To simulate a multi-state CRW, first create a transition matrix:</p>
-<div class="cell" data-hash="discrete_movement_models_cache/html/unnamed-chunk-20_70580811e2c4203673e5c7bc989fb549">
+<div class="cell">
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.7</span>,<span class="fl">0.2</span>,<span class="fl">.1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.4</span>,<span class="fl">.4</span>,<span class="fl">.2</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.3</span>,<span class="fl">0.6</span>,<span class="fl">0.1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span><span class="op">(</span><span class="va">M</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">M</span><span class="op">)</span>  <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"chilling"</span>, <span class="st">"cruising"</span>, <span class="st">"huffing"</span><span class="op">)</span></span>
 <span><span class="va">M</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -652,7 +716,7 @@ huffing       0.3      0.6     0.1</code></pre>
 </div>
 </div>
 <p>Create a vector of simulated states:</p>
-<div class="cell" data-hash="discrete_movement_models_cache/html/unnamed-chunk-21_9863e1342fe57c9eacc041a449fa2467">
+<div class="cell">
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">400</span></span>
 <span><span class="va">states</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">M</span><span class="op">)</span></span>
 <span><span class="va">State</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>, n<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
@@ -660,35 +724,41 @@ huffing       0.3      0.6     0.1</code></pre>
 <span>  <span class="va">State</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">states</span>, <span class="fl">1</span>, prob<span class="op">=</span><span class="va">M</span><span class="op">[</span><span class="va">State</span><span class="op">[</span><span class="va">i</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>,<span class="op">]</span><span class="op">)</span>  </span>
 <span><span class="va">State</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1] 1 1 1 1 3 2 2 3 1 1 1 1 1 1 1 1 1 1 1 1 1 3 2 1 1 2 3 2 1 1 1 2 3 2 1 1 3
- [38] 2 1 1 3 1 2 3 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 3 2 1 1 1 3 2 1 1 1 1 1
- [75] 1 1 2 1 1 1 1 3 2 1 1 2 1 1 2 1 1 1 1 2 2 1 1 2 3 2</code></pre>
+<pre><code>  [1] 1 1 1 1 1 3 2 1 1 1 1 1 1 1 3 1 1 1 1 2 3 1 1 3 3 1 2 2 3 2 3 1 1 2 1 1 1
+ [38] 1 1 1 1 1 2 2 2 2 1 1 1 1 2 1 1 1 1 1 3 1 2 1 1 2 2 3 2 1 1 1 2 1 1 1 1 1
+ [75] 2 3 2 2 2 1 1 1 2 2 1 1 2 3 2 2 2 2 1 1 1 1 2 2 1 2</code></pre>
 </div>
 </div>
-<div class="cell" data-hash="discrete_movement_models_cache/html/unnamed-chunk-22_46fb23c60a226dcca592ae721dd49b12">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="discrete_movement_models_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="600"></p>
+<div>
+<figure class="figure"><p><img src="discrete_movement_models_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="600"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Next, assign movement steps to each state</p>
-<div class="cell" data-hash="discrete_movement_models_cache/html/unnamed-chunk-23_c254c49e2bf0d4d160c2201221c5f589">
+<div class="cell">
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rhos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">.5</span>, <span class="fl">.9</span><span class="op">)</span></span>
 <span><span class="va">betas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.5</span>,<span class="fl">3</span>,<span class="fl">8</span><span class="op">)</span></span>
 <span><span class="va">alphas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">5</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">thetas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/circular/man/wrappedcauchy.html">rwrappedcauchy</a></span><span class="op">(</span><span class="va">n</span>, rho <span class="op">=</span> <span class="va">rhos</span><span class="op">[</span><span class="va">State</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">thetas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/pkg/circular/man/wrappedcauchy.html">rwrappedcauchy</a></span><span class="op">(</span><span class="fl">1</span>, rho <span class="op">=</span> <span class="va">rhos</span><span class="op">[</span><span class="va">State</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">step_lengths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Weibull.html">rweibull</a></span><span class="op">(</span><span class="va">n</span>, shape <span class="op">=</span> <span class="va">alphas</span><span class="op">[</span><span class="va">State</span><span class="op">]</span>, scale <span class="op">=</span> <span class="va">betas</span><span class="op">[</span><span class="va">State</span><span class="op">]</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">S</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/complex.html">complex</a></span><span class="op">(</span>arg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="va">thetas</span><span class="op">)</span>, mod <span class="op">=</span> <span class="va">step_lengths</span><span class="op">)</span></span>
 <span><span class="va">Z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="va">S</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-hash="discrete_movement_models_cache/html/MRW_sim_plot_8dfc01c0d75994045c8e20005b9b89f4">
+<div class="cell">
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cols</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkblue"</span>,<span class="st">"green"</span>,<span class="st">"orange"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Z</span>, type <span class="op">=</span> <span class="st">"l"</span>, col <span class="op">=</span> <span class="st">"darkgrey"</span>, asp <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span><span class="va">Z</span>, col <span class="op">=</span> <span class="va">cols</span><span class="op">[</span><span class="va">State</span><span class="op">]</span>, pch <span class="op">=</span> <span class="fl">19</span>, cex <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span><span class="op">(</span><span class="va">M</span><span class="op">)</span>, col <span class="op">=</span> <span class="va">cols</span>, pch <span class="op">=</span> <span class="fl">19</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="discrete_movement_models_files/figure-html/MRW_sim_plot-1.png" class="img-fluid" width="600"></p>
+<div>
+<figure class="figure"><p><img src="discrete_movement_models_files/figure-html/MRW_sim_plot-1.png" class="img-fluid figure-img" width="600"></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="habitat-preference-model" class="level2" data-number="12.9"><h2 data-number="12.9" class="anchored" data-anchor-id="habitat-preference-model">
@@ -724,12 +794,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
     }
-  });
-  clipboard.on('success', function(e) {
+    return false;
+  }
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -761,11 +834,48 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/eligurarie\.github\.io\/MovementEcologyBook\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -775,8 +885,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -788,9 +907,244 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -830,20 +1184,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../part3_statistical_foundations/spatial_correlation.html" class="pagination-link">
+      <a href="../part3_statistical_foundations/spatial_correlation.html" class="pagination-link" aria-label="Spatial correlations">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Spatial correlations</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../part4_movement_models/continuous_movement_models.html" class="pagination-link">
+      <a href="../part4_movement_models/continuous_movement_models.html" class="pagination-link" aria-label="Continuous time movement models">
         <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Continuous time movement models</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
-    <div class="nav-footer-left"><a href="https://eligurarie.github.io/">E. Gurarie</a>, N. Barbour, O. Couriot, M. Hebblewhite (?), others (?)</div>   
-    <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a>.</div>
+    <div class="nav-footer-left">
+<p><a href="https://eligurarie.github.io/">E. Gurarie</a>, N. Barbour, O. Couriot, M. Hebblewhite (?), others (?)</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/edit/main/part4_movement_models/discrete_movement_models.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
   </div>
 </footer>
 

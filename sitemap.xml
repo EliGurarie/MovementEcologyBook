@@ -1,79 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://eligurarie.github.io/MovementEcologyBook/index.html</loc>
-    <lastmod>2023-04-07T04:35:17.204Z</lastmod>
-  </url>
-  <url>
-    <loc>https://eligurarie.github.io/MovementEcologyBook/introductions.html</loc>
-    <lastmod>2023-04-07T04:35:17.208Z</lastmod>
-  </url>
-  <url>
-    <loc>https://eligurarie.github.io/MovementEcologyBook/questionsinmovementecology.html</loc>
-    <lastmod>2023-04-07T04:35:17.208Z</lastmod>
-  </url>
-  <url>
-    <loc>https://eligurarie.github.io/MovementEcologyBook/whyspecialstats.html</loc>
-    <lastmod>2023-04-07T04:35:17.208Z</lastmod>
-  </url>
-  <url>
-    <loc>https://eligurarie.github.io/MovementEcologyBook/part2_data_and_manipulations/complex_numbers.html</loc>
-    <lastmod>2023-04-07T04:35:17.212Z</lastmod>
-  </url>
-  <url>
-    <loc>https://eligurarie.github.io/MovementEcologyBook/part2_data_and_manipulations/spatial_data_in_R.html</loc>
-    <lastmod>2023-04-07T04:35:17.232Z</lastmod>
-  </url>
-  <url>
-    <loc>https://eligurarie.github.io/MovementEcologyBook/part2_data_and_manipulations/movement_data_in_R.html</loc>
-    <lastmod>2023-04-07T04:35:17.244Z</lastmod>
-  </url>
-  <url>
-    <loc>https://eligurarie.github.io/MovementEcologyBook/part2_data_and_manipulations/visualization.html</loc>
-    <lastmod>2023-04-07T04:35:17.244Z</lastmod>
-  </url>
-  <url>
     <loc>https://eligurarie.github.io/MovementEcologyBook/part3_statistical_foundations/likelihoods.html</loc>
-    <lastmod>2023-04-07T04:35:17.252Z</lastmod>
+    <lastmod>2025-07-29T17:06:09.705Z</lastmod>
   </url>
   <url>
     <loc>https://eligurarie.github.io/MovementEcologyBook/part3_statistical_foundations/time_series.html</loc>
-    <lastmod>2023-04-07T04:35:17.256Z</lastmod>
+    <lastmod>2025-07-29T17:06:09.705Z</lastmod>
   </url>
   <url>
     <loc>https://eligurarie.github.io/MovementEcologyBook/part3_statistical_foundations/mixed_models.html</loc>
-    <lastmod>2023-04-07T04:35:17.268Z</lastmod>
+    <lastmod>2025-07-29T17:06:09.705Z</lastmod>
   </url>
   <url>
     <loc>https://eligurarie.github.io/MovementEcologyBook/part3_statistical_foundations/spatial_correlation.html</loc>
-    <lastmod>2023-04-07T13:24:52.742Z</lastmod>
+    <lastmod>2025-07-29T17:06:09.705Z</lastmod>
   </url>
   <url>
     <loc>https://eligurarie.github.io/MovementEcologyBook/part4_movement_models/discrete_movement_models.html</loc>
-    <lastmod>2023-04-07T04:41:54.796Z</lastmod>
+    <lastmod>2025-07-29T17:56:56.324Z</lastmod>
   </url>
   <url>
     <loc>https://eligurarie.github.io/MovementEcologyBook/part4_movement_models/continuous_movement_models.html</loc>
-    <lastmod>2023-04-07T13:15:41.461Z</lastmod>
-  </url>
-  <url>
-    <loc>https://eligurarie.github.io/MovementEcologyBook/part4_movement_models/home_ranges.html</loc>
-    <lastmod>2023-04-07T04:35:17.272Z</lastmod>
-  </url>
-  <url>
-    <loc>https://eligurarie.github.io/MovementEcologyBook/part4_movement_models/behavioral_changes.html</loc>
-    <lastmod>2023-04-07T04:35:17.276Z</lastmod>
-  </url>
-  <url>
-    <loc>https://eligurarie.github.io/MovementEcologyBook/part4_movement_models/hmms.html</loc>
-    <lastmod>2023-04-07T04:35:17.276Z</lastmod>
-  </url>
-  <url>
-    <loc>https://eligurarie.github.io/MovementEcologyBook/resource_selection.html</loc>
-    <lastmod>2023-04-07T04:35:17.276Z</lastmod>
-  </url>
-  <url>
-    <loc>https://eligurarie.github.io/MovementEcologyBook/step_selection.html</loc>
-    <lastmod>2023-04-07T04:35:17.276Z</lastmod>
+    <lastmod>2025-07-29T17:06:09.715Z</lastmod>
   </url>
 </urlset>
