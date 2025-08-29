@@ -1,6 +1,6 @@
 ---
 title: "EFB 796: Techniques and Concepts in Movement Ecology"
-subtitle: 
+subtitle: "Course Materials | SUNY-ESF | Fall 2025" 
 author: "[Dr. Elie Gurarie](https://eligurarie.github.io)"
 output: 
   rmdformats::robobook:
@@ -11,18 +11,20 @@ output:
 ---
 
 
-Link to ***[The Book](../index.html)***
+<center><font size = 6> ***[The Book](../index.html)*** </font></center>
 
-## 1. Overview
+## 0. Overview
 
 - [Slides](01_Overview/Overview.html)
 
 
-## 2. Processing Movement Data
+## 1. Processing Movement Data
 
 - [Lecture Slides](02_ProcessingData/PreliminaryProcessing.html)
 
 - [Lab](02_ProcessingData/Lab1_DataProcessing.html) ([code](02_ProcessingData/Lab1_DataProcessing.R))
   - data here: [Elk_GPS_data.csv](data/Elk_GPS_data.csv) (right-click to download). 
 
-![](SUNY_ESF_logo.png)![](Muybridge_Buffalo_galloping.gif)
+- [Homework 1](Homework/HW1.html)
+
+![](Muybridge_Buffalo_galloping.gif)
