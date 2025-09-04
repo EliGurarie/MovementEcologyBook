@@ -21,19 +21,17 @@ output:
 ## 1. Processing Movement Data
 
 - [Lecture Slides](02_ProcessingData/PreliminaryProcessing.html)
-
 - [Lab](02_ProcessingData/Lab1_DataProcessing.html) ([code](02_ProcessingData/Lab1_DataProcessing.R))
   - data here: [Elk_GPS_data.csv](data/Elk_GPS_data.csv) (right-click to download). 
-
 - [Homework 1](Homework/HW1.html)
 
 
 ## 2. Visualizing Movement Data
 
 - [Lecture Slides](03_VisualizingData/SpatialDatainR_BarbourN.pdf)
-
 - [Lab](03_VisualizingData/VisualizingMovementData.html) ([code](03_VisualizingData/VisualizingMovementData.R))
-  - data here: [Elk_GPS_data.csv](03_VisualizingData/data/elk_processed.rda) (right-click to download). 
+  - data here: [elk_processed.rda](03_VisualizingData/data/elk_processed.rda) (right-click to download). 
+- [Homework 2](Homework/HW2.html)
 
 
 
