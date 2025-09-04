@@ -27,4 +27,14 @@ output:
 
 - [Homework 1](Homework/HW1.html)
 
+
+## 2. Visualizing Movement Data
+
+- [Lecture Slides](03_VisualizingData/SpatialDatainR_BarbourN.pdf)
+
+- [Lab](03_VisualizingData/VisualizingMovementData.html) ([code](03_VisualizingData/VisualizingMovementData.R))
+  - data here: [Elk_GPS_data.csv](03_VisualizingData/data/elk_processed.rda) (right-click to download). 
+
+
+
 ![](Muybridge_Buffalo_galloping.gif)
