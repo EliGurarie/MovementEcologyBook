@@ -1,0 +1,302 @@
+---
+title: "Statistical Summaries" 
+author: "Elie Gurarie (w/ Nicki Barbour)"
+subtitle: "[EFB 796: Techniques in Movement Ecology](https://eligurarie.github.io/MovementEcologyBook/EFB796/)"
+date: "September 11, 2025" 
+output:
+  html_document:
+    theme: flatly
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, cache = TRUE, message = FALSE, warning = FALSE)
+require(knitr)
+```
+
+> This is an tutorial that illustrates some approaches to performing certain programming tasks in R. Always remember, there are many ways to perform similar or identical tasks, and the single **best** workflow and approach to programming is the one that works best for you!
+
+## Preamble
+
+The goal of this tutorial is to provide the tools to comprehend the structure of certain common types of animal movement data, as well as to load, process and visualize movement data using R in Rstudio.
+
+In particular we will use the elk data we processed in [the first lab](../../Day1/02_ProcessingData/Lab1_DataProcessing.html) accessing data from [Movebank](https://www.movebank.org), a free, online database of animal tracking data, where users can store, process, and share (or not share) location data. In the diverse and highly fragmented world of animal movement ecology, it is the closest to a "standard" format for movement data.
+
+For this tutorial, several packages for downloading, processing and visualizing data are required. We will use: - `plyr` - `dplyr` - `magrittr` - `lubridate` - `move` - `sf` - `mapview` - `ggplot2`.
+
+You can install and load many packages at once, e.g., by:
+
+```{r loadPackages, eval = TRUE, echo = TRUE, warning = FALSE, results = "hide", message=FALSE}
+# create packages list
+packages <- c("plyr","dplyr","magrittr", 
+              "lubridate","sf", "mapview","ggplot2")
+sapply(packages, require, character = TRUE)
+```
+
+## Summarizing the Elk data
+
+Load the processed elk data: 
+
+```{r, echo = -1}
+load("../data/elk_processed.rda")
+```
+
+Remember, this contains two objects - `elk_gps` and the spatially projected `elk_sf`. Review the structure of the data frame with `str()`:
+
+```{r Structure}
+str(elk_gps)
+```
+
+Again - often useful to add the projected coordinates as well to our data frame (see code: [here](../../Day1/03_SummariesVisualization/Lab02_SomeVisualizations.html)).  We'll create a new object for this lab - called `elk_df`:
+
+```{r}
+elk_df <- elk_gps |> data.frame(elk_sf |> st_transform(32611) |> st_coordinates())
+```
+
+Our time variable (`datetime`) is a `POSIXct` object - which is good.  The `lubridate` package also offers useful functions for extracting information from those times. For example, the hour of day (`hour()`), the day of year (`yday()`), the month (`month(`) or the year (`year()`). The  `plyr::mutate()` command can string much of this together together in a single command, for example:
+
+```{r AddYday, eval = FALSE}
+elk_gps <- elk_gps |> mutate(doy = yday(datetime),
+                            Month = month(datetime),
+                            Year = year(datetime),
+                            Hour = hour(datetime))
+head(elk_gps)
+```
+
+```{r echo = FALSE}
+elk_df <- elk_df |> mutate(doy = yday(datetime),
+                            Month = month(datetime),
+                            Year = year(datetime))
+kable(head(elk_df))
+```
+
+
+Our data set is more or less as we want it. Depending on your research questions, you might have additional variables, and you should make sure that those variables are in the correct format. It is also worth noting that once you know what your raw data set looks like and you know how it should look like before starting processing, all those manipulations (loading the data, redefining the class of the columns, adding new columns) can be done in one line of code:
+
+## Exploring raw movement data
+
+Now that the data set is more manageable, we can explore the data, and especially look at the number of individuals, the duration of their monitoring, the fix rate, the number of missing data, etc.
+
+However, as movement data is a time series, it is important when manipulating to FIRST order it by Individual and Time. The function `arrange` from the `plyr` (or `dplyr`) package is very handy:
+
+```{r OrderTime}
+elk_df <- elk_df |> plyr::arrange(id, datetime)
+```
+
+Here, we walk through a sequence of some basic questions:
+
+### How many individuals are there?
+
+And what are their unique ID's?
+
+```{r IDs}
+length(unique(elk_df$id)) 
+unique(elk_df$id)
+```
+
+### How many locations per individual?
+
+To look at the average number of GPS locations per individual and other statistics (*e.g.*, standard deviation), we can use the `mean()`, `sd()`, and related functions.
+
+But first, we want to make sure that there are no missing locations (missing Longitude or Latitude), in this data set. `is.na()` checks whether each element is an NA or not, and `table()` just counts:
+
+```{r}
+# missing longitude
+table(is.na(elk_df$lon))
+
+# missing latitude
+table(is.na(elk_df$lat))
+```
+
+They are all FALSES so no missing locations! That's a relief.
+
+Here's the number of total observations per individual:
+
+```{r, echo = 2, eval = 1}
+table(elk_df$id) |> data.frame()
+table(elk_df$id)
+```
+
+And some summary statistics:
+
+mean
+
+```{r mean}
+mean(table(elk_df$id))
+```
+
+standard deviation
+
+```{r sd}
+sd(table(elk_df$id))
+```
+
+minimum and maximum
+
+```{r}
+min(table(elk_df$id))
+max(table(elk_df$id))
+```
+and all that stats together using `summary()` (but you need to convert to vector first):
+
+```{r}
+summary(as.numeric(table(elk_df$id)))
+```
+
+And histogram:
+
+```{r}
+hist(table(elk_df$id))
+```
+
+
+### What is the duration of monitoring?
+
+The functions `min()`, `max()` and `range()` are self-explanatory, but importantly work excellently with properly formatted time objects. 
+
+The `diff()` function calculates differences among subsequent elements of a vector, or, for time (POSIX) data, the `difftime(t1, t2)` function will compute the difference between two times - or two time vectors. 
+
+The overall time span of the monitoring effort for the individual "GP1" one is:
+
+```{r}
+GP1 <- subset(elk_df, id =="GP1")
+diff(range(GP1$datetime))
+```
+Unfortunately, the `diff` function does not recognize time units, which can be important to specify. 
+With `difftime` you can choose from: `"auto", "secs", "mins", "hours", "days", "weeks"`):
+
+```{r}
+diff(range(GP1$datetime)) # auto-picks hours
+difftime(max(GP1$datetime), min(GP1$datetime), units = "weeks")
+```
+This individual has a pretty short track!
+
+We can also look at the time range of the entire dataset:
+
+```{r}
+diff(range(elk_df$datetime), units = "days")
+```
+
+Years is not an option with `difftime`, but to manipulate the output statistically, you need to convert to numeric. Thus the number of years for the entire dataset is:
+
+```{r}
+(diff(range(elk_df$datetime), units = "days") |> as.numeric())/365.25
+```
+
+~ 3 years (not bad!)
+
+What we really want is to figure this out for each individual, all at once. One approach is to use the `plyr::ddply` command. This function allows you to apply functions to different groups (subsets) of a data set. Here's an example:
+
+```{r, eval = FALSE}
+elk_df |> ddply("id", plyr::summarize, 
+                 start= min(datetime), end = max(datetime)) |>
+  mutate(duration = difftime(end, start, units = "days"))
+```
+
+```{r, echo = FALSE}
+elk_df |> ddply("id", plyr::summarize, 
+                 start= min(datetime),
+                 end = max(datetime)) |> 
+  mutate(duration = difftime(end, start, units = "days")) |>
+  head() |> kable()
+```
+
+The (near) equivalent with `dplyr` commands, but just for duration:
+
+```{r}
+elk_df |> dplyr::group_by(id) |>
+  dplyr::summarize(start = min(datetime), 
+                   end = max(datetime), 
+                   duration = difftime(end, start, units = "days"))
+```
+
+To get statistical summaries of these durations, you have to convert the time range object (which is a unique `difftime` class) into numeric. Thus:
+
+```{r}
+elk_summary <- elk_df |> group_by(id) |> 
+  dplyr::summarize(time_range = difftime(max(datetime), min(datetime), units ="days"))
+
+elk_summary$time_range |> as.numeric() |> summary()
+```
+
+The median duration of monitoring is \~270 days, less than a year. Some individual(s) have \~3 years of monitoring, and some only a few days.
+
+We can visualize the monitoring duration for each individual, on a plot, by extracting the start date and the end date of the monitoring for each individual.
+
+```{r Timerange}
+n.summary <- elk_df |> group_by(id) |> 
+  summarize(start = min(datetime), end = max(datetime)) 
+```
+
+Here's a version using `ggplot2`
+
+```{r elkDurations}
+require(ggplot2)
+ggplot(n.summary, aes(y = id, xmin = start, xmax = end)) + 
+    geom_linerange() 
+```
+
+It may make more sense to sort the individuals not alphabetically, but by the time of release. Here's an approach, which relies on reordering the factor levels of the id column (an often fussy task):
+
+```{r}
+n.summary <- elk_df |> group_by(id) |> 
+  summarize(start = min(datetime), end = max(datetime)) %>% 
+  arrange(start) |> 
+  mutate(id = factor(id, levels = as.character(id)))
+  
+ggplot(n.summary, aes(y = id, xmin = start, xmax = end)) + 
+    geom_linerange() 
+```
+
+This is quick and easy and attractive enough. But, for the record, if you wanted to use base plotting functions (which, for many applications, can be much more easy to customize), code for a similar plot would look something like this:
+
+```{r basePlotDurations, echo = -1}
+par(bty = "l", tck = 0.01, mgp = c(1,.25,0), mar = c(2,5,1,1), cex.axis = 0.8)
+with(n.summary, {
+  plot(start, id, xlim = range(start, end), 
+       type = "n", yaxt = "n", ylab = "", xlab = "")
+  segments(start, as.integer(id), end, as.integer(id), lwd = 2)
+  mtext(side = 2, at = 1:nrow(n.summary), id, cex = 0.7, las = 1, line = .2)
+  })
+```
+
+In any case, on this figure each line represents the duration of the monitoring (x axis) for a given individual (y axis). While we see the beginning and end of the monitoring for each individual, we cannot see if there are any gaps in the monitoring.
+
+To see if there is one or multiple gaps, we can create a vector of Date for each individual (i.e., containing only the date and not the time, to simplify the it and get only get one row per day per individual). To get the date from a time vector, we use the `as.Date` function. We then use the `slice()` command to keep only row per day for each individual. Do not forget to arrange per ID and date as all these manipulation can sometimes mess up the ordering of your data.
+
+```{r}
+elk_days <- elk_df |> mutate(date = as.Date(datetime)) |>
+  group_by(id, date) |>
+  slice(1) |> arrange(id, datetime) 
+```
+
+```{r, elkDurationPlotWithGaps}
+ggplot(elk_days, aes(y = id, x = datetime)) + 
+    geom_point(shape = 20, size = .5, alpha = .1) 
+```
+
+Similar to the previous figure, each line represent the monitoring dates for a given individual. But from this figure, we can see that there are some gaps in the monitoring of some individuals.
+
+### What is the fix rate?
+
+The **"fix rate"**, or the time interval between successive locations, can be extracted by using the `difftime()` function on the `Time` column. Again, this function needs to be applied to each individual separately. Here, we are subsetting the data set per ID, and applying a function which is adding a column `difftime()` to each subset. Note that since the vector of time difference is smaller than the vector of time, we add a missing value at the beginning of each vector, for each value to represent the difference in time to the previous location.
+
+```{r, eval = FALSE}
+elk_df <- elk_df |> ddply("id", mutate, 
+        dtime = c(NA, diff(datetime, units = "hours")))
+```
+
+```{r, echo = FALSE}
+head(elk_df) |> kable()
+```
+
+What are the statistics (min, max, mean, median, ...) of this fix rate?
+
+```{r}
+elk_df$dtime |> summary()
+```
+
+On average, the fix rate is \~1 hour (median is also around 1 hour). 
+
+The range from 0.01 hours to over 1,000 hours highlights the importance of understanding the sources of gaps in your data. This understanding often needs to come from having a relationship with the people that actually collected the data (unless if was you of course!), to understand their monitoring strategy and structure of the data, and to understand how to process the data depending on your research questions.
