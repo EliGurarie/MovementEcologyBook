@@ -38,6 +38,7 @@ output:
 - [Book chapter](https://eligurarie.github.io/MovementEcologyBook/part2_data_and_manipulations/movement_data_in_R.html)
 - [Lab](04_SummarizingData/Lab_StatisticalSummaries.html) | [code](04_SummarizingData/Lab_StatisticalSummaries.R) |  [Rmd](04_SummarizingData/Lab_StatisticalSummaries.Rmd)
   - data here: [elk_processed.rda](data/elk_processed.rda) (right-click to download). 
+- [Homework 3](Homework/HW3.html)
 
 
 
