@@ -40,6 +40,9 @@ output:
   - data here: [elk_processed.rda](data/elk_processed.rda) (right-click to download). 
 - [Homework 3](Homework/HW3.html)
 
+## 4. Simple Steps to Complex Numbers
+- [Book chapter](https://eligurarie.github.io/MovementEcologyBook/part2_data_and_manipulations/complex_numbers.html)
+- [Lecture/Lab](05_ComplexNumbersAreSimple/ComplexNumbers.html) 
 
 
 ![](Muybridge_Buffalo_galloping.gif)
