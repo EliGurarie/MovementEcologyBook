@@ -43,6 +43,6 @@ output:
 ## 4. Simple Steps to Complex Numbers
 - [Book chapter](https://eligurarie.github.io/MovementEcologyBook/part2_data_and_manipulations/complex_numbers.html)
 - [Lecture/Lab](05_ComplexNumbersAreSimple/ComplexNumbers.html) 
-
+- [Lab - Summarizing Data (portion on steps)](04_SummarizingData/Lab_StatisticalSummaries.html#Obtaining_Steps)
 
 ![](Muybridge_Buffalo_galloping.gif)
