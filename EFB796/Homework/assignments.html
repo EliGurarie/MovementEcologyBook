@@ -11,9 +11,8 @@
 
 <meta name="author" content="Elie Gurarie" />
 
-<meta name="date" content="2025-08-26" />
 
-<title>Assignment 1</title>
+<title>Exercises and Assignments</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1479,16 +1478,180 @@ border-radius: 0px;
 
 
 
-<h1 class="title toc-ignore">Assignment 1</h1>
-<h3 class="subtitle"><a href="https://eligurarie.github.io/MovementEcologyBook/EFB796/">EFB 796:
-Techniques and Concepts in Movement Ecology</a></h3>
+<h1 class="title toc-ignore">Exercises and Assignments</h1>
+<h3 class="subtitle"><a href="../index.html">EFB 796: Techniques and
+Concepts in Movement Ecology</a></h3>
 <h4 class="author">Elie Gurarie</h4>
-<h4 class="date">2025-08-26</h4>
+<h4 class="date">Fall 2025</h4>
 
 </div>
 
 
-<p>(<strong>due Thursday September 4</strong>)</p>
+<p><font color="blue"> Unless specified otherwise, homework
+assignments should be emailed to the instructor as <em>knitted</em> R
+Markdown document with minimal (if any) code. Print the markdown to a
+pdf, and provide the <code>.Rmd</code> file as well.</font></p>
+<div id="week-4-due-thursday-september-25" class="section level1">
+<h1>Week 4: (due Thursday September 25)</h1>
+<p>In <a href="https://eligurarie.github.io/MovementEcologyBook/EFB796/04_SummarizingData/Lab_StatisticalSummaries.html#Obtaining_Steps">this
+portion of the Summarizing Data Lab</a>, I provide a function to obtain
+step information from movement data.</p>
+<p>A (cleaner) version of this function is here:</p>
+<pre class="r"><code>getSteps &lt;- function(df){
+  
+  Z &lt;- df$X + 1i*df$Y
+  Time &lt;- df$Time         # the column has to be called &quot;Time&quot; 
+  Step &lt;- c(NA, diff(Z))  # these are complex vectors
+  
+  
+  # we add the extra NA because there is no step to the first location
+  dT &lt;- c(NA, diff(Time, units = &quot;hours&quot;) |&gt; as.numeric())
+  
+  SL &lt;- Mod(Step)   # step length 
+  MR &lt;- SL/dT       # movement rate (kind of like speed)
+  
+  Phi &lt;- Arg(Step)  # absolute orientation
+  Theta &lt;- c(NA, diff(Phi))     # turning angle
+  # note, yet another extra NA!
+  
+  data.frame(df, Z, dT, Step, SL, MR, Phi, Theta)
+}</code></pre>
+<p>Note that to make this function work, you have to create a data frame
+with columns <code>X</code>, <code>Y</code> and <code>Time</code>.</p>
+<p>Just as an example, here is it applied to one elk, step-by-step:</p>
+<div id="load-the-data-and-subset-one-animal" class="section level4">
+<h4>1. Load the data and subset one animal</h4>
+<pre class="r"><code>require(sf)
+load(&quot;../data/elk_processed.rda&quot;)
+myelk &lt;- subset(elk_sf, id == &quot;4049&quot;)</code></pre>
+</div>
+<div id="transform-to-a-suitable-crs-and-extract-xy-coordinates" class="section level4">
+<h4>2. Transform to a suitable CRS and extract XY coordinates</h4>
+<p>If you lost the UTM finder, you can check on <a href="https://latlongdata.com/latitude-longitude-to-utm-converter/">this
+link</a> for example. For the elk, it’s <a href="https://epsg.io/32611">Zone 11 N</a>:</p>
+<pre class="r"><code>myelk &lt;- st_transform(myelk, crs = 32611)</code></pre>
+</div>
+<div id="obtain-the-x-y-coordinates" class="section level4">
+<h4>3. Obtain the X, Y coordinates:</h4>
+<pre class="r"><code>myelk_xy &lt;- st_coordinates(myelk)
+head(myelk_xy)</code></pre>
+<pre><code>##             X       Y
+## [1,] 581853.4 5775515
+## [2,] 582144.6 5774799
+## [3,] 580275.7 5772376
+## [4,] 580022.5 5772614
+## [5,] 581917.3 5772259
+## [6,] 581896.4 5775608</code></pre>
+<p>Note that this is a <code>matrix</code> object, which is a bit
+different than a <code>data.frame</code>. All the entries have to be of
+the same type, and you can’t access the columns by name in the same way
+as with a data frame. You have to do:</p>
+<pre class="r"><code>myelk_xy[,&quot;X&quot;]</code></pre>
+<p>or</p>
+<pre class="r"><code>myelk_xy[,1]</code></pre>
+<p>to get the first column.</p>
+</div>
+<div id="create-a-vector-with-time" class="section level4">
+<h4>4. Create a vector with time:</h4>
+<pre class="r"><code>myelk_df &lt;- data.frame(Time = myelk$datetime, X = myelk_xy[,1], Y = myelk_xy[,2])</code></pre>
+</div>
+<div id="apply-the-function" class="section level4">
+<h4>5. Apply the function!</h4>
+<pre class="r"><code>myelk_steps &lt;- getSteps(myelk_df)
+head(myelk_steps)</code></pre>
+<pre><code>##                  Time        X       Y                 Z        dT
+## 1 2001-12-13 07:01:00 581853.4 5775515 581853.4+5775515i        NA
+## 2 2001-12-13 09:01:00 582144.6 5774799 582144.6+5774799i  2.000000
+## 3 2001-12-14 09:01:00 580275.7 5772376 580275.7+5772376i 24.000000
+## 4 2001-12-14 11:00:00 580022.5 5772614 580022.5+5772614i  1.983333
+## 5 2001-12-14 17:02:00 581917.3 5772259 581917.3+5772259i  6.033333
+## 6 2001-12-14 19:01:00 581896.4 5775608 581896.4+5775608i  1.983333
+##                     Step        SL        MR        Phi     Theta
+## 1                     NA       NaN       NaN         NA        NA
+## 2   291.21719- 716.0909i  773.0418  386.5209 -1.1845478        NA
+## 3 -1868.86832-2423.4877i 3060.3858  127.5161 -2.2276955 -1.043148
+## 4  -253.24107+ 238.4393i  347.8280  175.3755  2.3862899  4.613985
+## 5  1894.80562- 355.1837i 1927.8080  319.5262 -0.1853008 -2.571591
+## 6   -20.93806+3349.3682i 3349.4337 1688.7901  1.5770476  1.762348</code></pre>
+<p>Looks like it worked!</p>
+</div>
+<div id="i.-single-animal-analysis" class="section level2">
+<h2>I. Single animal analysis</h2>
+<p>Apply this function for a <strong>single</strong> animal from a
+dataset of your choice, just like above. Report:</p>
+<ol style="list-style-type: decimal">
+<li>Mean step length (with correct / relevant units)</li>
+<li>Mean <em>movement rate</em> (with correct / relevant units) <em>Why
+is it important to differentiate the two?</em><br />
+</li>
+<li>Mean cosine of the turning angle.</li>
+</ol>
+<p>Draw a histogram of the step-length distribution and movement rate
+distribution, and a rose-diagram of the turning angle distribution.</p>
+</div>
+<div id="ii.-extra-credit-but-important-summarize-for-all-individuals" class="section level2">
+<h2>II. (<strong>Extra Credit, but important</strong>) Summarize for all
+individuals</h2>
+<p>Obtain these statistics for all the animals in your data-set. Then
+summarize those summaries, i.e. what is the mean and standard deviation
+of those statistics across your sample.</p>
+<p><strong>Hint 1</strong> To apply this function to a bunch of animals
+to get the raw data you’d do something like this:</p>
+<pre class="r"><code>elk_withsteps &lt;- ddply(elk_df, &quot;id&quot;, getSteps)</code></pre>
+<p>BUT this assumes you have an <code>id</code> column in your data
+frame!</p>
+<p><strong>Hint 2</strong> To then obtain summary statistics for each
+individual, you’ll have to summarize AGAIN =:</p>
+<pre class="r"><code>elk_summaries &lt;- ddply(elk_withsteps, &quot;id&quot;, summarizeSteps)</code></pre>
+<p>BUT this assumes you have a function called
+<code>summarizeSteps</code> that takes a step data frame and returns the
+summary statistics!</p>
+<p>GOOD LUCK and USE THE DISCUSSION BOARD and HELP EACH OTHER!</p>
+</div>
+</div>
+<div id="week-3-due-thursday-september-18" class="section level1">
+<h1>Week 3: (due Thursday September 18)</h1>
+<p>Pick a movement data set of your choice with
+<strong>multiple</strong> individuals (but no more than 20). Ideally, a
+dataset that you plan to investigate yourself. Alternatively, work with
+some subset of the Ya Ha Tinda elk dataset on Movebank, following the
+instructions in <a href="../movement_data_in_R.html">Chapter: Movement
+Data in R</a>.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Create a table that reports for each individual (i) the number of
+locations, (ii) the start, end time and duration of the monitoring,
+(iii) the median, mean and standard deviation of the <em>duty cycle</em>
+(i.e. the duration between subsequent observations).</p></li>
+<li><p>Report the following statistics:</p>
+<ol style="list-style-type: decimal">
+<li>The mean, standard deviation, median, range, and interquartile range
+(25% and 75% quantiles) of the number of locations per individual;</li>
+<li>The median, mean, and standard deviation of the location frequency
+(aka “duty cycle” or “fix rate”) - per individual and across all
+individuals.</li>
+<li>If the data are meant to be regular, report the number or proportion
+of missing locations - per individual and across individuals.</li>
+</ol></li>
+</ol>
+</div>
+<div id="week-2-due-thursday-september-11" class="section level1">
+<h1>Week 2: (due Thursday September 11)</h1>
+<div id="i.-making-maps-with-your-spatial-data" class="section level2">
+<h2>I. Making maps with your spatial data</h2>
+<p>Your assignment is to make a “pretty” and informative (static) map in
+R with two data sets: (a) the <code>Eagles.rda</code> file on Blackboard
+- (note, you’ll most likely have to convert that to a <code>sf</code>
+object); and (b) your data of choice. Ideally, the data will be what you
+might use for your final project.</p>
+<p>You can make this map using any R package you want as long as you can
+make a “pretty” map with it. Your map should include,at a minimum, a
+background map of some kind (could just be a polygon of land, could be a
+basemap, labeled X/Y axes, a legend, and of course, your data. If you
+are feeling fancy/brave, try to add a north arrow and scale bar!</p>
+</div>
+</div>
+<div id="week-1-due-thursday-september-4" class="section level1">
+<h1>Week 1: (due Thursday September 4)</h1>
 <div id="i.-articulate" class="section level2">
 <h2>I. Articulate …</h2>
 <p>… your goals for this class. If you have one, suggest an idea for a
@@ -1526,6 +1689,7 @@ mydata_processed &lt;- mydata |&gt; STEP1() |&gt; STEP2() |&gt; STEP3()</code></
 <p><strong>4.</strong> (1) report where (in the world) these data are,
 (2) how long they were tracked for, and (3) how many individuals were
 tracked.</p>
+</div>
 </div>
 
 

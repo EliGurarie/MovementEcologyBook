@@ -11,7 +11,10 @@ output:
 ---
 
 
-<center><font size = 6> ***[The Book](../index.html)*** </font></center>
+<font size = 6> ***[The Book](../index.html)*** </font>
+
+And all homeworks are posted [here](Homework/assignments.html)
+
 
 ## 0. Overview
 
@@ -23,7 +26,6 @@ output:
 - [Lecture Slides](02_ProcessingData/PreliminaryProcessing.html)
 - [Lab](02_ProcessingData/Lab1_DataProcessing.html) ([code](02_ProcessingData/Lab1_DataProcessing.R))
   - data here: [Elk_GPS_data.csv](data/Elk_GPS_data.csv) (right-click to download). 
-- [Homework 1](Homework/HW1.html)
 
 
 ## 2. Visualizing Movement Data
@@ -31,14 +33,12 @@ output:
 - [Lecture Slides](03_VisualizingData/SpatialDatainR_BarbourN.pdf)
 - [Lab](03_VisualizingData/VisualizingMovementData.html) ([code](03_VisualizingData/VisualizingMovementData.R))
   - data here: [elk_processed.rda](03_VisualizingData/data/elk_processed.rda) (right-click to download). 
-- [Homework 2](Homework/HW2.html)
 
 
 ## 3. Summarizing Movement Data
 - [Book chapter](https://eligurarie.github.io/MovementEcologyBook/part2_data_and_manipulations/movement_data_in_R.html)
 - [Lab](04_SummarizingData/Lab_StatisticalSummaries.html) | [code](04_SummarizingData/Lab_StatisticalSummaries.R) |  [Rmd](04_SummarizingData/Lab_StatisticalSummaries.Rmd)
   - data here: [elk_processed.rda](data/elk_processed.rda) (right-click to download). 
-- [Homework 3](Homework/HW3.html)
 
 ## 4. Simple Steps to Complex Numbers
 - [Book chapter](https://eligurarie.github.io/MovementEcologyBook/part2_data_and_manipulations/complex_numbers.html)
