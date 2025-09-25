@@ -47,8 +47,8 @@ And all homeworks are posted [here](Homework/assignments.html)
 
 ## 5. Home Ranges
 - [Lecture](06_HomeRanges/HomeRanges_slides.html)
-- [Lab](06_HomeRanges/HomeRanges.html) 
-- [R code](06_HomeRanges/HomeRanges.R)
+- [Lab](06_HomeRanges/HomeRanges.html) | [R code](06_HomeRanges/HomeRanges.R) | [Rmd](06_HomeRanges/HomeRanges.Rmd)
+- [In class R code](06_HomeRanges/HomeRanges_inclassCode.R)
 
 
 ![](Muybridge_Buffalo_galloping.gif)

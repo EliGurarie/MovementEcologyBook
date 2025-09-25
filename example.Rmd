@@ -1,0 +1,29 @@
+---
+title: "Untitled"
+author: "Nicki and Elie"
+date: "2025-09-25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+Load packages:
+
+```{r}
+require(move)
+require(plyr)
+require(ggplot2)
+require(TuktuData)
+```
+
+
+And then things happen
+
+
+```{r}
+data(nwt_raw)
+str(nwt_raw)
+```
+
