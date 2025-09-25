@@ -1,0 +1,213 @@
+---
+title: "Exercises and Assignments"
+subtitle: "[EFB 796: Techniques and Concepts in Movement Ecology](../index.html)" 
+author: "Elie Gurarie"
+date: "Fall 2025"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+  theme: "cosmo"
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache= TRUE) 
+```
+
+<font color = "blue"> Unless specified otherwise, homework assignments should be emailed to the instructor as *knitted* R Markdown document with minimal (if any) code. Print the markdown to a pdf, and provide the `.Rmd` file as well.</font>
+
+# Week 5: (due Thursday October 2) 
+
+Choose some data that you can meaningfully get a home range estimate from and:
+
+1. Pick one individual and obtain a 50% and 95% MCP.  Plot the MCP's and the data on one image.   Report their areas. 
+
+2. Compute a kernel density estimate.  Plot it with the 50% and 95% kernels.  Report their areas and compare the polygons. 
+
+**Extra Credit:** Using the kernel densities, find two animals that might have some overlap in their ranges, and compute the **volume intersection** (VI) overlap, using the `kerneloverlap` function in `adehabitatHR` as descibed [here](https://eligurarie.github.io/MovementEcologyBook/EFB796/06_HomeRanges/HomeRanges.html#Kernel_overlaps). 
+
+
+
+# Week 4: (due Thursday September 25) 
+
+In [this portion of the Summarizing Data Lab](https://eligurarie.github.io/MovementEcologyBook/EFB796/04_SummarizingData/Lab_StatisticalSummaries.html#Obtaining_Steps), I provide a function to obtain step information from movement data.  
+
+A (cleaner) version of this function is here:
+
+```{r}
+getSteps <- function(df){
+  
+  Z <- df$X + 1i*df$Y
+  Time <- df$Time         # the column has to be called "Time" 
+  Step <- c(NA, diff(Z))  # these are complex vectors
+  
+  
+  # we add the extra NA because there is no step to the first location
+  dT <- c(NA, diff(Time, units = "hours") |> as.numeric())
+  
+  SL <- Mod(Step)   # step length 
+  MR <- SL/dT       # movement rate (kind of like speed)
+  
+  Phi <- Arg(Step)  # absolute orientation
+  Theta <- c(NA, diff(Phi))     # turning angle
+  # note, yet another extra NA!
+  
+  data.frame(df, Z, dT, Step, SL, MR, Phi, Theta)
+}
+```
+
+Note that to make this function work, you have to create a data frame with columns `X`, `Y` and `Time`.  
+
+Just as an example, here is it applied to one elk, step-by-step:
+
+#### 1. Load the data and subset one animal
+
+```{r, message = FALSE, warning = FALSE}
+require(sf)
+load("../data/elk_processed.rda")
+myelk <- subset(elk_sf, id == "4049")
+```
+
+#### 2. Transform to a suitable CRS and extract XY coordinates
+
+If you lost the UTM finder, you can check on [this link](https://latlongdata.com/latitude-longitude-to-utm-converter/) for example.  For the elk, it's [Zone 11 N](https://epsg.io/32611): 
+
+```{r}
+myelk <- st_transform(myelk, crs = 32611)
+```
+
+#### 3. Obtain the X, Y coordinates:
+
+```{r}
+myelk_xy <- st_coordinates(myelk)
+head(myelk_xy)
+```
+Note that this is a `matrix` object, which is a bit different than a `data.frame`.  All the entries have to be of the same type, and you can't access the columns by name in the same way as with a data frame.   You have to do:
+
+```{r, eval = FALSE}
+myelk_xy[,"X"]
+```
+
+or 
+
+```{r, eval = FALSE}
+myelk_xy[,1]
+```
+
+to get the first column.  
+
+#### 4. Create a vector with time:
+
+```{r}
+myelk_df <- data.frame(Time = myelk$datetime, X = myelk_xy[,1], Y = myelk_xy[,2])
+```
+
+
+#### 5.  Apply the function!
+
+```{r}
+myelk_steps <- getSteps(myelk_df)
+head(myelk_steps)
+```
+
+Looks like it worked!
+
+
+## I. Single animal analysis
+
+Apply this function for a **single** animal from a dataset of your choice, just like above. Report: 
+
+1. Mean step length (with correct / relevant units)
+2. Mean *movement rate* (with correct / relevant units) *Why is it important to differentiate the two?*   
+3. Mean cosine of the turning angle.  
+
+Draw a histogram of the step-length distribution and movement rate distribution, and a rose-diagram of the turning angle distribution.  
+
+
+## II. (**Extra Credit, but important**) Summarize for all individuals
+
+Obtain these statistics for all the animals in your data-set.   Then summarize those summaries, i.e. what is the mean and standard deviation of those statistics across your sample. 
+
+**Hint 1**  To apply this function to a bunch of animals to get the raw data you'd do something like this:
+
+```{r, eval = FALSE}
+elk_withsteps <- ddply(elk_df, "id", getSteps)
+```
+
+BUT this assumes you have an `id` column in your data frame!
+
+
+**Hint 2**  To then obtain summary statistics for each individual, you'll have to summarize AGAIN =:
+
+```{r, eval = FALSE}
+elk_summaries <- ddply(elk_withsteps, "id", summarizeSteps)
+```
+
+
+BUT this assumes you have a function called `summarizeSteps` that takes a step data frame and returns the summary statistics!
+
+GOOD LUCK and USE THE DISCUSSION BOARD and HELP EACH OTHER!
+
+
+
+
+# Week 3: (due Thursday September 18) 
+
+
+Pick a movement data set of your choice with **multiple** individuals (but no more than 20). Ideally, a dataset that you plan to investigate yourself. Alternatively, work with some subset of the Ya Ha Tinda elk dataset on Movebank, following the instructions in [Chapter: Movement Data in R](../movement_data_in_R.html).
+
+a)  Create a table that reports for each individual (i) the number of locations, (ii) the start, end time and duration of the monitoring, (iii) the median, mean and standard deviation of the *duty cycle* (i.e. the duration between subsequent observations).
+
+b)  Report the following statistics:
+
+    1.  The mean, standard deviation, median, range, and interquartile range (25% and 75% quantiles) of the number of locations per individual;
+    2.  The median, mean, and standard deviation of the location frequency (aka "duty cycle" or "fix rate") - per individual and across all individuals.
+    3.  If the data are meant to be regular, report the number or proportion of missing locations - per individual and across individuals. 
+
+
+
+# Week 2: (due Thursday September 11) 
+
+## I. Making maps with your spatial data
+
+Your assignment is to make a "pretty" and informative (static) map in R with two data sets:  (a) the `Eagles.rda` file on Blackboard - (note, you'll most likely have to convert that to a `sf` object); and (b) your data of choice.  Ideally, the data will be what you might use for your final project. 
+
+You can make this map using any R package you want as long as you can make a "pretty" map with it.  Your map should include,at a minimum, a background map of some kind (could just be a polygon of land, could be a basemap, labeled X/Y axes, a legend, and of course, your data. If you are feeling fancy/brave, try to add a north arrow and scale bar!
+
+
+
+# Week 1: (due Thursday September 4) 
+
+## I. Articulate ...
+
+... your goals for this class.  If you have one, suggest an idea for a final project and data you would like to analyze.  Finally, if there are any specific  analysis tools you are interested in learning more about, share those, with examples of papers.  
+
+## II. Register for Movebank 
+
+if you haven't already. 
+
+## III. Develop a data-processing pipe 
+
+Essentially, you're going to recreate the workflow in [Lab1](https://eligurarie.github.io/MovementEcologyBook/EFB796/02_ProcessingData/Lab1_DataProcessing.html).  But with a different dataset.
+
+**1.** Find a dataset in csv format.  It can be: 
+
+- your own data (if already in csv format),;
+- any publicly available dataset from Movebank (perhaps closest to your taxon of interest), which can be downloaded as a `.csv`;
+- or any of the `.csv` files on the Blackboard course page 
+
+**2.** develop a "processing pipe".  In other words a sequence that looks like this:
+
+```{r eval = FALSE}
+mydata <- read.csv("mydata.csv")
+mydata_processed <- mydata |> STEP1() |> STEP2() |> STEP3()
+```
+
+such that the final data frame has columns `ID`, `X` (or `Lon`), `Y` (or `Lat`), `Time` - formatted as a POSIX.
+
+**3.** convert to a "simple feature" (using the `st_as_sf`) command, visualize it with `mapview()` 
+
+**4.** (1) report where (in the world) these data are, (2) how long they were tracked for, and (3) how many individuals were tracked. 
+
+
