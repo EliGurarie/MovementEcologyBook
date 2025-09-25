@@ -45,4 +45,10 @@ And all homeworks are posted [here](Homework/assignments.html)
 - [Lecture/Lab](05_ComplexNumbersAreSimple/ComplexNumbers.html) 
 - [Lab - Summarizing Data (portion on steps)](04_SummarizingData/Lab_StatisticalSummaries.html#Obtaining_Steps)
 
+## 5. Home Ranges
+- [Short Lecture](06_HomeRanges/HomerangeI.pdf)
+- [Lab](06_HomeRanges/HomeRanges.html) 
+- [R code](06_HomeRanges/HomeRanges.R)
+
+
 ![](Muybridge_Buffalo_galloping.gif)

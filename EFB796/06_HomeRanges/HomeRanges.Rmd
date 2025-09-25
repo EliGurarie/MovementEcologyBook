@@ -1,0 +1,437 @@
+---
+title: 'Estimating Home Ranges'
+author: "Elie Gurarie (w/ Nicki Barbour)"
+subtitle: "[EFB 796: Techniques in Movement Ecology](https://eligurarie.github.io/MovementEcologyBook/EFB796/)"
+date: "September 25, 2025" 
+output:
+  html_document:
+    theme: flatly
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE)
+```
+
+
+> **Goal:** To estimate home ranges with Minimum Convex Polygons, Kernel Density Estimates, and Localized Convex Hull
+
+
+Packages:
+
+```{r}
+library(ggplot2)
+library(plyr)
+library(sf)
+library(mapview)
+```
+
+Selecting some animals
+
+```{r loadData, echo = -1}
+load("../data/elk_processed.rda")
+head(elk_gps)
+```
+
+We've picked out 3 individuals that are, largely, non-migratory.  The snippet of code below also directly extracts the *projected* X-Y coordinates (from `st_coordinates`) and adds them to the data frame:
+
+```{r SelectResidentElk}
+elk_res <- elk_gps |>
+  subset(id %in% c("YL80", "YL91", "YL94")) |>
+  mutate(id = droplevels(id))
+
+elk_res_sf <- elk_res |> 
+  st_as_sf(coords = c("lon","lat"), crs = 4326) |> 
+  st_transform(32611) 
+
+elk_res <- cbind(elk_res, st_coordinates(elk_res_sf))
+str(elk_res)
+```
+
+## Visualize Tracks
+
+Let's start off by visualizing our selected tracks, using some of the methods we learned in lab 1.  We can see that these tracks have a nice "blob" of movement, indicating residential behavior suitable for home range analysis. 
+
+
+```{r ThreeElkMapped}
+ggplot(data=elk_res, aes(x=X, y=Y, col = id)) +
+  geom_path() + coord_fixed() + ggtitle("Some (mostly) resident elk")
+```
+
+These are *generally* resident animals, with a LOT of overlap, but also, clearly, some long-distance movements. 
+
+Here's a mapview..  This is a bit of code that's worth storing ... it is odd, and relies on `dplyr`, but it is the approach to turn simple feature POINTS into LINES:
+
+```{r, cache = FALSE}
+require(dplyr)
+elk_tracks <- elk_res_sf |> 
+  dplyr::group_by(id) |> 
+  summarize(do_union=FALSE) |> 
+  st_cast("LINESTRING")
+
+mapview(elk_tracks,zcol="id")
+```
+
+# Minimum Convex Polygon
+
+The MCP method is very simple - essentially, it draws the smallest/tightest polygon around the locations, by 1) calculating the centroid of all the points, 2) calculating the distance from each location/point to this centroid, 3) removing all points that have a distance greater than a specified quantile (usually 95-100 percent) and 4) applying the "convex hull" algorithm to determine the minimum convex polygon for the points. 
+
+## In Base R
+
+First - let's note that there is a base R function called `chull` (for convex hull) which does this quickly and simply given a two-column matrix of coordinates.   For example: 
+
+```{r}
+xy <- (elk_res |> subset(id == id[1]))[,c("X","Y")]
+head(xy)
+```
+
+The `chull` function simply lets us know which rows of the matrix contain the convex hull: 
+
+```{r}
+chull(xy)
+```
+
+To get the actual points: 
+
+```{r}
+mcp <- xy[chull(xy),]
+```
+
+
+To see the mcp:
+
+```{r, echo = -1}
+par(bty = "l", mgp = c(1,.1,0), tck = 0.01, cex.axis = 0.75)
+plot(xy, cex = 0.5, asp = 1)
+polygon(mcp, bor = 2, lwd = 2)
+```
+
+It's a big triangle!  What's its area?  Here, a simple function from the `pracma` function will do the trick.  
+
+```{r}
+library(pracma)
+polyarea(mcp[,1], mcp[,2])
+```
+Note that the number is negative!  That's because the points are clockwise.  Anyways, the units of this is m^2.  So if you wanted to convert to km^2:
+
+```{r}
+-polyarea(mcp[,1], mcp[,2])/(1e6)
+```
+
+## Using `adehabitatHR`
+
+The `adehabitatHR` package, (and related `adehabitatLT`, `adehabitatMS`, `adehabitatMR` functions) are all devoted to analyzing ecological data ("ade" stands for *Analyse des données écologique*).  There are lots of useful functions in these packages, and terrific documentation.  For example, for homerange analysis, you can explore the  [adehabitatHR vignette](https://cran.r-project.org/web/packages/adehabitatHR/vignettes/adehabitatHR.pdf).
+
+```{r}
+library(adehabitatHR)
+```
+
+The `mcp` function from adehabitatHR works on one individual at a time. It also requires that the data first be converted to a `SpatialPoints` structure, a different spatial data type (similar to sf, but using the "sp" package instead).
+
+This function also requires that the user specify the quantile to use for selecting locations for the MCP method - generally 95-100%. 
+
+In order to perform our homerange analysis on all of our individuals at once, it will be useful to write a function that takes an individual sf object and a parameter for the percent of points to use for MCP calcuation. The function will return an MCP object, from the `mcp` function. 
+
+We'll start with one animal, and convert it to an `sp` object.
+
+```{r}
+myelk_sf <- elk_res_sf |> subset(id == "YL94")
+myelk_sp <- myelk_sf |> as_Spatial()
+```
+
+And the `mcp` functions returns the MCP.  You can provide the "percentage" which will exclude some points.  Just running the function outputs an area (in square km, but that can be adjusted as needed):
+
+```{r mcp95}
+(mcp95 <- mcp(myelk_sp, percent = 95, unout = "km2"))
+```
+
+
+```{r mcp100}
+(mcp100 <- mcp(myelk_sp, percent = 100, unout = "km2"))
+```
+
+Note that the 100% MCP is much larger than the 95% MCP - we'll see exactly why soon.  
+
+You can easily convert this mcp to a simple feature: 
+
+```{r}
+mcp95 <- st_as_sf(mcp95)
+mcp100 <- st_as_sf(mcp100)
+
+ggplot() + 
+  geom_sf(data = mcp100, color = "blue", fill = alpha("blue",.2)) +
+    geom_sf(data = mcp95, color = "red", fill = alpha("red",.2)) + 
+     geom_sf(data = myelk_sf, alpha = 0.2)
+```
+
+ 
+```{r findMCPFunction}
+findMCP <- function(id_sf, percent){
+  id_sp <- id_sf |> as_Spatial()
+  id_mcp <- mcp(id_sp, percent, unout="km2")
+  return(st_as_sf(id_mcp))
+}
+findMCP(elk_res_sf |> subset(id == "YL80"), 95)
+findMCP(elk_res_sf |> subset(id == "YL91"), 95)
+findMCP(elk_res_sf |> subset(id == "YL94"), 95)
+```
+
+You can collect a bunch of simple features into a `SpatialPointsDataframe` and get all the MCP's at once.  Importantly - however - the data can ONLY contain one column - for the ID's. 
+
+```{r, cache = FALSE}
+elk_sp <- elk_res_sf |> mutate(datetime = NULL) |> as_Spatial(IDs = "id") 
+elk_mcps <- mcp(elk_sp, percent = 95, unout = "km2") |> st_as_sf()
+mapview(elk_mcps, zcol = "id")
+```
+
+>  What issues are there with these home ranges? 
+ 
+# Kernel Density Estimates
+
+Kernel density estimation (KDE) is a slightly more complex method used to calculate home-range areas. There are tools for this also in the `adehabitatHR` package. 
+
+KDE applies a user-specified function to input points/locations in order to predict the probability of occurrence or the "utilization distribution", within each pixel of a user-specified grid. The choice of resolution for this grid can have a trade-off, with a finer resolution being more memory-intensive to calculate. The choice of this resolution should be informed by the resolution of the input data.
+
+A commonly used function for KDE (and the default for the adehabitatHR package function, `kernelUD`) is the "bivariate normal kernel". This function takes a set of individual observations, a parameter for the number of observations, and *importantly*, a user-specified parameter for the smoothing factor, *h* (also called the "bandwidth"). The choice of the value for this *h* parameter can significantly impact results, with a larger *h* resulting in more smoothing or a larger distance over which a data point influences the utlization distribution. The adehabitatHR package uses the "reference bandwidth" as a default with its `kernelUD` function but additional options exist (e.g., the "least-square cross validation method" or a user-chosen value).
+
+Users can also specify the percentage of density to use for homerange estimation (usually 50-95%), within the `getverticeshr` function, which calculates the homerange area using the estimated utilization distribution from the `kernelUD` function.
+
+Similar to the `mcp` function, the `kernelUD` and `getverticeshr` functions are applied to one individual at a time. To apply to all individuals at once, we can write our own function. The function takes an individual sf object, a user-specified grid, and a user-specified percent. It then converts the data into "SpatialPoints" format and applies the `kernelUD` and `getverticeshr` to get the estimated homerange contour. The contour is then converted back to an sf object (as a POLYGON) and the area of the polygon is calculated using the `st_area`. This area is added as a column to our output homerange polygon object.
+
+## Compute and plot KDE
+
+We'll do it here for one animal:
+
+```{r PickAnElk}
+myelk_sf <- elk_res_sf |> subset(id == "YL80")
+myelk_sp <- myelk_sf |>  as_Spatial() 
+myelk_kernelud <- kernelUD(myelk_sp, grid = 200)
+```
+
+This object estimates a whole density function, which looks like this: 
+
+```{r}
+plot(myelk_kernelud)
+```
+
+You can convert this to a `raster`, which is spatially referenced:
+
+```{r}
+require(raster)
+my_kernel <- raster(myelk_kernelud)
+my_kernel
+plot(my_kernel)
+```
+
+And you can even use this in a mapview:
+
+```{r mapviewKernel, cache = FALSE}
+mapview(my_kernel)
+```
+
+Contours can be helpful:
+
+
+```{r contourPlotKernel}
+plot(my_kernel)
+contour(my_kernel, add = TRUE)
+```
+
+Or, for fun, a 3D plot:
+
+```{r PerspPlotKernel}
+persp(my_kernel, border = NA, shade = TRUE)
+```
+
+
+
+## Derived quantities
+
+From this, you can calculate a few metrics.  For example, if you want the border of a 95% kernel (somewhat similar to what the MCP returns):
+ 
+```{r getKDEpolygon}
+myelk_kde_poly <- getverticeshr(myelk_kernelud, percent = 95) |>
+  st_as_sf()
+myelk_kde_poly
+```
+
+Note, that you can easily obtain the area of this polygon
+
+```{r getArea}
+st_area(myelk_kde_poly)
+```
+
+And map this:
+
+```{r mapview2, cache =FALSE}
+mapview(myelk_kde_poly) + mapview(myelk_sf)
+```
+
+
+We can also write a function that obtains all this information:
+
+```{r getKernelPolyFunction}
+getKernelPoly <- function(sf, percent = 95, idcol = "id", ...){
+  sp <- sf |> mutate(id = droplevels(get(idcol))) 
+  as_Spatial(sp[,"id"], cast = TRUE, IDs = "id") |> kernelUD(...) |>
+  getverticeshr(percent = 95) |> 
+  st_as_sf()
+}
+```
+
+You can use this to compare different parameters, like kernel choice (remember the differenve between the `bivnorm` and `epa` kernels): 
+
+
+```{r ComparingKernels}
+kde_poly_norm <- getKernelPoly(elk_sf |> subset(id == "YL91"), kern = "bivnorm") 
+kde_poly_epa <- getKernelPoly(elk_sf |> subset(id == "YL91"), kern = "epa") 
+
+kde_compare_kernels <- rbind(
+  kde_poly_norm |> mutate(type = "Bivariate Normal"),
+  kde_poly_epa |> mutate(type = "Epanechnikov"))
+
+ggplot(kde_compare_kernels) + geom_sf(aes(fill = type), alpha = .5) + 
+    geom_sf(data = elk_sf |> subset(id == "YL91"), alpha = .2, size = 1)
+```
+
+
+
+Or ... you cam compute all of the kerners for a bunch of individuals(!)
+
+```{r computeAllMCPs}
+MCP_allElks <- getKernelPoly(elk_sf |> st_transform(32611), kern = "epa") 
+```
+ 
+All the MCP's plotted:
+ 
+```{r mapAllMCPs}
+ggplot(MCP_allElks) + 
+  geom_sf(aes(fill = id, color = id), alpha = .2)
+```
+
+Now we can get some real statistics:
+
+```{r AndSummarize}
+MCP_allElks
+summary(MCP_allElks$area)
+```
+
+Amazing variation in the kernel estimates!
+
+
+
+## Kernel overlaps
+
+[Fieberg and Kochanny 2010](https://wildlife.onlinelibrary.wiley.com/doi/abs/10.2193/0022-541X(2005)69[1346:QHOTIO]2.0.CO;2) argue convincingly that if you are esimating overlap between multiple organisms, you should leverage the power of the whole kernel density. 
+
+Let's get two kernel densities:
+
+
+```{r computeTwoKernels}
+elk1 <- elk_res_sf |> subset(id == "YL80")
+elk2 <- elk_res_sf |> subset(id == "YL94")
+
+kernel1 <- elk1 |>  as_Spatial() |>  kernelUD(grid = 200)
+kernel2 <- elk2 |>  as_Spatial() |>  kernelUD(grid = 200)
+```
+
+Plotting both kernels as contours:
+
+```{r Countour2Kernels}
+contour(kernel1, 
+        xlim = c(590e3, 610e3), ylim = c(5720e3, 5745e3), 
+        col = "blue")
+ contour(kernel2, add = TRUE, col = "red")
+axis(1); axis(2)
+```
+
+To compute overlap, you just have to convert your `sf` list of objects into a `SpatialPointsDataFrame` - but - importantly, identify `id` as the ID column. 
+
+The `VI` is the "volume overlap" measure.  
+
+```{r}
+threeElks_sp <- as_Spatial(elk_res_sf[,"id"], cast = TRUE, IDs = "id")
+kerneloverlap(threeElks_sp, method = "VI", kern = "epa")
+```
+
+Note how high that overlap is! 
+
+# Local Convex Hull (LoCoH)
+
+The Local Convex Hull (LoCoH) method is a non-parametric approach that constructs home ranges by creating local convex hulls around subsets of location points. Unlike KDE methods that rely on smoothing parameters, LoCoH adapts to the local density of points and can better capture sharp boundaries and complex shapes in animal movement patterns.
+
+There are three main variants of LoCoH:
+- **k-LoCoH**: Uses the k nearest neighbors to each point
+- **r-LoCoH**: Uses all points within distance r of each point  
+- **a-LoCoH**: Uses the k nearest neighbors such that the sum of distances is ≤ a
+
+There is an implementation in `adehabitatHR` of LoCoH, but it is extremely slow.  
+Ther is a very interesting and sophisticated (if older) `tlocoh` package, which is a complex suite of tools, really devoted to nuances of home range estimation, including incorporating time-dynamic elements.  Check out [this page](http://tlocoh.r-forge.r-project.org/) for lots of good information.  BUT - the repository that hosts is appears to be down. 
+
+So we'll try the `amt` package - a powerful, versatile, relatively "modern" (i.e. simple feature friendly) set of movement analysis tools. 
+
+```{r}
+require(amt)
+```
+All movement packages require the data to be formatted in a particular way, and `amt` is no exception.  The data type for EMT is called a `track` we first need to create it.  We'll do it for one animal first: 
+
+
+```{r PrepareTLoCoHData}
+myelk <- elk_res |> subset(id == "YL80") |> 
+  make_track(.x = X, .y = Y, .t = datetime, crs = st_crs(elk_res_sf))
+```
+
+The local convex hull function is `hr_locoh`:
+
+```{r computeLoCoH}
+myelk_locoh <- hr_locoh(myelk, n = 30, type = "k", levels = c(0.5,.75,.95))
+```
+
+The `amt` package is very good at working with simple features, and returning simple features.  Which means this "locoh" is projected.  
+
+If you just want to see the outlines:
+
+```{r}
+plot(myelk_locoh$locoh[3:1,"level"])
+```
+
+But you can also mapview it:
+
+```{r, cache = FALSE}
+myelk_sf <- elk_res_sf |> subset(id == "YL80")
+mapview(myelk_locoh$locoh, zcol = "level") + mapview(myelk_sf, cex = 0.3)
+```
+
+You can get the areas of these locoh's easily:
+
+```{r}
+st_area(myelk_locoh$locoh)
+```
+
+> Try playing with the *k* parameter. 
+
+
+## Advantages and limitations of LoCoH
+
+**Advantages:**
+- Adapts to local point density
+- Can capture complex, non-convex shapes
+- No smoothing parameter selection required (unlike KDE)
+- Preserves "holes" in distributions
+- Good for patchy habitat use
+
+**Limitations:**
+- Sensitive to choice of k parameter
+- Can be computationally intensive for large datasets
+- May produce fragmented polygons with small *k* values
+- Less suitable for very sparse data
+
+The k parameter in LoCoH is somewhat analogous to the bandwidth in KDE - smaller values create more detailed boundaries but may overfit to the data, while larger values create smoother boundaries but may miss important details in habitat use patterns.
+
+ 
+```{r eval = FALSE, echo = FALSE}
+knitr::purl("HomeRanges_MCP_KDE.Rmd")
+```
+ 
+ 
