@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>**Home Ranges &amp; Utilization Distributions*</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Elie Gurarie (Adapted from: Dougherty, Seidel and Getz" />
+    <script src="HomeRanges_slides_files/header-attrs-2.29/header-attrs.js"></script>
+    <link href="HomeRanges_slides_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="HomeRanges_slides_files/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="HomeRanges_slides_files/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="HomeRanges_slides_files/tile-view-0.2.6/tile-view.js"></script>
+    <link rel="stylesheet" href="mycss.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, title-slide
+
+.title[
+# **Home Ranges &amp; Utilization Distributions*
+]
+.subtitle[
+## Workshop on R and Movement Ecology
+]
+.author[
+### Elie Gurarie (Adapted from: <a href="">Dougherty, Seidel and Getz</a>
+]
+
+---
+
+
+
+
+
+
+
+
+
+
+.pull-left-40[
+# Home Range Primer
+
+**Home ranges** and **territories** represent different concepts:
+
+- **Home range**: Area traversed by an individual
+- **Territory**: Defended portion of home range
+- **Core areas**: High-intensity use zones within home ranges
+- **Zones of overlap**: Shared areas between individuals
+]
+
+.pull-right-60[
+&lt;br&gt;
+![](images/conceptual.png)
+]
+
+---
+
+# What is a Home Range?
+
+.pull-left-50.large[
+
+The most commonly cited definition (Burt, 1943):
+
+&gt; *"that area traversed by an individual in its normal activities of food gathering, mating and caring for young"*
+
+**Key point:** 'Occasional sallies' should not be considered as part of the home range
+]
+
+
+.pull-right-50[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+![](images/Burt1943.png)
+]
+
+
+
+---
+
+# Issues with Burt's Definition
+
+.pull-left.large[
+**What qualifies as 'normal' activity?**
+
+Space use patterns arise from various behaviors:
+- Food gathering
+- Mating 
+- Caring for young
+- Predator avoidance
+- Refuge use
+
+Does "what is normal" shift over time?
+]
+
+--
+
+.pull-right.large[
+**What qualifies as a 'sally'?**
+
+Circular reasoning problem:
+- Need defined home range to identify sallies
+- Need to remove sallies to define home range
+- Burt gives no guidance on this!
+]
+
+---
+
+# More Issues with the Definition
+
+.pull-left.large[
+**Intensity of use variation**
+
+Even at fine scales, movements reflect differential use:
+- 8 hours in bedroom
+- 30 minutes in bathroom
+
+Burt's definition can't differentiate between these usage intensities.
+]
+
+--
+
+.pull-right.large[
+**How to delimit the region?**
+
+This is one of the great challenges in movement ecology over the past few decades.
+
+Various methods have been developed - we'll discuss several today.
+]
+
+---
+
+# Why Do We Care About Home Ranges?
+
+**Conservation and Management:** Difficult to conserve species without understanding space use. Will parks be successful? Will fences inhibit resource access?
+
+--
+
+**Disease Transmission:** Do individuals use same spaces at same/different times? Important for predicting pathogen spread.
+
+--
+
+**Human-Wildlife Conflict:** When and where do humans and wildlife come into contact? Are settlements within animal home ranges?
+
+--
+
+**Tourism, Hunting &amp; Recreation:** Many industries built on knowledge of animal movement patterns. Shifting expectations can create conflict.
+
+--
+
+**Any others you can think of?**
+
+---
+
+# Home Range Size Predictors
+
+.pull-left.large[
+According to recent meta-analysis of GPS data (Tucker et al. 2014):
+
+- **Body size:** 53-85% of variance in home range size
+- **Diet:** ~15% of variance  
+- **Environment:** Only 1.7% of variance
+
+Body mass is the strongest predictor!
+]
+
+.pull-right[
+.center[
+![](images/tucker.png)
+]
+]
+
+
+---
+
+
+
+.pull-left.large[
+# Home Range Size Predictors II
+
+According to recent meta-analysis of terrestrial mammals in Brazil:
+
+- The patterns are strongly mediated by ***sex*** ... 
+
+- *females* show *no relationship*
+
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+.footnote.red[Giroux et al. (*in press*) Ecology Letters]
+
+]
+
+.pull-right[
+.center[
+![](images/GirouxResults.png)
+]
+]
+
+
+---
+
+# Minimum Convex Polygon (MCP) Method
+
+.pull-left-40.large[
+**Most basic method:**
+- Draw polygon around outermost points
+- Everything within = home range
+
+**Problems:**
+- Includes vast unused areas
+- Sensitive to outliers
+- No intensity information
+]
+
+.pull-right-60[
+![](images/mcp.png)
+
+]
+
+---
+
+# Kernel Density Estimates (KDE) 
+
+.pull-left[
+
+## Strengths:
+- utilization distribution (densities)
+
+## Weaknesses:
+- includes areas that are not likely or possible to
+use
+- does not recognize boundaries well
+- selecting bandwidth is **arbitrary** and has big influence
+- selecting kernel shape is similarly **arbitrary**.  
+
+]
+
+--
+
+.pull-right[
+![](images/kde.png)
+]
+
+---
+
+## KDE's (aka **Utilization Distributions**) depend strongly on bandwidth
+
+![](images/kde2.png)
+
+
+---
+
+# Autocorrelated Kernel Density Estimates
+#### `ctmm` R package
+.squeeze-60[
+![](images/akde.png)
+]
+
+
+
+.pull-left[
+#### Strengths
+-  Accounts for autocorrelation by adjusting the
+bandwidth
+- Doesn’t over fit
+- Agnostic about data sampling &amp; bandwidths
+]
+
+.pull-right[
+#### Weaknesses
+- Need to understand continuous time movement models
+- Strong assumption
+- Slow 
+]
+
+---
+
+# Comparing Methods
+
+.pull-left.large[
+**MCP Method:**
+- Simple boundary
+- No usage intensity
+- Good for broad-scale processes
+- Example: Disease transmission via home range overlap
+
+![Simple point cloud with polygon boundary]
+]
+
+.pull-right.large[
+**UD/KDE Method:**  
+- Probability surface
+- Shows usage intensity
+- Good for fine-scale details
+- Example: Predicting where within home range animal occurs
+
+
+]
+
+
+---
+class: inverse
+
+# Local Convex Hull (LoCoH)
+
+
+.center[[***see slides from Andy Lyons as used by Wayne Getz***](LoCoH_slides.pdf) from [this workshop]() ]
+
+---
+
+# Method Selection Considerations
+
+.large[
+**Choose MCP when:**
+- Simple presence/absence sufficient
+- Broad-scale ecological processes
+- Computational simplicity needed
+
+**Choose UD/KDE when:**
+- Usage intensity matters
+- Fine-scale spatial predictions needed
+- Understanding core vs. peripheral areas important
+
+**Remember:** User-defined parameters (smoothing method, bandwidth) can affect results!
+]
+
+---
+
+# Key Takeaways
+
+.large[
+1. **Home range definition** has conceptual challenges but remains useful
+
+3. **Method choice matters** - MCP vs. KDE serve different purposes
+
+4. **No perfect method** - each has strengths and limitations
+
+5. **Context is critical** - territorial vs. migratory behavior patterns require different approaches
+]
+
+--
+
+.center.red.large[
+&lt;br&gt;&lt;br&gt;
+**The key is matching your method to your research question!**
+]
+
+---
+
+# Example: Caribou Herd Overlap
+
+.pull-left-50[![](images/VIexamples.png)]
+
+.pull-right-50[![](images/ExampleHerdOverlaps.png)]
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.center[### **KDE's** of thinned data to compute **Volume Intersection** at herd and individual levels]
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "github",
+  "countIncrementalSlides": false,
+  "highlightLines": true,
+  "ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
