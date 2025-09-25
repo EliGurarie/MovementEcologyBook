@@ -28,6 +28,14 @@ Choose some data that you can meaningfully get a home range estimate from and:
 **Extra Credit:** Using the kernel densities, find two animals that might have some overlap in their ranges, and compute the **volume intersection** (VI) overlap, using the `kerneloverlap` function in `adehabitatHR` as descibed [here](https://eligurarie.github.io/MovementEcologyBook/EFB796/06_HomeRanges/HomeRanges.html#Kernel_overlaps). 
 
 
+3. Sketch a **specific analysis** you'd like to perform for your final project.  Briefly describe: 
+    - The study system
+    - The ecological question
+    - The data you'd like to analyze
+    - The tool you'd like to apply
+
+This will serve as a foundation as we prep for a final project.  If you don't have very concrete ideas - it will be good to know sooner than later.  
+
 
 # Week 4: (due Thursday September 25) 
 
