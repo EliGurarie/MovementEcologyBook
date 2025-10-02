@@ -50,5 +50,12 @@ And all homeworks are posted [here](Homework/assignments.html)
 - [Lab](06_HomeRanges/HomeRanges.html) | [R code](06_HomeRanges/HomeRanges.R) | [Rmd](06_HomeRanges/HomeRanges.Rmd)
 - [In class R code](06_HomeRanges/HomeRanges_inclassCode.R)
 
+## 6. Discrete Movement Models and HMM's
+
+- [Book Chapter](https://eligurarie.github.io/MovementEcologyBook/part4_movement_models/discrete_movement_models.html)
+- [Discrete Movement Models (slides)](07_DiscreteModelsAndHMMs/DiscreteMovementModels_slides.html)
+- [Discrete Movement Models (lab)](07_DiscreteModelsAndHMMs/DiscreteMovementModels_lab.html)
+- [Markov Chain lecture](07_DiscreteModelsAndHMMs/Lecture08a_MarkovChains.pdf)
+- [Hidden Markov Model (lab)](07_DiscreteModelsAndHMMs/Lab_HMM.html)
 
 ![](Muybridge_Buffalo_galloping.gif)

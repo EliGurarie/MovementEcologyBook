@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Home Ranges &amp; Utilization Distributions</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Elie Gurarie" />
+    <script src="DiscreteMovementModels_slides_files/header-attrs-2.29/header-attrs.js"></script>
+    <link href="DiscreteMovementModels_slides_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="DiscreteMovementModels_slides_files/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="mycss.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, title-slide
+
+.title[
+# <strong>Home Ranges &amp; Utilization Distributions</strong>
+]
+.subtitle[
+## EFB 796: Techniques in Movement Ecology
+]
+.author[
+### Elie Gurarie
+]
+
+---
+
+
+
+
+
+
+
+
+
+
+## 1D Random Walk
+.pull-left[
+`$$X \sim \text{RW}_{1d}(\sigma)$$`
+
+`$$X_t = X_{t+1} + \sigma W_t$$`
+where `\(W_t \sim {\cal N}(0,1)\)` = white noise
+
+
+``` r
+sigma = 2
+Z &lt;- cumsum(rnorm(100, sd = sigma))
+```
+]
+.pull-right[
+![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+]
+
+&lt;!-- --- --&gt;
+
+&lt;!-- ### Properties --&gt;
+
+&lt;!-- `$$\text{E}(Z_t) = 0$$` --&gt;
+&lt;!-- `$$\text{Var}(Z_t) = \sigma^2 t$$` --&gt;
+&lt;!-- On *average* goes nowhere, over time goes to `\(\infty\)` (unconstrained) --&gt;
+
+---
+
+## 2D Random Walk
+
+.pull-left[
+`$${\bf Z} \sim \text{RW}_{2d}(\sigma)$$` 
+`$${\bf Z}_t = {\bf Z}_{t-1} + \sigma{\bf W}_t$$`
+
+boldfacing means 2-d vector, but will drop going forward.
+
+
+``` r
+sigma &lt;- 3; n &lt;- 100
+Z &lt;- cumsum(rnorm(n, sd = sigma)) + 
+  1i*cumsum(rnorm(n, sd = sigma))
+```
+]
+
+.pull-right[
+![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+]
+
+---
+
+.pull-left[
+
+### Statistical Properties
+`$$\text{E}({\bf Z}_t) = \{0,0\};\,\, \text{Var}(|{\bf Z}_t|) = 2 \sigma^2 t$$`
+
+]
+
+.pull-right[
+### Step &amp; turning angles:
+
+`$$\theta \sim \text{Unif}(-\pi, \pi)$$`
+
+`$${|\bf S| / \sigma} \sim \text{Chi}(k = 2); \,\,  \text{E}({|\bf S|}) = \sqrt{2}\sigma$$`
+]
+
+You can use this result to estimate `\(\sigma\)` - take the mean step lengths and divide by `\(\sqrt{2}\)`
+
+
+![](DiscreteMovementModels_slides_files/figure-html/RW_CRW-1.png)&lt;!-- --&gt;
+]
+
+
+---
+
+.pull-left[
+## 1D autoregression process
+
+
+`$$X_t = \phi X_{t+1} +\sigma W_t$$`
+
+
+### Properties
+
+`$$\text{E}(X_t) = 0$$`
+$$\text{Var}(X_t) = {\sigma^2 \over 1-\phi^2}  $$
+(Auto)-regresses to mean (easily rescaled to `\(\mu \neq 0\)`). 
+
+Spatially constrained! 
+&lt;!-- By the way: start making functions! --&gt;
+
+
+
+]
+
+.pull-right[
+![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+]
+
+
+---
+
+### the Autocorrelation function
+
+This calculates whether subsection locations at a specific lag depend on prior locations. 
+
+
+``` r
+pars()
+acf(X)
+```
+
+![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+
+
+---
+
+.pull-left-40[
+
+## 2D autoregressive walk
+
+`$${\bf Z} \sim \text{AR}_{2d}(\phi, \sigma)$$`
+`$${\bf Z}_t = \phi {\bf Z}_{t-1} + \sigma {\bf W}_t$$`
+
+Where everything is 2D.  And easily scaled to a different mean `\(\bf m\)`
+
+
+
+]
+
+.pull-right-60[
+
+![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
+]
+
+
+---
+
+.pull-left[
+### 2D-AR walk: Properties
+
+Spatially constrained in 2D!  
+
+Actually looks kind of like home ranging. 
+In fact, the 95% home-ranging area is:
+
+`$$A \approx {6 \pi \sigma^2 \over 1 - \phi^2 }$$`
+(Where `\(6 \approx -2\log(\alpha)\)`, `\(\alpha = 5\%\)`)
+
+Rewrite in terms of "steps" (displacements):
+
+`$${\bf Z}_t = {\bf Z}_{t-1} - (1-\phi){\bf Z}_{t-1} + \sigma {\bf W}_t$$`
+`$${\bf S}_t = - (1-\phi){\bf Z}_{t-1} + \sigma {\bf W}_t$$`
+
+This means that the *step* process itself is NOT stationary / independent, but depends on **absolute location**.  
+
+Specifically, the urge to "go home" is proportional to the distance from home. 
+
+]
+
+--
+
+.pull-right[
+
+And, of course, there is auto-correlation in the locations:
+
+![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
+
+But NOT in the steps themselves:
+
+![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
+]
+
+
+---
+
+## **Correlated Random Walk**
+
+.pull-left[
+
+Basically:  
+
+`$$Z_t = Z_{t-1} + S_t$$`
+
+`\(\theta = \text{Arg}(S) \sim \text{some distribution}\)`
+`\(|S| \sim \text{some distribution}\)`
+
+![](images/CauchyWeibull.png)
+
+]
+.pull-right[
+&gt; **The famous one:**
+![](images/Kareiva.png)
+
+&gt; **The totally forgotten one:**
+![](images/Patlak.png)
+
+]
+
+
+---
+
+
+## 
+
+.pull-left[
+Simulate in **R**
+
+
+``` r
+require(circular)
+
+CRW &lt;- function(n = 100, rho=0.8, alpha = 1, beta = 2){
+  theta &lt;- rwrappedcauchy(n, rho)
+  phi  &lt;- cumsum(theta)
+  S &lt;- complex(arg = phi, mod = rweibull(n, alpha, beta))
+  cumsum(S)
+}
+```
+Also - flies off to infinity.  
+
+![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
+
+]
+
+.pull-right[
+
+Also - autocorrelated in position:
+
+![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-16-1.png)&lt;!-- --&gt;
+
+but not in steps!
+
+![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-17-1.png)&lt;!-- --&gt;
+]
+
+
+---
+
+
+## Multi-state Correlated Random Walk
+.pull-left-60[
+
+![](images/morales.png)
+
+Pretty self-explanatory!  
+
+]
+
+.pull-right-40[
+![](images/morales_model.png)
+]
+
+&lt;br&gt;
+
+&gt; &lt;center&gt; .large[**BUT** ... what is the model of transitioning between states?]
+
+
+---
+
+## Markov Chains
+
+... model **state transitions**
+
+.pull-left[
+Consider `\({\bf X} = \{X_1,X_2,X_3, ... , X_n\}\)` is in some discrete **state** (A, B or C) with fixed probabilities of transitioning from one state to another:
+
+Sample sequence: `\({\bf X} = CCCBBCACCBABCBA ...\)`.
+
+This is called a **Markov chain**.
+]
+.pull-right[
+![](images/ThreeStates.png)
+]
+
+---
+
+## Probability transition matrix
+
+We express this process in terms of a **Probability Transition** matrix:
+
+.pull-left[	
+![](images/ptm.png)
+]
+
+.pull-right[
+Such that: 
+	`$$M_{ij}=\Pr{(X_{t+1} = j | X_t = i)} = p_{ij}$$`
+
+Such that: 
+	`$$\Pr{(X_{t+1} = j)} = \sum_{i=1}^N M_{ij} \Pr{(X_t = i)}$$`
+Which can be conveniently rewritten in matrix notation as: 
+	`$$\pi_{t+1} = {\bf M} \times (\pi_{t})^T$$`
+		
+Where `\(\pi_t\)` is the distribution of the system over all states at time `\(t\)`. 
+]
+
+---
+
+## Back to Multi-state CRW ... 
+
+To simulate a multi-state CRW, first create a transition matrix:
+
+
+``` r
+M &lt;- rbind(c(0.7,0.2,.1), c(.4,.4,.2), c(0,0.8,0.2))
+row.names(M) &lt;- colnames(M) &lt;- c("chilling", "cruising", "huffing")
+M
+```
+
+```
+##          chilling cruising huffing
+## chilling      0.7      0.2     0.1
+## cruising      0.4      0.4     0.2
+## huffing       0.0      0.8     0.2
+```
+
+Create a vector of simulated states:
+
+
+``` r
+n &lt;- 400
+states &lt;- 1:nrow(M)
+State &lt;- c(1, rep(NA, n=1))
+for(i in 2:n) State[i] &lt;- sample(states, 1, prob=M[State[i-1],])  
+State[1:100]
+```
+
+```
+##   [1] 1 1 2 1 1 1 1 1 1 3 2 2 3 2 3 2 2 2 1 2 2 3 3 2 1 1 1 1 3 3 2 2 3 2 2 3 3 2 3
+##  [40] 2 2 1 1 1 2 1 1 1 2 1 1 2 1 1 1 2 2 1 3 2 2 3 2 1 1 1 1 1 1 1 2 1 1 1 1 1 2 2
+##  [79] 2 2 2 1 2 1 1 2 1 1 1 1 2 2 2 2 1 1 1 1 1 1
+```
+
+---
+
+
+
+## Simulated MRW
+
+.pull-left-60[
+
+
+
+
+
+![](DiscreteMovementModels_slides_files/figure-html/MRW_sim_plot-1.png)&lt;!-- --&gt;
+
+
+
+]
+
+.pull-right-40[
+
+Stationary state proportions: 
+
+
+```
+##  chilling  cruising   huffing 
+## 0.4848485 0.3636364 0.1515152
+```
+
+Simulated proportions:
+
+
+``` r
+table(State) |&gt; prop.table()
+```
+
+```
+## State
+##      1      2      3 
+## 0.4800 0.3675 0.1525
+```
+]
+
+---
+
+## Habitat dependent Multi-state random walk
+
+.pull-left[
+
+The actual Morales MRW was more interesting than just transitions ... each transition was modeled as **depending on covariates** ( `\(\bf X\)` ) according to coefficients `\(\beta\)`.  
+
+`$$p_{12} = {e^{\beta {\bf X}} \over 1 + e^{\beta {\bf X}}}$$`
+
+and `\(p_{11} = 1-p_{12}\)`.   This sounds crazy complicated, but - with recent technology is - in fact - quite easy to do!
+]
+
+.pull-right[
+
+Before, we had to struggle a lot with writing Bayesian Markov Chain Monte Carlo simulators, bu now this is (relatively) easy to do with the  `momentuhmm` package.  
+
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "github",
+  "countIncrementalSlides": false,
+  "highlightLines": true,
+  "ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
