@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Home Ranges &amp; Utilization Distributions</title>
+    <title>Discrete Movement Models</title>
     <meta charset="utf-8" />
     <meta name="author" content="Elie Gurarie" />
     <script src="DiscreteMovementModels_slides_files/header-attrs-2.29/header-attrs.js"></script>
@@ -14,7 +14,7 @@
 class: center, title-slide
 
 .title[
-# <strong>Home Ranges &amp; Utilization Distributions</strong>
+# <strong>Discrete Movement Models</strong>
 ]
 .subtitle[
 ## EFB 796: Techniques in Movement Ecology
@@ -140,7 +140,6 @@ This calculates whether subsection locations at a specific lag depend on prior l
 
 
 ``` r
-pars()
 acf(X)
 ```
 
@@ -237,13 +236,12 @@ Basically:
 
 ## 
 
-.pull-left[
+.pull-left-60[
 Simulate in **R**
 
 
 ``` r
 require(circular)
-
 CRW &lt;- function(n = 100, rho=0.8, alpha = 1, beta = 2){
   theta &lt;- rwrappedcauchy(n, rho)
   phi  &lt;- cumsum(theta)
@@ -257,7 +255,7 @@ Also - flies off to infinity.
 
 ]
 
-.pull-right[
+.pull-right-40[
 
 Also - autocorrelated in position:
 
@@ -361,9 +359,9 @@ State[1:100]
 ```
 
 ```
-##   [1] 1 1 2 1 1 1 1 1 1 3 2 2 3 2 3 2 2 2 1 2 2 3 3 2 1 1 1 1 3 3 2 2 3 2 2 3 3 2 3
-##  [40] 2 2 1 1 1 2 1 1 1 2 1 1 2 1 1 1 2 2 1 3 2 2 3 2 1 1 1 1 1 1 1 2 1 1 1 1 1 2 2
-##  [79] 2 2 2 1 2 1 1 2 1 1 1 1 2 2 2 2 1 1 1 1 1 1
+##   [1] 1 2 3 3 2 2 1 1 3 2 3 2 3 2 1 3 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 3 2 1 2
+##  [38] 3 2 3 3 2 1 3 2 2 2 1 1 1 2 2 1 1 3 2 2 2 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+##  [75] 1 1 1 1 1 1 2 1 1 1 1 1 1 2 1 1 2 2 3 2 2 1 1 2 1 3
 ```
 
 ---
@@ -404,7 +402,7 @@ table(State) |&gt; prop.table()
 ```
 ## State
 ##      1      2      3 
-## 0.4800 0.3675 0.1525
+## 0.5175 0.3400 0.1425
 ```
 ]
 
@@ -423,7 +421,9 @@ and `\(p_{11} = 1-p_{12}\)`.   This sounds crazy complicated, but - with recent 
 
 .pull-right[
 
-Before, we had to struggle a lot with writing Bayesian Markov Chain Monte Carlo simulators, bu now this is (relatively) easy to do with the  `momentuhmm` package.  
+Before, we had to struggle a lot with writing Bayesian Markov Chain Monte Carlo simulators. 
+
+But now this is (relatively) easy to do with the  `momentuhmm` package (and other tools).  
 
 ]
     </textarea>
