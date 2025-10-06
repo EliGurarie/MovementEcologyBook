@@ -40,7 +40,104 @@ xaringan::inf_mr()
 
 
 
+# 1D White Noise
 
+.pull-left-40[
+The simplest movement model is white noise:
+
+- `\(WN(\sigma)\)` 
+
+Each position is an independent draw from a normal distribution.
+
+`$$\mathbf{X}_t \sim \sigma W_t$$`
+  
+Where `\(W_t\)` is true "white noise":
+
+`$$W_t \sim {\cal N}(0,1)$$`
+
+Very simple to generate:
+
+
+``` r
+sigma &lt;- 2; n &lt;- 100
+X &lt;- sigma * rnorm(n)
+```
+]
+.pull-right-60[
+
+![](DiscreteMovementModels_slides_files/figure-html/OneDWhiteNoise-1.png)&lt;!-- --&gt;
+
+]
+
+---
+
+.pull-left-40[
+
+## Properties
+
+- Expected position: `\(E(X_t) = 0\)` (centered at origin)
+
+- Variance: `\(\text{Var}(X_t) = \sigma^2\)`.  In the context of *movement*, this means that it is spatially constrained (has a 1-D "home range").  
+
+- No autocorrelation - each position is independent
+]
+
+.pull-right-60[
+
+
+
+![](DiscreteMovementModels_slides_files/figure-html/manyWhiteNoise1D-1.png)&lt;!-- --&gt;
+
+Note: standard deviation constant over time. 
+]
+
+
+---
+
+## 2D White Noise
+
+
+
+.pull-left-40[
+Extending to 2D is as simple as making X and Y each be a WN(`\(\sigma\)`) process. 
+
+`$${\bf Z} \sim \text{WN}_{2d}(\sigma)$$` 
+
+(boldfacing means 2-d vector, but will drop going forward.. 
+
+Simulating:
+
+
+``` r
+Z &lt;- rnorm(n, sd = sigma) + 
+  1i * rnorm(n, sd = sigma)
+```
+]
+
+
+.pull-left-60[
+
+
+
+![](DiscreteMovementModels_slides_files/figure-html/whiteNoise2D-1.png)&lt;!-- --&gt;
+
+Note - circular range (spatial constraint)
+]
+
+
+---
+
+## Properties
+
+**Key properties:**
+- Turning angles are uniformly distributed: `\(\theta \sim \text{Unif}(-\pi, \pi)\)`
+- Step lengths follow a Chi distribution with k=2
+- Expected step length: `\(E(|S|) = \sqrt{2}\sigma\)`
+
+
+![](DiscreteMovementModels_slides_files/figure-html/RW_properties-1.png)&lt;!-- --&gt;
+
+---
 
 ## 1D Random Walk
 
@@ -61,7 +158,7 @@ Z &lt;- cumsum(rnorm(200, sd = sigma))
 
 .pull-right-60[
 
-![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
 
 ]
 
@@ -83,7 +180,7 @@ Z &lt;- cumsum(rnorm(200, sd = sigma))
 
 .pull-right-60[
 
-![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
 
 ]
 
@@ -107,7 +204,7 @@ Z &lt;- cumsum(rnorm(n, sd = sigma)) +
 ]
 
 .pull-right-60[
-![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -156,7 +253,7 @@ Spatially constrained!
 ]
 
 .pull-right-60[
-![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
 ]
 
 
@@ -171,7 +268,7 @@ This calculates whether subsection locations at a specific lag depend on prior l
 acf(X)
 ```
 
-![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
 
 
 ---
@@ -191,7 +288,7 @@ Where everything is 2D.  And easily scaled to a different mean `\(\bf m\)`
 
 .pull-right-60[
 
-![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
+![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
 ]
 
 
@@ -225,11 +322,11 @@ Specifically, the urge to "go home" is proportional to the distance from home.
 
 And, of course, there is auto-correlation in the locations:
 
-![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
+![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
 
 But NOT in the steps themselves:
 
-![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
 ]
 
 
@@ -279,7 +376,7 @@ CRW &lt;- function(n = 100, rho=0.8, alpha = 1, beta = 2){
 ```
 Also - flies off to infinity.  
 
-![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-16-1.png)&lt;!-- --&gt;
+![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-17-1.png)&lt;!-- --&gt;
 
 ]
 
@@ -287,11 +384,11 @@ Also - flies off to infinity.
 
 Also - autocorrelated in position:
 
-![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-17-1.png)&lt;!-- --&gt;
+![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
 
 but not in steps!
 
-![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
+![](DiscreteMovementModels_slides_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
 ]
 
 
@@ -387,9 +484,9 @@ State[1:100]
 ```
 
 ```
-##   [1] 1 1 2 1 1 1 1 1 1 3 2 2 3 2 3 2 2 2 1 2 2 3 3 2 1 1 1 1 3 3 2 2 3 2 2 3 3 2 3 2 2 1 1
-##  [44] 1 2 1 1 1 2 1 1 2 1 1 1 2 2 1 3 2 2 3 2 1 1 1 1 1 1 1 2 1 1 1 1 1 2 2 2 2 2 1 2 1 1 2
-##  [87] 1 1 1 1 2 2 2 2 1 1 1 1 1 1
+##   [1] 1 2 3 2 3 2 1 1 1 1 2 2 3 3 2 3 3 2 2 2 2 2 2 1 1 2 2 2 1 3 2 1 1 1 1 3 2
+##  [38] 1 1 1 1 2 2 1 1 2 3 2 1 1 1 1 2 1 1 1 1 1 1 2 3 2 2 1 1 2 1 1 1 1 1 1 1 1
+##  [75] 1 3 2 2 2 3 2 3 2 1 1 1 1 1 2 1 1 1 1 3 2 2 2 2 3 2
 ```
 
 ---
@@ -430,7 +527,7 @@ table(State) |&gt; prop.table()
 ```
 ## State
 ##      1      2      3 
-## 0.4800 0.3675 0.1525
+## 0.5000 0.3525 0.1475
 ```
 ]
 
