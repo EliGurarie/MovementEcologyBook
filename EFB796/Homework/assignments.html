@@ -1491,6 +1491,53 @@ Concepts in Movement Ecology</a></h3>
 assignments should be emailed to the instructor as <em>knitted</em> R
 Markdown document with minimal (if any) code. Print the markdown to a
 pdf, and provide the <code>.Rmd</code> file as well.</font></p>
+<div id="week-6-discrete-movement-models-due-thursday-october-9" class="section level1">
+<h1>Week 6: Discrete Movement Models (due Thursday October 9)</h1>
+<p>In the (updated) discrete movement models lab, I provide code for
+simulation and visualization of a 3-state multi-state random walk. Here,
+you’ll practice simulating TWO-STATE Markov chains - with a slow very
+random state, and a directed faster state (much like the Morales
+“encamped” vs. “transitioning” elk). Here are two matrices:</p>
+<pre class="r"><code># Slow transitions (long stays)
+M1 &lt;- rbind(
+  c(0.90, 0.10),
+  c(0.233, 0.767)
+)
+
+# Fast transitions (short stays)  
+M2 &lt;- rbind(
+  c(0.60, 0.40),
+  c(0.933, 0.067)
+)</code></pre>
+<p>and here are two sets of turning angle and step-length
+parameters:</p>
+<pre class="r"><code>rhos &lt;- c(0, 0.9)       # turning angle concentration
+alphas &lt;- c(1, 3)       # Weibull shape for step length
+betas &lt;- c(0.5,  5)     # Weibull scale for step length</code></pre>
+<ol style="list-style-type: decimal">
+<li><p>Simulate and plot tracks (TWO TRACKS - one for each Matrix), with
+500 locations each. Comment on those tracks - in what ways are they
+similar or different?</p></li>
+<li><p>What is the (approximate) <strong>stationary state</strong> of
+these Markov chains? I.e., how much percentage of time is each track
+spending in each state.</p></li>
+</ol>
+<blockquote>
+<p>Extra credit: What is the <em>theoretical</em> stationary state of
+this Markov process?</p>
+</blockquote>
+<ol start="3" style="list-style-type: decimal">
+<li>Now - compute the mean “<em>run time</em>” of each state, i.e. how
+long does tha animal stay in a given state on average. How do these
+compare across the two models? (the <code>rle</code> function will be
+useful for this).</li>
+</ol>
+<blockquote>
+<p>Extra extra credit: What is the <em>theoretical</em> run time? (this
+is not something we covered, but you can look it up and the answer is
+actually very intuitive).</p>
+</blockquote>
+</div>
 <div id="week-5-due-thursday-october-2" class="section level1">
 <h1>Week 5: (due Thursday October 2)</h1>
 <p>Choose some data that you can meaningfully get a home range estimate
@@ -1506,19 +1553,6 @@ animals that might have some overlap in their ranges, and compute the
 <strong>volume intersection</strong> (VI) overlap, using the
 <code>kerneloverlap</code> function in <code>adehabitatHR</code> as
 descibed <a href="https://eligurarie.github.io/MovementEcologyBook/EFB796/06_HomeRanges/HomeRanges.html#Kernel_overlaps">here</a>.</p>
-<ol start="3" style="list-style-type: decimal">
-<li>Sketch a <strong>specific analysis</strong> you’d like to perform
-for your final project. Briefly describe:
-<ul>
-<li>The study system</li>
-<li>The ecological question</li>
-<li>The data you’d like to analyze</li>
-<li>The tool you’d like to apply</li>
-</ul></li>
-</ol>
-<p>This will serve as a foundation as we prep for a final project. If
-you don’t have very concrete ideas - it will be good to know sooner than
-later.</p>
 </div>
 <div id="week-4-due-thursday-september-25" class="section level1">
 <h1>Week 4: (due Thursday September 25)</h1>
