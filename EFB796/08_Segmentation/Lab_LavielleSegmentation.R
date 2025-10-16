@@ -1,0 +1,328 @@
+#' ---
+#' title: "Segmentation Methods II: Lavielle"
+#' author: "Elie Gurarie"
+#' subtitle: "EFB 796: Techniques in Movement Ecology"
+#' date: "October 16, 2025"
+#' output:
+#'   html_document:
+#'     toc: true
+#'     toc_float: true
+#' ---
+#' 
+## ----setup, include=FALSE----------------------------------------------------------------------------
+knitr::opts_chunk$set(echo = TRUE, fig.height = 4, 
+                      message = FALSE, warning = FALSE)
+
+#' 
+#' 
+#' # Overview
+#' 
+#' Lavielle segmentation is a statistical method for detecting multiple change-points in time series data, particularly useful for identifying distinct behavioral phases or movement patterns in animal trajectory data.
+#' 
+#' The technique, developed by Lavielle (1999, 2005), uses a **penalized contrast approach** to partition a sequence of observations into homogeneous segments. The optimal number of segments, *k*, in the timeseries is then determined by minimizing the "penalized contrast function" (Lavielle 2005). Break points are (typically) determined using the mean, variance, or mean AND variance along the timeseries of the variable of interest (e.g., speed).  An important underlying assumption is that in each phase, the model for the data is:
+#' 
+#' $$X = {\cal N}(\mu_i, \sigma_i)$$
+#' 
+#' Barraquand and Benhamou (2008) adapted this approach specifically for animal movement analysis.  It is useful for determining *behavioral changes*, and from those **homogeneous movement bouts** (what we term "phases"). 
+#' 
+#' The segmentation is ueually used to analyze *step lengths* or *movement rates* or even (quite effectively) the output of *first passage time* analyses.   But here, we will (first) use it on absolute spatial location, for which it is an underutilized and useful tool.  
+#' 
+#' 
+#' # Elk analysis
+#' 
+#' First, let's load in our processed data from lab 1.
+#' 
+## ----echo = -1---------------------------------------------------------------------------------------
+load("../data/elk_processed.rda")
+
+#' We will use one individual from our data as an example, "YL96". This individual has some "patches" of residency-like behavior along its track.
+#' 
+## ----------------------------------------------------------------------------------------------------
+myelk <- subset(elk_gps, id == "YL96") |>
+  dplyr::mutate(id = as.character(id))
+
+str(myelk)
+
+#' 
+#' 
+#' We can use Base R to visualize the track of this individual in space and time, using the methods we learned in lab 1:
+#' 
+#' 
+## ----------------------------------------------------------------------------------------------------
+par(mar = c(0,4,0,0), oma = c(4,0,5,2), xpd=NA)
+layout(rbind(c(1,2), c(1,3)))
+plot(myelk$lon, myelk$lat, asp = 1, type="o", ylab="Latitude", xlab="Longitude")
+plot(myelk$datetime, myelk$lon, type="o", xaxt="n", ylab="Longitude", xlab="")
+plot(myelk$datetime, myelk$lat, type="o", ylab="Latitude", xlab="Datetime")
+title(paste("ID", myelk$id[1]), outer = TRUE)
+
+#' 
+#' ## Segmenting on positions
+#' 
+#' Load the `adehabitatLT` package: 
+#' 
+## ----------------------------------------------------------------------------------------------------
+require(adehabitatLT)
+
+#' 
+#' 
+#' The Lavielle Method is fit using the `laveielle` function, where the user can specify the:
+#' 
+#' 1 - variable from the dataset to distinguish the segments by (here, we will use latitude)
+#' 2 - `Lmin` - the minimum number of relocations within a segment
+#' 3 - `Kmax` - the maximum number of segments to "try out"
+#' 4 - `type` - how to distinguish the segments (mean, variance, or both, "meanvar")
+#'   
+#' We can use the visualizations of our track to inform our decisions on these parameters. 
+#' 
+#' Here, we will use a minimum of 20 locations, max of 5 segments, and the mean to determine segments by **latitude**.  It is really important to understand exactly what we're segmenting here - since it's not really a very typical use of this tool ... it is exclusively the "northness" of the elk's location over time. 
+#' 
+## ----------------------------------------------------------------------------------------------------
+elk_lavielle_analysis <- lavielle(myelk$lat, Lmin = 20, Kmax = 20, type = "mean")
+
+#' 
+#' After fitting, we can use the `chooseseg` function to identify the number of segments. 
+#' 
+## ----------------------------------------------------------------------------------------------------
+chooseseg(elk_lavielle_analysis)
+
+#' 
+#' The plot shows a quantity $J_k$ which quantifies the total "cost" of that segmentation.  This curve starts high (k=1) (all data in one segment = high variance), drops steeply (the first few segments capture major patterns), and then Flattens out, since additional segments provide minimal improvement.  We therefore focus on the "elbow point" as a kind of "sweet spot" where each new segment substantially reduces unexplained variance.  Looking at this, we might like 6 or 7 segments as having captured the most variation.  
+#' 
+#' We can now create a nice plot of these segments, with the change in latitude over time and the red lines delineating the break points for each segment.
+#' 
+## ----echo = 1----------------------------------------------------------------------------------------
+breakpoints_list <- findpath(elk_lavielle_analysis, K = 6)
+
+#' 
+#' easy - by the way - to see where the algorthim would but a seventh of eighth segment.  You can decide how much you "really" need:
+#' 
+## ----fig.height = 3----------------------------------------------------------------------------------
+l7 <- findpath(elk_lavielle_analysis, K = 7)
+l8 <- findpath(elk_lavielle_analysis, K = 8)
+
+#' 
+#' 
+#' Note, the output is a *list* of segments, which we can collapse into a single vector with `ldply` (recalling that `ld` means "from list to dataframe"). 
+#' 
+## ----------------------------------------------------------------------------------------------------
+require(plyr)
+breakpoints <- ldply(breakpoints_list, rbind)
+
+#' 
+#' Now, we can use those breakpoints to "augment" our raw data with the appropriate phase.  
+#' 
+## ----AugmentDataWithPhase----------------------------------------------------------------------------
+require(plyr)
+cuts <- c(breakpoints[,1], nrow(myelk))
+myelk <- myelk |> 
+  mutate(Row_ID = 1:nrow(myelk),
+         phase = cut(Row_ID, 
+                     breaks = cuts, 
+                     include.lowest = TRUE, right = TRUE,
+                     labels = 1:(length(cuts)-1)))
+
+#' 
+#' We can visualize the final results in time:: 
+#' 
+## ----PhaseWithLatitude-------------------------------------------------------------------------------
+require(ggplot2)
+ggplot(data=myelk, aes(x=datetime, y=lat)) +
+  geom_path(col = "grey") + 
+  geom_point(aes(color = phase)) + 
+  theme_classic()
+
+#' 
+#' In space: 
+#' 
+## ----mapWithPhase------------------------------------------------------------------------------------
+ggplot(data=myelk, aes(x=lon, y=lat)) +
+  geom_path(col = "grey") + 
+  geom_point(aes(color = phase)) + 
+  theme_classic()
+
+#' 
+#' 
+#' Or in both (with my favorite scantrack):
+#' 
+## ----echo = -1---------------------------------------------------------------------------------------
+par(mar = c(0,4,0,0), oma = c(4,0,5,2), xpd=NA)
+layout(rbind(c(1,2), c(1,3)))
+palette(gplots::rich.colors(6))
+with(myelk, {
+  plot(lon, lat, asp = 1, type="o",  col = phase)
+  plot(datetime, lon, type="o", xaxt="n", xlab="", col = phase)
+  plot(datetime, lat, type="o", col = phase)
+  title(paste("ID", id[1]), outer = TRUE)
+})
+
+#' 
+#' This seems to work very well!
+#' 
+#' > Exercise 1: Repeat this with 7 and 8 segments. Repeat this with longitude instead of latitude. Which segmentation do you prefer? Why? 
+#' 
+#' 
+#' 
+#' ## Segmenting on speeds
+#' 
+#' A (slight) problem with this segmentation is that it does not separate transitional movements from the resident movements.  It therefore might make more sense to do this on the *velocities* or *speeds*.
+#' 
+#' First, obtain those velocities, using some of the augmentation code from before:
+#' 
+## ----------------------------------------------------------------------------------------------------
+require(sf)
+require(dplyr)
+
+elk_df <- elk_gps |> 
+  data.frame(elk_sf |> st_transform(32611) |> st_coordinates()) |> 
+  ddply("id", mutate,
+      Z = X + 1i*Y,
+    	Step = c(NA, diff(Z)),
+    	StepLength = Mod(Step),
+    	dTime = c(NA, difftime(datetime[-1],
+                           	datetime[-length(datetime)],
+                           	units = "hours")),
+    	Speed = StepLength/dTime)
+
+myelk <- subset(elk_df, id == "YL96")
+
+#' 
+#' This is how I've always done this (and taught you), but it is worth noting that the `adehabitatLT` package - like many others - has a data type `ltraj` which turns your coordinates into an object with all those data at well:
+#' 
+## ----------------------------------------------------------------------------------------------------
+elk_ltraj <- as.ltraj(xy = elk_sf |> 
+                        st_transform(32611) |> st_coordinates(),
+                      date = elk_gps$datetime,
+                      id = elk_gps$id)
+
+#' 
+#' 
+#' It did this with all the elk. To obtain the one we want: 
+#' 
+## ----------------------------------------------------------------------------------------------------
+myelk_ltraj <- elk_ltraj[id = "YL96"]
+plot(myelk_ltraj)
+
+#' 
+#' Note the structure here:
+#' 
+## ----------------------------------------------------------------------------------------------------
+myelk_ltraj
+myelk_ltraj[[1]] |> head()
+
+#' 
+#' with all the statistics we usualy collect. 
+#' 
+#' Anyways, back to our version, here's a look at the time series of the speed:
+#' 
+## ----------------------------------------------------------------------------------------------------
+with(myelk,
+  plot(datetime, Speed, type = "l"))
+
+#' 
+#' There is a lot of data here and unlike absolute location hard to see structure.  Also - it is not normal. 
+#' 
+## ----------------------------------------------------------------------------------------------------
+qqnorm(myelk$Speed)
+
+#' 
+#' The log transform, on the other hand:
+#' 
+## ----------------------------------------------------------------------------------------------------
+hist(log(myelk$Speed))
+
+#' 
+## ----------------------------------------------------------------------------------------------------
+with(myelk, plot(datetime, log(Speed), type = "l"))
+
+#' 
+#' Ok - are there some significant changes in here?  
+#' 
+#' 
+#' > NOTE:  For reasons that are unclear to me, the segmentation has a hard time with the complete dataset ... so I subset an (interesting) portion of the data. 
+#' 
+## ----------------------------------------------------------------------------------------------------
+myelk_subset <- myelk[1000:1600,]
+ggplot(myelk_subset, aes(X,Y)) + geom_path()
+
+LogSpeed <- log(myelk_subset$Speed)[-1]
+myelk_speed_lv <-  lavielle(LogSpeed, Lmin = 24, Kmax = 20, type = "mean")
+
+#' 
+#' Choose the segments: 
+#' 
+## ----------------------------------------------------------------------------------------------------
+chooseseg(myelk_speed_lv)
+
+#' 
+#' Find the breaks:
+#' 
+## ----------------------------------------------------------------------------------------------------
+elk_segments <- findpath(myelk_speed_lv, 10)
+
+#' 
+## ----------------------------------------------------------------------------------------------------
+breakpoints <- ldply(elk_segments, rbind)
+breakpoints
+
+#' 
+#' Add the breaks
+#' 
+## ----AugmentDataWithBreakpoints----------------------------------------------------------------------
+require(plyr)
+cuts <- c(breakpoints[,1]-.5, nrow(myelk))
+myelk_subset <- myelk_subset |> 
+  mutate(Row_ID = 1:nrow(myelk_subset),
+         phase = cut(Row_ID, 
+                     breaks = cuts, 
+                     labels = 1:nrow(breakpoints)))
+
+#' 
+#' Visualize the time series
+#' 
+## ----plotSpeedPhase----------------------------------------------------------------------------------
+require(ggplot2)
+ggplot(data=myelk_subset, aes(x=datetime, y=Speed)) +
+  geom_path(col = "grey") + 
+  geom_point(aes(color = phase)) + 
+  theme_classic()
+
+#' 
+#' A scantrack with the phases:
+#' 
+## ----echo = -1---------------------------------------------------------------------------------------
+par(mar = c(0,4,0,0), oma = c(4,0,5,2), xpd=NA)
+layout(rbind(c(1,2), c(1,3)))
+palette(gplots::rich.colors(10))
+with(myelk_subset, {
+  plot(X, Y, asp = 1, type="o", col = phase)
+  plot(datetime, lon, type="o", xaxt="n", xlab="", col = phase)
+  plot(datetime, lat, type="o", col = phase)
+})
+
+#' 
+#' Did the speed to a good job of partitioning this particular migration? 
+#' How do the speeds compare across these phases? 
+#' 
+## ----------------------------------------------------------------------------------------------------
+myelk_subset |> ddply("speedphase", summarize, 
+  start = min(datetime),
+  end = max(datetime),
+  Speed.mean = mean(Speed),
+  Speed.sd = sd(Speed))
+
+#' 
+#' 
+#' 
+#' # References
+#' 
+#' - Lavielle, M. 2005. Using penalized contrasts for the change-point problem.
+#' Signal Processing, 85, 1501–1510.
+#' 
+#' - Lavielle, M. 1999. Detection of multiple changes in a sequence of dependent
+#' variables. Stochastic Processes and their Applications. 83, 79–102.
+#' 
+#' - Barraquand, F. and Benhamou, S. 2008. Animal movements in heterogeneous landscapes: identifying profitable places and homogeneous movement bouts. Ecology, 89, 3336–3348.
+#' 
+#' 
+#' 

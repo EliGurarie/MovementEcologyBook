@@ -58,4 +58,16 @@ And all homeworks are posted [here](Homework/assignments.html)
 - [Markov Chain lecture](07_DiscreteModelsAndHMMs/Lecture08a_MarkovChains.pdf)
 - [Hidden Markov Model (lab)](07_DiscreteModelsAndHMMs/Lab_HMM.html)
 
+
+## 7. Segmentation Techniques
+
+- [Segmentation lecture](08_Segmentation/Segmentation - principles and pitfalls.pdf)
+
+- I. First Passage Time [lab](08_Segmentation/Lab_FPT.html) | [Rmd](08_Segmentation/Lab_FPT.Rmd) | [R code](08_Segmentation/Lab_FPT.R)
+- II. Lavielle Segmentation [lab](08_Segmentation/Lab_LavielleSegmentation.html) | [Rmd](08_Segmentation/Lab_LavielleSegmentation.Rmd) | [R code](08_Segmentation/Lab_LavielleSegmentation.R)
+- III. Hidden Markov Model [lab](08_Segmentation/Lab_HMM.html) | [Rmd](08_Segmentation/Lab_HMM.Rmd) | [R code](08_Segmentation/Lab_HMM.R)
+- IV. Continuous time BCPA [R code](08_Segmentation/whale_bcpa.R) 
+
+
+
 ![](Muybridge_Buffalo_galloping.gif)
