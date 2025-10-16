@@ -1,0 +1,185 @@
+---
+title: "Segmentation: First Passage Time"
+author: "Elie Gurarie (with Nicki Barbour)"
+subtitle: "EFB 796: Techniques in Movement Ecology"
+date: "October 16, 2025"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+# Goals
+
+> To perform a first-passage time analysis on the elk data set to identify when it is in a "resident" (area restricted search) phase versus a "transiting" phase. We'll use functionality in the `adehabitatLT` package. 
+
+```{r}
+load("../data/elk_processed.rda")
+head(elk_gps)
+```
+
+We will use one individual from the elk, "YL96". This individual has some "patches" of residency-like behavior along its track.
+
+```{r datasubset}
+myelk <- subset(elk_gps, id == "YL96") |>
+  dplyr::mutate(id = as.character(id))
+```
+
+The `scan track`:
+
+```{r scantrack, echo = -1}
+par(mar = c(0,4,0,0), oma = c(4,0,5,2), xpd=NA)
+layout(rbind(c(1,2), c(1,3)))
+with(myelk, { 
+  plot(lon, lat, asp = 1, type="o")
+  plot(datetime, lon, type="o", xlab = "")
+  plot(datetime, lat, type="o")
+  title(id[1], outer = TRUE)
+})
+```
+# First Passage Time
+
+First Passage Time (FPT) can be a useful parameter to describe scales of behavior along a movement track. 
+
+It is generally defined as the time observed for an animal to pass through a circle, with radius "r", where "r" defines the scale of behavior.
+
+The variance of the log of the FPT can be used to select this scale, "r", with a high variance (peak) being seen for scales often used by more residential-like behavior (e.g., slower, more tortuous movements).
+
+## The `ltraj` Data Format
+
+Unfortunately the `adehabitatLT` does not work too well with simple feature projected data, but rather with the now outdates "Spatial Points" data type.   
+
+```{r}
+library(adehabitatLT)
+library(sf)
+library(plyr)
+```
+
+In order to fit the `fpt` function, we first need to:
+
+1 - make our data spatial (`sf`)
+
+2 - convert our data to  `SpatialPoints` format (`sp` which is automatically installed and loaded with the `adehabitatLT` package).
+
+```{r}
+myelk_sp <- myelk |>
+  st_as_sf(coords=c("lon","lat"), crs= 4326) |> 
+  st_transform(32611) |>
+  st_cast("POINT") |> 
+  as_Spatial()
+```
+We can now use the `as.ltraj` function to convert out data into ltraj format.
+
+```{r}
+myelk_traj <- as.ltraj(coordinates(myelk_sp), 
+                       date = myelk$datetime, 
+                       id = myelk$id)
+
+summary(myelk_traj)
+```
+
+Note, the `ltraj` data type is good for processing multiple individuals - and even multiple "bursts" (subsets of data) per individual.  We won't'use that functionality here. 
+
+We can use the `head` function to look at the ltraj data table for this individual.  Note that in converting to `ltraj` many of the metrics that we also obtained are computed (step lengths, turning angles, etc.)
+
+```{r}
+head(myelk_traj[[1]])
+```
+
+We can also plot the trajectory of the individual, which shows the start and end locations in red and blue.
+
+```{r}
+plot(myelk_traj)
+```
+
+## Estimate First Passage time
+
+We can now apply the `fpt` function, first testing a variety of radii (50,000 - 100,000 m).
+
+```{r}
+myelk_fpt_100 <- fpt(myelk_traj, 
+                 radii = 100, 
+                 units="hours")
+myelk_fpt_1000 <- fpt(myelk_traj, 
+                 radii = 1000, 
+                 units="hours")
+myelk_fpt_10000 <- fpt(myelk_traj, 
+                 radii = 10000, 
+                 units="hours")
+```
+
+Compare athese: 
+```{r}
+plot(myelk_fpt_100, scale = 100)
+plot(myelk_fpt_1000, scale = 1000)
+plot(myelk_fpt_10000, scale = 10000)
+```
+
+> How do you interpret these!?
+
+
+A common way to "select a scale" for the first passage tima analysis is to compare the *variance* of the first passage time across many scales.  We find the FPT actoss all the scales at once, and  use the `varlogfpt` function on our FPT object to see if we can find a peak in the variance at one of the spatial scales of interest.
+
+
+```{r}
+myelk_fpt <- fpt(myelk_traj, radii = seq(100,10000,100))
+varlogfpt(myelk_fpt, graph=TRUE)
+```
+
+A "peak" in that variance is considred to be a place where the `fpt` has the most variability, and you can see the most structure in the movement.  Elk are always stopping and going, explaining the smaller peaks early on.  But we are more interested in large scale behaviors, so what happens around 5000 m.  
+
+Now that we have decided on our spatial scale of interest, we can refit our `fpt` function and plot the results.
+
+```{r}
+myelk_fpt <- fpt(myelk_traj, radii = 5000, units="hours")
+plot(myelk_fpt, scale = 5000, warn = FALSE)
+```
+
+We can bind our FPT values to our data as a column by extracting it from our FPT object. 
+
+```{r}
+myelk$FPT <- myelk_fpt[[1]]$r1
+```
+
+
+Periods of higher FPT seem to mostly correspond to the distinct patches of possible "residential" behavior.
+
+```{r}
+library(ggplot2)
+```
+
+```{r, echo= FALSE, eval = FALSE}
+
+ggplot(myelk) +
+  geom_path(aes(x = datetime, y = scale(FPT)), 
+            color="darkgrey", size = 1) +
+  geom_path(aes(x = datetime, y = scale(lat)), 
+            color ="orange", alpha = 0.6, size = 1) +
+  geom_point(aes(x = datetime, y = scale(FPT))) +
+  theme_classic() +
+  ylab("Scaled FPT (grey) vs Latitude (orange)")
+```
+
+```{r}
+ggplot(myelk, aes(lon, lat, col = FPT)) +  geom_point() + 
+  ggtitle("First Passage Time at 5000 m radius")
+```
+
+
+You can use a threshold here and try to pick out the periods when the animal is moving in a very directed way.  Let's just make this plot spatial as well.  
+
+```{r}
+myelk_sf <- myelk |>
+  st_as_sf(coords=c("lon","lat"), crs= 4326) |> 
+  mutate(FPT = myelk_fpt[[1]]$r1)
+
+ggplot(myelk_sf, aes(col = cut(FPT, c(0,100,200,1400)))) +  
+  geom_sf() + 
+  ggtitle("First Passage Time at 5000 m radius")
+```
+
+This is one way to break down the movement into very intensive, transitory, and intermediate "behaviors". 
