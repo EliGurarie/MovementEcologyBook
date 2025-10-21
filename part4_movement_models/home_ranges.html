@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.7.32">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="E Gurarie, N Barbour, O Couriot, M Hebblewhite">
-<title>Techniques and Concepts in Movement Ecology - 14&nbsp; Home ranges</title>
+<title>14&nbsp; Home ranges – Techniques and Concepts in Movement Ecology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -15,10 +15,30 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
@@ -30,21 +50,28 @@ ul.task-list li input[type="checkbox"] {
 <link href="../part4_movement_models/behavioral_changes.html" rel="next">
 <link href="../part4_movement_models/continuous_movement_models.html" rel="prev">
 <link href="../cover.png" rel="icon" type="image/png">
-<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap-60adedb169b4fbd7f273e58ba331e10b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -53,30 +80,35 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 </head>
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">
-<span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Home ranges</span>
-</h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part4_movement_models/discrete_movement_models.html">IV. Models of movement</a></li><li class="breadcrumb-item"><a href="../part4_movement_models/home_ranges.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Home ranges</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Techniques and Concepts in Movement Ecology</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-  <a href="" class="quarto-reader-toggle sidebar-tool" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+    <a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
   </div>
@@ -84,173 +116,214 @@ ul.task-list li input[type="checkbox"] {
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../introductions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction(s)</span></a>
+  <a href="../introductions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction(s)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">I. Foundations</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">I. Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../questionsinmovementecology.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Kinds of movements, and kinds of questions</span></a>
+  <a href="../questionsinmovementecology.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Kinds of movements, and kinds of questions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../whyspecialstats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Why do we need special statistics?</span></a>
+  <a href="../whyspecialstats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Why do we need special statistics?</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">II. Basic Manipulations</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">II. Basic Manipulations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part2_data_and_manipulations/complex_numbers.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Complex Numbers are Simple</span></a>
+  <a href="../part2_data_and_manipulations/complex_numbers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Complex Numbers are Simple</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part2_data_and_manipulations/spatial_data_in_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Spatial data in R</span></a>
+  <a href="../part2_data_and_manipulations/spatial_data_in_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Spatial data in R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part2_data_and_manipulations/movement_data_in_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Movement data in R</span></a>
+  <a href="../part2_data_and_manipulations/movement_data_in_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Movement data in R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part2_data_and_manipulations/visualization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualization</span></a>
+  <a href="../part2_data_and_manipulations/visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualization</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">III. Statistical foundations</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">III. Statistical foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part3_statistical_foundations/likelihoods.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Likelihood Theory</span></a>
+  <a href="../part3_statistical_foundations/likelihoods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Likelihood Theory</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part3_statistical_foundations/time_series.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Time Series</span></a>
+  <a href="../part3_statistical_foundations/time_series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Time Series</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part3_statistical_foundations/mixed_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Mixed models (with autocorrelation!)</span></a>
+  <a href="../part3_statistical_foundations/mixed_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Mixed models (with autocorrelation!)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part3_statistical_foundations/spatial_correlation.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Spatial correlations</span></a>
+  <a href="../part3_statistical_foundations/spatial_correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Spatial correlations</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">IV. Models of movement</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">IV. Models of movement</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part4_movement_models/discrete_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Discrete time movement models</span></a>
+  <a href="../part4_movement_models/discrete_movement_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Discrete time movement models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part4_movement_models/continuous_movement_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Continuous time movement models</span></a>
+  <a href="../part4_movement_models/continuous_movement_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Continuous time movement models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part4_movement_models/home_ranges.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Home ranges</span></a>
+  <a href="../part4_movement_models/home_ranges.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Home ranges</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part4_movement_models/behavioral_changes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Behavioral Changes</span></a>
+  <a href="../part4_movement_models/behavioral_changes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Behavioral Changes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part4_movement_models/hmms.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Hidden Markov and State-Space Modeling</span></a>
+  <a href="../part4_movement_models/hmms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Hidden Markov and State-Space Modeling</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">V. Resource and Step-Selection</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">V. Resource and Step-Selection</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../resource_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Resource Selection</span></a>
+  <a href="../resource_selection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Resource Selection</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../step_selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Step Selection Functions</span></a>
+  <a href="../step_selection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Step Selection Functions</span></span></a>
   </div>
 </li>
       </ul>
 </li>
     </ul>
 </div>
-</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#mcp" id="toc-mcp" class="nav-link active" data-scroll-target="#mcp"><span class="toc-section-number">14.1</span>  MCP</a></li>
-  <li><a href="#kernel" id="toc-kernel" class="nav-link" data-scroll-target="#kernel"><span class="toc-section-number">14.2</span>  kernel</a></li>
-  <li><a href="#locoh" id="toc-locoh" class="nav-link" data-scroll-target="#locoh"><span class="toc-section-number">14.3</span>  LoCoH</a></li>
-  <li><a href="#akde" id="toc-akde" class="nav-link" data-scroll-target="#akde"><span class="toc-section-number">14.4</span>  akde</a></li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/edit/main/part4_movement_models/home_ranges.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<li>
+<a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">14.1</span> Overview</a>
+  <ul class="collapse">
+<li><a href="#conceptual-challenges-with-home-range-definition" id="toc-conceptual-challenges-with-home-range-definition" class="nav-link" data-scroll-target="#conceptual-challenges-with-home-range-definition"><span class="header-section-number">14.1.1</span> Conceptual Challenges with Home Range Definition</a></li>
+  <li><a href="#why-study-home-ranges" id="toc-why-study-home-ranges" class="nav-link" data-scroll-target="#why-study-home-ranges"><span class="header-section-number">14.1.2</span> Why Study Home Ranges?</a></li>
+  <li><a href="#large-scale-patterns-and-predictors-of-home-range-size" id="toc-large-scale-patterns-and-predictors-of-home-range-size" class="nav-link" data-scroll-target="#large-scale-patterns-and-predictors-of-home-range-size"><span class="header-section-number">14.1.3</span> Large-Scale Patterns and Predictors of Home Range Size</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#methods-for-estimating-home-ranges" id="toc-methods-for-estimating-home-ranges" class="nav-link" data-scroll-target="#methods-for-estimating-home-ranges"><span class="header-section-number">14.2</span> Methods for Estimating Home Ranges</a>
+  <ul class="collapse">
+<li><a href="#minimum-convex-polygon-mcp" id="toc-minimum-convex-polygon-mcp" class="nav-link" data-scroll-target="#minimum-convex-polygon-mcp"><span class="header-section-number">14.2.1</span> Minimum Convex Polygon (MCP)</a></li>
+  <li><a href="#kernel-density-estimation-kde" id="toc-kernel-density-estimation-kde" class="nav-link" data-scroll-target="#kernel-density-estimation-kde"><span class="header-section-number">14.2.2</span> Kernel Density Estimation (KDE)</a></li>
+  <li><a href="#local-convex-hull-locoh" id="toc-local-convex-hull-locoh" class="nav-link" data-scroll-target="#local-convex-hull-locoh"><span class="header-section-number">14.2.3</span> Local Convex Hull (LoCoH)</a></li>
+  <li><a href="#autocorrelated-kernel-density-estimation-akde" id="toc-autocorrelated-kernel-density-estimation-akde" class="nav-link" data-scroll-target="#autocorrelated-kernel-density-estimation-akde"><span class="header-section-number">14.2.4</span> Autocorrelated Kernel Density Estimation (AKDE)</a></li>
+  </ul>
+</li>
+  <li><a href="#comparison-table" id="toc-comparison-table" class="nav-link" data-scroll-target="#comparison-table"><span class="header-section-number">14.3</span> Comparison Table</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">14.4</span> References</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/edit/main/part4_movement_models/home_ranges.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title d-none d-lg-block">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../part4_movement_models/discrete_movement_models.html">IV. Models of movement</a></li><li class="breadcrumb-item"><a href="../part4_movement_models/home_ranges.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Home ranges</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">
 <span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Home ranges</span>
 </h1>
 </div>
@@ -265,166 +338,568 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
-</header><div class="cell">
 
+</header><section id="overview" class="level2" data-number="14.1"><h2 data-number="14.1" class="anchored" data-anchor-id="overview">
+<span class="header-section-number">14.1</span> Overview</h2>
+<p>The study of animal space use represents one of the fundamental challenges in wildlife ecology and conservation biology. At the heart of this endeavor lies the concept of the <strong>home range</strong>, most commonly defined by <span class="citation" data-cites="Burt1943">Burt (<a href="#ref-Burt1943" role="doc-biblioref">1943</a>)</span> as “that area traversed by an individual in its normal activities of food gathering, mating and caring for young.” While elegant in its simplicity, this definition has sparked decades of debate regarding what constitutes “normal” activities and how to operationally define the boundaries of space use <span class="citation" data-cites="Kie2010">(<a href="#ref-Kie2010" role="doc-biblioref">Kie et al. 2010</a>)</span>.</p>
+<p>It is critical to distinguish between several related but distinct concepts in spatial ecology:</p>
+<ul>
+<li><p><strong>Home range</strong>: The entire area traversed by an individual during its routine activities. This represents the full extent of an animal’s spatial footprint during a defined time period.</p></li>
+<li><p><strong>Territory</strong>: A defended portion of the home range. Not all species are territorial, and even for territorial species, the territory typically represents only a subset of the total home range.</p></li>
+<li><p><strong>Core areas</strong>: Zones of high-intensity use within home ranges, where animals spend disproportionate amounts of time. These often correspond to critical resources such as den sites, preferred foraging areas, or water sources <span class="citation" data-cites="Worton1989">(<a href="#ref-Worton1989" role="doc-biblioref">Worton 1989</a>)</span>.</p></li>
+<li><p><strong>Zones of overlap</strong>: Spatial areas shared between individuals. The extent and nature of overlap provides insights into social structure, resource competition, and potential disease transmission pathways.</p></li>
+</ul>
+<section id="conceptual-challenges-with-home-range-definition" class="level3" data-number="14.1.1"><h3 data-number="14.1.1" class="anchored" data-anchor-id="conceptual-challenges-with-home-range-definition">
+<span class="header-section-number">14.1.1</span> Conceptual Challenges with Home Range Definition</h3>
+<p>Despite its widespread adoption, Burt’s definition <span class="citation" data-cites="Burt1943">(<a href="#ref-Burt1943" role="doc-biblioref">Burt 1943</a>)</span> presents several practical and theoretical challenges that have motivated much of the methodological development in this field:</p>
+<p><strong>The “normality” problem</strong>: What qualifies as normal activity versus aberrant behavior? Space use patterns emerge from a complex suite of behaviors including foraging, mating, parental care, predator avoidance, and refuge-seeking. The relative importance of these behaviors may shift seasonally, ontogenetically, or in response to environmental conditions. Should we define separate home ranges for different seasons or life stages? Or does the concept of home range inherently integrate across these temporal scales?</p>
+<p><strong>The “sally” paradox</strong>: <span class="citation" data-cites="Burt1943">Burt (<a href="#ref-Burt1943" role="doc-biblioref">1943</a>)</span> explicitly noted that “occasional sallies” outside the home range should not be included in home range estimates. However, this creates a circular reasoning problem: we need a defined home range to identify what constitutes a sally, but we need to remove sallies to properly define the home range. Burt provided no guidance on how to resolve this paradox, leaving it to analysts to develop their own decision rules.</p>
+<p><strong>Intensity of use</strong>: Burt’s definition <span class="citation" data-cites="Burt1943">(<a href="#ref-Burt1943" role="doc-biblioref">Burt 1943</a>)</span> is essentially binary—an area is either within the home range or it is not. Yet animal space use is fundamentally heterogeneous. An individual might spend 8 hours per day in a small core area (e.g., a den site) but only 30 minutes in a much larger peripheral zone. A simple boundary-based definition cannot capture this variability in usage intensity, which may be critical for understanding resource selection, energetics, or predation risk <span class="citation" data-cites="Worton1989">(<a href="#ref-Worton1989" role="doc-biblioref">Worton 1989</a>)</span>.</p>
+<p><strong>Delimitation methods</strong>: Perhaps the most persistent challenge has been how to actually delineate home range boundaries from location data <span class="citation" data-cites="Borger2006 Kie2010">(<a href="#ref-Borger2006" role="doc-biblioref">Börger et al. 2006</a>; <a href="#ref-Kie2010" role="doc-biblioref">Kie et al. 2010</a>)</span>. This methodological question has driven much of the innovation in movement ecology over the past several decades, as we discuss in detail below.RetryClaude can make mistakes. Please double-check responses.</p>
+</section><section id="why-study-home-ranges" class="level3" data-number="14.1.2"><h3 data-number="14.1.2" class="anchored" data-anchor-id="why-study-home-ranges">
+<span class="header-section-number">14.1.2</span> Why Study Home Ranges?</h3>
+<p>Understanding animal space use patterns has profound implications across multiple domains of ecology, conservation, and wildlife management:</p>
+<p><strong>Conservation and Management</strong>: It is difficult, if not impossible, to effectively conserve species without understanding their spatial requirements. Home range estimates inform critical decisions about protected area size and design, corridor placement, and habitat connectivity. Will a proposed park encompass sufficient space for viable populations? Will fencing inhibit access to seasonal resources? These questions require robust estimates of space use.</p>
+<p><strong>Disease Transmission</strong>: The spatial overlap between individuals determines contact rates, which in turn drives pathogen transmission dynamics. Do individuals use the same spaces at the same times (synchronous overlap) or different times (asynchronous overlap)? The distinction matters enormously for predicting disease spread and designing intervention strategies.</p>
+<p><strong>Human-Wildlife Conflict</strong>: As human settlements expand into wildlife habitat, understanding where and when humans and wildlife come into contact becomes increasingly important. Are villages located within the home ranges of dangerous or crop-raiding species? Do wildlife movement corridors intersect with roads or agricultural areas? Home range analysis provides a framework for predicting and mitigating conflict.</p>
+<p><strong>Tourism, Hunting, and Recreation</strong>: Multi-billion dollar industries are built on knowledge of where animals can be reliably found. Safari operators, hunting guides, and wildlife photographers all depend on understanding animal movement patterns. Changes in space use behavior can create conflict when reality diverges from expectation.</p>
+</section><section id="large-scale-patterns-and-predictors-of-home-range-size" class="level3" data-number="14.1.3"><h3 data-number="14.1.3" class="anchored" data-anchor-id="large-scale-patterns-and-predictors-of-home-range-size">
+<span class="header-section-number">14.1.3</span> Large-Scale Patterns and Predictors of Home Range Size</h3>
+<p>A fundamental question in spatial ecology concerns what factors determine home range size. Why do some species occupy vast areas while others have tiny home ranges? Recent meta-analyses using GPS collar data have revealed clear patterns:</p>
+<p><strong>Body size dominates</strong>: Tucker et al.&nbsp;(2014), in a comprehensive meta-analysis of GPS tracking data, found that body mass alone explains 53-85% of the variance in home range size across species. This follows from fundamental metabolic scaling—larger animals require more resources, which necessitates larger foraging areas. The relationship is remarkably consistent across diverse taxonomic groups and biomes.</p>
+<p><strong>Diet matters, but less</strong>: Dietary guild explains approximately 15% of variance in home range size, with carnivores generally requiring larger areas than herbivores of similar body mass (due to lower prey density). Omnivores tend to fall intermediate between these extremes.</p>
+<p><strong>Environment is surprisingly weak</strong>: Somewhat counterintuitively, environmental variables (productivity, temperature, precipitation) explain only about 1.7% of variance in home range size. This suggests that the intrinsic properties of organisms (body size, diet) matter far more than extrinsic environmental conditions.</p>
+<p><strong>Sex-specific patterns</strong>: More recent work (Giroux et al., in press, Ecology Letters) examining terrestrial mammals in Brazil revealed that these general patterns are strongly mediated by sex. While males show the expected positive relationship between body mass and home range size, females show no relationship. This likely reflects fundamental differences in spatial strategies between sexes—male home ranges are often determined by access to mates (and thus scale with population density and territory size), while female home ranges are more directly constrained by resource requirements for offspring provisioning.</p>
+</section></section><section id="methods-for-estimating-home-ranges" class="level2" data-number="14.2"><h2 data-number="14.2" class="anchored" data-anchor-id="methods-for-estimating-home-ranges">
+<span class="header-section-number">14.2</span> Methods for Estimating Home Ranges</h2>
+<p>The proliferation of methods for estimating home ranges reflects both the conceptual ambiguities in defining home ranges and the increasing sophistication of tracking technologies. Below we review the major approaches, from simple geometric methods to complex statistical models.</p>
+<section id="minimum-convex-polygon-mcp" class="level3" data-number="14.2.1"><h3 data-number="14.2.1" class="anchored" data-anchor-id="minimum-convex-polygon-mcp">
+<span class="header-section-number">14.2.1</span> Minimum Convex Polygon (MCP)</h3>
+<p>The Minimum Convex Polygon method represents the simplest and most intuitive approach to home range estimation. The procedure is straightforward: identify the outermost location points, draw a polygon connecting these peripheral points such that all interior angles are less than 180°, and define everything within this polygon as the home range.</p>
+<p><strong>Rationale</strong>: The MCP method operationalizes Burt’s definition quite literally—it encompasses all areas where an animal has been observed, explicitly including regions between observations under the assumption that the animal must traverse these areas to move between recorded locations.</p>
+<p><strong>Variants</strong>: Analysts often calculate 95% or 90% MCPs, which exclude the most peripheral 5-10% of points. This provides a crude method for handling the “sally” problem identified by Burt, under the assumption that the most extreme locations represent aberrant movements.</p>
+<p><strong>Advantages</strong>: - Extremely simple to calculate and explain - Requires minimal subjective decisions - Computationally efficient - Reproducible—different analysts will obtain identical results - Useful for coarse-scale questions about space use</p>
+<p><strong>Disadvantages</strong>: - Typically includes vast areas never used by the animal (especially in complex or fragmented habitats) - Highly sensitive to outliers—a single errant location point can dramatically inflate home range size - Provides no information about intensity of use or core areas - Assumes convexity, which is inappropriate for many real landscapes (e.g., animals living along river corridors or forest edges) - No statistical framework for comparing home ranges or assessing uncertainty</p>
+<p><strong>When to use</strong>: MCP remains useful for simple presence/absence questions or when studying broad-scale ecological processes where the exact boundary matters less than the general extent. For example, in studying disease transmission via home range overlap, the precise boundaries are less important than whether home ranges intersect at all.</p>
+</section><section id="kernel-density-estimation-kde" class="level3" data-number="14.2.2"><h3 data-number="14.2.2" class="anchored" data-anchor-id="kernel-density-estimation-kde">
+<span class="header-section-number">14.2.2</span> Kernel Density Estimation (KDE)</h3>
+<p>Kernel density estimation represents a fundamental departure from boundary-based methods. Rather than defining a hard edge to the home range, KDE produces a <strong>utilization distribution (UD)</strong>—a probabilistic surface describing the relative probability of finding an individual at any location within their range.</p>
+<p><strong>Basic Approach</strong>: KDE places a kernel function (typically a bivariate normal distribution) centered on each observed location point. These kernels are then summed across all locations to produce a smooth probability density surface. Areas with many nearby observations receive high density values, while areas distant from observed locations receive low values.</p>
+<p><strong>Key Parameters</strong>: - <strong>Bandwidth (h)</strong>: Controls the smoothness of the density surface. Large bandwidths produce smooth, broad distributions; small bandwidths produce spiky, fragmented distributions. This is the single most influential parameter and has been the subject of extensive methodological research. - <strong>Kernel shape</strong>: While bivariate normal kernels are standard, other shapes (Epanechnikov, uniform) can be used. In practice, kernel shape matters far less than bandwidth selection. - <strong>Isopleths</strong>: The UD is typically summarized using isopleths (contour lines) that enclose specified percentages of the probability density. The 95% isopleth is conventionally interpreted as the home range, while the 50% isopleth often represents core areas.</p>
+<p><strong>Bandwidth Selection</strong>: Numerous methods have been proposed for selecting the bandwidth: - <strong>Reference bandwidth</strong>: Based on the variance of the location data and sample size. Simple but often over-smooths. - <strong>Least-squares cross-validation (LSCV)</strong>: Minimizes the integrated squared error between the estimated and true density. Theoretically optimal but often produces fragmented distributions. - <strong>Plug-in methods</strong>: Use pilot estimates to inform bandwidth selection. Generally perform well but are computationally intensive.</p>
+<p>The lack of consensus on bandwidth selection represents a major limitation—different methods can yield dramatically different home range estimates from the same data.</p>
+<p><strong>Advantages</strong>: - Produces utilization distributions that capture intensity of use - Can identify core areas and peripheral zones - Provides a probabilistic framework that integrates naturally with resource selection analyses - Well-developed statistical theory - Can incorporate geographic barriers or boundaries</p>
+<p><strong>Disadvantages</strong>: - Includes areas that animals cannot or do not use (e.g., across large water bodies, over mountain ridges) - Performs poorly near hard boundaries (e.g., cliff edges, water boundaries) - Bandwidth selection is arbitrary and highly influential - Kernel shape selection adds another subjective decision - Assumes independence between location points, which is violated by autocorrelated movement data - Can dramatically over-estimate home range area at habitat edges</p>
+<p><strong>When to use</strong>: KDE is appropriate when usage intensity matters more than absolute boundaries. It excels at identifying core areas, predicting where within a home range an animal is most likely to occur, and studying fine-scale habitat selection patterns.</p>
+</section><section id="local-convex-hull-locoh" class="level3" data-number="14.2.3"><h3 data-number="14.2.3" class="anchored" data-anchor-id="local-convex-hull-locoh">
+<span class="header-section-number">14.2.3</span> Local Convex Hull (LoCoH)</h3>
+<p>The Local Convex Hull method, developed by Getz and colleagues, represents an attempt to combine the simplicity of geometric methods with the sophistication of density-based approaches.</p>
+<p><strong>Basic Approach</strong>: Rather than estimating a global density surface, LoCoH constructs local convex hulls around each location point and its nearest neighbors. These local hulls are then merged to create isopleths based on the proportion of hulls included. The method naturally adapts to the local density of observations—areas with many nearby points get small hulls, while isolated points get large hulls.</p>
+<p><strong>Variants</strong>: - <strong>Fixed-k LoCoH</strong>: Uses a fixed number of nearest neighbors (k) to define each hull - <strong>Fixed-r LoCoH</strong>: Includes all points within a fixed radius (r) in each hull - <strong>Adaptive LoCoH</strong>: Adapts the number of neighbors based on local density</p>
+<p><strong>Advantages</strong>: - Naturally handles hard boundaries and barriers - Does not include large unused areas in the interior of the home range - Can identify disjunct patches of habitat use - More robust to parameter selection than KDE - Respects the actual geometry of space use patterns</p>
+<p><strong>Disadvantages</strong>: - Still requires selection of parameter (k or r) - More computationally intensive than MCP - Less well-established statistical framework than KDE - Can produce complex, difficult-to-interpret boundaries - May oversegment home ranges when location data are sparse</p>
+<p><strong>When to use</strong>: LoCoH is particularly valuable when studying animals in fragmented or geometrically complex habitats, or when hard boundaries (rivers, cliffs, habitat edges) are important features of the landscape.</p>
+</section><section id="autocorrelated-kernel-density-estimation-akde" class="level3" data-number="14.2.4"><h3 data-number="14.2.4" class="anchored" data-anchor-id="autocorrelated-kernel-density-estimation-akde">
+<span class="header-section-number">14.2.4</span> Autocorrelated Kernel Density Estimation (AKDE)</h3>
+<p>The most recent major innovation in home range estimation comes from the <strong>continuous-time movement modeling (CTMM)</strong> framework, which explicitly accounts for the temporal autocorrelation inherent in animal movement data.</p>
+<p><strong>The Autocorrelation Problem</strong>: GPS collars typically record locations at regular intervals (every hour, every 4 hours, etc.). Consecutive locations are not independent—an animal near location A at time t is likely to still be near A at time t+1. Traditional KDE methods assume independence, which leads to underestimation of uncertainty and can bias home range estimates, particularly when sampling intervals are short relative to the timescale of movement.</p>
+<p><strong>CTMM Approach</strong>: AKDE first fits a continuous-time stochastic movement model to the location data. This model characterizes the autocorrelation structure of movement—how quickly does an animal’s location become independent of its previous location? The fitted movement model then informs bandwidth selection for kernel density estimation, effectively adjusting for the reduced information content in autocorrelated data.</p>
+<p><strong>Movement Models</strong>: Common models include: - <strong>Independent and Identically Distributed (IID)</strong>: No autocorrelation (rarely appropriate for GPS data) - <strong>Ornstein-Uhlenbeck (OU)</strong>: Autocorrelation with range residency (central place foraging) - <strong>Ornstein-Uhlenbeck Foraging (OUF)</strong>: Autocorrelation with directional persistence (ballistic movement)</p>
+<p><strong>Advantages</strong>: - Explicitly accounts for temporal autocorrelation in data - Provides principled, data-driven bandwidth selection - Does not overfit data - Produces proper confidence intervals for home range area - Agnostic to sampling schedule—works with regular or irregular location data - Based on solid statistical and movement ecology theory</p>
+<p><strong>Disadvantages</strong>: - Requires understanding of continuous-time movement models - Computationally intensive (especially for large datasets) - Makes strong parametric assumptions about movement processes - Can be slow to fit complex models - Requires more data than simpler methods (needs sufficient observations to characterize autocorrelation) - Software implementation limited (primarily ctmm R package)</p>
+<p><strong>When to use</strong>: AKDE is most appropriate when: (1) you have intensive GPS tracking data with temporal autocorrelation, (2) you need statistically rigorous home range estimates with proper uncertainty quantification, and (3) you’re willing to invest time in understanding movement models and fitting appropriate models to your data.</p>
+<hr></section></section><section id="comparison-table" class="level2" data-number="14.3"><h2 data-number="14.3" class="anchored" data-anchor-id="comparison-table">
+<span class="header-section-number">14.3</span> Comparison Table</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 14%">
+<col style="width: 25%">
+<col style="width: 21%">
+<col style="width: 15%">
+<col style="width: 13%">
+</colgroup>
+<thead><tr class="header">
+<th>Method</th>
+<th>Complexity</th>
+<th>Data Requirements</th>
+<th>Intensity Info</th>
+<th>Boundaries</th>
+<th>Best For</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><strong>MCP</strong></td>
+<td>Very Simple</td>
+<td>Low (≥30 points)</td>
+<td>None</td>
+<td>Hard edge</td>
+<td>Coarse-scale, presence/absence questions</td>
+</tr>
+<tr class="even">
+<td><strong>KDE</strong></td>
+<td>Moderate</td>
+<td>Moderate (≥50 points)</td>
+<td>Yes (UD)</td>
+<td>Smooth</td>
+<td>Core area identification, intensity-based analyses</td>
+</tr>
+<tr class="odd">
+<td><strong>LoCoH</strong></td>
+<td>Moderate</td>
+<td>Moderate (≥50 points)</td>
+<td>Yes (local density)</td>
+<td>Complex</td>
+<td>Complex landscapes, hard boundaries</td>
+</tr>
+<tr class="even">
+<td><strong>AKDE</strong></td>
+<td>High</td>
+<td>High (≥100+ points)</td>
+<td>Yes (UD)</td>
+<td>Smooth</td>
+<td>Rigorous statistical inference, intensive GPS data</td>
+</tr>
+</tbody>
+</table>
+<hr></section><section id="references" class="level2" data-number="14.4"><h2 data-number="14.4" class="anchored" data-anchor-id="references">
+<span class="header-section-number">14.4</span> References</h2>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Borger2006" class="csl-entry" role="listitem">
+Börger, Luca, Nicodemo Franconi, Giuseppe De Michele, Anna Gantz, Ferdinando Meschi, Andrea Manica, Sandro Lovari, and Tim Coulson. 2006. <span>“Effects of Sampling Regime on the Mean and Variance of Home Range Size Estimates.”</span> <em>Journal of Animal Ecology</em> 75 (6): 1393–1405.
 </div>
-<section id="mcp" class="level2" data-number="14.1"><h2 data-number="14.1" class="anchored" data-anchor-id="mcp">
-<span class="header-section-number">14.1</span> MCP</h2>
-</section><section id="kernel" class="level2" data-number="14.2"><h2 data-number="14.2" class="anchored" data-anchor-id="kernel">
-<span class="header-section-number">14.2</span> kernel</h2>
-</section><section id="locoh" class="level2" data-number="14.3"><h2 data-number="14.3" class="anchored" data-anchor-id="locoh">
-<span class="header-section-number">14.3</span> LoCoH</h2>
-</section><section id="akde" class="level2" data-number="14.4"><h2 data-number="14.4" class="anchored" data-anchor-id="akde">
-<span class="header-section-number">14.4</span> akde</h2>
-
-
+<div id="ref-Burt1943" class="csl-entry" role="listitem">
+Burt, William Henry. 1943. <span>“Territoriality and Home Range Concepts as Applied to Mammals.”</span> <em>Journal of Mammalogy</em> 24 (3): 346–52.
+</div>
+<div id="ref-Kie2010" class="csl-entry" role="listitem">
+Kie, John G, Jason Matthiopoulos, John Fieberg, Roger A Powell, Francesca Cagnacci, Michael S Mitchell, Jean-Michel Gaillard, and Paul R Moorcroft. 2010. <span>“The Home-Range Concept: <span>Are</span> Traditional Estimators Still Relevant with Modern Telemetry Technology?”</span> <em>Philosophical Transactions of the Royal Society B: Biological Sciences</em> 365 (1550): 2221–31.
+</div>
+<div id="ref-Worton1989" class="csl-entry" role="listitem">
+Worton, Bruce J. 1989. <span>“Kernel Methods for Estimating the Utilization Distribution in Home-Range Studies.”</span> <em>Ecology</em> 70 (1): 164–68.
+</div>
+</div>
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
-    }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-  function tippyHover(el, contentFn) {
-    const config = {
-      allowHTML: true,
-      content: contentFn,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start'
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      return note.innerHTML;
-    });
-  }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
-    } else {
-      return undefined;
+      return false;
     }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/eligurarie\.github\.io\/MovementEcologyBook\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
       });
     }
-  }
-});
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../part4_movement_models/continuous_movement_models.html" class="pagination-link">
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../part4_movement_models/continuous_movement_models.html" class="pagination-link" aria-label="Continuous time movement models">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Continuous time movement models</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../part4_movement_models/behavioral_changes.html" class="pagination-link">
+      <a href="../part4_movement_models/behavioral_changes.html" class="pagination-link" aria-label="Behavioral Changes">
         <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Behavioral Changes</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
-    <div class="nav-footer-left"><a href="https://eligurarie.github.io/">E. Gurarie</a>, N. Barbour, O. Couriot, M. Hebblewhite (?), others (?)</div>   
-    <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a>.</div>
+    <div class="nav-footer-left">
+<p><a href="https://eligurarie.github.io/">E. Gurarie</a>, N. Barbour, O. Couriot, M. Hebblewhite (?), others (?)</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/edit/main/part4_movement_models/home_ranges.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/EliGurarie/SpatialAndMovementEcologyCourse/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
   </div>
 </footer>
 
