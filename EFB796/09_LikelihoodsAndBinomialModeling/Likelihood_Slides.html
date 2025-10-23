@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Likelihoods</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Elie Gurarie" />
+    <script src="Likelihood_Slides_files/header-attrs-2.29/header-attrs.js"></script>
+    <link href="Likelihood_Slides_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="Likelihood_Slides_files/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="mycss.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, title-slide
+
+.title[
+# Likelihoods
+]
+.subtitle[
+## EFB 796: Techniques in Movement Ecology
+]
+.author[
+### Elie Gurarie
+]
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+# Why we're going Over this
+
+.pull-left[
+## Likelihoods are: 
+
+- The link between: **Data** -&gt; **Probability Models** -&gt; **Inference**
+
+- The most important tool, in practice, for fitting models
+
+- Used to **Maximize the Likelihood** when estimating parameters
+
+- Provide a flexible / general framework for comparing / selecting models
+  - Via **Likelihood Ratio Tests**
+  - Via **Information Criteria** (AIC, BIC, etc.)
+]
+
+.pull-right[
+
+Surprisingly:
+
+- Almost **NEVER TAUGHT** in undergraduate statistics classes
+- Yet they are **EASY TO UNDERSTAND**
+
+&gt; We are basically peeking under the hood of a lot of statistical machinery.
+
+]
+
+---
+
+
+
+.pull-left-60[
+# Likelihoods vs. Probabilities
+
+**Probabilities:**
+
+- Tells you about a random event *given* parameter values
+
+$$P(X = x | \theta) = f(x| \theta) $$
+
+
+**Likelihoods:**
+- Tells you about parameter values *given* observations
+
+`$${\cal L}(\theta | x) = f(x|\theta)$$`
+
+### But they're equal!!!
+
+]
+
+.pull-right-30[
+
+
+![](images/headstand.jpg)
+
+***Likelihoods turn Probabilities on their heads!!***
+]
+
+---
+
+.pull-left-70[
+# Example: Height Distribution
+
+## A probability statement
+
+Let's say the average height of a human male is:
+
+`$$X \sim {\cal N}(\mu_0 = 6, \sigma_0 = 0.5)$$`
+
+For a 7-foot tall person:
+
+
+``` r
+dnorm(7, 6, 0.5)
+```
+
+```
+## [1] 0.1079819
+```
+
+
+The per-foot "probability" of being around 7 feet tall is 0.11 1/foot.
+
+
+``` r
+dnorm(7, 6, 0.5) / 12 # Convert to per-inch
+```
+
+```
+## [1] 0.008998494
+```
+
+
+Just under 1% probability that a person is within one inch of 7 feet.
+]
+
+.pull-right-30[.pull-right-70[![](images/bballplayer.jpg)]
+]
+
+---
+
+.pull-left-70[
+
+# Defining a Likelihood
+
+The more normal thing that happens is you collect data (e.g. 1 man's height), and want to *infer* the mean and variance.  
+
+So, given a single data point: `\(X_1 = \{7\}\)`
+
+What is the *likelihood* that `\(\mu_0 = 6\)` and `\(\sigma_0 = 0.5\)`, given `\(X_1 = 7\)`?
+
+`$$\large {\cal L}(\mu, \sigma | x) = f(X_1|\mu_0, \sigma_0) = 0.11$$`
+&gt; ### **IMPORTANT:** The Likelihood **IS** equal to the probability!
+]
+]
+
+
+.pull-right-30[.pull-right-70[![](images/bballplayer.jpg)]
+]
+
+
+---
+
+# Using the Likelihood Concept
+
+**BUT**, in contrast to Probabilities, the *actual  value of the likelihood* is (almost) NEVER of any practical interest!  
+
+We ONLY care about its value when compared with likelihoods of different models.
+
+
+Let's compare two models:  
+
+.pull-left[
+Model 1: `\(\mu_0 = 6, \sigma_0 = 0.5\)`
+
+
+``` r
+L0 &lt;- dnorm(7, 6, 0.5)
+L0
+```
+
+```
+## [1] 0.1079819
+```
+]
+
+.pull-right[
+Model 2: `\(\mu_1 = 7, \sigma_1 = 0.001\)`
+
+
+``` r
+L1 &lt;- dnorm(7, 7, 0.01)
+L1
+```
+
+```
+## [1] 39.89423
+```
+]
+
+--
+
+The *ratio* between these is: `$$L_1 / L_0 = 40$$`
+
+
+&gt; Model 2 is more than 3000x more *likely* than Model 1!
+
+
+---
+
+
+
+.pull-left[
+# Joint Likelihoods
+Now we sample more data: 5 individuals and measure heights: 
+
+`$$X = \{6.6, 6.8, 7.0, 7.2, 7.4 \}$$` 
+
+![](images/bballteam.jpg)
+]
+
+
+.pull-right[
+
+Visualize these data-points against our null-model:
+
+
+``` r
+mu0 &lt;- 6
+sigma0 &lt;- 0.5
+X &lt;- c(6.6, 6.8, 7.0, 7.2, 7.4)
+curve(dnorm(x, mu0, sigma0), xlim=c(4,8))
+points(X, dnorm(X, mu0, sigma0), pch=19, col=2)
+points(X, dnorm(X, mu0, sigma0), type="h", col=2)
+```
+
+&lt;img src="Likelihood_Slides_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# Joint Likelihood 
+
+.pull-left[
+The **joint likelihood** is the product of the likelihood for each data point.  Why? Because the *Probability* of `\(n\)` independent events is the *product* of the probabilities:
+
+$${\cal L}(\mu_0, \sigma_0 | {\bf X}) = \prod_{i=1}^n f(X_i|\mu_0, \sigma_0) $$
+]
+
+.pull-right[
+With our data:
+
+
+``` r
+(L0 &lt;- prod(dnorm(X, mu0, sigma0)))
+```
+
+```
+## [1] 6.596596e-06
+```
+
+This is a very very small number (*but we don't care, we want to compare*)!  
+
+The joint likelihood of our alternative model:
+
+``` r
+mu1 &lt;- 7
+sigma1 &lt;- 0.01
+(L1 &lt;- prod(dnorm(X, mu1, sigma1)))
+```
+
+```
+## [1] 0
+```
+
+]
+---
+
+# Illustrate the comparison
+
+
+&lt;img src="Likelihood_Slides_files/figure-html/comparebballmodels-1.png" width="2000" style="display: block; margin: auto;" /&gt;
+
+.pull-left[
+Points away from 7 have extremely low probability, which brings the likelihood of this model way down.
+]
+
+--
+
+.pull-right[
+&gt; ### But what's the BEST model!?
+]
+
+---
+
+# Maximum Likelihood Estimator (MLE)
+
+MLE's are the "best" parameters with the smallest possible variances.  Here is a definition notation:
+
+`$$\huge  \widehat\theta_\mathrm{mle} \subseteq  \underset{\theta\in\Theta}{\operatorname{arg\,max}}\ {\cal L}(\theta\,|X)$$`
+
+- The "hat" means - **estimator**
+- `\(\text{argmax}\)` means - **the value of `\(\theta\)` where the function is maximized**
+
+so:
+
+&lt;font color="darkred"&gt;
+.large.center[
+the MLE of `\(\theta\)` are those values of `\(\theta\)` for which the likelihood function is maximized. 
+]
+
+&lt;/font&gt;
+
+
+---
+
+
+.pull-left-30[
+# Likelihood Profile
+
+Let's see what the likelihood looks like across a range of values for `\(\mu\)` and `\(\sigma\)`: 
+]
+.pull-right-70[
+
+``` r
+mus &lt;- seq(6, 8, .05); sigmas &lt;- seq(.1, 1, .02)
+Likelihood &lt;- function(mu, sigma) prod(dnorm(X, mu, sigma))
+L.matrix &lt;- outer(mus, sigmas, Vectorize(Likelihood))
+image(mus, sigmas, L.matrix, col=topo.colors(100))
+contour(mus, sigmas, L.matrix, add=TRUE)
+persp(mus, sigmas, L.matrix, axes=TRUE, shade=TRUE, bor=NA)
+```
+]
+
+
+&lt;img src="Likelihood_Slides_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+
+.center[
+***Approximately what values of `\(\theta\)` maximize the likelihood?***
+]
+
+
+---
+# Maximum Likelihood Estimator
+
+.pull-left-60[
+
+
+``` r
+(max.indices &lt;- which(L.matrix == max(L.matrix), arr.ind = TRUE))
+```
+
+```
+##      row col
+## [1,]  21  10
+```
+
+``` r
+(mu.hat &lt;- mus[max.indices[1]])
+```
+
+```
+## [1] 7
+```
+
+``` r
+(sigma.hat &lt;- sigmas[max.indices[2]])
+```
+
+```
+## [1] 0.28
+```
+
+
+This approach is called a **grid search**. 
+
+]
+
+
+
+.pull-right-40[
+&lt;img src="Likelihood_Slides_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Numerically Finding the MLE
+
+.pull-left[
+
+Using `optim()` function:
+
+``` r
+optim(par = c(mu = 6, sigma = 1), 
+      function(p) -Likelihood(p["mu"], p["sigma"]))
+```
+
+```
+## $par
+##        mu     sigma 
+## 7.0000003 0.2828426 
+## 
+## $value
+## [1] -0.4582359
+## 
+## $counts
+## function gradient 
+##       89       NA 
+## 
+## $convergence
+## [1] 0
+## 
+## $message
+## NULL
+```
+]
+
+.pull-right.large[
+&gt; This function is a crazy bag of worms, but it is **extremely powerful**. We will decompose its use in lab.
+
+]
+
+
+
+---
+# Comparing 3 models side by side
+
+&lt;img src="Likelihood_Slides_files/figure-html/threemodels-1.png" width="2000" style="display: block; margin: auto;" /&gt;
+
+The best model balances the *center* of the distribution while giving it just the right amount of *spread*. 
+
+---
+## we *actually* compute **log-Likelihoods**
+
+
+.pull-left[
+#### Likelihood: 
+$${\cal L}(\theta | {\bf X}) = \prod_{i=1}^n f(X_i| \theta) $$
+]
+
+.pull-right[
+#### log-Likelihood:
+`$${\cal l}(\theta | {\bf X}) = \log({\cal L}) = \sum_{i=1}^n \log(f(X_i|\theta))$$`
+]
+
+
+**practical reasons:**
+
+1. Probabilities can be extremely small - but logs make very very small numbers very very manageable. 
+
+2. Multiplying lots of small numbers is extremely hard computationally 
+  - *R failed with our example with 5 data points!*
+
+3. But logs turn multiplication into addition, which is **extremely** easy. 
+  - The number of particles in the universe is about 10^80 ... its log is 184.
+
+**theoretical reasons:**
+
+- The *sharpness* of the *peak* of the *log-Likelihood profile* provides estimates of *precision* for our estimates!!!!
+
+---
+# log-Likelihoods: illustrated
+
+.pull-left[
+
+``` r
+Likelihood &lt;- function(mu, sigma)  
+  prod(dnorm(X, mu, sigma))
+L.matrix &lt;- outer(mus, sigmas, Vectorize(Likelihood))
+```
+
+&lt;img src="Likelihood_Slides_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+
+``` r
+logLikelihood &lt;- function(mu, sigma)  
+  sum(dnorm(X, mu, sigma, log=TRUE))
+ll.matrix &lt;- outer(mus, sigmas, Vectorize(logLikelihood))
+```
+
+&lt;img src="Likelihood_Slides_files/figure-html/unnamed-chunk-14-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+.center[***The maxima are always identical***]
+
+---
+
+# Confidence Intervals
+
+The variance around the point estimates is equal to the negative reciprocal of the second derivative of the log-likelihood at the maximum.
+
+`$$\Sigma(\theta) = {\cal I}(\theta)^{-1}$$`
+
+Where:
+- `\(\cal{I}\)` is the Fisher Information (Hessian of the log likelihood)
+- `\(\Sigma\)` is the variance-covariance matrix of the parameter estimates
+
+---
+class: small
+
+# Confidence Intervals: Application
+
+
+.pull-left[
+Ask `optim()` to compute the Hessian:
+
+
+``` r
+logLikelihood &lt;- function(mu, sigma)
+  sum(log(dnorm(X, mu, sigma)))
+param.fit &lt;- optim(c(1,1),  function(p) -logLikelihood(p[1], p[2]), hessian=TRUE)
+param.fit$par
+```
+
+```
+## [1] 6.9999642 0.2828735
+```
+
+``` r
+param.fit$hessian
+```
+
+```
+##             [,1]         [,2]
+## [1,] 62.48637509   0.01580303
+## [2,]  0.01580303 124.94594137
+```
+
+
+The inverse of a matrix (in R) is `solve(M)`:
+
+
+``` r
+(Sigma &lt;- solve(param.fit$hessian))
+```
+
+```
+##               [,1]          [,2]
+## [1,]  1.600349e-02 -2.024104e-06
+## [2,] -2.024104e-06  8.003462e-03
+```
+]
+
+.pull-right[
+
+
+The square root of the diagonal gives standard errors
+
+
+``` r
+(se &lt;- sqrt(diag(Sigma)))
+```
+
+```
+## [1] 0.12650490 0.08946207
+```
+
+And the confidence intervals are:
+
+
+``` r
+coefs &lt;- data.frame(hat = param.fit$par, CI.low = param.fit$par  - 1.96*se, CI.high = param.fit$par  + 1.96*se)
+```
+
+
+|   hat| CI.low| CI.high|
+|-----:|------:|-------:|
+| 7.000|  6.752|   7.248|
+| 0.283|  0.108|   0.458|
+
+
+
+.center[.large[***We'll practice this in lab!***]]
+
+
+---
+
+# Comparing models with likelihoods
+
+Likelihood Ratio Test:
+
+- Model 0 and Model 1 are NESTED 
+  - (i.e. Model 0 is a special case of Model 1) with `\(k_0\)` and `\(k_1\)` parameters.  
+
+- Compute MLE's:  `\(\widehat{\theta_0}\)` and `\(\widehat{\theta_1}\)`
+
+- Compute likelihoods: `\({\cal L_0(\theta_0|X)}\)` and `\({\cal L_1(\theta_1|X)}\)`  
+- *important: the data `\(X\)` must be identical!*
+
+- Likelihood Ratio Test Statistic: 
+`$$\Lambda = -2 \log \left( \frac{L_0}{L_1}  \right) = 2 (l_1 - l_0)$$`
+
+- under Null hypothesis (i.e. Model 1) has distribution `\(\Lambda \sim Chi^2_{d.f. = k_1 - k_0}\)`
+
+---
+
+.pull-left[
+### LRT: Example with regression:
+
+Competing models:
+`$$M0: Y_i = \beta_0 + \epsilon_i$$`
+`$$M1: Y_i = \beta_0 + \beta_1 X_i + \epsilon_i$$`
+where `\(\epsilon\)` are iid Gaussian. 
+
+Defining (negative) log-likelihood functions
+
+``` r
+LL0 &lt;- function(par = c(beta0, sigma), X, Y){
+  -sum(dnorm(Y, mean = par['beta0'],
+             sd = par['sigma'], log=TRUE) )
+}
+LL1 &lt;- function(par = c(beta0, beta1, sigma), X, Y){
+  Y.hat &lt;- par['beta0'] + par['beta1']*X
+  -sum(dnorm(Y, mean = Y.hat, 
+             sd = par['sigma'], log=TRUE) )
+}
+```
+
+]
+
+.pull-right[
+&lt;img src="Likelihood_Slides_files/figure-html/unnamed-chunk-21-1.png" style="display: block; margin: auto;" /&gt;
+
+
+Obtaining estimates
+
+
+``` r
+fit0 &lt;- optim(c(beta0=0, sigma=1), LL0, X = X, Y = Y)
+fit1 &lt;- optim(c(beta0 = 0, beta1 = 0, sigma = 1), LL1, X = X, Y = Y)
+```
+Performing test:
+
+``` r
+LRT &lt;- 2*(-fit1$value + fit0$value)
+1-pchisq(LRT, 1)
+```
+
+```
+## [1] 0.001640782
+```
+]
+
+
+---
+
+# Non-nested models
+
+Compare Akaike Information Criterion (AIC):  
+$$ AIC =  - 2 \log(\cal L) + 2 k$$
+
+
+``` r
+c(AIC0  = 2*(fit0$value + 2*2),
+  AIC1  = 2*(fit1$value + 2*3))
+```
+
+```
+##     AIC0     AIC1 
+## 67.33485 61.42143
+```
+
+Or ... Bayesian Information Criterion (BIC)
+$$ BIC =  - 2 \log(\cal L) + k \log(n) $$
+
+``` r
+c(BIC0  = 2*(fit0$value + 2 * log(length(X))),
+  BIC1  = 2*(fit1$value + 3 * log(length(X))))
+```
+
+```
+##     BIC0     BIC1 
+## 71.31778 67.39583
+```
+
+**Which? Why?** - a complicated debate, different underlying assumptions  But generally - if you want to be more parsimonious (i.e. protect from overfitting) BIC is a better bet. 
+
+
+---
+class: inverse
+# Likelihood maximization: A summary
+
+- If you have **data** ...
+
+- and you can write a **probability model** in terms of **parameters** ...
+  - (no matter how strange or arbitrary seeming)
+
+- then you can probably:
+  - **estimate those parameters** ...
+  - **compare competing models** ...
+  - and obtain **confidence intervals**.
+  
+All with **Maximum Likelihood Estimation**
+
+&gt; .large[All of the above is **the vast majority** of statistical modeling in **Ecology**!]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "github",
+  "countIncrementalSlides": false,
+  "highlightLines": true,
+  "ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

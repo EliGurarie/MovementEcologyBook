@@ -63,11 +63,16 @@ And all homeworks are posted [here](Homework/assignments.html)
 
 - [Segmentation lecture](08_Segmentation/Segmentation - principles and pitfalls.pdf)
 
-- I. First Passage Time [lab](08_Segmentation/Lab_FPT.html) | [Rmd](08_Segmentation/Lab_FPT.Rmd) | [R code](08_Segmentation/Lab_FPT.R)
-- II. Lavielle Segmentation [lab](08_Segmentation/Lab_LavielleSegmentation.html) | [Rmd](08_Segmentation/Lab_LavielleSegmentation.Rmd) | [R code](08_Segmentation/Lab_LavielleSegmentation.R)
-- III. Hidden Markov Model [lab](08_Segmentation/Lab_HMM.html) | [Rmd](08_Segmentation/Lab_HMM.Rmd) | [R code](08_Segmentation/Lab_HMM.R)
-- IV. Continuous time BCPA [R code](08_Segmentation/whale_bcpa.R) 
+- I) First Passage Time: [lab](08_Segmentation/Lab_FPT.html) | [Rmd](08_Segmentation/Lab_FPT.Rmd) | [R code](08_Segmentation/Lab_FPT.R)
+- II) Lavielle Segmentation: [lab](08_Segmentation/Lab_LavielleSegmentation.html) | [Rmd](08_Segmentation/Lab_LavielleSegmentation.Rmd) | [R code](08_Segmentation/Lab_LavielleSegmentation.R)
+- III) Hidden Markov Model: [lab](08_Segmentation/Lab_HMM.html) | [Rmd](08_Segmentation/Lab_HMM.Rmd) | [R code](08_Segmentation/Lab_HMM.R)
+- IV) Continuous time BCPA: [R code](08_Segmentation/whale_bcpa.R) 
 
 
+
+## 8. Maximum Likelihood and Binomial Modelling
+
+- The all-mighty likelihood: [slides](09_LikelihoodsAndBinomialModeling/Likelihood_Slides.html) | [book chapter](https://eligurarie.github.io/MovementEcologyBook/part3_statistical_foundations/likelihoods.html)
+- Binomial Modeling of Common Sole: [lab](09_LikelihoodsAndBinomialModeling/MLEforBinomialModeling.html) | [Rmd](09_LikelihoodsAndBinomialModeling/MLEforBinomialModeling.rmd) | [R code](09_LikelihoodsAndBinomialModeling/MLEforBinomialModeling.R)
 
 ![](Muybridge_Buffalo_galloping.gif)
