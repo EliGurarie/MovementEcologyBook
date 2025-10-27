@@ -73,6 +73,6 @@ And all homeworks are posted [here](Homework/assignments.html)
 ## 8. Maximum Likelihood and Binomial Modelling
 
 - The all-mighty likelihood: [slides](09_LikelihoodsAndBinomialModeling/Likelihood_Slides.html) | [book chapter](https://eligurarie.github.io/MovementEcologyBook/part3_statistical_foundations/likelihoods.html)
-- Binomial Modeling of Common Sole: [lab](09_LikelihoodsAndBinomialModeling/MLEforBinomialModeling.html) | [Rmd](09_LikelihoodsAndBinomialModeling/MLEforBinomialModeling.rmd) | [R code](09_LikelihoodsAndBinomialModeling/MLEforBinomialModeling.R) | [data](09_LikelihoodsAndBinomialModeling/data/Solea.csv)
+- Binomial Modeling of Common Sole: [lab](09_LikelihoodsAndBinomialModeling/MLEforBinomialModeling.html) | [Rmd](09_LikelihoodsAndBinomialModeling/MLEforBinomialModeling.rmd) | [R code](09_LikelihoodsAndBinomialModeling/MLEforBinomialModeling.R) | [data](09_LikelihoodsAndBinomialModeling/data/)
 
 ![](Muybridge_Buffalo_galloping.gif)
