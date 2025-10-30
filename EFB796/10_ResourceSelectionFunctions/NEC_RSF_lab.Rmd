@@ -1,0 +1,322 @@
+---
+title: "Resource Selection - First Example"
+author: "Elie Gurarie"
+subtitle: "[EFB 796: Techniques in Movement Ecology](https://eligurarie.github.io/MovementEcologyBook/EFB796/)"
+date: "October 2, 2025" 
+output:
+  html_document:
+    theme: flatly
+    df_print: kable
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE, warning = FALSE, message = FALSE)
+```
+
+![](nec.webp)
+
+# Overview
+
+This analysis demonstrates how to fit a Resource Selection Function (RSF) for New England Cottontail rabbits at a cranberry bog site. The process involves:
+
+1. Loading and preparing spatial data (locations and habitat covariates)
+2. Creating used and available point datasets
+3. Fitting and comparing candidate models
+4. Visualizing model predictions and interactions
+
+# Load Required Packages
+
+```{r packages}
+require(terra)
+require(sf)
+require(mapview)
+require(raster)
+require(gtools)
+require(plyr)
+require(MuMIn)
+require(gplots)
+```
+
+# Load Data
+
+We'll load the New England Cottontail location data and the associated habitat covariates for the cranberry bog study area.
+
+```{r load_data}
+load("data/Cranberry_Data.rda")
+```
+
+Let's take a quick look at the spatial data:
+
+```{r explore_data, eval=FALSE}
+mapview(CranNEC_sf)
+plot(Cranberry_covariates)
+```
+
+# Prepare Covariates
+
+We need to clean up the covariate rasters by removing an unnecessary layer and setting zeros to NA.
+
+```{r prepare_covariates}
+Cranberry_covariates <- dropLayer(Cranberry_covariates, 3)
+Cranberry_covariates[Cranberry_covariates == 0] <- NA
+```
+
+Now we transform the cottontail location data to match the coordinate system of our rasters:
+
+```{r transform_crs}
+CranNEC_sf <- CranNEC_sf |> st_transform(crs(Cranberry_covariates))
+
+plot(Cranberry_covariates[[1]])
+plot(CranNEC_sf, add = TRUE, col = "darkred", pch = 19, cex = 0.5)
+```
+
+# Create Used Dataset
+
+We extract covariate values at each cottontail location to create our "used" dataset.
+
+```{r create_used}
+covars <- extract(Cranberry_covariates, CranNEC_sf)
+used_df <- data.frame(CranNEC_sf |> st_drop_geometry(), 
+                      st_coordinates(CranNEC_sf),
+                      covars, 
+                      Used = TRUE)
+```
+
+# Create Available Dataset
+
+## Define Availability Domain with MCP
+
+We'll define the available habitat using a Minimum Convex Polygon (MCP) around the observed locations.
+
+```{r create_mcp}
+xy <- st_coordinates(CranNEC_sf)
+mcp <- xy[chull(xy),] 
+mcp <- rbind(mcp, mcp[1,])
+mcp_sf <- st_polygon(list(mcp))
+
+plot(Cranberry_covariates[[1]])
+plot(CranNEC_sf, add = TRUE, col = "darkred", pch = 19, cex = 0.5)
+plot(mcp_sf, add = TRUE)
+```
+
+We can also add a buffer around the MCP to expand the available area:
+
+```{r buffer_mcp}
+mcp_buffered <- st_buffer(mcp_sf, 20)
+plot(Cranberry_covariates[[1]])
+plot(mcp_buffered, add = TRUE)
+```
+
+## Sample Available Points
+
+We'll sample pseudo-absence points from within the buffered MCP. A common approach is to use a 5:1 ratio of available to used points.
+
+```{r sample_available}
+n_used <- nrow(used_df)
+n_available <- n_used * 5
+
+available_pts <- st_sample(mcp_buffered, n_available)
+plot(Cranberry_covariates[[1]])
+plot(available_pts, add = TRUE, col = "grey")
+```
+
+Now extract covariate values at the available points:
+
+```{r extract_available}
+covars_available <- extract(Cranberry_covariates, st_coordinates(available_pts))
+available_df <- data.frame(Used = FALSE, 
+                           st_coordinates(available_pts), 
+                           covars_available)
+```
+
+## Combine Used and Available Data
+
+```{r combine_data}
+NEC_RSF_df <- smartbind(used_df, available_df)
+
+# Remove rows with missing covariate data
+NEC_RSF_df <- NEC_RSF_df |> subset(!is.na(Canopy_cover))
+
+dim(NEC_RSF_df)
+head(NEC_RSF_df)
+```
+
+# Exploratory Data Analysis
+
+## Covariate Relationships
+
+Let's examine the relationship between our two main covariates:
+
+```{r pairs_plot}
+NEC_RSF_df[,c("Canopy_cover", "invasive_stem")] |> pairs()
+```
+
+## Compare Used vs Available Distributions
+
+Comparing the distributions of covariates between used and available points helps us understand habitat selection patterns.
+
+```{r density_canopy}
+with(NEC_RSF_df, {
+  plot(density(Canopy_cover[Used]), col = "darkred", lwd = 2,
+       main = "Canopy Cover Distribution")
+  lines(density(Canopy_cover[!Used]), col = "darkgrey", lwd = 2)
+  legend("topright", legend = c("Used", "Available"), 
+         col = c("darkred", "darkgrey"), lwd = 2)
+})
+```
+
+```{r density_invasive}
+with(NEC_RSF_df, {
+  plot(density(invasive_stem[Used]), col = "darkred", lwd = 2,
+       main = "Invasive Stem Distribution")
+  lines(density(invasive_stem[!Used]), col = "darkgrey", lwd = 2)
+  legend("topright", legend = c("Used", "Available"), 
+         col = c("darkred", "darkgrey"), lwd = 2)
+})
+```
+
+# Model Fitting and Selection
+
+## Simple Additive Model
+
+We'll start with a simple additive model:
+
+```{r simple_model}
+M1 <- glm(Used ~ Canopy_cover + invasive_stem, 
+          data = NEC_RSF_df, 
+          family = "binomial")
+
+summary(M1)
+```
+
+## Compare Multiple Candidate Models
+
+We can efficiently fit and compare multiple models using lists and `lapply`:
+
+```{r candidate_models}
+formulae <- list(
+  M0 = Used ~ 1,
+  Canopy = Used ~ Canopy_cover,
+  Invasive = Used ~ invasive_stem,
+  CanInv = Used ~ Canopy_cover + invasive_stem,
+  CanByInv = Used ~ Canopy_cover * invasive_stem
+)
+
+fits <- lapply(formulae, function(f)
+  glm(f, data = NEC_RSF_df, family = "binomial"))  
+
+ldply(fits, AIC)
+```
+
+## Polynomial Models
+
+Biological relationships are often non-linear. Let's fit models with polynomial terms:
+
+```{r polynomial_models}
+moreformulae <- list(
+  C2 = Used ~ poly(Canopy_cover, 2),
+  I2 = Used ~ poly(invasive_stem, 2),
+  C2I2 = Used ~ poly(Canopy_cover, 2) + poly(invasive_stem, 2)
+)
+
+morefits <- lapply(moreformulae, function(f)
+  glm(f, data = NEC_RSF_df, family = "binomial"))  
+
+ldply(morefits, AIC)
+```
+
+## Automated Model Selection with `dredge`
+
+With multiple covariates and polynomial terms, the number of possible models grows quickly. The `dredge` function from the `MuMIn` package automates model selection:
+
+```{r dredge, fig.height = 8}
+global.model <- glm(Used ~ 
+                      (Canopy_cover + I(Canopy_cover^2)) *
+                      (invasive_stem + I(invasive_stem^2)), 
+                    data = NEC_RSF_df, 
+                    family = "binomial", 
+                    na.action = "na.fail")
+
+NEC_dredge <- dredge(global.model)
+plot(NEC_dredge)
+```
+
+## Final Selected Model
+
+Based on the model selection process, we'll fit the top-ranked model:
+
+```{r final_model}
+fit <- glm(Used ~ (Canopy_cover + I(Canopy_cover^2)) +
+             (invasive_stem + I(invasive_stem^2)) + 
+             Canopy_cover*invasive_stem, 
+           family = "binomial",
+           data = NEC_RSF_df)
+
+summary(fit)
+```
+
+# Spatial Predictions
+
+## Create Prediction Raster
+
+We can now predict habitat suitability across the entire study area:
+
+```{r predict_raster}
+covars_predict <- values(Cranberry_covariates)
+RSF_predict <- predict(fit, newdata = data.frame(covars_predict), type = "response")
+
+RSF_raster <- Cranberry_covariates[[1]] * NA
+values(RSF_raster) <- RSF_predict
+
+plot(RSF_raster, main = "RSF Predictions")
+```
+
+## Classify into Habitat Quality Categories
+
+We can break the continuous predictions into quantile-based categories:
+
+```{r quantile_map}
+breaks <- quantile(values(RSF_raster), seq(0, 1, length = 11), na.rm = TRUE)
+```
+
+Create a discrete version:
+
+```{r discrete_map}
+RSF_raster_discrete <- cut(RSF_raster, breaks)
+plot(RSF_raster_discrete, col = rich.colors(10),
+     main = "Discrete Habitat Quality")
+plot(CranNEC_sf, add = TRUE, col = "white", pch = 4)
+```
+
+# Visualize Interactions
+
+Understanding how covariates interact is crucial for interpreting RSF results. The negative interaction between canopy cover and invasive stem density squared indicates that the effect of each variable depends on the level of the other.
+
+```{r interaction_plot, fig.width=8, fig.height=6}
+canopy_seq <- seq(0, 60, length.out = 200)
+invasive_levels <- seq(0, 180, 30)
+colors <- rich.colors(length(invasive_levels))
+
+plot(canopy_seq, canopy_seq, type = "n", ylim = c(0, 1),
+     xlab = "Canopy cover (%)", 
+     ylab = "Predicted probability of use",
+     main = "Effect of Canopy Cover at Different Invasive Stem Densities")
+
+for(i in seq_along(invasive_levels)) {
+  newdata <- data.frame(Canopy_cover = canopy_seq, 
+                        invasive_stem = invasive_levels[i])
+  pred <- predict(fit, newdata = newdata, type = "response")
+  lines(canopy_seq, pred, col = colors[i], lwd = 2)
+}
+
+legend("right", 
+       legend = invasive_levels, 
+       title = "Invasive stem\ndensity",
+       col = colors, 
+       lwd = 2, 
+       bty = "n")
+```
+
+The plot shows that at low invasive stem densities, cottontails show a U-shaped relationship with canopy cover (avoiding intermediate levels). However, as invasive stem density increases, this pattern weakens and eventually reverses, with higher invasive stem density associated with increased use across all canopy levels.

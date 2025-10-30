@@ -75,4 +75,13 @@ And all homeworks are posted [here](Homework/assignments.html)
 - The all-mighty likelihood: [slides](09_LikelihoodsAndBinomialModeling/Likelihood_Slides.html) | [book chapter](https://eligurarie.github.io/MovementEcologyBook/part3_statistical_foundations/likelihoods.html)
 - Binomial Modeling of Common Sole: [lab](09_LikelihoodsAndBinomialModeling/MLEforBinomialModeling.html) | [Rmd](09_LikelihoodsAndBinomialModeling/MLEforBinomialModeling.rmd) | [R code](09_LikelihoodsAndBinomialModeling/MLEforBinomialModeling.R) | [data](09_LikelihoodsAndBinomialModeling/data/)
 
+
+## 9. Resource Selection Functions
+
+New England Cottontail Data are on Blackboard. 
+
+- [lab](10_ResourceSelectionFunctions/NewEnglandCottontailRSF.html)
+- [R code](10_ResourceSelectionFunctions/NewEnglandCottontailRSF.R)
+
+
 ![](Muybridge_Buffalo_galloping.gif)

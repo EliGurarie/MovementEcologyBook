@@ -1,0 +1,9 @@
+terra
+sf
+mapview
+sp
+raster
+gtools
+plyr
+MuMIn
+gplots
