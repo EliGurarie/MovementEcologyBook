@@ -80,7 +80,7 @@ And all homeworks are posted [here](Homework/assignments.html)
 
 New England Cottontail Data are on Blackboard. 
 
-- [lab](10_ResourceSelectionFunctions/NewEnglandCottontailRSF.html)
+- [lab](10_ResourceSelectionFunctions/NEC_RSF_lab.html)
 - [R code](10_ResourceSelectionFunctions/NewEnglandCottontailRSF.R)
 
 
