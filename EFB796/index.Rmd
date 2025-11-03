@@ -82,6 +82,7 @@ New England Cottontail Data are on Blackboard.
 
 - [lab](10_ResourceSelectionFunctions/NEC_RSF_lab.html)
 - [R code](10_ResourceSelectionFunctions/NewEnglandCottontailRSF.R)
+- [Caribou RSF slides](https://eligurarie.github.io/EFB390/lectures/Lecture10/Lecture11b_PCH_RSF.pdf)
 
 
 ![](Muybridge_Buffalo_galloping.gif)
