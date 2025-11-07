@@ -1491,6 +1491,53 @@ Concepts in Movement Ecology</a></h3>
 assignments should be emailed to the instructor as <em>knitted</em> R
 Markdown document with minimal (if any) code. Print the markdown to a
 pdf, and provide the <code>.Rmd</code> file as well.</font></p>
+<div id="hw-8-animation-and-overfitting" class="section level1">
+<h1>HW 8: Animation and Overfitting</h1>
+<div id="due-thursday-november-13" class="section level4">
+<h4>(due Thursday November 13)</h4>
+<ol style="list-style-type: decimal">
+<li><p>Create an animation! Of any data you like. In some format you
+like, that can be easily shared. Upload them (e.g. on blackboard) so we
+can look at them collectively.</p></li>
+<li><p>Revisit the New England Cottontail RSF that we performed a few
+weeks ago <a href="https://eligurarie.github.io/MovementEcologyBook/EFB796/10_ResourceSelectionFunctions/NEC_RSF_lab.html">here</a>.
+Do the following <em>minor</em> changes:</p></li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li><p>Load the <code>CranStach_Data.rda</code> file (in the Blackboard
+data folder) that Melinda prepared with a corrected raster stack. Within
+the stack, use <code>Canopy_cover</code> and <code>StemDensity</code> as
+the two predictors.</p></li>
+<li><p>Build up the Used / Available data frame and fit the following
+main-effects model:
+<code>Used ~ Canopy_cover + I(Canopy_cover^2) + StemDensity + I(StemDensity^2)</code></p></li>
+</ol>
+<p>All of these main effects will - most likely - be highly significant.
+Record the coefficient estimates, standard errors and p-values for the 4
+main effects.</p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Now … refit the model again but using <em>sub-samplings</em> of the
+total data. Subsample to every 2, every 5, every 10 locations. Obtain
+the estimates, standard errors, and p-values for the 4 main effects
+again. Plot those against the sub-sampling. At what point do some of the
+effects become non-significant?</li>
+</ol>
+<p><font color="green"> <strong>Tip:</strong> to subsample a data
+frame, you can do something like this:</p>
+<p><code>n.total &lt;- nrow(df)</code><br>
+<code>pickme &lt;- sample(1:ntotal, round(n.total * 0.5))</code><br>
+<code>df_subsample &lt;- df[pickme,]</code><br></p>
+<p>This is a random sample of 1/2 of the data. To make it one tenth of
+the data, you’d replace the 0.5 with a 0.1, and so on. </font></p>
+<p><strong><em>Extra Credit: Write a function that will return those
+standard errors and p-values as a function of the subsampling rate, that
+looks something like:</em></strong></p>
+<pre class="r"><code>getStats &lt;- function(samplingrate){
+  # ...
+  return(stats.df)
+}</code></pre>
+</div>
+</div>
 <div id="hw-7-maximum-likelihood-and-binomial-models" class="section level1">
 <h1>HW 7: Maximum Likelihood and Binomial Models</h1>
 <div id="due-monday-november-3" class="section level4">
