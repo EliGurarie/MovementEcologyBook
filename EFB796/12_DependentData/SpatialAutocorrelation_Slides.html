@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Dependent Data Part II: Spatial Correlations</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="E. Gurarie" />
+    <script src="SpatialAutocorrelation_Slides_files/header-attrs-2.29/header-attrs.js"></script>
+    <link href="SpatialAutocorrelation_Slides_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="SpatialAutocorrelation_Slides_files/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <script src="SpatialAutocorrelation_Slides_files/fabric-4.3.1/fabric.min.js"></script>
+    <link href="SpatialAutocorrelation_Slides_files/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="SpatialAutocorrelation_Slides_files/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <link href="SpatialAutocorrelation_Slides_files/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="SpatialAutocorrelation_Slides_files/tile-view-0.2.6/tile-view.js"></script>
+    <script src="SpatialAutocorrelation_Slides_files/kePrint-0.0.1/kePrint.js"></script>
+    <link href="SpatialAutocorrelation_Slides_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="mycss.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, title-slide
+
+.title[
+# Dependent Data Part II: Spatial Correlations
+]
+.subtitle[
+## EFB 796: Techniques in Spatial and Movement Ecology
+]
+.author[
+### E. Gurarie
+]
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Recalling Generalized Least Squares
+
+.pull-left[
+Linear model with correlated residuals:
+
+`$$Y_i = \beta X_{ij} + \epsilon_{ij}$$`
+
+where `\(\epsilon \sim \mathcal{N}(0, \Sigma)\)`
+
+For **AR(1)** temporal correlation:
+
+`$$\text{Cor}(\epsilon_t, \epsilon_{t-h}) = \phi^h$$`
+]
+
+.pull-right[
+The residual variance-covariance matrix:
+
+`$$\Sigma = \sigma^2 \begin{bmatrix}
+1 &amp; \phi &amp; \phi^2 &amp; \cdots \\
+\phi &amp; 1 &amp; \phi &amp; \cdots \\
+\phi^2 &amp; \phi &amp; 1 &amp; \cdots \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots
+\end{bmatrix}$$`
+
+Only **two parameters**: `\(\phi\)` and `\(\sigma^2\)`
+]
+
+---
+# Spatial Autocorrelation
+
+.pull-left[
+The **Gaussian spatial correlation** structure:
+
+`$$\text{Cor}(\epsilon_{i}, \epsilon_{j}) = \exp \left(- \left(\frac{r_{ij}}{\lambda}\right)^2\right)$$`
+
+Where:
+- `\(r_{ij}\)` = distance between points `\(i\)` and `\(j\)`
+- `\(\lambda\)` = spatial correlation scale parameter
+]
+
+.pull-right[
+**Key properties:**
+
+| Distance | Correlation |
+|----------|-------------|
+| `\(r = 0\)` | 1 |
+| `\(r = \lambda\)` | `\(1/e \approx 0.37\)` |
+| `\(r \to \infty\)` | 0 |
+
+`\(\lambda\)` is interpretable: points within distance `\(\lambda\)` affect each other importantly
+]
+
+---
+# Why Does This Matter?
+
+.center[
+### The biggest risk of ignoring spatial correlations:
+
+## **Spurious results**
+
+### *p*-values will be artificially too low
+]
+
+--
+
+- Spatial data often violates independence assumption
+- Standard errors are underestimated
+- You may "detect" patterns that don't exist
+
+---
+# Example: Soil Quality Data
+
+
+``` r
+spdata &lt;- read.csv("https://terpconnect.umd.edu/~egurarie/teaching/Biol709/data/soildata.csv")
+```
+
+.pull-left[
+
+``` r
+head(spdata, 4) |&gt; round(3)
+```
+
+```
+##     east  north thick  soil
+## 1 70.662 47.165 0.708 4.513
+## 2 60.537 77.351 0.018 2.519
+## 3 87.182  3.531 1.112 8.133
+## 4 83.215 21.110 1.117 4.536
+```
+
+]
+
+.pull-right[
+&lt;img src="SpatialAutocorrelation_Slides_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+# Standard Linear Model
+
+Does surface soil quality predict thickness?
+
+
+``` r
+soil.lm &lt;- lm(thick ~ soil, spdata)
+```
+
+```
+##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)    0.471      0.065   7.278    0.000
+## soil           0.036      0.014   2.578    0.011
+```
+
+--
+
+**Looks significant!** But are the residuals independent?
+
+---
+# GLS: Same Result (So Far)
+
+Using `gls()` from `nlme` package with default settings:
+
+
+``` r
+require(nlme)
+soil.gls &lt;- gls(thick ~ soil, spdata)
+```
+
+```
+## (Intercept)        soil 
+##       0.471       0.036
+```
+
+Coefficients and p-values are identical to `lm()`
+
+---
+# Adding Spatial Correlation
+
+.small[
+
+``` r
+soil.gls.spatial &lt;- gls(thick ~ soil, spdata, correlation = corGaus(1, ~ east + north))
+summary(soil.gls.spatial)
+```
+
+```
+## Generalized least squares fit by REML
+##   Model: thick ~ soil 
+##   Data: spdata 
+##         AIC       BIC   logLik
+##   -324.0889 -313.7491 166.0445
+## 
+## Correlation Structure: Gaussian spatial correlation
+##  Formula: ~east + north 
+##  Parameter estimate(s):
+##    range 
+## 19.87502 
+## 
+## Coefficients:
+##                  Value  Std.Error   t-value p-value
+## (Intercept)  0.6409182 0.07577213  8.458495  0.0000
+## soil        -0.0000164 0.00006041 -0.271172  0.7868
+## 
+##  Correlation: 
+##      (Intr)
+## soil -0.039
+## 
+## Standardized residuals:
+##         Min          Q1         Med          Q3         Max 
+## -2.22586862 -0.79832451 -0.02467066  0.80239423  1.65427430 
+## 
+## Residual standard error: 0.2879278 
+## Degrees of freedom: 100 total; 98 residual
+```
+]
+
+---
+# Comparing Results
+
+&lt;table class="table" style="font-size: 18px; color: black; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Model &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Std.Error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Standard LM &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.036 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.014 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.011 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; GLS with Spatial Correlation &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.787 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+.center[
+### Standard errors increasewhen accounting for spatial correlation!
+]
+
+---
+# Syntax Notes
+
+**Correlation structure specification:**
+
+
+``` r
+corGaus(value, form = ~ east + north)
+```
+
+- `value`: initial estimate for range parameter
+- `form`: formula specifying spatial coordinates
+
+**Other correlation structures** (see `?corClasses`):
+- `corExp()` - Exponential
+- `corSpher()` - Spherical  
+- `corLin()` - Linear
+- `corRatio()` - Rational quadratic
+
+---
+# Using lme() Instead
+
+Nearly identical syntax, but requires a random effect:
+
+
+``` r
+require(plyr)
+soil.lme &lt;- lme(fixed = thick ~ soil, 
+                data = mutate(spdata, dummy = 1), 
+                correlation = corGaus(1, ~ east + north),
+                random = ~ 1 | dummy, 
+                method = "ML")
+```
+
+- More general/powerful but slower
+- Requires dummy random effect for purely spatial models
+- Same conclusions
+
+---
+# Challenges &amp; Limitations
+
+.pull-left[
+**Practical issues:**
+
+- Best defined for **Gaussian** models
+- For GLMs: harder to separate model from residual
+- Large matrices = slow fitting
+- Combining temporal + spatial correlation is difficult
+]
+
+.pull-right[
+**Advanced solutions:**
+
+- **Bayesian MCMC**: Can fit anything, but slow
+- **INLA** (Integrated Nested Laplace Approximations): 
+  - http://www.r-inla.org/
+  - Most powerful tool for complex spatial models
+]
+
+
+---
+# Key Takeaways
+
+.pull-left[
+### Spatial correlation matters
+
+- Ignoring it inflates significance
+- Standard errors are too small
+- Risk of false positives
+]
+
+.pull-right[
+### Tools available
+
+- `gls()` and `lme()` in `nlme`
+- Multiple correlation structures
+- Interpretable range parameter `\(\lambda\)`
+]
+
+.center[
+### Always check for spatial autocorrelation in spatial data!
+]
+
+---
+class: inverse, center, middle
+
+# Exercise: Ozone Data
+
+---
+# Ozone Data Structure
+
+.pull-left[
+
+
+``` r
+require(plyr); require(maps); require(fields)
+O3 &lt;- plyr::ozone
+lat &lt;- as.numeric(row.names(O3[,,1]))
+long &lt;- as.numeric(colnames(O3[,,1]))
+```
+
+24 × 24 × 72 array: monthly ozone averages, Jan 1995 - Dec 2000
+
+]
+
+.pull-right[
+![](SpatialAutocorrelation_Slides_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
+
+]
+
+---
+# Reshaping the Data
+
+
+
+``` r
+require(reshape2)
+O3.df &lt;- melt(O3)
+head(O3.df, 4)
+```
+
+```
+##     lat   long time value
+## 1 -21.2 -113.8    1   260
+## 2 -18.7 -113.8    1   258
+## 3 -16.2 -113.8    1   258
+## 4 -13.7 -113.8    1   254
+```
+
+
+``` r
+O3.df &lt;- mutate(O3.df, 
+                year = 1995 + floor((time-1)/12), 
+                month = time - (floor((time-1)/12) * 12))
+```
+
+---
+# Projecting Coordinates
+
+Convert lat/long to consistent units (km):
+
+
+``` r
+require(sf)
+O3.sf &lt;- st_as_sf(O3.df, coords = c("long", "lat")) |&gt;
+  st_set_crs(4326) |&gt;
+  st_transform(5367)  # Appropriate projection for Central America
+xy &lt;- st_coordinates(O3.sf)
+O3.df &lt;- data.frame(O3.df, xy)
+```
+
+---
+# Exercise Tasks
+
+For a chosen month/year combination:
+
+1. **Map** the ozone concentration
+
+2. **Fit linear regression** of ozone vs. East and North coordinates
+   - Is there a spatial trend?
+
+3. **Estimate spatial correlation scale** using `gls()` with `corGaus()`
+
+4. **Compare conclusions** with and without spatial correlation
+
+5. **Bonus**: Write a function to analyze all months
+   - Are there annual patterns in correlation scale?
+   - Are there annual patterns in spatial trends?
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "github",
+  "countIncrementalSlides": false,
+  "highlightLines": true,
+  "ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

@@ -84,5 +84,15 @@ New England Cottontail Data are on Blackboard.
 - [R code](10_ResourceSelectionFunctions/NewEnglandCottontailRSF.R)
 - [Caribou RSF slides](https://eligurarie.github.io/EFB390/lectures/Lecture10/Lecture11b_PCH_RSF.pdf)
 
+## 10.  Point Processes
+
+- [Point Process Lecture](11_PointProcesses/PointProcesses_Slides.html)
+
+## 11. Dependent Data
+
+- [Time series slides](12_DependentData/TimeSeries_slides.html)
+- [Spatial correlation slides](12_DependentData/SpatialAutocorrelation_Slides.html)
+
+
 
 ![](Muybridge_Buffalo_galloping.gif)

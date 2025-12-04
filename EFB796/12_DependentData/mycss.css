@@ -1,0 +1,192 @@
+.pull-left {
+  float: left;
+  width: 47%;
+}
+.pull-right {
+  float: right;
+  width: 47%;
+}
+
+.title-slide {
+  background-image: url("bg.jpg");
+  background-size: cover;
+  color: white;
+}
+
+.center-60 { text-align-last: center; width: 60%; }
+.center-70 { text-align-last: center; width: 70%; }
+.center-80 { text-align-last: center; width: 80%; }
+
+.pull-wide{ float: left; width: 100%; }
+
+.pull-left-80 { float: left; width: 79%; }
+.pull-right-20 { float: right; width: 19%; }
+.pull-right-20 + * { clear: both; }
+
+.pull-left-70 { float: left; width: 66.5%; }
+.pull-right-30 { float: right; width: 28.5%; }
+.pull-right-30 + * { clear: both; }
+
+.pull-left-60 { float: left; width: 59%; }
+.pull-right-40 { float: right; width: 39%; }
+.pull-right-40 + * { clear: both; }
+
+.pull-left-50 { float: left; width: 50%; }
+.pull-right-50 { float: right; width: 50%; }
+.pull-right-50 + * { clear: both; }
+
+.pull-left-40 { float: left; width: 39%; }
+.pull-right-60 { float: right; width: 59%; }
+.pull-right-60 + * { clear: both; }
+
+.pull-left-30 { float: left; width: 28.5%; }
+.pull-right-70 { float: right; width: 66.5%; }
+.pull-right-70 + * { clear: both; }
+
+.Large { font-size: 144% }
+.large { font-size: 120% }
+.small { font-size: 90% }
+.footnotesize { font-size: 80% }
+.scriptsize { font-size: 70% }
+.tiny { font-size: 60% }
+
+.black { color: black; }
+.red { color: red; }
+.darkred { color: darkred; }
+.blue { color: blue; }
+.green { color: green; }
+.darkblue { color: #00008B; }
+.yellow { color: yellow; }
+.orange { color: orange; }
+.purple { color: purple; }
+.gray { color: gray; }
+.grey { color: gray; }
+.white { color: Ivory; }
+.cyan { color: Cyan; }
+
+/******************
+ *
+ * Coloured content boxes
+ *
+ ****************/
+
+
+.box {
+    box-sizing: content-box;
+    	background-color: #e2e2e2;
+  /* Total width: 160px + (2 * 20px) + (2 * 8px) = 216px
+     Total height: 80px + (2 * 20px) + (2 * 8px) = 136px
+     Content box width: 160px
+     Content box height: 80px */
+}
+
+
+.box-blue,
+.box-gray,
+.box-grey,
+.box-army,
+.box-green,
+.box-purple,
+.box-red,
+.box-yellow {
+    border-radius: 5px;
+    margin: 0 0 5px;
+    overflow: hidden;
+    padding: 5px;
+    width: 100%;
+}
+
+.box-blue {
+    background-color: #F0F8FF;
+
+}
+
+.box-gray {
+    background-color: #e2e2e2;
+}
+
+.box-grey {
+	background-color: #F5F5F5;
+}
+
+.box-army {
+	background-color: #737a36;
+}
+
+.box-green {
+	background-color: #d9edc2;
+}
+
+.box-purple {
+	background-color: #e2e2f9;
+}
+
+.box-red {
+	background-color: #f9dbdb;
+}
+
+.box-yellow {
+	background-color: #fef5c4;
+}
+
+
+.full-width {
+    display: flex;
+    width: 100%;
+    flex: 1 1 auto;
+}
+
+/* from sydney.css https://github.com/garthtarr/sydney_xaringan/blob/master/assets/sydney.css*/
+
+blockquote, .blockquote {
+  display: block;
+  margin-top: 0.1em;
+  margin-bottom: 0.2em;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-left: solid 10px #0148A4;
+  border-top: solid 2px #0148A4;
+  border-bottom: solid 2px #0148A4;
+  border-right: solid 2px #0148A4;
+  box-shadow: 0 0 6px rgba(0,0,0,0.5);
+  /* background-color: #e64626; */
+  color: #e64626;
+  padding: 0.5em;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+.blockquote p {
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+.blockquote > h1:first-of-type {
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+.blockquote > h2:first-of-type {
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+.blockquote > h3:first-of-type {
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+.blockquote > h4:first-of-type {
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+
+.footnote {
+  position: absolute;
+  bottom: 0;
+  padding-right: 8em; /* to avoid the page numbering */
+}
+/* footnote identifier use: .fn[1] */
+.fn {
+  vertical-align: super;
+  font-size: 60%;
+}
+.footnote {
+  font-size: 0.7em;
+}
